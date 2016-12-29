@@ -7,4 +7,8 @@ import hearrun.business.Track;
  */
 public class TitelFrage extends Frage {
     Track song;
+
+    public TitelFrage(String fragetext, String[] antworten, int richtigIndex) {
+        super(fragetext, antworten, richtigIndex);
+    }
 }

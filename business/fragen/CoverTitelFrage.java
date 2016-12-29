@@ -7,5 +7,15 @@ import javafx.scene.image.Image;
  */
 public class CoverTitelFrage extends CoverFrage{
 
-    Image cover;
+    private Image cover;
+
+    public CoverTitelFrage(String fragetext, String [] antworten, int richtigIndex, Image cover){
+        super(fragetext, antworten, richtigIndex);
+        this.cover = cover;
+
+    }
+
+
+
+
 }

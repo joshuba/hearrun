@@ -7,4 +7,8 @@ import hearrun.business.Track;
  */
 public class InterpretFrage extends Frage {
     Track song;
+
+    public InterpretFrage(String fragetext, String[] antworten, int richtigIndex) {
+        super(fragetext, antworten, richtigIndex);
+    }
 }
