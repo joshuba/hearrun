@@ -11,14 +11,76 @@
   </frage>
     
   <frage stufe="1">
-    <fragetext>Wie dumm ist Leo?</fragetext>
+    <fragetext>Welche Gruppe spielte "We are the Champions"?</fragetext>
     <antwortmoeglichkeiten>
-      <antwort korrekt="nein">Kein Kommentar</antwort>
-      <antwort korrekt="nein">Behindert</antwort>
-      <antwort korrekt="nein">Schlau Lol</antwort>
-      <antwort korrekt="ja">Dumm wie Brot</antwort>
+      <antwort korrekt="nein">Miley Cyrus</antwort>
+      <antwort korrekt="nein">Ludwig XIV</antwort>
+      <antwort korrekt="ja">Queen</antwort>
+      <antwort korrekt="nein">Bob Dylan</antwort>
     </antwortmoeglichkeiten>
-  </frage>    
+  </frage>
+
+  <frage stufe="3">
+    <fragetext>Wie heißt die erste Oper der Musikgeschichte?</fragetext>
+    <antwortmoeglichkeiten>
+       <antwort korrekt="nein">L'Euridice</antwort>
+       <antwort korrekt="ja">La Dafne</antwort>
+       <antwort korrekt="nein">Jenny Treibel</antwort>
+       <antwort korrekt="nein">L'Orfeo</antwort>
+    </antwortmoeglichkeiten>
+  </frage>
+
+    <frage stufe="3">
+        <fragetext>Wer war der Schwiegervater von Richard Wagner?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Johannes Brahms</antwort>
+            <antwort korrekt="nein">Franz Grillparzer</antwort>
+            <antwort korrekt="ja">Franz List</antwort>
+            <antwort korrekt="nein">Joseph Eichendorff</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage stufe="3">
+        <fragetext>In dem musikalischen Märchen "Peter und der Wolf" ist jede Person und jedes Tier der Handlung einem eigenen Instrument zugeordnet. Welches Instrument steht für den Großvater ?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Kontrabass</antwort>
+            <antwort korrekt="nein">Trompete</antwort>
+            <antwort korrekt="ja">Fagott</antwort>
+            <antwort korrekt="nein">Triangel</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage stufe="3">
+        <fragetext>Welches Werk von Sergej Prokofjew will junge Menschen an die Musik heranführen ?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Scheherazade</antwort>
+            <antwort korrekt="ja">Peter und der Wolf</antwort>
+            <antwort korrekt="nein">Karneval der Tiere</antwort>
+            <antwort korrekt="nein">Hänsel und Gretel</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage stufe="2">
+        <fragetext>Wie viele Tasten hat ein Klavier wie es jeder kennt?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="ja">88</antwort>
+            <antwort korrekt="nein">77</antwort>
+            <antwort korrekt="nein">69</antwort>
+            <antwort korrekt="nein">12</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage stufe="2">
+        <fragetext>Lucy in the Sky with ...</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="ja">Diamonds</antwort>
+            <antwort korrekt="nein">Juwels</antwort>
+            <antwort korrekt="nein">Gold</antwort>
+            <antwort korrekt="nein">Silver</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+
 </fragekatalog>
 
 
