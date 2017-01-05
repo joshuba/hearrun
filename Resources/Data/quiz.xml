@@ -80,6 +80,16 @@
         </antwortmoeglichkeiten>
     </frage>
 
+    <frage stufe="1">
+        <fragetext>Die kleine Nachtmusik ist von ...</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Hans Zimmer</antwort>
+            <antwort korrekt="nein">Herr Barth</antwort>
+            <antwort korrekt="nein">Justin Biber</antwort>
+            <antwort korrekt="ja">Wolfgang Amadeus Mozart</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
 
 </fragekatalog>
 
