@@ -14,10 +14,7 @@ public class FrageController {
 
     }
 
-    public boolean stelleFrage(Fragetyp typ){
 
-
-    }
 
 
 }
