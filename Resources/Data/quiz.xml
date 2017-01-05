@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<fragekatalog>
+  <frage stufe="1">
+    <fragetext>Wie hieß der Schlagzeuger bei den Beatles?</fragetext>
+    <antwortmoeglichkeiten>
+      <antwort korrekt="nein">Rihanna</antwort>
+      <antwort korrekt="nein">Jack Sparrow</antwort>
+      <antwort korrekt="nein">Peter Gabriel</antwort>
+      <antwort korrekt="ja">Ringo Star</antwort>
+    </antwortmoeglichkeiten>
+  </frage>
+    
+  <frage stufe="1">
+    <fragetext>Wie dumm ist Leo?</fragetext>
+    <antwortmoeglichkeiten>
+      <antwort korrekt="nein">Kein Kommentar</antwort>
+      <antwort korrekt="nein">Behindert</antwort>
+      <antwort korrekt="nein">Schlau Lol</antwort>
+      <antwort korrekt="ja">Dumm wie Brot</antwort>
+    </antwortmoeglichkeiten>
+  </frage>    
+</fragekatalog>
+
+
+
+
