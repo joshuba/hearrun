@@ -51,11 +51,11 @@ public class FrageController {
         int richtigIndex = -1;
 
         //Waehle eine zufaellige Frage aus allen Fragen aus
-        Node nNode = alleFaktfragen.item((int)((Math.random()) * faktFragenAnz));
+        Node frage = alleFaktfragen.item((int)((Math.random()) * faktFragenAnz));
 
         //Extrahiere Fragetext
-        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-            Element eElement = (Element) nNode;
+        if (frage.getNodeType() == Node.ELEMENT_NODE) {
+            Element eElement = (Element) frage;
             fragetext = eElement.getElementsByTagName("fragetext").item(0).getTextContent();
 
             //Extrahiere Anworten und schreibe in Array

@@ -9,7 +9,7 @@
       <antwort korrekt="ja">Ringo Star</antwort>
     </antwortmoeglichkeiten>
   </frage>
-    
+
   <frage stufe="1">
     <fragetext>Welche Gruppe spielte "We are the Champions"?</fragetext>
     <antwortmoeglichkeiten>
@@ -89,6 +89,8 @@
             <antwort korrekt="ja">Wolfgang Amadeus Mozart</antwort>
         </antwortmoeglichkeiten>
     </frage>
+
+
 
 
 </fragekatalog>

@@ -1,12 +1,7 @@
 package hearrun.business;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-
+import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
+import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import java.io.File;
 
 /**
@@ -16,55 +11,139 @@ public class Player {
     private String root;
     private Playlist playlist;
     private boolean play;
+
+    private SimpleMinim simpleMinim;
+    private SimpleAudioPlayer player;
     private Track aktTrack;
-    private Media media;
-    private MediaPlayer player;
-    private static final Duration FADE_DURATION = Duration.seconds(2.0); //fading todo
 
-
-
-    public Player(String root){
+    Player(String root) {
         this.root = root;
         this.playlist = new Playlist(root);
         this.play = false;
 
+        simpleMinim = new SimpleMinim(true);
         aktTrack = playlist.get();
-        player = new MediaPlayer(media);
+        if (player == null) {
 
+            player = simpleMinim.loadMP3File(aktTrack.getPath());
+
+        }
     }
 
-    public void play(){
-        if(media == null){
-            media = new Media(new File(aktTrack.getPath()).toURI().toString());
+    public void play(double von, double bis) {
+
+
+        if (player == null) {
+
+            player = simpleMinim.loadMP3File(aktTrack.getPath());
         }
         player.play();
+
     }
 
-    public void play(double von, double bis){
+    public void play(int nr){
+        play(playlist.get(nr));
+    }
 
-         if(media == null){
-             media = new Media(new File(aktTrack.getPath()).toURI().toString());
-         }
-        player.setStartTime(new Duration(von));
-        player.setStopTime(new Duration(bis));
+    private void play(Track t) {
+
+
+        simpleMinim.stop();
+
+        setAktTrack(t);
         player.play();
-
     }
 
+    //MP3Player beenden
+    void stop() {
+        simpleMinim.stop();
+    }
 
-    public void pause(){
+    public void pause() {
         player.pause();
     }
 
-    public void setAktTrack(Track t){
-        this.aktTrack = aktTrack;
+
+    private void setAktTrack(Track t) {
+        aktTrack = t;
+        player = simpleMinim.loadMP3File(t.getPath());
+
     }
 
-    public void stop(){
-        player.stop();
+    public Track getAktTrack() {
+        return aktTrack;
     }
 
 
+    public void setPlay(boolean b) {
+        play = b;
+    }
+
+    public boolean getPlay() {
+        return play;
+    }
+
+    public void setVolume(float volume){
+
+
+
+        float gain = (float) (20*Math.log10(volume/100));   //Linear zu DB umrechnungsformel
+
+        player.setGain(gain);
+
+    }
+
+    public void mute(){
+        if(player.isMuted()){
+            player.unmute();
+        }else{
+            player.mute();
+        }
+    }
+
+    public String getRoot(){
+        return new File(root).getAbsolutePath();
+    }
+
+    public void setPosition(double percent){
+
+        int millis =(int) (player.length() * percent);
+
+        player.play(millis);
+        player.pause();
+
+    }
+
+
+    public float getAktTime(){
+        return player.position();
+    }
+
+    public float getAktLength(){
+        return player.length()-player.position();
+    }
+
+    public long getLength(){
+        return player.length();
+    }
+
+    public boolean isMuted(){
+        return player.isMuted();
+    }
+
+    public void changeRoot(String root){
+        playlist.changeRoot(root);
+    }
+
+    public int getIndex(){
+        return playlist.getIndex();
+    }
+
+    public void refreshTrack(){
+        player.pause();
+        aktTrack = playlist.get();
+        player = simpleMinim.loadMP3File(aktTrack.getPath());
+    }
 
 }
 
