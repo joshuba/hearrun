@@ -1,0 +1,11 @@
+#centerLayout{
+    -fx-background-color: darkgoldenrod;
+}
+
+#sideBar{
+    -fx-background-color: aquamarine;
+}
+
+#topLayout{
+    -fx-background-color: darkgreen;
+}
