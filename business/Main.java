@@ -29,7 +29,7 @@ public class Main extends Application {
 
 
         primaryStage.setTitle("Hear and Run - alpha 0.01");
-        primaryStage.initStyle(StageStyle.UTILITY); //Nur "schliessen Button"
+        //primaryStage.initStyle(StageStyle.UTILITY); //Nur "schliessen Button"
 
 
 

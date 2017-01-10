@@ -9,3 +9,16 @@
 #topLayout{
     -fx-background-color: darkgreen;
 }
+
+#MyCellNormal {
+    -fx-border-width: 0.5;
+    -fx-border-color: #000000;
+    -fx-background-color: #ffffff;
+}
+
+
+#MyCellInRange {
+    -fx-border-width: 0.5;
+    -fx-border-color: #ffffff;
+    -fx-background-color: lightskyblue
+}
