@@ -35,7 +35,6 @@ public class CenterLayout extends GridPane {
             }
         }
 
-        getNodeFromGridPane(2,4).getClass().
 
         /*
         Label label1 = new Label("Label 1");
