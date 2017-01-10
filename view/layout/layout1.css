@@ -1,5 +1,5 @@
 #centerLayout{
-    -fx-background-color: darkgoldenrod;
+    -fx-background-color: white;
 }
 
 #sideBar{
@@ -7,18 +7,39 @@
 }
 
 #topLayout{
-    -fx-background-color: darkgreen;
-}
-
-#MyCellNormal {
-    -fx-border-width: 0.5;
-    -fx-border-color: #000000;
-    -fx-background-color: #ffffff;
+    -fx-background-color: white;
 }
 
 
-#MyCellInRange {
-    -fx-border-width: 0.5;
-    -fx-border-color: #ffffff;
-    -fx-background-color: lightskyblue
+#interpretFeldLeer{
+    -fx-background-image: url("../../resources/icons/artistfeld.png");
 }
+
+#coverFeldLeer{
+    -fx-background-image: url("../../resources/icons/coverfeld.png");
+}
+
+#ereignisFeldLeer{
+    -fx-background-image: url("../../resources/icons/ereignisfeld.png");
+}
+
+#faktFeldLeer{
+    -fx-background-image: url("../../resources/icons/faktfeld.png");
+}
+
+#titelFeldLeer{
+    -fx-background-image: url("../../resources/icons/titelfeld.png");
+}
+
+#endFeldLeer{
+    -fx-background-image: url("../../resources/icons/endfeld.png");
+
+}
+
+
+#interpretFeldLeer, #coverFeldLeer, #ereignisFeldLeer, #faktFeldLeer, #titelFeldLeer, #endFeldLeer{
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+
+}
+

@@ -1,6 +1,7 @@
 package hearrun.business;
 
 import hearrun.view.layout.CompleteLayout;
+import hearrun.view.layout.Map;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
@@ -28,10 +29,11 @@ public class Main extends Application {
         Scene scene = new Scene(layout);
 
 
+
         primaryStage.setTitle("Hear and Run - alpha 0.01");
         //primaryStage.initStyle(StageStyle.UTILITY); //Nur "schliessen Button"
-
-
+        primaryStage.setMinWidth(1600);
+        primaryStage.setMinHeight(1000);
 
 
         primaryStage.setScene(scene);

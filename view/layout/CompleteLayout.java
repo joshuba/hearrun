@@ -21,7 +21,7 @@ public class CompleteLayout extends BorderPane{
 
     public CompleteLayout(Stage stage){
         this.setId("completeLayout");
-        this.viewController = new ViewController();
+        this.viewController = new ViewController("map1.txt");
         this.stage = stage;
 
         CenterLayout centerLayout = new CenterLayout();
@@ -46,6 +46,11 @@ public class CompleteLayout extends BorderPane{
         viewController.setCenterLayout(centerLayout);
         viewController.setLeftLayout(leftLayout);
         viewController.setRightLayout(rightLayout);
+
+
+        //Baue Map
+        viewController.baueSpielfeldAuf();
+
 
 
 

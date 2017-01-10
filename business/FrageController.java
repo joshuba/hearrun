@@ -31,7 +31,7 @@ public class FrageController {
 
 
     public FrageController()  {
-        leseXMLein("/Users/Josh/IdeaProjects/HearRun/src/hearrun/Resources/Data/quiz.xml");
+        leseXMLein("/Users/Josh/IdeaProjects/HearRun/src/hearrun/resources/Data/quiz.xml");
     }
 
 
