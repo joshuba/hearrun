@@ -1,18 +1,22 @@
 package hearrun.view.layout;
 
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 /**
  * Created by joshuabarth on 10.01.17.
  */
 public class Feld extends HBox{
     private Feldtyp feldtyp;
-    private static  double height = 120;
-    private static double weight = 120;
+    private Stage stage;
 
 
-    public Feld(Feldtyp feldtyp){
+
+
+
+    public Feld(Feldtyp feldtyp, Stage stage){
         this.feldtyp = feldtyp;
+        this.stage = stage;
         switch(feldtyp){
             case CoverFeld: this.setId("coverFeldLeer");
             break;
@@ -27,9 +31,9 @@ public class Feld extends HBox{
             case EndFeld: this.setId("endFeldLeer");
             break;
         }
-
-        this.setMinHeight(height);
-        this.setMinWidth(weight);
+        this.prefHeightProperty().bind(stage.heightProperty());
+        System.out.println(this.prefHeightProperty().getValue());
+        this.prefWidthProperty().bind(stage.widthProperty());
     }
 
     public Feldtyp getFeldtyp(){

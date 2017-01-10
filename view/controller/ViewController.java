@@ -4,6 +4,7 @@ import hearrun.view.layout.CenterLayout;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.Map;
 import hearrun.view.layout.SideBar;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,13 +16,16 @@ import java.util.ArrayList;
  * Created by Josh on 09.01.17.
  */
 public class ViewController {
+    private Stage stage;
     private CenterLayout centerLayout;
     private SideBar leftLayout;
     private SideBar rightLayout;
     private Map aktMap;
 
-    public ViewController(String mapName){
+    public ViewController(String mapName, Stage stage){
+        this.stage = stage;
         leseMapVonDateiEin(mapName);
+
     }
 
 
@@ -38,7 +42,7 @@ public class ViewController {
     }
 
     public void leseMapVonDateiEin(String mapName){
-        this.aktMap = new Map(mapName);
+        this.aktMap = new Map(mapName, stage);
 
     }
 
@@ -47,7 +51,9 @@ public class ViewController {
     }
 
 
-
+    public Stage getStage(){
+        return stage;
+    }
 
 
 }

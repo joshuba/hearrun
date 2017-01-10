@@ -36,6 +36,11 @@
 
 }
 
+#kreis{
+    -fx-background-color: black;
+
+}
+
 
 #interpretFeldLeer, #coverFeldLeer, #ereignisFeldLeer, #faktFeldLeer, #titelFeldLeer, #endFeldLeer{
     -fx-background-repeat: stretch;

@@ -37,7 +37,7 @@ public class Main extends Application {
 
 
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+       //primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.getStylesheets().add(("/hearrun/view/layout/layout1.css"));
         primaryStage.show();
@@ -48,4 +48,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }

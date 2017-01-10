@@ -21,8 +21,9 @@ public class CompleteLayout extends BorderPane{
 
     public CompleteLayout(Stage stage){
         this.setId("completeLayout");
-        this.viewController = new ViewController("map1.txt");
         this.stage = stage;
+
+        this.viewController = new ViewController("map1.txt", stage);
 
         CenterLayout centerLayout = new CenterLayout();
         SideBar leftLayout = new SideBar();

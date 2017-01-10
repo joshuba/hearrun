@@ -1,6 +1,7 @@
 package hearrun.view.layout;
 
 import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+import javafx.stage.Stage;
 import sun.rmi.rmic.Main;
 
 import java.io.BufferedReader;
@@ -18,7 +19,7 @@ public class Map {
     private int feldHoehe;
     private String dateiName;
 
-    public Map(String dateiName){
+    public Map(String dateiName, Stage stage){
         this.dateiName = dateiName;
 
 
@@ -42,7 +43,7 @@ public class Map {
                 line = line.substring(1);
                 String zeichen [] = line.split(" ");
                 for (int i = 0; i<zeichen.length; i++){
-                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]));
+                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), stage);
                        spielFeld[i][row] = feld;
 
                 }
