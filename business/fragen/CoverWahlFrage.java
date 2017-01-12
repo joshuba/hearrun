@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 /**
  * Beschreibung
  */
-public class CoverWahlFrage extends CoverFrage {
+public class CoverWahlFrage extends Frage {
     private Image[] anworten;
 
     public CoverWahlFrage(String fragetext, int richtigIndex, Image[] antworten){

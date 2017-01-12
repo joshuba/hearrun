@@ -1,9 +1,13 @@
 package hearrun.business;
-import hearrun.business.fragen.FaktFrage;
-import hearrun.business.fragen.Frage;
+
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+import hearrun.business.exceptions.TagNeededException;
+import hearrun.business.fragen.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -13,69 +17,102 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
  * Created by Josh on 28.12.16.
  */
 public class FrageController {
-    private static final int FRAGEZEIT  = 10;
+    private static final int FRAGEZEIT = 10;
+    private final String XMLPATH = "src/hearrun/resources/data/quiz.xml";
+    private final String MUSIKPATH = "music";
+    private final int MENGE_FRAGETYP = 5;
 
     //Für Faktfragen
     private File inputFile;
     private DocumentBuilderFactory dbFactory;
     private DocumentBuilder dBuilder;
     private Document doc;
-    private int faktFragenAnz;
-    private NodeList alleFaktfragen;
+    private Frageliste alleFragen;
+
+    ArrayList<File> tracks;
 
 
-    public FrageController()  {
-        leseXMLein("/Users/Josh/IdeaProjects/HearRun/src/hearrun/Resources/Data/quiz.xml");
+    public FrageController() {
+        alleFragen = new Frageliste();
+        tracks = new ArrayList<>();
+        leseXMLein(XMLPATH);
+        leseMusikEin(MUSIKPATH);
     }
-
 
 
     public Frage frageStellen(Fragetyp fragetyp) {
-        switch (fragetyp) {
-            case Faktfrage:
-                return(stelleFaktfrage());
-
-        }
-        return null;
+        return alleFragen.getRand(fragetyp);
     }
 
-    public Frage stelleFaktfrage(){
-        String fragetext = null;
-        String [] antworten = null;
-        int richtigIndex = -1;
+    private void leseMusikEin(String path) {
+        File root = new File(path);
+        File[] files = root.listFiles();
+        // Dateien einlesen
+        if (files != null) {
+            for (File f : files)
+                if (f.getName().endsWith(".mp3") || f.getName().endsWith(".wav") || f.getName().endsWith(".aac"))
+                    tracks.add(f);
+                else if (f.isDirectory())
+                    leseMusikEin(f.getAbsolutePath());
+        }
 
-        //Waehle eine zufaellige Frage aus allen Fragen aus
-        Node nNode = alleFaktfragen.item((int)((Math.random()) * faktFragenAnz));
+        // dateien in Frageobjekte parsen
+        // checken, wieviele Fragen pro Typ ca erstellt werden können
+        int anz = tracks.size() / MENGE_FRAGETYP;
 
-        //Extrahiere Fragetext
-        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-            Element eElement = (Element) nNode;
-            fragetext = eElement.getElementsByTagName("fragetext").item(0).getTextContent();
+        // Alle titel einlesen
+        ID3v2[] titel = Util.getAllTitles(tracks.toArray(new File[tracks.size()]));
 
-            //Extrahiere Anworten und schreibe in Array
-            int size = eElement.getElementsByTagName("antwort").getLength(); //Anzahl der Anworten
-            antworten = new String [size];
-            for(int i = 0; i<size; i++){
-                antworten[i] = eElement.getElementsByTagName("antwort").item(i).getTextContent();
+        //Zufallsfaktor erhöhen
+        Collections.shuffle(tracks);
 
-                //Erkenne richtige Antwort
-                if(eElement.getElementsByTagName("antwort").item(i).getAttributes().item(0).toString().contains("ja")){
-                    richtigIndex = i;
-                }
+        //CoverTitelFragen einlesen
+        ArrayList<File> tracksCP = (ArrayList<File>) tracks.clone();
+        int akt = 0;
+        for (int i = 0; i < anz; i++) {
+            try {
+                alleFragen.add(CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
+            } catch (TagNeededException e) {
+                akt++;
+                i--;
+                continue;
+            } catch (UnsupportedTagException | IOException | InvalidDataException e) {
+                e.printStackTrace();
             }
+            tracksCP.remove(akt);
         }
 
-        return new FaktFrage(fragetext,antworten,richtigIndex);
+        //InterpretFragen einlesen
+        tracksCP = (ArrayList<File>) tracks.clone();
+        akt = 0;
+
+        for (int i = 0; i < anz; i++) {
+            try {
+                alleFragen.add(InterpretFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+            } catch (TagNeededException e) {
+                akt++;
+                i--;
+                continue;
+            }
+            tracksCP.remove(akt);
+        }
+
 
     }
 
-    private void leseXMLein(String path){
+    private void leseTracks(String path) {
+
+    }
+
+    private void leseXMLein(String path) {
         //Lese FrageXML ein
         inputFile = new File(path);
         dbFactory = DocumentBuilderFactory.newInstance();
@@ -83,29 +120,42 @@ public class FrageController {
         try {
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(inputFile);
-        }catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e1) {
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
 
         doc.getDocumentElement().normalize();
-        alleFaktfragen = doc.getElementsByTagName("frage");
-        faktFragenAnz = alleFaktfragen.getLength();
+        NodeList alleFaktfragenNL = doc.getElementsByTagName("frage");
 
         System.out.println("XML erfolgreich eingelesen!");
 
+        //erstelle Frage-Objekte zu allen Fraktfragen in der xml
+        for (int i = 0; i < alleFaktfragenNL.getLength(); i++) {
+            //extrahiere Fragetext
+            Element frage = (Element) alleFaktfragenNL.item(i);
+            String fragetext = frage.getElementsByTagName("fragetext").item(0).getTextContent();
+
+            // extrahiere Antworten und richtigIndex
+            NodeList antworten = frage.getElementsByTagName("antwort");
+            String[] antwortTexte = new String[antworten.getLength()];
+            int richtigIndex = -1;
+            for (int j = 0; j < antworten.getLength(); j++) {
+                antwortTexte[j] = antworten.item(j).getTextContent();
+
+                if (antworten.item(j).getAttributes().item(0).toString().contains("ja"))
+                    richtigIndex = j;
+            }
+
+            // Füge die Frage der Frageliste hinzu
+            alleFragen.add(new FaktFrage(fragetext, antwortTexte, richtigIndex));
+        }
+
 
     }
-
-
-
-
-
-
-
 
 
 }

@@ -19,18 +19,21 @@ import java.io.IOException;
  * Track Objekt
  */
 public class Track {
-
+/*
     private SimpleStringProperty title;
     private SimpleStringProperty artist;
     private SimpleStringProperty album;
+*/
     private String path;
 
 
     Track(String path) {
+        this.path = path;
+
+        /*
         try {
             Mp3File mp3File = new Mp3File(path);
 
-            this.path = path;
             this.title = new SimpleStringProperty(mp3File.getId3v2Tag().getTitle());
             this.artist = new SimpleStringProperty(mp3File.getId3v2Tag().getArtist());
             this.album = new SimpleStringProperty(mp3File.getId3v2Tag().getAlbum());
@@ -38,11 +41,12 @@ public class Track {
         } catch (UnsupportedTagException | InvalidDataException | IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
 
 
-
+/*
     public ObservableValue<String> getTitle() {
         return title;
     }
@@ -54,12 +58,12 @@ public class Track {
     public ObservableValue<String> getAlbum() {
         return album;
     }
-
+*/
 
     public String getPath(){
         return path;
     }
-
+/*
     public Image getCover() {
         try {
             Mp3File mp3File = new Mp3File(path);
@@ -80,5 +84,5 @@ public class Track {
         return null;
 
     }
-
+*/
 }

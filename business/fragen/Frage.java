@@ -1,6 +1,8 @@
 package hearrun.business.fragen;
 
-public class Frage {
+import java.io.File;
+
+public abstract class Frage {
 
     protected String fragetext;
     protected String[] antworten;
