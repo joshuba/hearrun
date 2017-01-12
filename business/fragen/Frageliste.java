@@ -39,27 +39,49 @@ public class Frageliste {
 
 
     public Frage getRand(Fragetyp typ) {
+        Frage rand;
+        int index;
         switch (typ) {
             case CoverTitelFrage:
-                return coverTitelFragen.get((int) (Math.random() * coverTitelFragen.size()));
+                index = (int) (Math.random() * coverTitelFragen.size());
+                rand = coverTitelFragen.get(index);
+                coverTitelFragen.remove(index);
+                return rand;
             case CoverWahlFrage:
-                return coverWahlFragen.get((int) (Math.random() * coverWahlFragen.size()));
+                index = (int) (Math.random() * coverWahlFragen.size());
+                rand = coverWahlFragen.get(index);
+                coverWahlFragen.remove(index);
+                return rand;
             case FaktFrage:
-                return faktFragen.get((int) (Math.random() * faktFragen.size()));
+                index = (int) (Math.random() * faktFragen.size());
+                rand = faktFragen.get(index);
+                faktFragen.remove(index);
+                return rand;
             case InterpretFrage:
-                return interpretFragen.get((int) (Math.random() * interpretFragen.size()));
+                index = (int) (Math.random() * interpretFragen.size());
+                rand = interpretFragen.get(index);
+                interpretFragen.remove(index);
+                return rand;
             default: //titelFrage
-                return titelFragen.get((int) (Math.random() * titelFragen.size()));
+                index = (int) (Math.random() * titelFragen.size());
+                rand = titelFragen.get(index);
+                titelFragen.remove(index);
+                return rand;
         }
     }
 
     public Frage getRand() {
         ArrayList <Frage> alleFragen = new ArrayList<>();
-        alleFragen.addAll(coverTitelFragen);
-        alleFragen.addAll(coverWahlFragen);
-        alleFragen.addAll(faktFragen);
-        alleFragen.addAll(interpretFragen);
-        alleFragen.addAll(titelFragen);
+        if (coverTitelFragen.size() > 0)
+            alleFragen.addAll(coverTitelFragen);
+        if (coverWahlFragen.size() > 0)
+            alleFragen.addAll(coverWahlFragen);
+        if (faktFragen.size() > 0)
+            alleFragen.addAll(faktFragen);
+        if (interpretFragen.size() > 0)
+            alleFragen.addAll(interpretFragen);
+        if (titelFragen.size() > 0)
+            alleFragen.addAll(titelFragen);
 
         return alleFragen.get((int) (Math.random() * alleFragen.size()));
     }

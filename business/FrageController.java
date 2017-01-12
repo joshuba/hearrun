@@ -6,6 +6,7 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import hearrun.business.exceptions.TagNeededException;
 import hearrun.business.fragen.*;
+import javafx.scene.image.Image;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -48,8 +49,12 @@ public class FrageController {
     }
 
 
-    public Frage frageStellen(Fragetyp fragetyp) {
+    public Frage getFrage(Fragetyp fragetyp) {
         return alleFragen.getRand(fragetyp);
+    }
+
+    public Frage getFrage() {
+        return alleFragen.getRand();
     }
 
     private void leseMusikEin(String path) {
@@ -70,6 +75,7 @@ public class FrageController {
 
         // Alle titel einlesen
         ID3v2[] titel = Util.getAllTitles(tracks.toArray(new File[tracks.size()]));
+        Image[] covers = Util.getAllCovers(tracks.toArray(new File[tracks.size()]));
 
         //Zufallsfaktor erhöhen
         Collections.shuffle(tracks);
@@ -88,6 +94,22 @@ public class FrageController {
                 e.printStackTrace();
             }
             tracksCP.remove(akt);
+        }
+
+        // CoverWahlFragen einlesen
+        tracksCP = (ArrayList<File>) tracks.clone();
+        akt = 0;
+        for (int i = 0; i < anz; i++) {
+            try {
+                alleFragen.add(CoverWahlFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), covers));
+
+            } catch (TagNeededException e) {
+                akt++;
+                i--;
+                continue;
+            }
+            tracksCP.remove(akt);
+
         }
 
         //InterpretFragen einlesen

@@ -1,75 +1,71 @@
 package hearrun.business;
 
+import hearrun.business.fragen.CoverTitelFrage;
+import hearrun.business.fragen.CoverWahlFrage;
+import hearrun.business.fragen.FaktFrage;
 import hearrun.business.fragen.Frage;
-import hearrun.business.fragen.InterpretFrage;
+import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Created by Josh on 05.01.17.
  */
-public class Main {
+public class Main extends Application {
+    FrageController controller;
 
     public static void main(String[] args) {
-        FrageController controller = new FrageController();
+        launch(args);
+    }
 
-        Frage faktFrage = controller.frageStellen(Fragetyp.FaktFrage);
-        System.out.println(faktFrage.getFragetext());
-        for(int i = 0; i<faktFrage.getAntworten().length;i++){
-            System.out.println(i + ". " + faktFrage.getAntworten()[i]);
+
+    public void stelleFrage() {
+        Frage frage = controller.getFrage();
+
+        if (frage instanceof CoverWahlFrage) {
+            System.out.println(frage.getFragetext());
+            System.out.println(((CoverWahlFrage) frage).getPath());
+            for (Image i : ((CoverWahlFrage) frage).getAnworten())
+                showImage(i);
+            System.out.println(frage.getRichtigIndex());
+        }else{
+            System.out.println(frage.getFragetext());
+            for (String s : frage.getAntworten())
+                System.out.println(s);
+            System.out.println(frage.getRichtigIndex());
         }
-        System.out.println("Richtig: " + faktFrage.getRichtigIndex());
 
-        Frage coverFrage = controller.frageStellen(Fragetyp.CoverTitelFrage);
+    }
 
-        System.out.println(coverFrage.getFragetext());
-        for (String s : coverFrage.getAntworten())
-            System.out.println(s);
-        System.out.println(coverFrage.getRichtigIndex());
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        controller = new FrageController();
 
-        coverFrage = controller.frageStellen(Fragetyp.CoverTitelFrage);
+        for(int i = 0; i < 10; i++)
+            stelleFrage();
+    }
 
-        System.out.println(coverFrage.getFragetext());
-        for (String s : coverFrage.getAntworten())
-            System.out.println(s);
-        System.out.println(coverFrage.getRichtigIndex());
+    public void showImage (Image i){
+        try {
+            BufferedImage img = SwingFXUtils.fromFXImage(i, null);
+            File temp = File.createTempFile("img", ".png");
 
-        coverFrage = controller.frageStellen(Fragetyp.CoverTitelFrage);
+            ImageIO.write(img, "png", temp);
 
-        System.out.println(coverFrage.getFragetext());
-        for (String s : coverFrage.getAntworten())
-            System.out.println(s);
-        System.out.println(coverFrage.getRichtigIndex());
+            Desktop.getDesktop().open(temp);
 
-        coverFrage = controller.frageStellen(Fragetyp.CoverTitelFrage);
-
-        System.out.println(coverFrage.getFragetext());
-        for (String s : coverFrage.getAntworten())
-            System.out.println(s);
-        System.out.println(coverFrage.getRichtigIndex());
-/*
-        InterpretFrage interpretFrage = (InterpretFrage) controller.frageStellen(Fragetyp.InterpretFrage);
-        System.out.println(interpretFrage.getFragetext());
-        for(String s : interpretFrage.getAntworten())
-            System.out.println(s);
-        System.out.println(interpretFrage.getRichtigIndex());
-        System.out.println(interpretFrage.getPath());
-
-        interpretFrage = (InterpretFrage) controller.frageStellen(Fragetyp.InterpretFrage);
-        System.out.println(interpretFrage.getFragetext());
-        for(String s : interpretFrage.getAntworten())
-            System.out.println(s);
-        System.out.println(interpretFrage.getRichtigIndex());
-        System.out.println(interpretFrage.getPath());
-
-        interpretFrage = (InterpretFrage) controller.frageStellen(Fragetyp.InterpretFrage);
-        System.out.println(interpretFrage.getFragetext());
-        for(String s : interpretFrage.getAntworten())
-            System.out.println(s);
-        System.out.println(interpretFrage.getRichtigIndex());
-        System.out.println(interpretFrage.getPath());
-*/
-
-
-
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

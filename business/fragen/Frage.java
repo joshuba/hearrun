@@ -1,6 +1,5 @@
 package hearrun.business.fragen;
 
-import java.io.File;
 
 public abstract class Frage {
 
