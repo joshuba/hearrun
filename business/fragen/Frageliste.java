@@ -68,7 +68,7 @@ public class Frageliste {
                     rand = titelFragen.get(index);
                     titelFragen.remove(index);
             }
-        }catch (ArrayIndexOutOfBoundsException e){
+        }catch (IndexOutOfBoundsException e){
             System.err.println("Aus einer Liste wurden bereits alle Fragen gestellt");
             System.exit(1);
         }
