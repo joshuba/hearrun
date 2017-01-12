@@ -1,5 +1,6 @@
 package hearrun.view.controller;
 
+import hearrun.business.Spiel;
 import hearrun.view.layout.CenterLayout;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.Map;
@@ -20,11 +21,10 @@ public class ViewController {
     private CenterLayout centerLayout;
     private SideBar leftLayout;
     private SideBar rightLayout;
-    private Map aktMap;
+    private Spiel spiel;
 
-    public ViewController(String mapName, Stage stage){
+    public ViewController(Stage stage){
         this.stage = stage;
-        leseMapVonDateiEin(mapName);
 
     }
 
@@ -41,19 +41,22 @@ public class ViewController {
         this.rightLayout = rightLayout;
     }
 
-    public void leseMapVonDateiEin(String mapName){
-        this.aktMap = new Map(mapName, stage);
 
-    }
 
     public void baueSpielfeldAuf(){
-        centerLayout.baueSpielfeldAuf(aktMap);
+        centerLayout.baueSpielfeldAuf(spiel.getAktMap());
     }
 
 
-    public Stage getStage(){
-        return stage;
+
+    public void setSpiel(Spiel spiel){
+        this.spiel = spiel;
     }
+
+
+
+
+
 
 
 }

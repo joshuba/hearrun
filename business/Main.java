@@ -25,8 +25,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        CompleteLayout layout = new CompleteLayout(primaryStage);
-        Scene scene = new Scene(layout);
+        SpielController spielController = new SpielController(primaryStage);
+        spielController.waehleMapErstelleSpiel("map1.txt");
+        Scene scene = new Scene(spielController.getLayout());
+        spielController.getiwas();
+
 
 
 
@@ -34,6 +37,9 @@ public class Main extends Application {
         //primaryStage.initStyle(StageStyle.UTILITY); //Nur "schliessen Button"
         primaryStage.setMinWidth(1600);
         primaryStage.setMinHeight(1000);
+
+
+
 
 
         primaryStage.setScene(scene);

@@ -8,15 +8,11 @@ import javafx.stage.Stage;
  */
 public class Feld extends HBox{
     private Feldtyp feldtyp;
-    private Stage stage;
 
 
 
-
-
-    public Feld(Feldtyp feldtyp, Stage stage){
+    public Feld(Feldtyp feldtyp){
         this.feldtyp = feldtyp;
-        this.stage = stage;
         switch(feldtyp){
             case CoverFeld: this.setId("coverFeldLeer");
             break;
@@ -31,9 +27,9 @@ public class Feld extends HBox{
             case EndFeld: this.setId("endFeldLeer");
             break;
         }
-        this.prefHeightProperty().bind(stage.heightProperty());
-        System.out.println(this.prefHeightProperty().getValue());
-        this.prefWidthProperty().bind(stage.widthProperty());
+       //this.prefHeightProperty().bind(stage.heightProperty());
+        //System.out.println(this.prefHeightProperty().getValue());
+        //this.prefWidthProperty().bind(stage.widthProperty());
     }
 
     public Feldtyp getFeldtyp(){

@@ -19,7 +19,7 @@ public class Map {
     private int feldHoehe;
     private String dateiName;
 
-    public Map(String dateiName, Stage stage){
+    public Map(String dateiName){
         this.dateiName = dateiName;
 
 
@@ -43,7 +43,7 @@ public class Map {
                 line = line.substring(1);
                 String zeichen [] = line.split(" ");
                 for (int i = 0; i<zeichen.length; i++){
-                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), stage);
+                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]));
                        spielFeld[i][row] = feld;
 
                 }

@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.business.Spiel;
 import hearrun.view.controller.ViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,6 +9,8 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import javax.swing.text.View;
 
 /**
  * Created by Josh on 09.01.17.
@@ -19,11 +22,11 @@ public class CompleteLayout extends BorderPane{
 
 
 
-    public CompleteLayout(Stage stage){
+    public CompleteLayout(Stage stage, Spiel spiel){
         this.setId("completeLayout");
         this.stage = stage;
 
-        this.viewController = new ViewController("map1.txt", stage);
+        this.viewController = new ViewController(stage);
 
         CenterLayout centerLayout = new CenterLayout();
         SideBar leftLayout = new SideBar();
@@ -48,14 +51,15 @@ public class CompleteLayout extends BorderPane{
         viewController.setLeftLayout(leftLayout);
         viewController.setRightLayout(rightLayout);
 
-
-        //Baue Map
-        viewController.baueSpielfeldAuf();
+        viewController.setSpiel(spiel);
 
 
 
 
+    }
 
+    public ViewController getViewController(){
+        return this.viewController;
     }
 
 
