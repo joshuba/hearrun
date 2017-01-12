@@ -27,6 +27,7 @@ public class CenterLayout extends GridPane {
     public void baueSpielfeldAuf(Map map){
         for (int i = 0; i<map.getFeldBreite(); i++){
             for(int j = 0; j <map.getFeldHoehe(); j++){
+
                 GridPane.setConstraints(map.getFeld(i,j), i,j );
                 this.getChildren().add(map.getFeld(i,j));
             }

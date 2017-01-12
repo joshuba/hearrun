@@ -51,6 +51,7 @@ public class CompleteLayout extends BorderPane{
         viewController.setLeftLayout(leftLayout);
         viewController.setRightLayout(rightLayout);
 
+        //Aktuelles Spiel dem ViewController übergeben
         viewController.setSpiel(spiel);
 
 

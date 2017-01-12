@@ -1,9 +1,5 @@
 package hearrun.view.layout;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-import javafx.stage.Stage;
-import sun.rmi.rmic.Main;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
