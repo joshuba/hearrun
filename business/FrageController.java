@@ -127,6 +127,21 @@ public class FrageController {
             tracksCP.remove(akt);
         }
 
+        // TitelFragen einlesen
+        tracksCP = (ArrayList<File>) tracks.clone();
+        akt = 0;
+
+        for (int i = 0; i < anz; i++) {
+            try {
+                alleFragen.add(TitelFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+            } catch (TagNeededException e) {
+                akt++;
+                i--;
+                continue;
+            }
+            tracksCP.remove(akt);
+        }
+
 
     }
 

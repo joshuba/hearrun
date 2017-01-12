@@ -39,35 +39,40 @@ public class Frageliste {
 
 
     public Frage getRand(Fragetyp typ) {
-        Frage rand;
+        Frage rand = null;
         int index;
-        switch (typ) {
-            case CoverTitelFrage:
-                index = (int) (Math.random() * coverTitelFragen.size());
-                rand = coverTitelFragen.get(index);
-                coverTitelFragen.remove(index);
-                return rand;
-            case CoverWahlFrage:
-                index = (int) (Math.random() * coverWahlFragen.size());
-                rand = coverWahlFragen.get(index);
-                coverWahlFragen.remove(index);
-                return rand;
-            case FaktFrage:
-                index = (int) (Math.random() * faktFragen.size());
-                rand = faktFragen.get(index);
-                faktFragen.remove(index);
-                return rand;
-            case InterpretFrage:
-                index = (int) (Math.random() * interpretFragen.size());
-                rand = interpretFragen.get(index);
-                interpretFragen.remove(index);
-                return rand;
-            default: //titelFrage
-                index = (int) (Math.random() * titelFragen.size());
-                rand = titelFragen.get(index);
-                titelFragen.remove(index);
-                return rand;
+        try{
+            switch (typ) {
+                case CoverTitelFrage:
+                    index = (int) (Math.random() * coverTitelFragen.size());
+                    rand = coverTitelFragen.get(index);
+                    coverTitelFragen.remove(index);
+                    return rand;
+                case CoverWahlFrage:
+                    index = (int) (Math.random() * coverWahlFragen.size());
+                    rand = coverWahlFragen.get(index);
+                    coverWahlFragen.remove(index);
+                    return rand;
+                case FaktFrage:
+                    index = (int) (Math.random() * faktFragen.size());
+                    rand = faktFragen.get(index);
+                    faktFragen.remove(index);
+                    return rand;
+                case InterpretFrage:
+                    index = (int) (Math.random() * interpretFragen.size());
+                    rand = interpretFragen.get(index);
+                    interpretFragen.remove(index);
+                    return rand;
+                default: //titelFrage
+                    index = (int) (Math.random() * titelFragen.size());
+                    rand = titelFragen.get(index);
+                    titelFragen.remove(index);
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.err.println("Aus einer Liste wurden bereits alle Fragen gestellt");
+            System.exit(1);
         }
+        return rand;
     }
 
     public Frage getRand() {
