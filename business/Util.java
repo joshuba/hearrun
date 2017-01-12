@@ -8,6 +8,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -50,6 +51,20 @@ public class Util {
             }
         }
         return covers.toArray(new Image[covers.size()]);
+    }
+
+    public static void showImage(Image i) {
+        try {
+            BufferedImage img = SwingFXUtils.fromFXImage(i, null);
+            File temp = File.createTempFile("img", ".png");
+
+            ImageIO.write(img, "png", temp);
+
+            Desktop.getDesktop().open(temp);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

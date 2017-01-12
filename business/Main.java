@@ -37,7 +37,7 @@ public class Main extends Application {
             System.out.println(frage.getFragetext());
             System.out.println(((CoverWahlFrage) frage).getPath());
             for (Image i : ((CoverWahlFrage) frage).getAnworten())
-                showImage(i);
+                Util.showImage(i);
             System.out.println(frage.getRichtigIndex());
         } else if (frage instanceof InterpretFrage) {
             System.out.println(frage.getFragetext());
@@ -70,17 +70,5 @@ public class Main extends Application {
 
     }
 
-    public void showImage(Image i) {
-        try {
-            BufferedImage img = SwingFXUtils.fromFXImage(i, null);
-            File temp = File.createTempFile("img", ".png");
 
-            ImageIO.write(img, "png", temp);
-
-            Desktop.getDesktop().open(temp);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
