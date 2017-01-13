@@ -27,6 +27,8 @@ public class Feld extends HBox{
             case EndFeld: this.setId("endFeldLeer");
             break;
         }
+        this.setMinHeight(80);
+        this.setMinWidth(80);
        //this.prefHeightProperty().bind(stage.heightProperty());
         //System.out.println(this.prefHeightProperty().getValue());
         //this.prefWidthProperty().bind(stage.widthProperty());
