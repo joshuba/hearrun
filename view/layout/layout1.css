@@ -35,6 +35,10 @@
     -fx-background-image: url("../../resources/icons/endfeld.png");
 
 }
+#lol{
+    -fx-background-image: url("../../resources/icons/a.png");
+
+}
 
 #kreis{
     -fx-background-color: black;
@@ -42,7 +46,7 @@
 }
 
 
-#interpretFeldLeer, #coverFeldLeer, #ereignisFeldLeer, #faktFeldLeer, #titelFeldLeer, #endFeldLeer{
+#interpretFeldLeer, #coverFeldLeer, #ereignisFeldLeer, #faktFeldLeer, #titelFeldLeer, #endFeldLeer, #lol{
     -fx-background-repeat: stretch;
     -fx-background-size: 100%;
 

@@ -53,6 +53,10 @@ public class ViewController {
         this.spiel = spiel;
     }
 
+    public void setFeldId(int x, int y, String id){
+        spiel.getAktMap().getFeld(x,y).setBesetzt(id);
+    }
+
 
 
 

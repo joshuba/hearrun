@@ -13,6 +13,7 @@ public class SpielController {
 
     public SpielController(Stage stage){
         this.stage = stage;
+        Spieler spieler1 = new Spieler("Hans");
 
     }
 
@@ -27,9 +28,14 @@ public class SpielController {
         return this.layout;
     }
 
-    public void getiwas(){
-        System.out.println(aktSpiel.getAktMap().getFeldHoehe());
+    public void moveSpieler(int x, int y){
+        //spieler.move(x,y);
+        layout.getViewController().setFeldId(x,y,"lol");
+
     }
+
+
+
 
 
 }
