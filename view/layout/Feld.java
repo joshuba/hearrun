@@ -17,8 +17,8 @@ public class Feld extends HBox{
         this.feldtyp = feldtyp;
         setLeer();
 
-        this.setMinHeight(80);
-        this.setMinWidth(80);
+        this.setMinHeight(30);
+        this.setMinWidth(30);
        //this.prefHeightProperty().bind(stage.heightProperty());
         //System.out.println(this.prefHeightProperty().getValue());
         //this.prefWidthProperty().bind(stage.widthProperty());
@@ -48,6 +48,8 @@ public class Feld extends HBox{
                 break;
         }
     }
+
+
 
 
 

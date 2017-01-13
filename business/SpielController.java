@@ -13,14 +13,14 @@ public class SpielController {
 
     public SpielController(Stage stage){
         this.stage = stage;
-        Spieler spieler1 = new Spieler("Hans");
 
     }
 
     public void waehleMapErstelleSpiel(String dateiname){
-        this.aktSpiel = new Spiel(dateiname);
+        this.aktSpiel = new Spiel(dateiname, 1); //TODO SPIELERANZAHL
         this.layout = new CompleteLayout(stage, aktSpiel);
         layout.getViewController().baueSpielfeldAuf();
+        layout.getViewController().setFeldId(0,0,"lol");
     }
 
 
@@ -28,9 +28,8 @@ public class SpielController {
         return this.layout;
     }
 
-    public void moveSpieler(int x, int y){
-        //spieler.move(x,y);
-        layout.getViewController().setFeldId(x,y,"lol");
+    public void moveSpieler(){
+        layout.getViewController().nextPossibleField(aktSpiel.getAktSpieler());
 
     }
 

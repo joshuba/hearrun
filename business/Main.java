@@ -27,7 +27,9 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         SpielController spielController = new SpielController(primaryStage);
         spielController.waehleMapErstelleSpiel("map1.txt");
-        spielController.moveSpieler(0,0);
+
+
+
 
         Scene scene = new Scene(spielController.getLayout());
 

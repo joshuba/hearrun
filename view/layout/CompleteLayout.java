@@ -31,14 +31,11 @@ public class CompleteLayout extends BorderPane{
         CenterLayout centerLayout = new CenterLayout();
         SideBar leftLayout = new SideBar();
         SideBar rightLayout = new SideBar();
-        TopLayout topLayout = new TopLayout();
+        TopLayout topLayout = new TopLayout(viewController);
 
 
 
         //CompleteLayout stylen
-
-
-
 
 
         //Komponenten zusammenfügen

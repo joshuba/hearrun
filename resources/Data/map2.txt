@@ -1,0 +1,35 @@
+*Müll
+*40
+*9
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+
+/
+
+
+
+____________________________________
+
+*   (1)Name
+*   (2)Breite
+*   (3)Hoehe
+#   Feldtypen
+/   Ende des Dokuments
+
+I   InterpretFeld
+C   CoverFeld
+T   Titelfeld
+E   Ereignisfeld
+F   Faktfeld
+X   Endfeld
+L   Leeres Feld
+R   RandomFeld
+_________________________________
+
