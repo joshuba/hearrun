@@ -13,9 +13,10 @@ public class MainMenu extends VBox{
     private Button newGame;
     private Button settings;
     private Button exit;
-    private boolean continueAn = false;
+    private boolean continueAn;
 
     public MainMenu(SpielController spielController){
+        continueAn = false;
         this.setId("mainMenu");
         this.setMinHeight(700);
         this.setMinWidth(300);
@@ -49,6 +50,7 @@ public class MainMenu extends VBox{
         if(!continueAn){
             this.getChildren().removeAll(newGame,settings,exit);
             this.getChildren().addAll(continu, newGame, settings, exit);
+            continueAn = true;
         }
 
 
