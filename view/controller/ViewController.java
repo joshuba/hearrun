@@ -18,7 +18,6 @@ public class ViewController {
     public ViewController(Stage stage, SpielController spielController){
         this.spielController = spielController;
         this.stage = stage;
-
     }
 
 
@@ -34,13 +33,10 @@ public class ViewController {
         this.rightLayout = rightLayout;
     }
 
-
-
     public void baueSpielfeldAuf(){
+        //Felder werden in das Gridpane gesetzt
         centerLayout.baueSpielfeldAuf(spielController.getAktSpiel().getAktMap());
     }
-
-
 
     public void setFeldId(int x, int y, String id){
         spielController.getAktSpiel().getAktMap().getFeld(x,y).setBesetztID(id);
@@ -119,6 +115,14 @@ public class ViewController {
 
     public Stage getStage(){
         return this.stage;
+    }
+
+    public void setGameLayout(){
+        spielController.getLayout().setGameLayout();
+    }
+
+    public void setMainMenu(){
+        spielController.getLayout().setMainMenu();
     }
 
 

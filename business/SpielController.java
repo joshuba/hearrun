@@ -1,7 +1,7 @@
 package hearrun.business;
 
+import hearrun.view.layout.GameLayout;
 import hearrun.view.layout.CompleteLayout;
-import hearrun.view.layout.MainMenu;
 import javafx.stage.Stage;
 
 /**
@@ -9,32 +9,39 @@ import javafx.stage.Stage;
  */
 public class SpielController {
     private Spiel aktSpiel;
-    private CompleteLayout layout;
+    private CompleteLayout completeLayout;
     private Stage stage;
+    private String dateiname;
+    private int spieleranzahl;
+
 
 
     public SpielController(Stage stage, String dateiname, int spieleranzahl){
         this.stage = stage;
+        this.dateiname = dateiname;
+        this.spieleranzahl = spieleranzahl;
 
-        starteSpiel(dateiname,spieleranzahl);
+        this.completeLayout = new CompleteLayout(stage, this);
+
+
 
     }
 
     private void waehleMapErstelleSpiel(String dateiname, int spieleranzahl){
-        this.layout = new CompleteLayout(stage, this); //Baue Layout auf
-        this.aktSpiel = new Spiel(dateiname, spieleranzahl, layout.getViewController()); //Erstelle spiel
-        layout.getViewController().baueSpielfeldAuf();
-        layout.getViewController().setFeldId(0,0,layout.getViewController().erkenneFeldId(0,0)); //Setze Alle Player aufs erste Feld
+
+        this.aktSpiel = new Spiel(dateiname, spieleranzahl, completeLayout.getViewController()); //Erstelle spiel
+        completeLayout.getViewController().baueSpielfeldAuf();
+        completeLayout.getViewController().setFeldId(0,0, completeLayout.getViewController().erkenneFeldId(0,0)); //Setze Alle Player aufs erste Feld
 
     }
 
 
     public CompleteLayout getLayout(){
-        return this.layout;
+        return this.completeLayout;
     }
 
     public void moveAktSpieler(int schritte) {
-            layout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
 
     }
 
@@ -50,9 +57,13 @@ public class SpielController {
         aktSpiel.getSpielerByNr(nr).setName(name);
     }
 
-    public void starteSpiel(String dateiname, int spieleranzahl){
+    public void starteSpiel(){
         waehleMapErstelleSpiel(dateiname, spieleranzahl);
 
+    }
+
+    public void beendeSpiel(){
+        stage.close();
     }
 
 

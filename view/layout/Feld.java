@@ -1,6 +1,9 @@
 package hearrun.view.layout;
 
 import hearrun.view.controller.ViewController;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -11,13 +14,13 @@ public class Feld extends HBox{
     private Feldtyp feldtyp;
 
 
+
     public Feld(Feldtyp feldtyp, ViewController viewController){
         this.feldtyp = feldtyp;
         setLeer();
 
 
        this.prefHeightProperty().bind(viewController.getStage().heightProperty());
-        System.out.println(this.prefHeightProperty().getValue());
         this.prefWidthProperty().bind(viewController.getStage().widthProperty());
     }
 
