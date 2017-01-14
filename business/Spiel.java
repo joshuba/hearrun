@@ -17,7 +17,7 @@ public class Spiel {
         this.spieleranzahl = spieleranzahl;
         this.spielerListe = new ArrayList<Spieler>();
         leseMapVonDateiEin(mapName);
-        erstelleSpieler();
+        erstelleSpieler("testspieler");
 
 
     }
@@ -35,9 +35,25 @@ public class Spiel {
         return spielerListe.get(aktSpieler);
     }
 
-    private void erstelleSpieler(){
-        Spieler spieler1 = new Spieler("Hans");
-        spielerListe.add(spieler1);
+    public Spieler getSpielerByNr(int nr){
+        return spielerListe.get(nr);
+
+    }
+
+    public int getSpieleranzahl(){
+        return this.spieleranzahl;
+    }
+
+    public void erstelleSpieler(String name){
+        for (int i=0; i<spieleranzahl; i++){
+            Spieler spieler = new Spieler(i, name);
+            spielerListe.add(spieler);
+
+        }
         aktSpieler = 0;
+    }
+
+    public void nextSpieler(){
+        aktSpieler = (aktSpieler +1) %spieleranzahl;
     }
 }

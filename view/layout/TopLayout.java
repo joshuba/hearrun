@@ -1,5 +1,7 @@
 package hearrun.view.layout;
 
+import hearrun.business.Spiel;
+import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -12,13 +14,15 @@ import javax.swing.text.View;
  */
 public class TopLayout extends VBox {
     ViewController viewController;
-    public TopLayout(ViewController viewController){
+    SpielController spielController;
+    public TopLayout(ViewController viewController, SpielController spielController){
         this.viewController = viewController;
+        this.spielController = spielController;
         this.setId("topLayout");
         this.setMinHeight(50);
 
-        Button settings = new Button("GO");
-        settings.setOnAction((e) -> viewController.nextPossibleField(null));
+        Button settings = new Button("P1");
+        settings.setOnAction((e) -> spielController.moveAktSpieler(1));
 
         this.getChildren().add(settings);
     }

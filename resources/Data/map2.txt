@@ -1,15 +1,21 @@
-*Müll
-*40
-*9
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
-#R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R
+*Snake
+*20
+*15
+#R R R R R R R R R R R R R R R R R R R R
+#L L L L L L L L L L L L L L L L L L L R
+#L R R R R R R R R R R R R R R R R R L R
+#L R L L L L L L L L L L L L L L L R L R
+#L R L R R R R R R R R R R R R R L R L R
+#L R L R L L L L L L L L L L L R L R L R
+#L R L R L R R R R R R R R R L R L R L R
+#L R L R L R L L L L L L L R L R L R L R
+#L R L R L R L E R R R R R R L R L R L R
+#L R L R L R L L L L L L L L L R L R L R
+#L R L R L R R R R R R R R R R R L R L R
+#L R L R L L L L L L L L L L L L L R L R
+#L R L R R R R R R R R R R R R R R R L R
+#L R L L L L L L L L L L L L L L L L L R
+#L R R R R R R R R R R R R R R R R R R R
 
 /
 

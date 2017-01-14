@@ -1,0 +1,15 @@
+#completeLayout{
+    -fx-background-image: url("../../resources/icons/background1.jpg");
+}
+
+#sideBar{
+    -fx-background-color: white;
+}
+
+#topLayout{
+    -fx-background-color: white;
+}
+#kreis{
+     -fx-background-color: black;
+
+ }

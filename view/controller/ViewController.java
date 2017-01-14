@@ -1,15 +1,9 @@
 package hearrun.view.controller;
 
-import hearrun.business.Spiel;
+import hearrun.business.SpielController;
 import hearrun.business.Spieler;
 import hearrun.view.layout.*;
 import javafx.stage.Stage;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Josh on 09.01.17.
@@ -19,9 +13,10 @@ public class ViewController {
     private CenterLayout centerLayout;
     private SideBar leftLayout;
     private SideBar rightLayout;
-    private Spiel spiel;
+    private SpielController spielController;
 
-    public ViewController(Stage stage){
+    public ViewController(Stage stage, SpielController spielController){
+        this.spielController = spielController;
         this.stage = stage;
 
     }
@@ -42,70 +37,90 @@ public class ViewController {
 
 
     public void baueSpielfeldAuf(){
-        centerLayout.baueSpielfeldAuf(spiel.getAktMap());
+        centerLayout.baueSpielfeldAuf(spielController.getAktSpiel().getAktMap());
     }
 
 
-
-    public void setSpiel(Spiel spiel){
-        this.spiel = spiel;
-    }
 
     public void setFeldId(int x, int y, String id){
-        spiel.getAktMap().getFeld(x,y).setBesetzt(id);
+        spielController.getAktSpiel().getAktMap().getFeld(x,y).setBesetzt(id);
     }
 
-    public void nextPossibleField(Spieler spieler){
-        if(spieler == null){
-            spieler = spiel.getAktSpieler();
+    public void moveForward(int i, Spieler s){
+        int c = 1;
+        while(c <= i){
+            nextPossibleField(s);
+            c++;
+        }
+    }
+
+    private void nextPossibleField(Spieler spieler) {
+        int counter = 0;
+        if (spieler == null) {
+            spieler = spielController.getAktSpiel().getAktSpieler();
         }
         int x = spieler.getAktX();
         int y = spieler.getAktY();
-        Map map = this.spiel.getAktMap();
-
-        //nach rechts
-        if(map.getFeld(x+1,y).getFeldtyp() != Feldtyp.LeeresFeld && x+1 != spieler.getLastX() && x+1<=map.getFeldBreite()){
-            System.out.println("rechts gefunden");
-            spiel.getAktMap().getFeld(x,y).setLeer(); //Setze aktuelles Feld zurueck
-            spiel.getAktMap().getFeld(x+1,y).setBesetzt("lol"); //Setze neues Feld auf besetzt
-            spieler.move(x+1,y);
-
-        }
-        //nach links
-        else if(map.getFeld(x-1,y).getFeldtyp() != Feldtyp.LeeresFeld && x-1 != spieler.getLastX() && x-1 >= 0){
-            System.out.println("links gefunden");
-            spiel.getAktMap().getFeld(x,y).setLeer();
-            spiel.getAktMap().getFeld(x-1,y).setBesetzt("lol");
-            spieler.move(x-1,y);
+        Map map = this.spielController.getAktSpiel().getAktMap();
 
 
+            //nach rechts
+            if (x + 1 < map.getFeldBreite() && map.getFeld(x + 1, y).getFeldtyp() != Feldtyp.LeeresFeld && x + 1 != spieler.getLastX()) {
+                spieler.move(x + 1, y);
+                map.getFeld(x, y).setBesetzt(erkenneFeldId(spieler.getLastX(),spieler.getLastY())); //Setze aktuelles Feld zurueck
+                spielController.getAktSpiel().getAktMap().getFeld(x + 1, y).setBesetzt(erkenneFeldId(spieler.getAktX(),spieler.getAktY())); //Setze neues Feld auf besetzt
 
-        }
-        //nach Oben
-        else if(map.getFeld(x,y-1).getFeldtyp() != Feldtyp.LeeresFeld && y-1 != spieler.getLastY() && y-1 >= 0){
-            System.out.println("oben gefunden");
-            spiel.getAktMap().getFeld(x,y).setLeer();
-            spiel.getAktMap().getFeld(x,y-1).setBesetzt("lol");
-            spieler.move(x,y-1);
-
-
-
-        }
-        //nach unten
-        else if(map.getFeld(x,y+1).getFeldtyp() != Feldtyp.LeeresFeld && y+1 != spieler.getLastY() && y+1 <= map.getFeldHoehe()){
-            System.out.println("unten gefunden");
-            spiel.getAktMap().getFeld(x,y).setLeer();
-            spiel.getAktMap().getFeld(x,y+1).setBesetzt("lol");
-            spieler.move(x,y+1);
-
-
-
-
-        }
-
+            }
+            //nach links
+            else if (x - 1 >= 0 && map.getFeld(x - 1, y).getFeldtyp() != Feldtyp.LeeresFeld && x - 1 != spieler.getLastX()) {
+                spieler.move(x - 1, y);
+                map.getFeld(x, y).setBesetzt(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
+                map.getFeld(x - 1, y).setBesetzt(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+            }
+            //nach Oben
+            else if (y - 1 >= 0 && map.getFeld(x, y - 1).getFeldtyp() != Feldtyp.LeeresFeld && y - 1 != spieler.getLastY()) {
+                spieler.move(x, y - 1);
+                map.getFeld(x, y).setBesetzt(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
+                map.getFeld(x, y - 1).setBesetzt(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+            }
+            //nach unten
+            else if (y + 1 <= map.getFeldHoehe() && map.getFeld(x, y + 1).getFeldtyp() != Feldtyp.LeeresFeld && y + 1 != spieler.getLastY()) {
+                spieler.move(x, y + 1);
+                map.getFeld(x, y).setBesetzt(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
+                map.getFeld(x, y + 1).setBesetzt(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+            }
+            erkenneFeldId(x,y);
 
 
     }
+
+    public String erkenneFeldId(int x, int y) {
+        int anz = spielController.getAktSpiel().getSpieleranzahl();
+        boolean leer = true;
+        String idZahl = "p";
+
+        for (int i = 0; i <anz; i++) {
+            if(spielController.getAktSpiel().getSpielerByNr(i).stehtAufFeld(x,y)){ //Wenn der spieler auf dem Feld steht merke zahl z.B. 13: spieler 1 und 3 auf feld
+                idZahl = idZahl + (spielController.getAktSpiel().getSpielerByNr(i).getNr()+1);
+                leer = false;
+            }
+        }
+        //Falls leer
+        if (leer){
+            idZahl = "leer";
+
+
+        }
+
+        String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString() + idZahl;
+        feldtyp = feldtyp.toLowerCase();
+        return feldtyp;
+
+    }
+
+
+
+
 
 
 

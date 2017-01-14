@@ -11,16 +11,19 @@ public class SpielController {
     private CompleteLayout layout;
     private Stage stage;
 
-    public SpielController(Stage stage){
+    public SpielController(Stage stage, String dateiname){
         this.stage = stage;
+        waehleMapErstelleSpiel(dateiname, 4);
+
 
     }
 
-    public void waehleMapErstelleSpiel(String dateiname){
-        this.aktSpiel = new Spiel(dateiname, 1); //TODO SPIELERANZAHL
-        this.layout = new CompleteLayout(stage, aktSpiel);
+    private void waehleMapErstelleSpiel(String dateiname, int spieleranzahl){
+        this.aktSpiel = new Spiel(dateiname, spieleranzahl); //TODO SPIELERANZAHL
+        this.layout = new CompleteLayout(stage, this);
         layout.getViewController().baueSpielfeldAuf();
-        layout.getViewController().setFeldId(0,0,"lol");
+        layout.getViewController().setFeldId(0,0,layout.getViewController().erkenneFeldId(0,0)); //Setze Alle Player aufs erste Feld
+
     }
 
 
@@ -28,8 +31,21 @@ public class SpielController {
         return this.layout;
     }
 
-    public void moveSpieler(){
-        layout.getViewController().nextPossibleField(aktSpiel.getAktSpieler());
+    public void moveAktSpieler(int schritte) {
+            layout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+            getAktSpiel().nextSpieler();
+
+    }
+
+    public Spiel getAktSpiel(){
+        return aktSpiel;
+    }
+
+    private void setzeSpielerAnzahl(int anz){
+        for(int i = 0; i<anz; i++){
+            aktSpiel.erstelleSpieler("testspieler_" + (i+1));
+
+        }
 
     }
 

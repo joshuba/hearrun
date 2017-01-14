@@ -17,8 +17,8 @@ public class Feld extends HBox{
         this.feldtyp = feldtyp;
         setLeer();
 
-        this.setMinHeight(30);
-        this.setMinWidth(30);
+        this.setMinHeight(80);
+        this.setMinWidth(80);
        //this.prefHeightProperty().bind(stage.heightProperty());
         //System.out.println(this.prefHeightProperty().getValue());
         //this.prefWidthProperty().bind(stage.widthProperty());
@@ -34,17 +34,17 @@ public class Feld extends HBox{
 
     public void setLeer(){
         switch(feldtyp){
-            case CoverFeld: this.setId("coverFeldLeer");
+            case CoverFeld: this.setId("coverfeldleer");
                 break;
-            case EreignisFeld: this.setId("ereignisFeldLeer");
+            case EreignisFeld: this.setId("ereignisfeldleer");
                 break;
-            case FaktFeld: this.setId("faktFeldLeer");
+            case FaktFeld: this.setId("faktfeldleer");
                 break;
-            case InterpretFeld: this.setId("interpretFeldLeer");
+            case InterpretFeld: this.setId("interpretfeldleer");
                 break;
-            case TitelFeld: this.setId("titelFeldLeer");
+            case TitelFeld: this.setId("titelfeldleer");
                 break;
-            case EndFeld: this.setId("endFeldLeer");
+            case EndFeld: this.setId("endfeldleer");
                 break;
         }
     }
