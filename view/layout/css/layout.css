@@ -11,5 +11,6 @@
 }
 
 #mainMenu{
-    -fx-background-color: black;
+    -fx-background-color: lightgray;
+    -fx-opacity: 75%;
 }

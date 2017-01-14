@@ -61,6 +61,7 @@ public class SpielController {
         if(aktSpiel != null){
             beendeSpiel();
         }
+
         completeLayout.getViewController().resetGameLayout();
         waehleMapErstelleSpiel(dateiname, spieleranzahl);
         completeLayout.getViewController().setGameLayout();

@@ -30,12 +30,16 @@ public class CompleteLayout extends StackPane {
 
     public void setGameLayout(){
         this.getChildren().removeAll(mainMenu);
-        this.getChildren().addAll(gameLayout);
+        //Falls das gamelayout nicht da ist hinzufuegen
+        if(this.getChildren().isEmpty()){
+            this.getChildren().addAll(gameLayout);
+        }
+
 
     }
 
     public void setMainMenu(){
-        this.getChildren().removeAll(gameLayout);
+        //this.getChildren().removeAll(gameLayout);
         this.getChildren().addAll(mainMenu);
     }
 
@@ -44,6 +48,7 @@ public class CompleteLayout extends StackPane {
     }
 
     public void resetGameLayout(){
+        this.getChildren().removeAll(gameLayout);
         gameLayout = new GameLayout(stage, spielController, viewController);
 
     }
