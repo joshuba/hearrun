@@ -13,6 +13,7 @@ public class MainMenu extends VBox{
     private Button newGame;
     private Button settings;
     private Button exit;
+    private boolean continueAn = false;
 
     public MainMenu(SpielController spielController){
         this.setId("mainMenu");
@@ -29,8 +30,9 @@ public class MainMenu extends VBox{
 
         this.getChildren().addAll(newGame,settings,exit);
 
-        newGame.setOnAction((e) -> spielController.getLayout().setGameLayout());
-        exit.setOnAction((e) -> spielController.beendeSpiel());
+        newGame.setOnAction((e) -> spielController.starteSpiel());
+        exit.setOnAction((e) -> spielController.beendeProgramm());
+        continu.setOnAction((e)-> spielController.getLayout().setGameLayout());
 
 
 
@@ -40,10 +42,16 @@ public class MainMenu extends VBox{
 
     }
 
-    public void activateContinue(){
-        this.getChildren().removeAll(newGame,settings,exit);
 
-        this.getChildren().addAll(continu, newGame, settings, exit);
+
+    public void activateContinue(){
+        //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
+        if(!continueAn){
+            this.getChildren().removeAll(newGame,settings,exit);
+            this.getChildren().addAll(continu, newGame, settings, exit);
+        }
+
+
     }
 
     public void deactivateContinue(){

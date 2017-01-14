@@ -22,7 +22,6 @@ public class CompleteLayout extends StackPane {
          this.maxHeight(stage.getHeight());
          this.maxWidth(stage.getWidth());
 
-         gameLayout = new GameLayout(stage, spielController, viewController);
          mainMenu = new MainMenu(spielController);
 
          setMainMenu();
@@ -43,6 +42,17 @@ public class CompleteLayout extends StackPane {
     public ViewController getViewController(){
         return this.viewController;
     }
+
+    public void resetGameLayout(){
+        gameLayout = new GameLayout(stage, spielController, viewController);
+
+    }
+
+    public MainMenu getMainMenu(){
+        return this.mainMenu;
+    }
+
+
 
 
 }

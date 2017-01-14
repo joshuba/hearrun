@@ -118,11 +118,20 @@ public class ViewController {
     }
 
     public void setGameLayout(){
+
         spielController.getLayout().setGameLayout();
     }
 
     public void setMainMenu(){
+        //Wenn das spiel laeuft schalte continue ein
+        if(spielController.getAktSpiel() != null){
+            spielController.getLayout().getMainMenu().activateContinue();
+        }
         spielController.getLayout().setMainMenu();
+    }
+
+    public void resetGameLayout(){
+        spielController.getLayout().resetGameLayout();
     }
 
 

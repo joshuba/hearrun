@@ -58,11 +58,21 @@ public class SpielController {
     }
 
     public void starteSpiel(){
+        if(aktSpiel != null){
+            beendeSpiel();
+        }
+        completeLayout.getViewController().resetGameLayout();
         waehleMapErstelleSpiel(dateiname, spieleranzahl);
+        completeLayout.getViewController().setGameLayout();
 
     }
 
     public void beendeSpiel(){
+        this.aktSpiel = null;
+        this.completeLayout.getViewController().resetGameLayout();
+    }
+
+    public void beendeProgramm(){
         stage.close();
     }
 
