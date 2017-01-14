@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.view.controller.ViewController;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -8,27 +9,23 @@ import javafx.stage.Stage;
  */
 public class Feld extends HBox{
     private Feldtyp feldtyp;
-    private boolean besetzt;
 
 
-
-
-    public Feld(Feldtyp feldtyp){
+    public Feld(Feldtyp feldtyp, ViewController viewController){
         this.feldtyp = feldtyp;
         setLeer();
 
-        this.setMinHeight(80);
-        this.setMinWidth(80);
-       //this.prefHeightProperty().bind(stage.heightProperty());
-        //System.out.println(this.prefHeightProperty().getValue());
-        //this.prefWidthProperty().bind(stage.widthProperty());
+
+       this.prefHeightProperty().bind(viewController.getStage().heightProperty());
+        System.out.println(this.prefHeightProperty().getValue());
+        this.prefWidthProperty().bind(viewController.getStage().widthProperty());
     }
 
     public Feldtyp getFeldtyp(){
         return this.feldtyp;
     }
 
-    public void setBesetzt(String id){
+    public void setBesetztID(String id){
         this.setId(id);
     }
 

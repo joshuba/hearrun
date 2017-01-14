@@ -1,15 +1,21 @@
 package hearrun.view.layout;
 
+import hearrun.view.controller.ViewController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+
+import javax.swing.text.View;
 
 /**
  * Gridpane, welches das Spielfeld darstellt
  */
 public class CenterLayout extends GridPane {
 
-    public CenterLayout(){
+    private ViewController viewController;
+
+    public CenterLayout(ViewController viewController){
+        this.viewController = viewController;
         this.setId("centerLayout");
         this.setGridLinesVisible(false);
         this.setAlignment(Pos.CENTER);

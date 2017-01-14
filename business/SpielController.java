@@ -1,6 +1,7 @@
 package hearrun.business;
 
 import hearrun.view.layout.CompleteLayout;
+import hearrun.view.layout.MainMenu;
 import javafx.stage.Stage;
 
 /**
@@ -11,16 +12,17 @@ public class SpielController {
     private CompleteLayout layout;
     private Stage stage;
 
-    public SpielController(Stage stage, String dateiname){
-        this.stage = stage;
-        waehleMapErstelleSpiel(dateiname, 4);
 
+    public SpielController(Stage stage, String dateiname, int spieleranzahl){
+        this.stage = stage;
+
+        starteSpiel(dateiname,spieleranzahl);
 
     }
 
     private void waehleMapErstelleSpiel(String dateiname, int spieleranzahl){
-        this.aktSpiel = new Spiel(dateiname, spieleranzahl); //TODO SPIELERANZAHL
-        this.layout = new CompleteLayout(stage, this);
+        this.layout = new CompleteLayout(stage, this); //Baue Layout auf
+        this.aktSpiel = new Spiel(dateiname, spieleranzahl, layout.getViewController()); //Erstelle spiel
         layout.getViewController().baueSpielfeldAuf();
         layout.getViewController().setFeldId(0,0,layout.getViewController().erkenneFeldId(0,0)); //Setze Alle Player aufs erste Feld
 
@@ -33,21 +35,27 @@ public class SpielController {
 
     public void moveAktSpieler(int schritte) {
             layout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
-            getAktSpiel().nextSpieler();
 
+    }
+
+    public void nextSpieler(){
+        this.getAktSpiel().nextSpieler();
     }
 
     public Spiel getAktSpiel(){
         return aktSpiel;
     }
 
-    private void setzeSpielerAnzahl(int anz){
-        for(int i = 0; i<anz; i++){
-            aktSpiel.erstelleSpieler("testspieler_" + (i+1));
+    public void setPlayerName(int nr, String name){
+        aktSpiel.getSpielerByNr(nr).setName(name);
+    }
 
-        }
+    public void starteSpiel(String dateiname, int spieleranzahl){
+        waehleMapErstelleSpiel(dateiname, spieleranzahl);
 
     }
+
+
 
 
 

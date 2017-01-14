@@ -58,4 +58,8 @@ public class Spieler {
         }
         return false;
     }
+
+    public void setName(String name){
+        this.name = name;
+    }
 }

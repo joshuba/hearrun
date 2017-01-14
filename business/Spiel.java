@@ -1,5 +1,6 @@
 package hearrun.business;
 
+import hearrun.view.controller.ViewController;
 import hearrun.view.layout.Map;
 
 import java.util.ArrayList;
@@ -12,8 +13,10 @@ public class Spiel {
     private ArrayList<Spieler> spielerListe;
     private int aktSpieler;
     private int spieleranzahl;
+    private ViewController viewController;
 
-    public Spiel(String mapName, int spieleranzahl){
+    public Spiel(String mapName, int spieleranzahl, ViewController viewController){
+        this.viewController = viewController;
         this.spieleranzahl = spieleranzahl;
         this.spielerListe = new ArrayList<Spieler>();
         leseMapVonDateiEin(mapName);
@@ -23,7 +26,7 @@ public class Spiel {
     }
 
     public void leseMapVonDateiEin(String mapName){
-        this.aktMap = new Map(mapName);
+        this.aktMap = new Map(mapName, viewController);
 
     }
 
@@ -55,5 +58,9 @@ public class Spiel {
 
     public void nextSpieler(){
         aktSpieler = (aktSpieler +1) %spieleranzahl;
+    }
+
+    public void setPlayerNames(int nr, String name){
+        spielerListe.get(nr).setName(name);
     }
 }

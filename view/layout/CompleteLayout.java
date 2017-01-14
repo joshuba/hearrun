@@ -26,10 +26,9 @@ public class CompleteLayout extends BorderPane{
     public CompleteLayout(Stage stage, SpielController spielController){
         this.setId("completeLayout");
         this.stage = stage;
-
         this.viewController = new ViewController(stage, spielController);
 
-        CenterLayout centerLayout = new CenterLayout();
+        CenterLayout centerLayout = new CenterLayout(viewController);
         SideBar leftLayout = new SideBar();
         SideBar rightLayout = new SideBar();
         TopLayout topLayout = new TopLayout(viewController, spielController);
