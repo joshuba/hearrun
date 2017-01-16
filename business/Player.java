@@ -26,7 +26,7 @@ public class Player {
     }
 
     public static void main (String[] args){
-        File audioFile = new File();
+        File audioFile = new File("");
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
 

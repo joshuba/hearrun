@@ -1,6 +1,7 @@
 package hearrun.business;
 
-import hearrun.view.layout.GameLayout;
+import hearrun.business.fragen.Frage;
+import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
 import javafx.stage.Stage;
 
@@ -13,6 +14,7 @@ public class SpielController {
     private Stage stage;
     private String dateiname;
     private int spieleranzahl;
+    private FrageController frageController;
 
 
 
@@ -20,8 +22,9 @@ public class SpielController {
         this.stage = stage;
         this.dateiname = dateiname;
         this.spieleranzahl = spieleranzahl;
-
         this.completeLayout = new CompleteLayout(stage, this);
+        frageController = new FrageController();
+
 
 
 
@@ -42,6 +45,8 @@ public class SpielController {
 
     public void moveAktSpieler(int schritte) {
         completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        stelleAktFrage();
+
 
     }
 
@@ -75,6 +80,18 @@ public class SpielController {
 
     public void beendeProgramm(){
         stage.close();
+    }
+
+    public void stelleAktFrage(){
+        Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
+        Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
+        Frage frage = frageController.getFrage(fragetyp);
+
+        //Zeige frage
+        getLayout().getViewController().zeigeFrage(frage, fragetyp);
+
+
+
     }
 
 

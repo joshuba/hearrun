@@ -1,11 +1,14 @@
 package hearrun.view.layout;
 
+import hearrun.business.Fragetyp;
 import hearrun.view.controller.ViewController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.util.Random;
 
 /**
  * Created by joshuabarth on 10.01.17.
@@ -47,6 +50,30 @@ public class Feld extends HBox{
             case EndFeld: this.setId("endfeldleer");
                 break;
         }
+    }
+
+    public Fragetyp getPassendenFragetyp(){
+        switch(this.feldtyp){
+            case CoverFeld:
+                double rand = Math.random() * 1;
+
+                if (Math.round(rand) == 1) {
+                    return Fragetyp.CoverTitelFrage;
+                }return Fragetyp.CoverWahlFrage;
+
+            case EreignisFeld:
+                System.out.println("TODO: Ereignisfeler");
+                return null;
+
+            case FaktFeld: return Fragetyp.FaktFrage;
+            case InterpretFeld: return Fragetyp.InterpretFrage;
+            case TitelFeld: return Fragetyp.Titelfrage;
+            case EndFeld:
+                System.out.println("TODO: Gewinnfeld");
+                return null;
+
+        }
+        return null;
     }
 
 

@@ -1,5 +1,5 @@
 #sideBar{
-    -fx-background-color: darkgreen;
+    -fx-background-color: white;
 }
 
 #topLayout{
@@ -13,4 +13,16 @@
 #mainMenu{
     -fx-background-color: lightgray;
     -fx-opacity: 75%;
+}
+
+#frageTextfeld{
+    -fx-background-color: antiquewhite;
+}
+
+#richtigButton{
+    -fx-background-color: greenyellow;
+}
+
+#falschButton{
+    -fx-background-color: crimson;
 }

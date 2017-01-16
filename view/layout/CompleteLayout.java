@@ -2,6 +2,8 @@ package hearrun.view.layout;
 
 import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
+import hearrun.view.layout.FrageFenster.TextFrage;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -29,7 +31,7 @@ public class CompleteLayout extends StackPane {
     }
 
     public void setGameLayout(){
-        this.getChildren().removeAll(mainMenu);
+        this.getChildren().removeAll(this.getChildren());
         //Falls das gamelayout nicht da ist hinzufuegen
         if(this.getChildren().isEmpty()){
             this.getChildren().addAll(gameLayout);
@@ -41,6 +43,7 @@ public class CompleteLayout extends StackPane {
     public void setMainMenu(){
         //this.getChildren().removeAll(gameLayout);
         this.getChildren().addAll(mainMenu);
+        mainMenu.mainMenuWindow();
     }
 
     public ViewController getViewController(){
@@ -55,6 +58,15 @@ public class CompleteLayout extends StackPane {
 
     public MainMenu getMainMenu(){
         return this.mainMenu;
+    }
+
+    public void zeigeTextFrage(TextFrage frage){
+        this.getChildren().add(frage);
+
+    }
+
+    public void bluryAnAus(boolean anAus){
+        this.gameLayout.Blury(anAus);
     }
 
 
