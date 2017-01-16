@@ -1,73 +1,52 @@
 package hearrun.business;
 
-import hearrun.business.fragen.*;
+import hearrun.view.layout.CompleteLayout;
+import hearrun.view.layout.Map;
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import javafx.stage.StageStyle;
 
 /**
- * Created by Josh on 05.01.17.
+ * Created by Josh on 09.01.17
  */
 public class Main extends Application {
-    FrageController controller;
+    private Stage primaryStage;
+
+    @Override
+    public void init() throws Exception {
+        super.init();
+
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        CompleteLayout layout = new CompleteLayout(primaryStage);
+        Scene scene = new Scene(layout);
+
+
+
+        primaryStage.setTitle("Hear and Run - alpha 0.01");
+        //primaryStage.initStyle(StageStyle.UTILITY); //Nur "schliessen Button"
+        primaryStage.setMinWidth(1600);
+        primaryStage.setMinHeight(1000);
+
+
+        primaryStage.setScene(scene);
+       //primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        scene.getStylesheets().add(("/hearrun/view/layout/layout1.css"));
+        primaryStage.show();
+
+
+    }
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-
-    public void stelleFrage() {
-        stelleFrage(controller.getFrage());
-    }
-
-
-    public void stelleFrage(Frage frage) {
-
-        if (frage instanceof CoverWahlFrage) {
-            System.out.println(frage.getFragetext());
-            System.out.println(((CoverWahlFrage) frage).getPath());
-            for (Image i : ((CoverWahlFrage) frage).getAnworten())
-                Util.showImage(i);
-            System.out.println(frage.getRichtigIndex());
-        } else if (frage instanceof InterpretFrage) {
-            System.out.println(frage.getFragetext());
-            System.out.println(((InterpretFrage) frage).getPath());
-            for (String s : frage.getAntworten())
-                System.out.println(s);
-            System.out.println(frage.getRichtigIndex());
-        } else if (frage instanceof TitelFrage) {
-            System.out.println(frage.getFragetext());
-            System.out.println(((TitelFrage) frage).getPath());
-            for (String s : frage.getAntworten())
-                System.out.println(s);
-            System.out.println(frage.getRichtigIndex());
-        } else {
-            System.out.println(frage.getFragetext());
-            for (String s : frage.getAntworten())
-                System.out.println(s);
-            System.out.println(frage.getRichtigIndex());
-        }
-
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        controller = new FrageController();
-
-        for (int i = 0; i < 10; i++)
-            stelleFrage(controller.getFrage(Fragetyp.Titelfrage));
-
-
     }
 
 

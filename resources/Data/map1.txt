@@ -1,0 +1,35 @@
+*SimpleMap
+*15
+*9
+#I C T E F I C T E F I C T E F
+#L L L L L L L L L L L L L L I
+#I F E T C I F E T C I F E T C
+#C L L L L L L L L L L L L L L
+#T E F I C T E F T C I F E T C
+#L L L L L L L L L L L L L L T
+#T C I F E T C I F E T C I F E
+#E L L L L L L L L L L L L L L
+#F I C T E F I C T E F I C T X
+
+/
+
+
+
+____________________________________
+
+*   (1)Name
+*   (2)Breite
+*   (3)Hoehe
+#   Feldtypen
+/   Ende des Dokuments
+
+I   InterpretFeld
+C   CoverFeld
+T   Titelfeld
+E   Ereignisfeld
+F   Faktfeld
+X   Endfeld
+L   Leeres Feld
+R   RandomFeld
+_________________________________
+
