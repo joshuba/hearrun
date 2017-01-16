@@ -19,7 +19,6 @@ public class SideBar extends VBox{
 
         Circle kreis = new Circle();
         oben.getChildren().add(kreis);
-        kreis.setId("kreis");
         kreis.setRadius(20);
 
         FlowPane unten = new FlowPane();
@@ -27,10 +26,8 @@ public class SideBar extends VBox{
         this.getChildren().addAll(oben,unten);
 
 
-
         Circle kreis2 = new Circle();
         unten.getChildren().add(kreis2);
-        kreis2.setId("kreis");
         kreis.setRadius(20);
     }
 }

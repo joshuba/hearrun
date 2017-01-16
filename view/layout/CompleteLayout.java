@@ -1,62 +1,63 @@
 package hearrun.view.layout;
 
+import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- * Created by Josh on 09.01.17.
+ * Created by joshuabarth on 14.01.17.
  */
-public class CompleteLayout extends BorderPane{
+public class CompleteLayout extends StackPane {
+    private GameLayout gameLayout;
     private ViewController viewController;
+    private SpielController spielController;
+    private MainMenu mainMenu;
     private Stage stage;
-    private int border;
 
+    public CompleteLayout(Stage stage, SpielController spielController){
+         this.viewController = new ViewController(stage, spielController);
+         this.spielController = spielController;
+         this.stage = stage;
+         this.maxHeight(stage.getHeight());
+         this.maxWidth(stage.getWidth());
 
+         mainMenu = new MainMenu(spielController);
 
-    public CompleteLayout(Stage stage){
-        this.setId("completeLayout");
-        this.stage = stage;
+         setMainMenu();
 
-        this.viewController = new ViewController("map1.txt", stage);
+    }
 
-        CenterLayout centerLayout = new CenterLayout();
-        SideBar leftLayout = new SideBar();
-        SideBar rightLayout = new SideBar();
-        TopLayout topLayout = new TopLayout();
-
-
-
-        //CompleteLayout stylen
-
-
-
-
-
-        //Komponenten zusammenfügen
-        this.setCenter(centerLayout);
-        this.setLeft(leftLayout);
-        this.setRight(rightLayout);
-        this.setTop(topLayout);
-
-        viewController.setCenterLayout(centerLayout);
-        viewController.setLeftLayout(leftLayout);
-        viewController.setRightLayout(rightLayout);
-
-
-        //Baue Map
-        viewController.baueSpielfeldAuf();
-
-
-
+    public void setGameLayout(){
+        this.getChildren().removeAll(mainMenu);
+        //Falls das gamelayout nicht da ist hinzufuegen
+        if(this.getChildren().isEmpty()){
+            this.getChildren().addAll(gameLayout);
+        }
 
 
     }
+
+    public void setMainMenu(){
+        //this.getChildren().removeAll(gameLayout);
+        this.getChildren().addAll(mainMenu);
+    }
+
+    public ViewController getViewController(){
+        return this.viewController;
+    }
+
+    public void resetGameLayout(){
+        this.getChildren().removeAll(gameLayout);
+        gameLayout = new GameLayout(stage, spielController, viewController);
+
+    }
+
+    public MainMenu getMainMenu(){
+        return this.mainMenu;
+    }
+
+
 
 
 }

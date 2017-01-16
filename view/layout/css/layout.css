@@ -1,0 +1,16 @@
+#sideBar{
+    -fx-background-color: darkgreen;
+}
+
+#topLayout{
+    -fx-background-color: white;
+}
+
+#kreis{
+    -fx-background-color: darkgreen;
+}
+
+#mainMenu{
+    -fx-background-color: lightgray;
+    -fx-opacity: 75%;
+}

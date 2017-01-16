@@ -1,13 +1,9 @@
 package hearrun.business;
 
-import hearrun.view.layout.CompleteLayout;
-import hearrun.view.layout.Map;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * Created by Josh on 09.01.17
@@ -25,9 +21,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        CompleteLayout layout = new CompleteLayout(primaryStage);
-        Scene scene = new Scene(layout);
+        SpielController spielController = new SpielController(primaryStage, "map1.txt", 3);
 
+        Scene scene = new Scene(spielController.getLayout());
 
 
         primaryStage.setTitle("Hear and Run - alpha 0.01");
@@ -39,7 +35,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
        //primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        scene.getStylesheets().add(("/hearrun/view/layout/layout1.css"));
+        scene.getStylesheets().add(("/hearrun/view/layout/css/felder.css"));
+        scene.getStylesheets().add(("/hearrun/view/layout/css/layout.css"));
         primaryStage.show();
 
 

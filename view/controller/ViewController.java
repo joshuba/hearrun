@@ -1,16 +1,9 @@
 package hearrun.view.controller;
 
-import hearrun.view.layout.CenterLayout;
-import hearrun.view.layout.Feld;
-import hearrun.view.layout.Map;
-import hearrun.view.layout.SideBar;
+import hearrun.business.SpielController;
+import hearrun.business.Spieler;
+import hearrun.view.layout.*;
 import javafx.stage.Stage;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Josh on 09.01.17.
@@ -20,12 +13,11 @@ public class ViewController {
     private CenterLayout centerLayout;
     private SideBar leftLayout;
     private SideBar rightLayout;
-    private Map aktMap;
+    private SpielController spielController;
 
-    public ViewController(String mapName, Stage stage){
+    public ViewController(Stage stage, SpielController spielController){
+        this.spielController = spielController;
         this.stage = stage;
-        leseMapVonDateiEin(mapName);
-
     }
 
 
@@ -41,19 +33,115 @@ public class ViewController {
         this.rightLayout = rightLayout;
     }
 
-    public void leseMapVonDateiEin(String mapName){
-        this.aktMap = new Map(mapName, stage);
-
-    }
-
     public void baueSpielfeldAuf(){
-        centerLayout.baueSpielfeldAuf(aktMap);
+        //Felder werden in das Gridpane gesetzt
+        centerLayout.baueSpielfeldAuf(spielController.getAktSpiel().getAktMap());
     }
 
+    public void setFeldId(int x, int y, String id){
+        spielController.getAktSpiel().getAktMap().getFeld(x,y).setBesetztID(id);
+    }
+
+    public void moveForward(int i, Spieler s){
+        int c = 1;
+        while(c <= i){
+            nextPossibleField(s);
+            c++;
+        }
+    }
+
+    private void nextPossibleField(Spieler spieler) {
+        int counter = 0;
+        if (spieler == null) {
+            spieler = spielController.getAktSpiel().getAktSpieler();
+        }
+        int x = spieler.getAktX();
+        int y = spieler.getAktY();
+        Map map = this.spielController.getAktSpiel().getAktMap();
+
+
+            //nach rechts
+            if (x + 1 < map.getFeldBreite() && map.getFeld(x + 1, y).getFeldtyp() != Feldtyp.LeeresFeld && x + 1 != spieler.getLastX()) {
+                spieler.move(x + 1, y); //bewegeSPieler
+                map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY())); //Setze aktuelles Feld zurueck
+                spielController.getAktSpiel().getAktMap().getFeld(x + 1, y).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY())); //Setze neues Feld auf besetzt
+
+            }
+            //nach links
+            else if (x - 1 >= 0 && map.getFeld(x - 1, y).getFeldtyp() != Feldtyp.LeeresFeld && x - 1 != spieler.getLastX()) {
+                spieler.move(x - 1, y);
+                map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
+                map.getFeld(x - 1, y).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+            }
+            //nach Oben
+            else if (y - 1 >= 0 && map.getFeld(x, y - 1).getFeldtyp() != Feldtyp.LeeresFeld && y - 1 != spieler.getLastY()) {
+                spieler.move(x, y - 1);
+                map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
+                map.getFeld(x, y - 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+            }
+            //nach unten
+            else if (y + 1 <= map.getFeldHoehe() && map.getFeld(x, y + 1).getFeldtyp() != Feldtyp.LeeresFeld && y + 1 != spieler.getLastY()) {
+                spieler.move(x, y + 1);
+                map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
+                map.getFeld(x, y + 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+            }
+            erkenneFeldId(x,y);
+
+
+    }
+
+    public String erkenneFeldId(int x, int y) {
+        int anz = spielController.getAktSpiel().getSpieleranzahl();
+        boolean leer = true;
+        String idZahl = "p";
+
+        //Wenn der spieler auf dem Feld steht merke zahl z.B. 13: spieler 1 und 3 auf feld
+        for (int i = 0; i <anz; i++) {
+            if(spielController.getAktSpiel().getSpielerByNr(i).stehtAufFeld(x,y)){
+                idZahl = idZahl + (spielController.getAktSpiel().getSpielerByNr(i).getNr()+1);
+                leer = false;
+            }
+        }
+        //Falls leer
+        if (leer){
+            idZahl = "leer";
+        }
+
+        String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString() + idZahl;
+        feldtyp = feldtyp.toLowerCase();
+        return feldtyp;
+
+    }
 
     public Stage getStage(){
-        return stage;
+        return this.stage;
     }
+
+    public void setGameLayout(){
+
+        spielController.getLayout().setGameLayout();
+    }
+
+    public void setMainMenu(){
+        //Wenn das spiel laeuft schalte continue ein
+        if(spielController.getAktSpiel() != null){
+            spielController.getLayout().getMainMenu().activateContinue();
+        }
+        spielController.getLayout().setMainMenu();
+    }
+
+    public void resetGameLayout(){
+        spielController.getLayout().resetGameLayout();
+    }
+
+
+
+
+
+
+
+
+
 
 
 }
