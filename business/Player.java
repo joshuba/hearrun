@@ -1,16 +1,7 @@
 package hearrun.business;
 
-import ddf.minim.AudioListener;
-import ddf.minim.AudioPlayer;
-import ddf.minim.Minim;
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -24,7 +15,7 @@ public class Player {
 
 
     public Player() {
-        minim = new SimpleMinim(true);
+        minim = new SimpleMinim();
 
 
     }
@@ -75,10 +66,10 @@ public class Player {
 
     public void playRandomNSeconds(String file, int n) {
         try {
+            SimpleMinim minim = new SimpleMinim(true);
             player = minim.loadMP3File(file);
 
             int start = (new Random().nextInt(player.length() - n));
-            int end = start + n;
 
             new Thread(() -> {
                 player.play(start);
@@ -91,6 +82,10 @@ public class Player {
             System.err.println("Der Song " + file + " ist zu kürzer als " + n + "s!\n\n");
             e.printStackTrace();
         }
+    }
+
+    public static void main (String[] args){
+        new Player().playRandomNSeconds("cantina.mp3", 5);
     }
 }
 
