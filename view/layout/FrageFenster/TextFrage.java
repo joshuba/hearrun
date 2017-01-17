@@ -34,6 +34,8 @@ public class TextFrage extends HBox {
     private SimpleIntegerProperty falschRichtig;
     private SimpleIntegerProperty aktZeit;
     private int zeit = 5;
+    private int decounter = 11;
+
 
     public TextFrage(Frage frage){
         this.setId("TextFrage");
@@ -95,43 +97,36 @@ public class TextFrage extends HBox {
     }
 
     public void starteAntworPhase(){
-        Task longTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
+
+        Thread t =new Thread(){
+            public void run(){
                 int counter = 0;
-                int decounter = 10;
                 int max = 10;
                 while(counter <= 10 && falschRichtig.getValue() != 1 && falschRichtig.getValue() != 0){
-                    if(isCancelled()){
-                        break;
-                    }
+                    //System.out.println("running: " + this.isRunning();
                     counter++;
-                    decounter--;
-                    updateProgress(0,10);
-                    //Platform.runLater(()-> aktZeit.add(1));
+                    System.out.println(aktZeit.getValue());
 
                     Platform.runLater(new Runnable() {
                         @Override public void run() {
-                            aktZeit.add(1);
-                            System.out.println("MAAAAAAHN");
+                            decounter--;
+                            aktZeit.setValue(decounter);
                         }
                     });
-                    ;
-                    Thread.sleep(1000);
-                    System.out.println(aktZeit.getValue());
-
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                return null;
             }
         };
 
-        Thread t = new Thread(longTask);
-        t.setDaemon(true);
         t.start();
 
-        aktZeitAnzeige.textProperty().bind(longTask.progressProperty().asString());
-        time.progressProperty().bind(longTask.progressProperty());
+
+        aktZeitAnzeige.textProperty().bind(aktZeit.asString());
+        time.progressProperty().bind(aktZeit);
 
         System.out.println("E");
 

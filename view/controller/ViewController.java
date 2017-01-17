@@ -146,7 +146,9 @@ public class ViewController {
             TextFrage t = new TextFrage(frage);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeTextFrage(t);
+
             t.starteAntworPhase();
+
             System.out.println(t.getResult());
             if(t.getResult() == 1 || t.getResult() == 0){  //TODO DRINGEND ÄNDERN
                 System.out.println("L");

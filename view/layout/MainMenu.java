@@ -1,11 +1,9 @@
 package hearrun.view.layout;
 
 import hearrun.business.SpielController;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -106,6 +104,16 @@ public class MainMenu extends VBox{
         exit.setOnAction((e) -> spielController.beendeProgramm());
         continu.setOnAction((e)-> spielController.getLayout().setGameLayout());
 
+    }
+
+    public void settingsWindow(){
+        removeAllElements();
+        Slider antwortZeit = new Slider();
+        Slider volume = new Slider();
+        Button button = new Button();
+        Button back = new Button();
+        this.getChildren().addAll(antwortZeit,volume,button, back);
+        back.setOnAction((e)->mainMenuWindow());
     }
 
 
