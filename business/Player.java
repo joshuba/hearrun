@@ -1,5 +1,6 @@
 package hearrun.business;
 
+import ddf.minim.AudioListener;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
@@ -10,37 +11,105 @@ import javafx.scene.media.MediaPlayer;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * Created by Josh on 28.12.16.
  */
 public class Player {
-    SimpleAudioPlayer player;
+    private SimpleAudioPlayer player;
+    private SimpleMinim minim;
+    private boolean loop;
+    private Thread loopedPlayer;
 
-    public Player(String path){
-        player = new SimpleMinim().loadMP3File(path);
+
+    public Player() {
+        minim = new SimpleMinim(true);
+
+
     }
 
-    public void play() {
-        player.play();
+    public void play(String file, boolean loop) {
+
+        player = minim.loadMP3File(file);
+        if (loop) {
+            loopedPlayer = new Thread() {
+
+                @Override
+                public void interrupt () {
+                    minim.stop();
+                    super.interrupt();
+                }
+
+                @Override
+                public void run() {
+
+                    while (true) {
+                        if (!player.isPlaying()) {
+                            player = minim.loadMP3File(file);
+                            player.play(0);
+                            minim.stop();
+                        }
+                    }
+                }
+            };
+            loopedPlayer.setDaemon(true);
+            loopedPlayer.start();
+        }else {
+            play(file);
+        }
     }
 
-    public static void main (String[] args){
-        File audioFile = new File();
+    public void stopLoop () {
+        if (loopedPlayer != null)
+            loopedPlayer.interrupt();
+    }
+
+    public void play(String file) {
+        Thread player = new Thread(() -> {
+            minim.loadMP3File(file).play();
+            minim.stop();
+        });
+        player.start();
+    }
+
+    public void playRandomNSeconds(String file, int n) {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+            player = minim.loadMP3File(file);
 
-            AudioFormat format = audioInputStream.getFormat();
-            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            int start = (new Random().nextInt(player.length() - n));
+            int end = start + n;
 
-            Clip audioClip = (Clip) AudioSystem.getLine(info);
-
-            audioClip.open(audioInputStream);
-            audioClip.start();
-
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            new Thread(() -> {
+                player.play(start);
+                try {
+                    Thread.sleep(n * 1000);
+                } catch (InterruptedException ignored) {}
+                minim.stop();
+            }).start();
+        } catch (IllegalArgumentException e) {
+            System.err.println("Der Song " + file + " ist zu kürzer als " + n + "s!\n\n");
             e.printStackTrace();
         }
+    }
+
+
+
+    public static void main (String[] args){
+        Player player = new Player();
+
+        player.playRandomNSeconds("music/1-01 i hate u, i love u (feat. olivia o_brien).mp3", 5);
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println(i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
 
