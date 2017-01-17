@@ -1,8 +1,11 @@
 package hearrun.view.controller;
 
+import hearrun.business.Fragetyp;
 import hearrun.business.SpielController;
 import hearrun.business.Spieler;
+import hearrun.business.fragen.Frage;
 import hearrun.view.layout.*;
+import hearrun.view.layout.FrageFenster.TextFrage;
 import javafx.stage.Stage;
 
 /**
@@ -132,6 +135,32 @@ public class ViewController {
 
     public void resetGameLayout(){
         spielController.getLayout().resetGameLayout();
+    }
+
+    public void zeigeFrage(Frage frage, Fragetyp fragetyp){
+        if(fragetyp == Fragetyp.CoverTitelFrage){
+
+        }else if (fragetyp == Fragetyp.CoverWahlFrage){
+
+        }else{
+            TextFrage t = new TextFrage(frage);
+            gameLayoutBlury(true);
+            spielController.getLayout().zeigeTextFrage(t);
+
+            t.starteAntworPhase();
+
+            System.out.println(t.getResult());
+            if(t.getResult() == 1 || t.getResult() == 0){  //TODO DRINGEND ÄNDERN
+                System.out.println("L");
+                spielController.getLayout().bluryAnAus(false);
+                setGameLayout();
+            }
+
+        }
+    }
+
+    public void gameLayoutBlury(boolean anAus){
+        spielController.getLayout().bluryAnAus(anAus);
     }
 
 

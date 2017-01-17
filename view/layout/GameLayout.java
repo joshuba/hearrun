@@ -2,6 +2,7 @@ package hearrun.view.layout;
 
 import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -41,6 +42,27 @@ public class GameLayout extends BorderPane{
 
 
     }
+
+    public void Blury(boolean anAus){
+        BoxBlur bb = new BoxBlur();
+        this.setEffect(bb);
+
+        if(anAus){
+            bb.setHeight(50);
+            bb.setWidth(50);
+            bb.setIterations(10);
+        }else{
+            bb.setHeight(0);
+            bb.setWidth(0);
+            bb.setIterations(0);
+        }
+
+    }
+
+
+
+
+
 
 
 

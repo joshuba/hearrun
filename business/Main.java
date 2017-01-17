@@ -21,15 +21,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        SpielController spielController = new SpielController(primaryStage, "map1.txt", 3);
+        SpielController spielController = new SpielController(primaryStage, "map1.txt", 1);
 
         Scene scene = new Scene(spielController.getLayout());
 
 
         primaryStage.setTitle("Hear and Run - alpha 0.01");
         //primaryStage.initStyle(StageStyle.UTILITY); //Nur "schliessen Button"
-        primaryStage.setMinWidth(1600);
-        primaryStage.setMinHeight(1000);
+        primaryStage.setMinWidth(900);
+        primaryStage.setMinHeight(600);
 
 
         primaryStage.setScene(scene);

@@ -6,6 +6,9 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import hearrun.business.exceptions.TagNeededException;
 import hearrun.business.fragen.*;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.Task;
 import javafx.scene.image.Image;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -28,7 +31,7 @@ import java.util.Collections;
 public class FrageController {
     private static final int FRAGEZEIT = 10;
     private final String XMLPATH = "src/hearrun/resources/data/quiz.xml";
-    private final String MUSIKPATH = "music";
+    private final String MUSIKPATH = "/Users/Josh/IdeaProjects/Hearrun/src/music/New Mukke";
     private final int MENGE_FRAGETYP = 5;
 
     //Für Faktfragen
@@ -38,6 +41,9 @@ public class FrageController {
     private Document doc;
     private Frageliste alleFragen;
 
+    private SimpleIntegerProperty musicReadingProgress;
+
+
     ArrayList<File> tracks;
 
 
@@ -46,6 +52,8 @@ public class FrageController {
         tracks = new ArrayList<>();
         leseXMLein(XMLPATH);
         leseMusikEin(MUSIKPATH);
+        musicReadingProgress = new SimpleIntegerProperty();
+        musicReadingProgress.setValue(0);
     }
 
 
@@ -57,90 +65,130 @@ public class FrageController {
         return alleFragen.getRand();
     }
 
-    private void leseMusikEin(String path) {
-        File root = new File(path);
-        File[] files = root.listFiles();
-        // Dateien einlesen
-        if (files != null) {
-            for (File f : files)
-                if (f.getName().endsWith(".mp3") || f.getName().endsWith(".wav") || f.getName().endsWith(".aac"))
-                    tracks.add(f);
-                else if (f.isDirectory())
-                    leseMusikEin(f.getAbsolutePath());
-        }
+    private synchronized void leseMusikEin(String path) {
 
-        // dateien in Frageobjekte parsen
-        // checken, wieviele Fragen pro Typ ca erstellt werden können
-        int anz = tracks.size() / MENGE_FRAGETYP;
+        Task<Integer> readMusic = new Task<Integer>() {
+            @Override protected Integer call() throws Exception {
+                System.out.println("Musik einlesen:");
+                    if (isCancelled()) {
+                        updateMessage("Cancelled");
+                    }
+                    File root = new File(path);
+                    File[] files = root.listFiles();
+                    // Dateien einlesen
+                    if (files != null) {
+                        for (File f : files)
+                            if (f.getName().endsWith(".mp3") || f.getName().endsWith(".wav") || f.getName().endsWith(".aac"))
+                                tracks.add(f);
+                            else if (f.isDirectory())
+                                leseMusikEin(f.getAbsolutePath());
+                    }
+                updateProgress(20, 100);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        musicReadingProgress.setValue(20.5);
+                        System.out.println(musicReadingProgress.getValue());
+                    }
+                });
 
-        // Alle titel einlesen
-        ID3v2[] titel = Util.getAllTitles(tracks.toArray(new File[tracks.size()]));
-        Image[] covers = Util.getAllCovers(tracks.toArray(new File[tracks.size()]));
 
-        //Zufallsfaktor erhöhen
-        Collections.shuffle(tracks);
 
-        //CoverTitelFragen einlesen
-        ArrayList<File> tracksCP = (ArrayList<File>) tracks.clone();
-        int akt = 0;
-        for (int i = 0; i < anz; i++) {
-            try {
-                alleFragen.add(CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
-            } catch (TagNeededException e) {
-                akt++;
-                i--;
-                continue;
-            } catch (UnsupportedTagException | IOException | InvalidDataException e) {
-                e.printStackTrace();
+
+                // dateien in Frageobjekte parsen
+                    // checken, wieviele Fragen pro Typ ca erstellt werden können
+                    int anz = tracks.size() / MENGE_FRAGETYP;
+
+                    // Alle titel einlesen
+                    ID3v2[] titel = Util.getAllTitles(tracks.toArray(new File[tracks.size()]));
+                    Image[] covers = Util.getAllCovers(tracks.toArray(new File[tracks.size()]));
+
+                    //Zufallsfaktor erhöhen
+                    Collections.shuffle(tracks);
+
+                    //CoverTitelFragen einlesen
+                    ArrayList<File> tracksCP = (ArrayList<File>) tracks.clone();
+                    int akt = 0;
+                    for (int i = 0; i < anz; i++) {
+                        try {
+                            alleFragen.add(CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
+                        } catch (TagNeededException e) {
+                            akt++;
+                            i--;
+                            continue;
+                        } catch (UnsupportedTagException | IOException | InvalidDataException e) {
+                            e.printStackTrace();
+                        }
+                        tracksCP.remove(akt);
+                    }
+                updateProgress(40, 100);
+
+
+
+                // CoverWahlFragen einlesen
+                    tracksCP = (ArrayList<File>) tracks.clone();
+                    akt = 0;
+                    for (int i = 0; i < anz; i++) {
+                        try {
+                            alleFragen.add(CoverWahlFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), covers));
+
+                        } catch (TagNeededException e) {
+                            akt++;
+                            i--;
+                            continue;
+                        }
+                        tracksCP.remove(akt);
+
+                    }
+                updateProgress(60, 100);
+
+
+
+                //InterpretFragen einlesen
+                    tracksCP = (ArrayList<File>) tracks.clone();
+                    akt = 0;
+
+                    for (int i = 0; i < anz; i++) {
+                        try {
+                            alleFragen.add(InterpretFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+                        } catch (TagNeededException e) {
+                            akt++;
+                            i--;
+                            continue;
+                        }
+                        tracksCP.remove(akt);
+                    }
+                updateProgress(80, 100);
+
+
+                // TitelFragen einlesen
+                    tracksCP = (ArrayList<File>) tracks.clone();
+                    akt = 0;
+
+                    for (int i = 0; i < anz; i++) {
+                        try {
+                            alleFragen.add(TitelFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+                        } catch (TagNeededException e) {
+                            akt++;
+                            i--;
+                            continue;
+                        }
+                        tracksCP.remove(akt);
+                    }
+                updateProgress(100, 100);
+                System.out.println("DONE");
+
+
+                return null;
             }
-            tracksCP.remove(akt);
-        }
+        };
 
-        // CoverWahlFragen einlesen
-        tracksCP = (ArrayList<File>) tracks.clone();
-        akt = 0;
-        for (int i = 0; i < anz; i++) {
-            try {
-                alleFragen.add(CoverWahlFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), covers));
+        Thread t = new Thread(readMusic);
+        t.start();
 
-            } catch (TagNeededException e) {
-                akt++;
-                i--;
-                continue;
-            }
-            tracksCP.remove(akt);
 
-        }
 
-        //InterpretFragen einlesen
-        tracksCP = (ArrayList<File>) tracks.clone();
-        akt = 0;
 
-        for (int i = 0; i < anz; i++) {
-            try {
-                alleFragen.add(InterpretFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
-            } catch (TagNeededException e) {
-                akt++;
-                i--;
-                continue;
-            }
-            tracksCP.remove(akt);
-        }
-
-        // TitelFragen einlesen
-        tracksCP = (ArrayList<File>) tracks.clone();
-        akt = 0;
-
-        for (int i = 0; i < anz; i++) {
-            try {
-                alleFragen.add(TitelFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
-            } catch (TagNeededException e) {
-                akt++;
-                i--;
-                continue;
-            }
-            tracksCP.remove(akt);
-        }
 
 
     }

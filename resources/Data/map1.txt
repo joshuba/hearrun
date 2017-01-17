@@ -1,7 +1,7 @@
 *SimpleMap
 *15
 *9
-#I C T E F I C T E F I C T E F
+#I I T E F I C T E F I C T E F
 #L L L L L L L L L L L L L L I
 #I F E T C I F E T C I F E T C
 #C L L L L L L L L L L L L L L
