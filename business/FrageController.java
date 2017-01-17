@@ -31,7 +31,7 @@ import java.util.Collections;
 public class FrageController {
     private static final int FRAGEZEIT = 10;
     private final String XMLPATH = "src/hearrun/resources/data/quiz.xml";
-    private final String MUSIKPATH = "/Users/Josh/IdeaProjects/Hearrun/src/music/New Mukke";
+    private final String MUSIKPATH = "music";
     private final int MENGE_FRAGETYP = 5;
 
     //Für Faktfragen

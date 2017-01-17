@@ -92,26 +92,5 @@ public class Player {
             e.printStackTrace();
         }
     }
-
-
-
-    public static void main (String[] args){
-        Player player = new Player();
-
-        player.playRandomNSeconds("music/1-01 i hate u, i love u (feat. olivia o_brien).mp3", 5);
-
-        for (int i = 0; i < 5; i++) {
-            System.out.println(i);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
-
-
 }
 
