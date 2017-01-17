@@ -1,5 +1,6 @@
 package hearrun.view.layout.FrageFenster;
 
+import hearrun.business.Player;
 import hearrun.business.fragen.Frage;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -34,11 +35,13 @@ public class TextFrage extends HBox {
     private SimpleIntegerProperty falschRichtig;
     private SimpleIntegerProperty aktZeit;
     private int zeit = 5;
-    private int decounter = 11;
+    private int decounter;
+    private Player player;
 
 
-    public TextFrage(Frage frage){
+    public TextFrage(Frage frage, Player player){
         this.setId("TextFrage");
+        this.player = player;
         this.frage = frage;
         richtigIndex = frage.getRichtigIndex();
         falschRichtig = new SimpleIntegerProperty();
@@ -97,38 +100,55 @@ public class TextFrage extends HBox {
     }
 
     public void starteAntworPhase(){
+        player.stopLoop();
+        if(frage.getPath() != null){
+            player.playRandomNSeconds(frage.getPath(),10);
+
+        }
+        decounter = 11;
 
         Thread t =new Thread(){
             public void run(){
-                int counter = 0;
-                int max = 10;
-                while(counter <= 10 && falschRichtig.getValue() != 1 && falschRichtig.getValue() != 0){
-                    //System.out.println("running: " + this.isRunning();
-                    counter++;
-                    System.out.println(aktZeit.getValue());
+                System.out.println("RRRR");
+                    int counter = 10;
 
-                    Platform.runLater(new Runnable() {
-                        @Override public void run() {
-                            decounter--;
-                            aktZeit.setValue(decounter);
+                    while(counter > 0 && falschRichtig.getValue() != 1 && falschRichtig.getValue() != 0){
+
+
+
+                            counter--;
+                            Platform.runLater(new Runnable() {
+                                @Override public void run() {
+                                    decounter--;
+                                    aktZeit.setValue(decounter);
+                                }
+                            });
+
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    });
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+
+
                     }
+                    System.out.println("LOL");
+                    player.stopLoop();
+                    this.notifyAll();
+
                 }
-            }
+
+
+
         };
 
-        t.start();
+
+
 
 
         aktZeitAnzeige.textProperty().bind(aktZeit.asString());
-        time.progressProperty().bind(aktZeit);
-
-        System.out.println("E");
+        time.progressProperty().bind(aktZeit.multiply(-1));
 
 
     }
@@ -149,8 +169,8 @@ public class TextFrage extends HBox {
 
     }
 
-    public int getResult(){
-        return this.falschRichtig.getValue();
+    public SimpleIntegerProperty getResult(){
+        return this.falschRichtig;
     }
 
     public void disableAllButtons(){

@@ -15,14 +15,16 @@ public class SpielController {
     private String dateiname;
     private int spieleranzahl;
     private FrageController frageController;
+    private Player player;
 
 
 
     public SpielController(Stage stage, String dateiname, int spieleranzahl){
         this.stage = stage;
+        this.player = new Player();
         this.dateiname = dateiname;
         this.spieleranzahl = spieleranzahl;
-        this.completeLayout = new CompleteLayout(stage, this);
+        this.completeLayout = new CompleteLayout(stage, this, player);
         frageController = new FrageController();
 
 
@@ -76,6 +78,7 @@ public class SpielController {
     public void beendeSpiel(){
         this.aktSpiel = null;
         this.completeLayout.getViewController().resetGameLayout();
+        player.stopLoop();
     }
 
     public void beendeProgramm(){
@@ -92,6 +95,9 @@ public class SpielController {
 
 
 
+    }
+    public Player getPlayer(){
+        return this.player;
     }
 
 

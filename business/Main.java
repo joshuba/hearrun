@@ -10,6 +10,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Stage primaryStage;
+    private SpielController spielController;
 
     @Override
     public void init() throws Exception {
@@ -21,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        SpielController spielController = new SpielController(primaryStage, "map1.txt", 1);
+        spielController = new SpielController(primaryStage, "map1.txt", 1);
 
         Scene scene = new Scene(spielController.getLayout());
 
@@ -46,5 +47,9 @@ public class Main extends Application {
         launch(args);
     }
 
-
+    @Override
+    public void stop() throws Exception {
+        spielController.getPlayer().stopLoop();
+        spielController.beendeProgramm();
+    }
 }

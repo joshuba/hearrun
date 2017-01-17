@@ -31,7 +31,7 @@ import java.util.Collections;
 public class FrageController {
     private static final int FRAGEZEIT = 10;
     private final String XMLPATH = "src/hearrun/resources/data/quiz.xml";
-    private final String MUSIKPATH = "music";
+    private final String MUSIKPATH = "music/music";
     private final int MENGE_FRAGETYP = 5;
 
     //Für Faktfragen
@@ -51,9 +51,10 @@ public class FrageController {
         alleFragen = new Frageliste();
         tracks = new ArrayList<>();
         leseXMLein(XMLPATH);
-        leseMusikEin(MUSIKPATH);
         musicReadingProgress = new SimpleIntegerProperty();
-        musicReadingProgress.setValue(0);
+        musicReadingProgress.setValue(15);
+        leseMusikEin(MUSIKPATH);
+
     }
 
 
@@ -65,7 +66,7 @@ public class FrageController {
         return alleFragen.getRand();
     }
 
-    private synchronized void leseMusikEin(String path) {
+    private void leseMusikEin(String path) {
 
         Task<Integer> readMusic = new Task<Integer>() {
             @Override protected Integer call() throws Exception {
@@ -83,14 +84,9 @@ public class FrageController {
                             else if (f.isDirectory())
                                 leseMusikEin(f.getAbsolutePath());
                     }
-                updateProgress(20, 100);
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        musicReadingProgress.setValue(20.5);
+                        updateProgress(20, 100);
+                        musicReadingProgress.setValue(20);
                         System.out.println(musicReadingProgress.getValue());
-                    }
-                });
 
 
 
@@ -122,6 +118,8 @@ public class FrageController {
                         tracksCP.remove(akt);
                     }
                 updateProgress(40, 100);
+                musicReadingProgress.setValue(40);
+                System.out.println(musicReadingProgress.getValue());
 
 
 
@@ -141,6 +139,8 @@ public class FrageController {
 
                     }
                 updateProgress(60, 100);
+                musicReadingProgress.setValue(60);
+                System.out.println(musicReadingProgress.getValue());
 
 
 
@@ -159,6 +159,8 @@ public class FrageController {
                         tracksCP.remove(akt);
                     }
                 updateProgress(80, 100);
+                musicReadingProgress.setValue(80);
+                System.out.println(musicReadingProgress.getValue());
 
 
                 // TitelFragen einlesen

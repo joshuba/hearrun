@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.business.Player;
 import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
 import hearrun.view.layout.FrageFenster.TextFrage;
@@ -16,10 +17,12 @@ public class CompleteLayout extends StackPane {
     private SpielController spielController;
     private MainMenu mainMenu;
     private Stage stage;
+    private Player player;
 
-    public CompleteLayout(Stage stage, SpielController spielController){
+    public CompleteLayout(Stage stage, SpielController spielController, Player player){
          this.viewController = new ViewController(stage, spielController);
          this.spielController = spielController;
+         this.player = player;
          this.stage = stage;
          this.maxHeight(stage.getHeight());
          this.maxWidth(stage.getWidth());
@@ -27,6 +30,7 @@ public class CompleteLayout extends StackPane {
          mainMenu = new MainMenu(spielController);
 
          setMainMenu();
+
 
     }
 
@@ -36,12 +40,16 @@ public class CompleteLayout extends StackPane {
         if(this.getChildren().isEmpty()){
             this.getChildren().addAll(gameLayout);
         }
-
+        player.stopLoop();
+        player.play("src/hearrun/resources/music/2.mp3");
 
     }
 
     public void setMainMenu(){
+        player.stopLoop();
+
         //this.getChildren().removeAll(gameLayout);
+        player.play("src/hearrun/resources/music/1.mp3", true);
         this.getChildren().addAll(mainMenu);
         mainMenu.mainMenuWindow();
     }
@@ -62,6 +70,7 @@ public class CompleteLayout extends StackPane {
 
     public void zeigeTextFrage(TextFrage frage){
         this.getChildren().add(frage);
+
 
     }
 

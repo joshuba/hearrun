@@ -18,6 +18,7 @@ public class ViewController {
     private SideBar rightLayout;
     private SpielController spielController;
 
+
     public ViewController(Stage stage, SpielController spielController){
         this.spielController = spielController;
         this.stage = stage;
@@ -143,14 +144,15 @@ public class ViewController {
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
 
         }else{
-            TextFrage t = new TextFrage(frage);
+            TextFrage t = new TextFrage(frage, spielController.getPlayer());
             gameLayoutBlury(true);
             spielController.getLayout().zeigeTextFrage(t);
-
             t.starteAntworPhase();
 
-            System.out.println(t.getResult());
-            if(t.getResult() == 1 || t.getResult() == 0){  //TODO DRINGEND ÄNDERN
+
+
+
+            if(t.getResult().getValue() == 1 || t.getResult().getValue() == 0){  //TODO DRINGEND ÄNDERN
                 System.out.println("L");
                 spielController.getLayout().bluryAnAus(false);
                 setGameLayout();
@@ -161,6 +163,10 @@ public class ViewController {
 
     public void gameLayoutBlury(boolean anAus){
         spielController.getLayout().bluryAnAus(anAus);
+    }
+
+    public void hoere(){
+
     }
 
 

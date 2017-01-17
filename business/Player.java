@@ -52,8 +52,11 @@ public class Player {
     }
 
     public void stopLoop () {
-        if (loopedPlayer != null)
+        if (loopedPlayer != null){
             loopedPlayer.interrupt();
+            loopedPlayer.stop();
+        }
+
     }
 
     public void play(String file) {
