@@ -2,6 +2,9 @@ package hearrun.view.layout.FrageFenster;
 
 import hearrun.business.Player;
 import hearrun.business.fragen.Frage;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.concurrent.Task;
@@ -15,6 +18,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Created by joshuabarth on 16.01.17.
@@ -37,6 +41,7 @@ public class TextFrage extends HBox {
     private int zeit = 5;
     private int decounter;
     private Player player;
+    private Timeline timeline;
 
 
     public TextFrage(Frage frage, Player player){
@@ -105,66 +110,45 @@ public class TextFrage extends HBox {
             player.playRandomNSeconds(frage.getPath(),10);
 
         }
-        decounter = 11;
 
-        Thread t =new Thread(){
-            public void run(){
-                System.out.println("RRRR");
-                    int counter = 10;
-
-                    while(counter > 0 && falschRichtig.getValue() != 1 && falschRichtig.getValue() != 0){
+        decounter = 10;
 
 
-
-                            counter--;
-                            Platform.runLater(new Runnable() {
-                                @Override public void run() {
-                                    decounter--;
-                                    aktZeit.setValue(decounter);
-                                }
-                            });
-
-
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                    System.out.println("LOL");
-                    player.stopLoop();
-                    this.notifyAll();
-
-                }
-
-
-
-        };
-
+        timeline = new Timeline(new KeyFrame(
+                Duration.millis(1000),
+                a -> aktZeit.set(decounter--)));
+        timeline.setOnFinished(b -> fertig());
+        timeline.setCycleCount(10);
+        timeline.play();
 
 
 
 
         aktZeitAnzeige.textProperty().bind(aktZeit.asString());
-        time.progressProperty().bind(aktZeit.multiply(-1));
+        time.progressProperty().bind(aktZeit);
 
 
     }
 
+    public void fertig(){
+        System.out.println("FERTIG LALALALLALA");
+    }
+
     public void zeigeRichtigOderFalsch(int index, Button bx){
         disableAllButtons();
+        timeline.stop();
 
         if(index == richtigIndex){
             bx.setId("richtigButton");
             System.out.println("Richtige Antwort");
             this.falschRichtig.setValue(1);
+            fertig();
 
         }else{
             bx.setId("falschButton");
             System.out.println("Falsche Antwort");
             this.falschRichtig.setValue(0);
+            fertig();
         }
 
     }

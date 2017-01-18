@@ -147,6 +147,7 @@ public class ViewController {
             TextFrage t = new TextFrage(frage, spielController.getPlayer());
             gameLayoutBlury(true);
             spielController.getLayout().zeigeTextFrage(t);
+
             t.starteAntworPhase();
 
 
