@@ -39,6 +39,7 @@ public class TextFrage extends VBox {
     private Timeline timeline;
     private SpielController spielController;
     private Label aktSpieler;
+    private HBox container;
 
 
 
@@ -47,6 +48,7 @@ public class TextFrage extends VBox {
         this.setId("TextFrage");
         this.player = spielController.getPlayer();
         this.frage = frage;
+
         richtigIndex = frage.getRichtigIndex();
         falschRichtig = new SimpleIntegerProperty();
         aktZeit = new SimpleIntegerProperty();
@@ -56,6 +58,8 @@ public class TextFrage extends VBox {
         //Elemente erstellen
         vBox = new VBox();
         hBox = new HBox();
+        container = new HBox();
+
 
         textfeld = new StackPane();
         fragetext = new Label("Frage: ");
@@ -72,13 +76,16 @@ public class TextFrage extends VBox {
         textfeld.getChildren().add(fragetext);
         vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3]);
         hBox.getChildren().addAll(time, aktZeitAnzeige);
-        this.getChildren().addAll(aktSpieler, vBox,hBox);
+        container.getChildren().addAll(vBox, hBox);
+        this.getChildren().addAll(aktSpieler, container);
 
 
 
         //Stylen
         vBox.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.CENTER);
+        container.setAlignment(Pos.CENTER);
+        hBox.setAlignment(Pos.CENTER_RIGHT);
         textfeld.setId("frageTextfeld");
         textfeld.setPadding(new Insets(0,0,60,0));
 
@@ -104,10 +111,10 @@ public class TextFrage extends VBox {
         buttons[3].setId("normalButton");
 
 
-        buttons[0].setOnAction((e)-> buttonPress(0, buttons[0]));
-        buttons[1].setOnAction((e)-> buttonPress(1, buttons[1]));
-        buttons[2].setOnAction((e)-> buttonPress(2, buttons[2]));
-        buttons[3].setOnAction((e)-> buttonPress(3, buttons[3]));
+        buttons[0].setOnAction((e)-> buttonPress(buttons[0]));
+        buttons[1].setOnAction((e)-> buttonPress(buttons[1]));
+        buttons[2].setOnAction((e)-> buttonPress(buttons[2]));
+        buttons[3].setOnAction((e)-> buttonPress(buttons[3]));
 
 
 
@@ -144,11 +151,11 @@ public class TextFrage extends VBox {
 
     }
 
-    public void buttonPress(int index, Button bx){
+    public void buttonPress(Button bx){
         disableAllButtons();
         timeline.stop();
 
-        if(index == richtigIndex){
+        if(bx == richtigButton){
             bx.setId("richtigButton");
             this.falschRichtig.setValue(1);
             fertig();
@@ -199,6 +206,7 @@ public class TextFrage extends VBox {
 
     public void wuerfeln(int index){
         Wuerfel w = new Wuerfel(index, spielController);
+        w.setPadding(new Insets(30,0,0,0));
         w.setAlignment(Pos.CENTER);
         this.getChildren().addAll(w);
     }

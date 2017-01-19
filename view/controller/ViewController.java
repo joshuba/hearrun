@@ -6,7 +6,10 @@ import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.*;
 import hearrun.view.layout.FrageFenster.TextFrage;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Created by Josh on 09.01.17.
@@ -47,11 +50,13 @@ public class ViewController {
     }
 
     public void moveForward(int i, Spieler s){
-        int c = 1;
-        while(c <= i){
-            nextPossibleField(s);
-            c++;
-        }
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(400),
+                a -> nextPossibleField(s)));
+        timeline.setCycleCount(i);
+        timeline.play();
+
     }
 
     private void nextPossibleField(Spieler spieler) {
