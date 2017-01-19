@@ -38,6 +38,7 @@ public class TextFrage extends VBox {
     private Player player;
     private Timeline timeline;
     private SpielController spielController;
+    private Label aktSpieler;
 
 
 
@@ -64,13 +65,14 @@ public class TextFrage extends VBox {
         buttons [3] = new Button();
         time = new ProgressBar();
         aktZeitAnzeige = new Label();
+        aktSpieler = new Label("Spieler: " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
 
 
         //Zusammenbauen
         textfeld.getChildren().add(fragetext);
         vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3]);
         hBox.getChildren().addAll(time, aktZeitAnzeige);
-        this.getChildren().addAll(vBox,hBox);
+        this.getChildren().addAll(aktSpieler, vBox,hBox);
 
 
 

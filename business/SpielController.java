@@ -71,7 +71,6 @@ public class SpielController {
         completeLayout.getViewController().resetGameLayout();
         waehleMapErstelleSpiel(dateiname, spieleranzahl);
         completeLayout.getViewController().setGameLayout();
-        stelleAktFrage();
 
 
     }
@@ -87,6 +86,7 @@ public class SpielController {
     }
 
     public void stelleAktFrage(){
+        System.out.println("WASDAS");
         Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
         Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
         Frage frage = frageController.getFrage(fragetyp);
@@ -109,7 +109,6 @@ public class SpielController {
     public void moveAndAskNext(int schritte){
         completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
         nextSpieler();
-        stelleAktFrage();
 
     }
 
