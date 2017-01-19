@@ -39,6 +39,9 @@ public class Main extends Application {
         scene.getStylesheets().add(("/hearrun/view/layout/css/layout.css"));
         primaryStage.show();
 
+        System.out.println("lala");
+        new Player().play("music/1-01 Numb.mp3");
+        System.out.println("alal");
 
     }
 
