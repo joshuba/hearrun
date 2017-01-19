@@ -26,3 +26,7 @@
 #falschButton{
     -fx-background-color: crimson;
 }
+
+#normalButton{
+    -fx-background-color: #d5dcd9;
+}

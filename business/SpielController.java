@@ -3,6 +3,7 @@ package hearrun.business;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
+import hearrun.view.layout.Wuerfel;
 import javafx.stage.Stage;
 
 /**
@@ -47,8 +48,6 @@ public class SpielController {
 
     public void moveAktSpieler(int schritte) {
         completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
-        stelleAktFrage();
-
 
     }
 
@@ -72,6 +71,8 @@ public class SpielController {
         completeLayout.getViewController().resetGameLayout();
         waehleMapErstelleSpiel(dateiname, spieleranzahl);
         completeLayout.getViewController().setGameLayout();
+        stelleAktFrage();
+
 
     }
 
@@ -99,6 +100,20 @@ public class SpielController {
     public Player getPlayer(){
         return this.player;
     }
+
+    public void stelleFrage(){
+        stelleAktFrage();
+
+    }
+
+    public void moveAndAskNext(int schritte){
+        completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        nextSpieler();
+        stelleAktFrage();
+
+    }
+
+
 
 
 

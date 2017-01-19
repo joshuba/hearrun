@@ -78,6 +78,10 @@ public class CompleteLayout extends StackPane {
         this.gameLayout.Blury(anAus);
     }
 
+    public void showWuerfelFenster(){
+
+    }
+
 
 
 

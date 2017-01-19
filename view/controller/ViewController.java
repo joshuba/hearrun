@@ -144,31 +144,29 @@ public class ViewController {
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
 
         }else{
-            TextFrage t = new TextFrage(frage, spielController.getPlayer());
+            TextFrage t = new TextFrage(frage, spielController);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeTextFrage(t);
 
             t.starteAntworPhase();
 
-
-
-
-            if(t.getResult().getValue() == 1 || t.getResult().getValue() == 0){  //TODO DRINGEND ÄNDERN
-                System.out.println("L");
-                spielController.getLayout().bluryAnAus(false);
-                setGameLayout();
-            }
-
         }
+    }
+
+    public void zeigeRichtigOderFalsch(){
+
+        //spielController.getLayout().showWuerfelFenster();
     }
 
     public void gameLayoutBlury(boolean anAus){
         spielController.getLayout().bluryAnAus(anAus);
     }
 
-    public void hoere(){
+    public void wuerfeln(){
 
     }
+
+
 
 
 
