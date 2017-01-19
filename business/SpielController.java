@@ -3,6 +3,7 @@ package hearrun.business;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
+import hearrun.view.layout.Wuerfel;
 import javafx.stage.Stage;
 
 /**
@@ -15,14 +16,16 @@ public class SpielController {
     private String dateiname;
     private int spieleranzahl;
     private FrageController frageController;
+    private Player player;
 
 
 
     public SpielController(Stage stage, String dateiname, int spieleranzahl){
         this.stage = stage;
+        this.player = new Player();
         this.dateiname = dateiname;
         this.spieleranzahl = spieleranzahl;
-        this.completeLayout = new CompleteLayout(stage, this);
+        this.completeLayout = new CompleteLayout(stage, this, player);
         frageController = new FrageController();
 
 
@@ -45,8 +48,6 @@ public class SpielController {
 
     public void moveAktSpieler(int schritte) {
         completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
-        stelleAktFrage();
-
 
     }
 
@@ -71,11 +72,13 @@ public class SpielController {
         waehleMapErstelleSpiel(dateiname, spieleranzahl);
         completeLayout.getViewController().setGameLayout();
 
+
     }
 
     public void beendeSpiel(){
         this.aktSpiel = null;
         this.completeLayout.getViewController().resetGameLayout();
+        player.stopLoop();
     }
 
     public void beendeProgramm(){
@@ -83,6 +86,7 @@ public class SpielController {
     }
 
     public void stelleAktFrage(){
+        System.out.println("WASDAS");
         Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
         Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
         Frage frage = frageController.getFrage(fragetyp);
@@ -93,6 +97,22 @@ public class SpielController {
 
 
     }
+    public Player getPlayer(){
+        return this.player;
+    }
+
+    public void stelleFrage(){
+        stelleAktFrage();
+
+    }
+
+    public void moveAndAskNext(int schritte){
+        completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        nextSpieler();
+
+    }
+
+
 
 
 

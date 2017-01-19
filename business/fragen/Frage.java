@@ -6,6 +6,7 @@ public abstract class Frage {
     protected String fragetext;
     protected String[] antworten;
     protected int richtigIndex;
+    protected String path;
 
     public Frage(String fragetext, String[] antworten, int richtigIndex){
         this.fragetext = fragetext;
@@ -23,6 +24,10 @@ public abstract class Frage {
 
     public String[] getAntworten(){
         return antworten;
+    }
+
+    public String getPath(){
+        return this.path;
     }
 
 }

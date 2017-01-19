@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.List;
+
 /**
  * Created by joshuabarth on 14.01.17.
  */
@@ -61,21 +63,21 @@ public class MainMenu extends VBox{
 
         //Baue neuesMenü auf
         VBox container1 = new VBox();
-        ListView mapauswahl = new ListView();
-        HBox spieler = new HBox();
-
-        VBox spieleranzahl = new VBox();
-        Label schrift = new Label("Spieleranzahl");
-        ChoiceBox anzahl = new ChoiceBox();
-        ListView spielerListe = new ListView();
-
+        HBox links = new HBox();
+        HBox rechts = new HBox();
+        Label spielfeld = new Label("Waehle eine Karte: ");
+        Label spieleranzahl = new Label("Waehle Spieler: ");
+        ListView maps = new ListView();
+        ListView spieler = new ListView();
+        Button addSpieler = new Button("Add");
         Button back = new Button("Back");
         Button start = new Button("Start");
 
-        this.getChildren().addAll(container1, back, start);
-        container1.getChildren().addAll(mapauswahl,spieler);
-        spieler.getChildren().addAll(spieleranzahl,spielerListe);
-        spieleranzahl.getChildren().addAll(schrift, anzahl);
+        links.getChildren().addAll(spielfeld, maps);
+        rechts.getChildren().addAll(spieleranzahl, spieler, addSpieler);
+        this.getChildren().addAll(container1,back, start);
+        container1.getChildren().addAll(links, rechts);
+
 
         back.setOnAction((e) -> mainMenuWindow());
         start.setOnAction((e) -> spielController.starteSpiel());
