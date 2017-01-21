@@ -4,7 +4,6 @@ import hearrun.business.Player;
 import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
 import hearrun.view.layout.FrageFenster.TextFrage;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -17,39 +16,36 @@ public class CompleteLayout extends StackPane {
     private SpielController spielController;
     private MainMenu mainMenu;
     private Stage stage;
-    private Player player;
+    private Player musicPlayer;
 
-    public CompleteLayout(Stage stage, SpielController spielController, Player player){
-         this.viewController = new ViewController(stage, spielController);
-         this.spielController = spielController;
-         this.player = player;
-         this.stage = stage;
-         this.maxHeight(stage.getHeight());
-         this.maxWidth(stage.getWidth());
-
-         mainMenu = new MainMenu(spielController);
+    public CompleteLayout(Stage stage, SpielController spielController){
+        this.viewController = new ViewController(stage, spielController);
+        mainMenu = new MainMenu(spielController);
+        this.spielController = spielController;
+        this.musicPlayer = spielController.getMusicPlayer();
+        this.stage = stage;
 
          setMainMenu();
-
-
     }
 
     public void setGameLayout(){
+        bluryAnAus(false);
         this.getChildren().removeAll(this.getChildren());
         //Falls das gamelayout nicht da ist hinzufuegen
         if(this.getChildren().isEmpty()){
             this.getChildren().addAll(gameLayout);
         }
-        player.stopLoop();
-        player.play("src/hearrun/resources/music/2.mp3");
+        musicPlayer.stop();
 
     }
 
     public void setMainMenu(){
-        player.stopLoop();
+
+
+        musicPlayer.stop();
 
         //this.getChildren().removeAll(gameLayout);
-        player.play("src/hearrun/resources/music/1.mp3", true);
+        musicPlayer.play("src/hearrun/resources/music/4.mp3", true);
         this.getChildren().addAll(mainMenu);
         mainMenu.mainMenuWindow();
     }
@@ -78,9 +74,7 @@ public class CompleteLayout extends StackPane {
         this.gameLayout.Blury(anAus);
     }
 
-    public void showWuerfelFenster(){
-
-    }
+ 
 
 
 

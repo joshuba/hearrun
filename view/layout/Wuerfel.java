@@ -32,14 +32,25 @@ public class Wuerfel extends VBox{
 
 
         if(index == -1){
-            this.wuerfeln = new Button("Negativ Würfeln");
+            this.wuerfeln = new Button();
+            wuerfeln.setId("negWuerfel");
+
 
         }else if(index == 0){
-            this.wuerfeln = new Button("Negativ Würfeln");
+            this.wuerfeln = new Button();
+            wuerfeln.setId("negWuerfel");
+
 
         }else if(index == 1){
-            this.wuerfeln = new Button("Positiv Würfeln");
+            this.wuerfeln = new Button();
+            wuerfeln.setId("posWuerfel");
+
         }
+
+        //stylen
+        wuerfeln.setMinSize(60,60);
+        anzeige.setMinSize(60,60);
+
 
         rad = 0;
 
@@ -73,6 +84,8 @@ public class Wuerfel extends VBox{
     }
 
     public void wuerfelProzess(){
+        spielcontroller.getEffectPlayer().play("src/hearrun/resources/sounds/wuerfel.mp3");
+        wuerfeln.setDisable(true);
         ergebnis = wuerfeln();
         System.out.println("Ergebnis: " + ergebnis);
 
@@ -82,7 +95,7 @@ public class Wuerfel extends VBox{
             );
 
             Timeline t = new Timeline(k);
-            t.setCycleCount(50);
+            t.setCycleCount(70);
 
             t.setOnFinished(b -> ergebnisZeigen());
             t.play();

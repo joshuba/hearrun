@@ -53,7 +53,10 @@ public class ViewController {
 
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(400),
-                a -> nextPossibleField(s)));
+                a -> {
+                    nextPossibleField(s);
+                    spielController.getEffectPlayer().play("src/hearrun/resources/sounds/move.mp3");
+                }));
         timeline.setCycleCount(i);
         timeline.play();
 
@@ -134,9 +137,12 @@ public class ViewController {
     public void setMainMenu(){
         //Wenn das spiel laeuft schalte continue ein
         if(spielController.getAktSpiel() != null){
+            spielController.getLayout().setMainMenu();
             spielController.getLayout().getMainMenu().activateContinue();
+            gameLayoutBlury(true);
+        }else{
+            spielController.getLayout().setMainMenu();
         }
-        spielController.getLayout().setMainMenu();
     }
 
     public void resetGameLayout(){
