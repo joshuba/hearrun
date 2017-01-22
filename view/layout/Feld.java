@@ -76,6 +76,21 @@ public class Feld extends HBox{
         return null;
     }
 
+    public String getLeerId(){
+        switch(feldtyp){
+            case CoverFeld: return "coverfeldleer";
+            case EreignisFeld: return"ereignisfeldleer";
+            case FaktFeld: return "faktfeldleer";
+            case InterpretFeld: return"interpretfeldleer";
+            case TitelFeld: return "titelfeldleer";
+            case EndFeld: return "endfeldleer";
+
+        }
+        return null;
+
+
+    }
+
 
 
 

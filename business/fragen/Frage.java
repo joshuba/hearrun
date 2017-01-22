@@ -8,6 +8,7 @@ public abstract class Frage {
     protected int richtigIndex;
     protected String path;
 
+
     public Frage(String fragetext, String[] antworten, int richtigIndex){
         this.fragetext = fragetext;
         this.antworten = antworten;

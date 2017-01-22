@@ -6,12 +6,14 @@ import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Wuerfel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -20,21 +22,25 @@ import javafx.util.Duration;
 /**
  * Created by joshuabarth on 16.01.17.
  */
-public class TextFrage extends VBox {
+public class TextFrage extends BorderPane {
     private SpielController spielController;
     private Player effectPlayer;
     private Player musicPlayer;
 
-    private final int zeit = 7;
+    private final int zeit = 4;
+    float progressWert;
+    float progressIndex;
 
     private  Frage frage;
     private int richtigIndex;
     private SimpleIntegerProperty falschRichtig;
     private int decounter;
     private SimpleIntegerProperty aktZeit;
+    private SimpleFloatProperty progress;
+
 
     private VBox vBox;
-    private HBox hBox;
+    private VBox timerBox;
     private StackPane textfeld;
     private Label fragetext;
     private Button [] buttons;
@@ -43,11 +49,13 @@ public class TextFrage extends VBox {
     private Label aktZeitAnzeige;
     private Timeline timeline;
     private Label aktSpieler;
-    private HBox container;
+    private HBox catPic;
 
 
 
     public TextFrage(Frage frage, SpielController spielController){
+        progress = new SimpleFloatProperty();
+
         this.setId("TextFrage");
         this.spielController = spielController;
         this.musicPlayer = spielController.getMusicPlayer();
@@ -63,8 +71,7 @@ public class TextFrage extends VBox {
 
         //Elemente erstellen
         vBox = new VBox();
-        hBox = new HBox();
-        container = new HBox();
+        timerBox = new VBox();
 
         textfeld = new StackPane();
         fragetext = new Label("Frage: ");
@@ -75,30 +82,37 @@ public class TextFrage extends VBox {
         time = new ProgressBar();
         aktZeitAnzeige = new Label();
         aktSpieler = new Label("Spieler: " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
+        catPic = new HBox();
 
 
         //Zusammenbauen
         textfeld.getChildren().add(fragetext);
         vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3]);
-        hBox.getChildren().addAll(time, aktZeitAnzeige);
-        container.getChildren().addAll(vBox, hBox);
-        this.getChildren().addAll(aktSpieler, container);
+        timerBox.getChildren().addAll(time, aktZeitAnzeige);
+        this.setTop(aktSpieler);
+        this.setCenter(vBox);
+        this.setRight(timerBox);
+        this.setPadding(new Insets(0,0,0,100));
 
 
         //Stylen
+        catPic.setMinSize(80,80);
+        catPic.setMaxSize(80,80);
+        catPic.setId(spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY()).getLeerId());
+
         vBox.setAlignment(Pos.CENTER);
-        this.setAlignment(Pos.CENTER);
-        container.setAlignment(Pos.CENTER);
-        hBox.setAlignment(Pos.CENTER_RIGHT);
+
         textfeld.setId("frageTextfeld");
         textfeld.setPadding(new Insets(0,0,60,0));
 
         time.setRotate(90);
-        hBox.setAlignment(Pos.CENTER_RIGHT);
+        time.setMinWidth(700);
+        time.setMinHeight(50);
+        timerBox.setMinWidth(100);
+        timerBox.setMaxWidth(100);
+        timerBox.setAlignment(Pos.CENTER);
 
 
-        aktZeitAnzeige.textProperty().bind(aktZeit.asString());
-        time.progressProperty().bind(aktZeit);
 
 
 
@@ -126,21 +140,33 @@ public class TextFrage extends VBox {
     }
 
     public void starteAntworPhase(){
+        progressIndex = (100/zeit+1)/100F;
+        progressWert = 0;
+
+
+
         musicPlayer.stop();
         if(frage.getPath() != null){
             musicPlayer.playRandomNSeconds(frage.getPath(),zeit);
         }
-
         decounter = zeit;
 
+        KeyFrame k1 = new KeyFrame(Duration.millis(1000), a ->{
 
-        timeline = new Timeline(new KeyFrame(
-                Duration.millis(1000),
-                a -> aktZeit.set(decounter--)));
+            aktZeit.set(decounter--);
+            getProgress();
+            System.out.println(progress);
+        });
+
+
+        timeline = new Timeline(k1);
         timeline.setOnFinished(b -> fertig());
-        timeline.setCycleCount(zeit+2);
+        timeline.setAutoReverse(false);
+        timeline.setCycleCount(zeit+1);
         timeline.play();
-        time.progressProperty().bind(timeline.cycleCountProperty());
+
+        time.progressProperty().bind(progress);
+        aktZeitAnzeige.textProperty().bind(aktZeit.asString());
 
 
     }
@@ -222,7 +248,15 @@ public class TextFrage extends VBox {
         Wuerfel w = new Wuerfel(index, spielController);
         w.setPadding(new Insets(30,0,0,0));
         w.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(w);
+        vBox.getChildren().addAll(w);
+    }
+
+    public void getProgress(){
+        System.out.println(progressWert);
+
+         progress.setValue(progressWert);
+        progressWert += progressIndex;
+
     }
 
 
