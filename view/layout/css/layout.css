@@ -50,6 +50,20 @@ Button{
     -fx-background-image: url("../../../resources/icons/posWuerfel_pressed.png");
 }
 
+.progress-bar .bar {
+    -fx-background-color: chartreuse;
+    -fx-border-width: 0}
+
+.progress-bar .track {
+    -fx-background-color: gainsboro;
+    -fx-border-style: none;
+
+}
+
+
+
+
+
 #negWuerfel, #posWuerfel{
     -fx-background-repeat: stretch;
     -fx-background-size: 100%;

@@ -50,6 +50,7 @@ public class TextFrage extends BorderPane {
     private Timeline timeline;
     private Label aktSpieler;
     private HBox catPic;
+    private VBox top;
 
 
 
@@ -72,6 +73,7 @@ public class TextFrage extends BorderPane {
         //Elemente erstellen
         vBox = new VBox();
         timerBox = new VBox();
+        top = new VBox();
 
         textfeld = new StackPane();
         fragetext = new Label("Frage: ");
@@ -80,6 +82,7 @@ public class TextFrage extends BorderPane {
         buttons [2] = new Button();
         buttons [3] = new Button();
         time = new ProgressBar();
+        time.setId("progressBar");
         aktZeitAnzeige = new Label();
         aktSpieler = new Label("Spieler: " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
         catPic = new HBox();
@@ -89,13 +92,16 @@ public class TextFrage extends BorderPane {
         textfeld.getChildren().add(fragetext);
         vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3]);
         timerBox.getChildren().addAll(time, aktZeitAnzeige);
-        this.setTop(aktSpieler);
+        top.getChildren().addAll(catPic, aktSpieler);
+        this.setTop(top);
         this.setCenter(vBox);
         this.setRight(timerBox);
         this.setPadding(new Insets(0,0,0,100));
 
 
         //Stylen
+        top.setAlignment(Pos.CENTER);
+        top.setPadding(new Insets(0,100,0,0));
         catPic.setMinSize(80,80);
         catPic.setMaxSize(80,80);
         catPic.setId(spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY()).getLeerId());
@@ -111,6 +117,7 @@ public class TextFrage extends BorderPane {
         timerBox.setMinWidth(100);
         timerBox.setMaxWidth(100);
         timerBox.setAlignment(Pos.CENTER);
+
 
 
 
