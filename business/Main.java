@@ -54,7 +54,6 @@ public class Main extends Application {
 
     @Override
     public void stop() throws Exception {
-        spielController.getMusicPlayer().stop();
         spielController.beendeProgramm();
     }
 }

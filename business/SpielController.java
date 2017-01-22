@@ -80,6 +80,7 @@ public class SpielController {
         this.aktSpiel = null;
         this.completeLayout.getViewController().resetGameLayout();
         musicPlayer.stop();
+        effectPlayer.stop();
     }
 
     public void beendeProgramm(){

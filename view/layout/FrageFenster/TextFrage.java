@@ -73,6 +73,7 @@ public class TextFrage extends VBox {
         buttons [2] = new Button();
         buttons [3] = new Button();
         time = new ProgressBar();
+        time.setProgress(zeit);
         aktZeitAnzeige = new Label();
         aktSpieler = new Label("Spieler: " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
 
@@ -171,7 +172,6 @@ public class TextFrage extends VBox {
         }else{
             bx.setId("falschButton");
             this.falschRichtig.setValue(0);
-            fertig();
 
             effectPlayer.play("src/hearrun/resources/sounds/wrong.mp3");
 
