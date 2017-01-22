@@ -6,6 +6,7 @@ import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.*;
 import hearrun.view.layout.FrageFenster.TextFrage;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.Stage;
@@ -49,16 +50,52 @@ public class ViewController {
         spielController.getAktSpiel().getAktMap().getFeld(x,y).setBesetztID(id);
     }
 
-    public void moveForward(int i, Spieler s){
+    public void movePlayer(int i, Spieler s){
+        int anz;
 
-        Timeline timeline = new Timeline(new KeyFrame(
+        //Falls man mehr Felder zurueck muss als da sind, landet man auf dem ersten
+        if(i>0){
+            anz = i;
+        }else{
+            anz = i*(-1);
+            if(s.getLogSize()-2 < anz){
+                anz = s.getLogSize()-2;
+            }
+        }
+
+
+        Timeline forward = new Timeline(new KeyFrame(
                 Duration.millis(400),
                 a -> {
                     nextPossibleField(s);
                     spielController.getEffectPlayer().play("src/hearrun/resources/sounds/move.mp3");
                 }));
-        timeline.setCycleCount(i);
-        timeline.play();
+        forward.setCycleCount(anz);
+
+        Timeline back = new Timeline(new KeyFrame(
+                Duration.millis(400),
+                a -> {
+                    lastPossibleField(s);
+                    spielController.getEffectPlayer().play("src/hearrun/resources/sounds/move.mp3"); //Spiele sound nur so oft wie feld gewechselt wird
+
+                }));
+        back.setCycleCount(anz);
+
+
+
+        if(i>0){
+            System.out.println("FORWARD");
+            forward.play();
+        }else{
+            if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann
+                back.play();
+            }else{
+                spielController.getEffectPlayer().play("src/hearrun/resources/sounds/moveFailure.mp3"); //Falls kein Feld mehr da ist
+                feldBlinkenLassen(0,0);
+
+            }
+        }
+
 
     }
 
@@ -98,6 +135,27 @@ public class ViewController {
                 map.getFeld(x, y + 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
             }
             erkenneFeldId(x,y);
+
+
+    }
+
+    private void lastPossibleField(Spieler spieler){
+        if (spieler == null) {
+            spieler = spielController.getAktSpiel().getAktSpieler();
+        }
+        int x = spieler.getAktX();
+        int y = spieler.getAktY();
+        Map map = this.spielController.getAktSpiel().getAktMap();
+
+        if(!(x == 0 && y == 0)){
+            spieler.moveBack(); //Gehe zurück
+            map.getFeld(x, y).setBesetztID(erkenneFeldId(x, y)); //Setze aktuelles Feld zurueck
+            spielController.getAktSpiel().getAktMap().getFeld(spieler.getAktX(), spieler.getAktY()).setBesetztID(erkenneFeldId(spieler.getAktX(), spieler.getAktY())); //Setze neues Feld auf b
+
+        }
+
+
+
 
 
     }
@@ -164,18 +222,36 @@ public class ViewController {
         }
     }
 
-    public void zeigeRichtigOderFalsch(){
-
-        //spielController.getLayout().showWuerfelFenster();
-    }
 
     public void gameLayoutBlury(boolean anAus){
         spielController.getLayout().bluryAnAus(anAus);
     }
 
-    public void wuerfeln(){
+    public void feldBlinkenLassen(int x, int y){
+        KeyFrame k1 = new KeyFrame(Duration.ZERO, a ->{
+            spielController.getAktSpiel().getAktMap().getFeld(x, y).setLeer(); //Setze aktuelles Feld zurueck
+        });
+
+        KeyFrame k2 = new KeyFrame(Duration.millis(200), a ->{
+            spielController.getAktSpiel().getAktMap().getFeld(x, y).setBesetztID(erkenneFeldId(x, y)); //Setze aktuelles Feld zurueck
+        });
+
+        Timeline blink = new Timeline();
+        blink.setOnFinished(a -> spielController.getAktSpiel().getAktMap().getFeld(x, y).setBesetztID(erkenneFeldId(x, y)));
+        blink.setAutoReverse(true);
+        blink.setCycleCount(6);
+        blink.getKeyFrames().addAll(k1,k2);
+        blink.play();
+
+
+
+
+
 
     }
+
+
+
 
 
 

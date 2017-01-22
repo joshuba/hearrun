@@ -163,16 +163,18 @@ public class TextFrage extends VBox {
         if(bx == richtigButton){
             bx.setId("richtigButton");
             this.falschRichtig.setValue(1);
+            fertig();
+
             effectPlayer.play("src/hearrun/resources/sounds/right.mp3");
 
-            fertig();
 
         }else{
             bx.setId("falschButton");
             this.falschRichtig.setValue(0);
+            fertig();
+
             effectPlayer.play("src/hearrun/resources/sounds/wrong.mp3");
 
-            fertig();
         }
 
     }

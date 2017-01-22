@@ -25,6 +25,8 @@ public class Player {
     public Player() {
         minim = new SimpleMinim();
         aktVolume = 80;
+        fadeOut = false;
+        fadeIn = false;
 
 
 
@@ -68,14 +70,14 @@ public class Player {
             int start = (new Random().nextInt(player.length() - n));
 
                 player.play(start);
-            fadeIn();
+                fadeIn();
 
 
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(1000*n),
                     a -> {
                         if(!fadeOut){
-                            fadeOut();
+                            //fadeOut();
                         }
 
                     }));
@@ -88,9 +90,13 @@ public class Player {
     }
 
     public void setVolume(float volume){
-        System.out.println(player.getGain());
         float gain = (float) (20*Math.log10(volume/100));   //Linear zu DB umrechnungsformel
         player.setGain(gain);
+    }
+
+    public int getVolume(){
+        float gain = player.getGain();
+        return (int) Math.pow(10, ((gain/20)+2));
 
     }
 
@@ -108,66 +114,94 @@ public class Player {
         new Player().playRandomNSeconds("cantina.mp3", 5);
     }
 
-    private int gebeVolIn(){
-        if(panVol < aktVolume){
-            panVol += 1;
-            System.out.println(panVol);
-            return panVol;
-        }else{
-            System.out.println("Fehler beim Einfaden");
-            panVol = 0;
-            return (int)aktVolume;
-        }
-    }
 
-    private int gebeVolOut(){
-        System.out.println(panVol);
 
-        if(panVol > 0){
-            panVol -= 1;
-            return panVol;
-        }else{
-            System.out.println("Fehler beim Ausfaden");
-            panVol = 0;
-            return 0;
-        }
-    }
+    public void fadeIn(){
+        int aktVol = getVolume();
+        KeyFrame k1 = new KeyFrame(Duration.ZERO, a ->{
+            setVolume(0);
+            System.out.println(getVolume());});
 
-    private void fadeIn(){
+        KeyFrame k2 = new KeyFrame(Duration.millis(300), a ->{
+            setVolume(aktVol/10);
+            System.out.println(getVolume());});
+
+        KeyFrame k3 = new KeyFrame(Duration.millis(500), a ->{
+            setVolume(aktVol/4);
+            System.out.println(getVolume());});
+
+        KeyFrame k4 = new KeyFrame(Duration.millis(600), a ->{
+            setVolume(aktVol/3);
+            System.out.println(getVolume());});
+
+        KeyFrame k5 = new KeyFrame(Duration.millis(700), a ->{
+            setVolume(aktVol/2);
+            System.out.println(getVolume());
+            fadeIn = false;});
+
+        KeyFrame k6 = new KeyFrame(Duration.millis(800), a ->{
+            setVolume(aktVol);
+            System.out.println(getVolume());
+            fadeIn = false;});
+
+        Timeline fadein = new Timeline();
+        fadein.setAutoReverse(false);
+        fadein.setCycleCount(1);
+        fadein.getKeyFrames().addAll(k1,k2, k3, k4, k5, k6);
+
+
+
         fadeIn = true;
-        setVolume(0);
-        panVol = 0;
 
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(10),
-                a -> setVolume(gebeVolIn())));
-        timeline.setCycleCount((int)aktVolume);
-        timeline.setOnFinished(event -> {
-            panVol = (int) aktVolume;
-            fadeIn = false;
+        if(!fadeOut){
+            fadein.play();
+        }
 
-        });
-
-        if(!fadeOut)
-            timeline.play();
 
     }
 
     public void fadeOut(){
-        fadeOut = true;
+        int aktVol = getVolume();
+        KeyFrame k1 = new KeyFrame(Duration.ZERO, a ->{
+            setVolume(aktVol);
+            System.out.println(getVolume());
 
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(10),
-                a -> setVolume(gebeVolOut())));
-        timeline.setCycleCount((int)aktVolume);
-        timeline.setOnFinished(event -> {
-            panVol = 0;
-            fadeOut = false;
-            minim.stop();
         });
 
+        KeyFrame k2 = new KeyFrame(Duration.millis(100), a ->{
+            setVolume(aktVol-((int)aktVol/4));
+            System.out.println(getVolume());
+
+
+        });
+
+        KeyFrame k3 = new KeyFrame(Duration.millis(200), a ->{
+            setVolume(aktVol-((int)aktVol/2));
+            System.out.println(getVolume());
+
+
+        });
+
+        KeyFrame k4 = new KeyFrame(Duration.millis(300), a ->{
+            setVolume(0);
+            System.out.println(getVolume());
+            fadeOut = false;
+
+
+        });
+
+        Timeline fadeout = new Timeline();
+        fadeout.setAutoReverse(false);
+        fadeout.setCycleCount(1);
+        fadeout.getKeyFrames().addAll(k1,k2, k3, k4);
+
+
+
+        fadeOut = true;
+
         if(!fadeIn)
-            timeline.play();
+            fadeout.play();
+
 
 
     }

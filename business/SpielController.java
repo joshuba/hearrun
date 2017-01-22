@@ -48,7 +48,7 @@ public class SpielController {
     }
 
     public void moveAktSpieler(int schritte) {
-        completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        completeLayout.getViewController().movePlayer(schritte,aktSpiel.getAktSpieler());
 
     }
 
@@ -83,6 +83,8 @@ public class SpielController {
     }
 
     public void beendeProgramm(){
+        musicPlayer.stop();
+        effectPlayer.stop();
         stage.close();
     }
 
@@ -111,7 +113,7 @@ public class SpielController {
     }
 
     public void moveAndAskNext(int schritte){
-        completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        completeLayout.getViewController().movePlayer(schritte,aktSpiel.getAktSpieler());
         nextSpieler();
 
     }

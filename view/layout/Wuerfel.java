@@ -35,11 +35,9 @@ public class Wuerfel extends VBox{
             this.wuerfeln = new Button();
             wuerfeln.setId("negWuerfel");
 
-
         }else if(index == 0){
             this.wuerfeln = new Button();
             wuerfeln.setId("negWuerfel");
-
 
         }else if(index == 1){
             this.wuerfeln = new Button();
@@ -70,35 +68,55 @@ public class Wuerfel extends VBox{
         }
     }
 
-    private int gebeZahlRad(){
-        rad = ((rad+1) % 4);
-        if(rad == 0){
-            rad = rad+1;
-        }
-        if(index <= 0){
-            return rad*(-1);
-        }else{
-            return rad;
-        }
 
-    }
 
     public void wuerfelProzess(){
         spielcontroller.getEffectPlayer().play("src/hearrun/resources/sounds/wuerfel.mp3");
         wuerfeln.setDisable(true);
         ergebnis = wuerfeln();
         System.out.println("Ergebnis: " + ergebnis);
+        System.out.println("index: " + index);
 
-        KeyFrame k = new KeyFrame(
-                    Duration.millis(30),
-                    a -> anzeige.setText(Integer.toString(gebeZahlRad()))
-            );
 
-            Timeline t = new Timeline(k);
-            t.setCycleCount(70);
+        KeyFrame k1 = new KeyFrame(Duration.millis(0), a ->{
+            anzeige.setText(Integer.toString(1));
+           });
+        KeyFrame k2 = new KeyFrame(Duration.millis(50), a ->{
+            anzeige.setText(Integer.toString(2));
+        });
+        KeyFrame k3 = new KeyFrame(Duration.millis(100), a ->{
+            anzeige.setText(Integer.toString(3));
+        });
+        KeyFrame k4 = new KeyFrame(Duration.millis(0), a ->{
+            anzeige.setText(Integer.toString(-1));
+        });
+        KeyFrame k5 = new KeyFrame(Duration.millis(50), a ->{
+            anzeige.setText(Integer.toString(-2));
+        });
+        KeyFrame k6 = new KeyFrame(Duration.millis(100), a ->{
+            anzeige.setText(Integer.toString(-3));
+        });
 
-            t.setOnFinished(b -> ergebnisZeigen());
-            t.play();
+        Timeline wuerfelt = new Timeline();
+        wuerfelt.setAutoReverse(true);
+        wuerfelt.setCycleCount(20);
+        if(index <= 0){
+            wuerfelt.getKeyFrames().addAll(k4, k5, k6);
+        }else{
+            wuerfelt.getKeyFrames().addAll(k1, k2, k3);
+
+        }
+        wuerfelt.setOnFinished(b -> ergebnisZeigen());
+        wuerfelt.play();
+
+
+
+
+
+
+
+
+
 
         }
 

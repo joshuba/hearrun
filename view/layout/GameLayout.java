@@ -15,7 +15,6 @@ public class GameLayout extends BorderPane{
     public GameLayout(Stage stage, SpielController spielController, ViewController viewController){
         this.setId("gameLayout");
 
-
         //Panes initalisieren
         CenterLayout centerLayout = new CenterLayout(viewController);
         SideBar leftLayout = new SideBar();

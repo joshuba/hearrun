@@ -1,5 +1,11 @@
 package hearrun.business;
 
+
+import com.sun.javafx.scene.paint.GradientUtils;
+
+import java.awt.*;
+import java.util.ArrayList;
+
 /**
  * Created by joshuabarth on 13.01.17.
  */
@@ -7,45 +13,40 @@ public class Spieler {
     private String name;
     private int nr;
     private int time;
-    private int aktx;
-    private int akty;
-    private int lastx;
-    private int lasty;
+
+    private ArrayList<Point> log;
 
     public Spieler(int nr, String name){
         this.nr = nr;
         this.name = name;
-        aktx = 0;
-        akty = 0;
-        lastx = aktx;
-        lasty = akty;
+        log = new ArrayList<Point>();
+        log.add(new Point(0,0)); //Für den Start wird die letzte Position auf 0 gesetzt
+        log.add(new Point(0,0)); //aktPos
+
 
     }
 
     public void move(int x, int y){
-       lastx = aktx;
-       lasty = akty;
+        log.add(new Point(x,y));
 
-        aktx = x;
-        akty = y;
 
     }
 
     public int getAktX(){
-        return this.aktx;
+        return log.get(log.size()-1).x;
     }
 
     public int getAktY() {
-        return akty;
+        return log.get(log.size()-1).y;
+
     }
 
     public int getLastX(){
-        return this.lastx;
+            return log.get(log.size()-2).x;
     }
 
     public int getLastY(){
-        return this.lasty;
-
+            return log.get(log.size()-2).y;
     }
 
     public int getNr(){
@@ -53,7 +54,7 @@ public class Spieler {
     }
 
     public boolean stehtAufFeld(int x, int y){
-        if (x == this.getAktX() && y == this.getAktY()){
+        if (x == getAktX() && y == getAktY()){
             return true;
         }
         return false;
@@ -61,5 +62,16 @@ public class Spieler {
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public void moveBack(){
+
+            log.remove(log.size()-1);
+
+
+    }
+
+    public int getLogSize(){
+        return log.size();
     }
 }

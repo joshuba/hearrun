@@ -22,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        spielController = new SpielController(primaryStage, "map1.txt", 4);
+        spielController = new SpielController(primaryStage, "map1.txt", 1);
 
         Scene scene = new Scene(spielController.getLayout());
 
@@ -45,6 +45,11 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+        //Player player = new Player();
+        //player.playRandomNSeconds("/Users/Josh/IdeaProjects/Hearrun/music/music/1-01 Carry On Wayward Son.mp3", 6);
+
+
     }
 
     @Override
