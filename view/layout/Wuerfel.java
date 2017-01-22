@@ -71,7 +71,7 @@ public class Wuerfel extends VBox{
 
 
     public void wuerfelProzess(){
-        spielcontroller.getEffectPlayer().play("src/hearrun/resources/sounds/wuerfel.mp3");
+        spielcontroller.getMusicPlayer().play("src/hearrun/resources/sounds/wuerfel.mp3");
         wuerfeln.setDisable(true);
         ergebnis = wuerfeln();
         System.out.println("Ergebnis: " + ergebnis);
@@ -99,7 +99,7 @@ public class Wuerfel extends VBox{
 
         Timeline wuerfelt = new Timeline();
         wuerfelt.setAutoReverse(true);
-        wuerfelt.setCycleCount(20);
+        wuerfelt.setCycleCount(30);
         if(index <= 0){
             wuerfelt.getKeyFrames().addAll(k4, k5, k6);
         }else{
