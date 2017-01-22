@@ -22,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        spielController = new SpielController(primaryStage, "map1.txt", 4);
+        spielController = new SpielController(primaryStage, "map1.txt", 3);
 
         Scene scene = new Scene(spielController.getLayout());
 
@@ -34,7 +34,7 @@ public class Main extends Application {
 
 
         primaryStage.setScene(scene);
-       primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.getStylesheets().add(("/hearrun/view/layout/css/felder.css"));
         scene.getStylesheets().add(("/hearrun/view/layout/css/layout.css"));
@@ -48,11 +48,15 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+        //Player player = new Player();
+        //player.playRandomNSeconds("/Users/Josh/IdeaProjects/Hearrun/music/music/1-01 Carry On Wayward Son.mp3", 6);
+
+
     }
 
     @Override
     public void stop() throws Exception {
-        spielController.getPlayer().stopLoop();
         spielController.beendeProgramm();
     }
 }

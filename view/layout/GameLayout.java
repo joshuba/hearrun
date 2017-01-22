@@ -10,18 +10,10 @@ import javafx.stage.Stage;
  * Created by Josh on 09.01.17.
  */
 public class GameLayout extends BorderPane{
-    private ViewController viewController;
-    private SpielController spielController;
-    private Stage stage;
-    private int border;
-
 
 
     public GameLayout(Stage stage, SpielController spielController, ViewController viewController){
         this.setId("gameLayout");
-        this.stage = stage;
-        this.viewController = viewController;
-        this.spielController = spielController;
 
         //Panes initalisieren
         CenterLayout centerLayout = new CenterLayout(viewController);
@@ -58,12 +50,6 @@ public class GameLayout extends BorderPane{
         }
 
     }
-
-
-
-
-
-
 
 
 

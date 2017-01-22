@@ -1,3 +1,11 @@
+Button{
+
+    -fx-background-color: transparent;
+    /* -fx-min-width: 50px;
+     -fx-min-height: 50px;
+ */
+}
+
 #sideBar{
     -fx-background-color: white;
 }
@@ -10,10 +18,6 @@
     -fx-background-color: darkgreen;
 }
 
-#mainMenu{
-    -fx-background-color: lightgray;
-    -fx-opacity: 75%;
-}
 
 #frageTextfeld{
     -fx-background-color: antiquewhite;
@@ -28,4 +32,25 @@
 }
 
 #normalButton{
+}
+
+#negWuerfel{
+    -fx-background-image: url("../../../resources/icons/negWuerfel.png");
+}
+
+#posWuerfel{
+    -fx-background-image: url("../../../resources/icons/posWuerfel.png");
+}
+
+#negWuerfel:pressed{
+    -fx-background-image: url("../../../resources/icons/negWuerfel_pressed.png");
+}
+
+#posWuerfel:pressed{
+    -fx-background-image: url("../../../resources/icons/posWuerfel_pressed.png");
+}
+
+#negWuerfel, #posWuerfel{
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
 }

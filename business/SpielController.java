@@ -3,7 +3,6 @@ package hearrun.business;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
-import hearrun.view.layout.Wuerfel;
 import javafx.stage.Stage;
 
 /**
@@ -16,16 +15,18 @@ public class SpielController {
     private String dateiname;
     private int spieleranzahl;
     private FrageController frageController;
-    private Player player;
+    private Player musicPlayer;
+    private Player effectPlayer;
 
 
 
     public SpielController(Stage stage, String dateiname, int spieleranzahl){
         this.stage = stage;
-        this.player = new Player();
+        this.musicPlayer = new Player();
+        this.effectPlayer = new Player();
         this.dateiname = dateiname;
         this.spieleranzahl = spieleranzahl;
-        this.completeLayout = new CompleteLayout(stage, this, player);
+        this.completeLayout = new CompleteLayout(stage, this);
         frageController = new FrageController();
 
 
@@ -47,7 +48,7 @@ public class SpielController {
     }
 
     public void moveAktSpieler(int schritte) {
-        completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        completeLayout.getViewController().movePlayer(schritte,aktSpiel.getAktSpieler());
 
     }
 
@@ -78,15 +79,17 @@ public class SpielController {
     public void beendeSpiel(){
         this.aktSpiel = null;
         this.completeLayout.getViewController().resetGameLayout();
-        player.stopLoop();
+        musicPlayer.stop();
+        effectPlayer.stop();
     }
 
     public void beendeProgramm(){
+        musicPlayer.stop();
+        effectPlayer.stop();
         stage.close();
     }
 
     public void stelleAktFrage(){
-        System.out.println("WASDAS");
         Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
         Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
         Frage frage = frageController.getFrage(fragetyp);
@@ -97,8 +100,12 @@ public class SpielController {
 
 
     }
-    public Player getPlayer(){
-        return this.player;
+    public Player getMusicPlayer(){
+        return this.musicPlayer;
+    }
+
+    public Player getEffectPlayer(){
+        return this.effectPlayer;
     }
 
     public void stelleFrage(){
@@ -107,7 +114,7 @@ public class SpielController {
     }
 
     public void moveAndAskNext(int schritte){
-        completeLayout.getViewController().moveForward(schritte,aktSpiel.getAktSpieler());
+        completeLayout.getViewController().movePlayer(schritte,aktSpiel.getAktSpieler());
         nextSpieler();
 
     }

@@ -21,45 +21,50 @@ import javafx.util.Duration;
  * Created by joshuabarth on 16.01.17.
  */
 public class TextFrage extends VBox {
+    private SpielController spielController;
+    private Player effectPlayer;
+    private Player musicPlayer;
+
+    private final int zeit = 7;
+
     private  Frage frage;
+    private int richtigIndex;
+    private SimpleIntegerProperty falschRichtig;
+    private int decounter;
+    private SimpleIntegerProperty aktZeit;
+
     private VBox vBox;
     private HBox hBox;
     private StackPane textfeld;
     private Label fragetext;
     private Button [] buttons;
     private Button richtigButton;
-    private int richtigIndex;
     private ProgressBar time;
     private Label aktZeitAnzeige;
-    private SimpleIntegerProperty falschRichtig;
-    private SimpleIntegerProperty aktZeit;
-    private final int zeit = 5;
-    private int decounter;
-    private Player player;
     private Timeline timeline;
-    private SpielController spielController;
     private Label aktSpieler;
     private HBox container;
 
 
 
     public TextFrage(Frage frage, SpielController spielController){
-        this.spielController = spielController;
         this.setId("TextFrage");
-        this.player = spielController.getPlayer();
+        this.spielController = spielController;
+        this.musicPlayer = spielController.getMusicPlayer();
+        this.effectPlayer = spielController.getEffectPlayer();
         this.frage = frage;
 
         richtigIndex = frage.getRichtigIndex();
         falschRichtig = new SimpleIntegerProperty();
         aktZeit = new SimpleIntegerProperty();
-        falschRichtig.setValue(-1);
+        aktZeit.setValue(zeit);
+        falschRichtig.setValue(-1); //= Nicht beantwortet
         this.buttons = new Button[4];
 
         //Elemente erstellen
         vBox = new VBox();
         hBox = new HBox();
         container = new HBox();
-
 
         textfeld = new StackPane();
         fragetext = new Label("Frage: ");
@@ -68,6 +73,7 @@ public class TextFrage extends VBox {
         buttons [2] = new Button();
         buttons [3] = new Button();
         time = new ProgressBar();
+        time.setProgress(zeit);
         aktZeitAnzeige = new Label();
         aktSpieler = new Label("Spieler: " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
 
@@ -78,7 +84,6 @@ public class TextFrage extends VBox {
         hBox.getChildren().addAll(time, aktZeitAnzeige);
         container.getChildren().addAll(vBox, hBox);
         this.getChildren().addAll(aktSpieler, container);
-
 
 
         //Stylen
@@ -94,7 +99,7 @@ public class TextFrage extends VBox {
 
 
         aktZeitAnzeige.textProperty().bind(aktZeit.asString());
-        time.progressProperty().bind(aktZeit.multiply(-1));
+        time.progressProperty().bind(aktZeit);
 
 
 
@@ -122,9 +127,9 @@ public class TextFrage extends VBox {
     }
 
     public void starteAntworPhase(){
-        player.stopLoop();
+        musicPlayer.stop();
         if(frage.getPath() != null){
-            player.playRandomNSeconds(frage.getPath(),zeit);
+            musicPlayer.playRandomNSeconds(frage.getPath(),zeit);
         }
 
         decounter = zeit;
@@ -136,12 +141,13 @@ public class TextFrage extends VBox {
         timeline.setOnFinished(b -> fertig());
         timeline.setCycleCount(zeit+2);
         timeline.play();
+        time.progressProperty().bind(timeline.cycleCountProperty());
 
 
     }
 
     public void fertig(){
-        player.stopLoop();
+        musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
         disableAllButtons();
 
@@ -160,10 +166,15 @@ public class TextFrage extends VBox {
             this.falschRichtig.setValue(1);
             fertig();
 
+            effectPlayer.play("src/hearrun/resources/sounds/right.mp3");
+
+
         }else{
             bx.setId("falschButton");
             this.falschRichtig.setValue(0);
-            fertig();
+
+            effectPlayer.play("src/hearrun/resources/sounds/wrong.mp3");
+
         }
 
     }
@@ -187,7 +198,10 @@ public class TextFrage extends VBox {
 
         Timeline t = new Timeline(k);
         t.setCycleCount(6);
+        if(falschRichtig.getValue() == -1){
+            effectPlayer.play("src/hearrun/resources/sounds/wrong.mp3");
 
+        }
 
         t.setOnFinished(b -> wuerfeln(falschRichtig.getValue()));
         t.play();

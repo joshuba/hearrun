@@ -28,8 +28,6 @@ public class MainMenu extends VBox{
         this.setId("mainMenu");
         this.setMinHeight(700);
         this.setMinWidth(300);
-
-
         this.setAlignment(Pos.CENTER);
 
         mainMenuWindow();
@@ -40,11 +38,9 @@ public class MainMenu extends VBox{
 
     public void activateContinue(){
         //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
-        if(!continueAn){
             this.getChildren().removeAll(newGame,settings,exit);
             this.getChildren().addAll(continu, newGame, settings, exit);
             continueAn = true;
-        }
 
 
     }
@@ -81,6 +77,7 @@ public class MainMenu extends VBox{
 
         back.setOnAction((e) -> mainMenuWindow());
         start.setOnAction((e) -> spielController.starteSpiel());
+        settings.setOnAction((e)-> settingsWindow());
 
 
 
@@ -101,7 +98,6 @@ public class MainMenu extends VBox{
 
         this.getChildren().addAll(newGame,settings,exit);
 
-        //newGame.setOnAction((e) -> spielController.starteSpiel());
         newGame.setOnAction((e) -> newGameWindow());
         exit.setOnAction((e) -> spielController.beendeProgramm());
         continu.setOnAction((e)-> spielController.getLayout().setGameLayout());
