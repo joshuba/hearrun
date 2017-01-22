@@ -20,8 +20,8 @@ Button{
 
 
 #frageTextfeld{
-    -fx-background-color: antiquewhite;
 }
+
 
 #richtigButton{
     -fx-background-color: greenyellow;
@@ -58,6 +58,10 @@ Button{
     -fx-background-color: gainsboro;
     -fx-border-style: none;
 
+}
+
+#grossText{
+    -fx-font-size: 30;
 }
 
 

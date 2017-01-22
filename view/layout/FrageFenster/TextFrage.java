@@ -27,7 +27,7 @@ public class TextFrage extends BorderPane {
     private Player effectPlayer;
     private Player musicPlayer;
 
-    private final int zeit = 4;
+    private final int zeit = 10;
     float progressWert;
     float progressIndex;
 
@@ -84,7 +84,7 @@ public class TextFrage extends BorderPane {
         time = new ProgressBar();
         time.setId("progressBar");
         aktZeitAnzeige = new Label();
-        aktSpieler = new Label("Spieler: " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
+        aktSpieler = new Label("Spieler " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
         catPic = new HBox();
 
 
@@ -110,6 +110,8 @@ public class TextFrage extends BorderPane {
 
         textfeld.setId("frageTextfeld");
         textfeld.setPadding(new Insets(0,0,60,0));
+
+        aktSpieler.setId("grossText");
 
         time.setRotate(90);
         time.setMinWidth(700);
