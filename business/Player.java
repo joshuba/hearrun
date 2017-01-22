@@ -111,21 +111,7 @@ public class Player {
 
 
     public static void main (String[] args){
-        Player p = new Player();
-        p.play("cantina.mp3", true);
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("dspsapvg");
-        p.stopLoop();
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new Player().playRandomNSeconds("cantina.mp3", 5);
     }
 
 

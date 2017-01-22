@@ -43,7 +43,7 @@ public class InterpretFrage extends Frage {
         for (int i = 0; i < 3; i++){
             ID3v2 randAntwort = alleInterpreten[(int) (Math.random() * alleInterpreten.length)];
             if(!randAntwort.getArtist().equals(interpret)) {//zweifach richtige antwort durch Interpret vermeiden
-                antworten.add(randAntwort.getArtist());
+                antworten.add(randAntwort.getTitle());
             }else
                 i--;
         }
