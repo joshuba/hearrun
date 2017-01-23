@@ -4,6 +4,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.util.Properties;
 
 /**
  * Created by Josh on 09.01.17
@@ -28,12 +31,12 @@ public class Main extends Application {
 
 
         primaryStage.setTitle("Hear and Run - alpha 0.01");
-        //primaryStage.initStyle(StageStyle.UTILITY); //Nur "schliessen Button"
         primaryStage.setMinWidth(900);
         primaryStage.setMinHeight(600);
 
 
         primaryStage.setScene(scene);
+
         //primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.getStylesheets().add(("/hearrun/view/layout/css/felder.css"));
@@ -41,10 +44,13 @@ public class Main extends Application {
         primaryStage.show();
 
 
+
     }
 
     public static void main(String[] args) {
         launch(args);
+
+
 
         //Player player = new Player();
         //player.playRandomNSeconds("/Users/Josh/IdeaProjects/Hearrun/music/music/1-01 Carry On Wayward Son.mp3", 6);

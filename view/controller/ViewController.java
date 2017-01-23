@@ -4,11 +4,13 @@ import hearrun.business.Fragetyp;
 import hearrun.business.SpielController;
 import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
+import hearrun.view.IntroScreen;
 import hearrun.view.layout.*;
 import hearrun.view.layout.FrageFenster.TextFrage;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -243,20 +245,26 @@ public class ViewController {
         blink.getKeyFrames().addAll(k1,k2);
         blink.play();
 
-
-
-
-
-
     }
 
+    public void newGameButtonAnAus(boolean anAus){
+        spielController.getLayout().newGameAnAus(anAus);
+    }
 
+    public void zeigeIntroScreen(){
+        IntroScreen is = new IntroScreen(stage, spielController);
+        spielController.getLayout().setIntroscreen(is);
+    }
 
+    public Stage getWindowStage(){
+        return this.stage;
+    }
 
+    public void zeigeLadeScreen(SimpleBooleanProperty bool, SimpleFloatProperty prog){
 
-
-
-
+        LoadingScreen ls = new LoadingScreen(bool, prog, spielController);
+        spielController.getLayout().setLoadingScreen(ls);
+    }
 
 
 

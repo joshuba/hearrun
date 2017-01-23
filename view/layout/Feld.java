@@ -2,11 +2,13 @@ package hearrun.view.layout;
 
 import hearrun.business.Fragetyp;
 import hearrun.view.controller.ViewController;
+import javafx.animation.RotateTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Random;
 
@@ -21,9 +23,16 @@ public class Feld extends HBox{
     public Feld(Feldtyp feldtyp, ViewController viewController){
         this.feldtyp = feldtyp;
         setLeer();
+        /*
+        RotateTransition rt = new RotateTransition(Duration.millis(1000), this);
+        rt.setByAngle(180);
+        rt.setCycleCount(200);
+        rt.setAutoReverse(true);
+        rt.play();
+*/
 
 
-       this.prefHeightProperty().bind(viewController.getStage().heightProperty());
+        this.prefHeightProperty().bind(viewController.getStage().heightProperty());
         this.prefWidthProperty().bind(viewController.getStage().widthProperty());
     }
 

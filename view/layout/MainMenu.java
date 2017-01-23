@@ -2,10 +2,13 @@ package hearrun.view.layout;
 
 import hearrun.business.SpielController;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 
 import java.util.List;
 
@@ -38,7 +41,7 @@ public class MainMenu extends VBox{
 
     public void activateContinue(){
         //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
-            this.getChildren().removeAll(newGame,settings,exit);
+            this.getChildren().removeAll(this.getChildren());
             this.getChildren().addAll(continu, newGame, settings, exit);
             continueAn = true;
 
@@ -77,7 +80,6 @@ public class MainMenu extends VBox{
 
         back.setOnAction((e) -> mainMenuWindow());
         start.setOnAction((e) -> spielController.starteSpiel());
-        settings.setOnAction((e)-> settingsWindow());
 
 
 
@@ -88,31 +90,62 @@ public class MainMenu extends VBox{
 
     public void mainMenuWindow(){
 
-        //Entferne new GameWindow falls es existiert
-        removeAllElements();
+            //Entferne new GameWindow falls es existiert
+            removeAllElements();
 
-        newGame = new Button("New Game");
-        continu =  new Button("Continue");
-        settings = new Button("Settings");
-        exit = new Button("Exit Game");
+            newGame = new Button("New Game");
+            continu =  new Button("Continue");
+            settings = new Button("Settings");
+            exit = new Button("Exit Game");
 
-        this.getChildren().addAll(newGame,settings,exit);
+            this.getChildren().addAll(newGame,settings,exit);
 
-        newGame.setOnAction((e) -> newGameWindow());
-        exit.setOnAction((e) -> spielController.beendeProgramm());
-        continu.setOnAction((e)-> spielController.getLayout().setGameLayout());
+            newGame.setOnAction((e) -> newGameWindow());
+            exit.setOnAction((e) -> spielController.beendeProgramm());
+            continu.setOnAction((e)-> spielController.getLayout().setGameLayout());
+            settings.setOnAction((e)-> settingsWindow());
+
+
+
 
     }
 
     public void settingsWindow(){
-        removeAllElements();
-        Slider antwortZeit = new Slider();
+        int gerundet;
+        this.getChildren().removeAll(this.getChildren());
+        Slider antwortZeit = new Slider(4,15,Integer.valueOf(spielController.getProperties().getProperty("antwortZeit")));
+        antwortZeit.setBlockIncrement(12);
+        antwortZeit.valueProperty().addListener((obs, oldValue, newValue) -> {
+            spielController.getProperties().setProperty("antwortZeit",String.valueOf(newValue.intValue()));
+            System.out.println(spielController.getProperties().getProperty("antwortZeit"));
+        });
+
+
+
         Slider volume = new Slider();
-        Button button = new Button();
-        Button back = new Button();
-        this.getChildren().addAll(antwortZeit,volume,button, back);
-        back.setOnAction((e)->mainMenuWindow());
+
+        Button button = new Button("Change Music Path");
+        Label pfad = new Label(spielController.getProperties().getProperty("musicPath"));
+        Button back = new Button("Back");
+        this.getChildren().addAll(antwortZeit,volume,button, pfad, back);
+        back.setOnAction((e)->spielController.getLayout().getViewController().setMainMenu());
+
+
+        button.setOnAction((e) -> {
+            String newpath = new DirectoryChooser().showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
+            pfad.setText(newpath);
+            spielController.getProperties().setProperty("musicPath", newpath);
+
+            spielController.beendeSpiel();
+            spielController.ladeMusik();
+        });
     }
+
+    public void newGameAnAus(boolean anAus){
+        this.newGame.setDisable(!anAus);
+    }
+
+
 
 
 }

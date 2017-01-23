@@ -64,7 +64,13 @@ Button{
     -fx-font-size: 30;
 }
 
+#introScreen{
+    -fx-background-color: dimgray;
+}
 
+#loadingScreen{
+    -fx-background-color: lightcoral;
+}
 
 
 

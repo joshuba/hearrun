@@ -27,7 +27,7 @@ public class TextFrage extends BorderPane {
     private Player effectPlayer;
     private Player musicPlayer;
 
-    private final int zeit = 10;
+    private int zeit;
     float progressWert;
     float progressIndex;
 
@@ -56,6 +56,7 @@ public class TextFrage extends BorderPane {
 
     public TextFrage(Frage frage, SpielController spielController){
         progress = new SimpleFloatProperty();
+        zeit = Integer.valueOf(spielController.getProperties().getProperty("antwortZeit"));
 
         this.setId("TextFrage");
         this.spielController = spielController;
@@ -149,6 +150,7 @@ public class TextFrage extends BorderPane {
     }
 
     public void starteAntworPhase(){
+        zeit = Integer.valueOf(spielController.getProperties().getProperty("antwortZeit"));
         progressIndex = (100/zeit+1)/100F;
         progressWert = 0;
 
@@ -267,6 +269,7 @@ public class TextFrage extends BorderPane {
         progressWert += progressIndex;
 
     }
+
 
 
 

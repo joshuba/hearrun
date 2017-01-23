@@ -13,7 +13,6 @@ public class Spieler {
     private String name;
     private int nr;
     private int time;
-
     private ArrayList<Point> log;
 
     public Spieler(int nr, String name){

@@ -2,6 +2,7 @@ package hearrun.view.layout;
 
 import hearrun.business.Player;
 import hearrun.business.SpielController;
+import hearrun.view.IntroScreen;
 import hearrun.view.controller.ViewController;
 import hearrun.view.layout.FrageFenster.TextFrage;
 import javafx.scene.layout.StackPane;
@@ -25,7 +26,6 @@ public class CompleteLayout extends StackPane {
         this.musicPlayer = spielController.getMusicPlayer();
         this.stage = stage;
 
-         setMainMenu();
     }
 
     public void setGameLayout(){
@@ -40,11 +40,11 @@ public class CompleteLayout extends StackPane {
     }
 
     public void setMainMenu(){
-
+        this.getChildren().removeAll(this.getChildren());
 
         musicPlayer.stop();
 
-        //this.getChildren().removeAll(gameLayout);
+
         musicPlayer.play("src/hearrun/resources/music/4.mp3", true);
         this.getChildren().addAll(mainMenu);
         mainMenu.mainMenuWindow();
@@ -74,9 +74,19 @@ public class CompleteLayout extends StackPane {
         this.gameLayout.Blury(anAus);
     }
 
- 
+    public void newGameAnAus(boolean anAus){
+        mainMenu.newGameAnAus(anAus);
+    }
 
 
+    public void setIntroscreen(IntroScreen introscreen) {
+        this.getChildren().removeAll();
+        this.getChildren().addAll(introscreen);
+    }
 
+    public void setLoadingScreen(LoadingScreen ls) {
+        this.getChildren().removeAll();
+        this.getChildren().addAll(ls);
 
+    }
 }
