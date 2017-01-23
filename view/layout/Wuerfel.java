@@ -5,6 +5,7 @@ import hearrun.business.SpielController;
 import hearrun.business.fragen.InterpretFrage;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,7 @@ public class Wuerfel extends VBox{
     public Wuerfel(int index, SpielController spielController){
         this.spielcontroller = spielController;
         anzeige = new Label();
+        anzeige.setId("grossText");
         iv = new ImageView();
         this.index = index;
 
@@ -48,6 +50,7 @@ public class Wuerfel extends VBox{
         //stylen
         wuerfeln.setMinSize(60,60);
         anzeige.setMinSize(60,60);
+        anzeige.setAlignment(Pos.CENTER);
 
 
         rad = 0;

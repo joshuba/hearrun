@@ -27,6 +27,7 @@ public class LoadingScreen extends VBox{
     private SimpleFloatProperty progres;
     private SimpleBooleanProperty ladeMusik;
     private Button reset;
+    private Label ueberschrift;
 
 
 
@@ -37,9 +38,12 @@ public class LoadingScreen extends VBox{
         this.ladeMusik = ladeMusik;
         bar = new ProgressBar();
         reset = new Button("reset");
+        ueberschrift = new Label("Musik einlesen");
+        ueberschrift.setId("grossText");
+
 
         text = new Label("Deine Musik wird eingelesen, dies kann abhängig von der Mediathekgröße einige Sekunden in Anspruch nehmen. \nFragen werden erstellt...");
-        this.getChildren().addAll(text,bar, reset);
+        this.getChildren().addAll(ueberschrift, text,bar, reset);
         bar.progressProperty().bind(progres);
 
         reset.setOnAction((e)-> spielController.resetMusicPathPropertie());
@@ -58,6 +62,7 @@ public class LoadingScreen extends VBox{
         this.setAlignment(Pos.CENTER);
         bar.setPadding(new Insets(40,0,30,0));
         bar.setMinWidth(600);
+        ueberschrift.setPadding(new Insets(0,0,100,0));
 
 
 

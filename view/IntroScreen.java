@@ -20,6 +20,7 @@ public class IntroScreen extends VBox{
     private Label text;
     private DirectoryChooser auswahl;
     private Button auswahlButton;
+    private Label ueberschrift;
     private Label path;
     private VBox container;
     private SpielController spielController;
@@ -32,13 +33,17 @@ public class IntroScreen extends VBox{
         text =new Label("Wilkommen! Um HearRun spielen zu können, gib bitte den Pfad zu deiner Musik an, die du im Spiel verwenden willst");
         auswahlButton = new Button("Waehle Pfad");
         path = new Label();
+        ueberschrift = new Label("Hear & Run - Wilkommen");
+        ueberschrift.setId("grossText");
+
 
         container = new VBox();
 
-        this.getChildren().addAll(text, auswahlButton, path);
+        this.getChildren().addAll(ueberschrift, text, auswahlButton, path);
 
         //styling
         this.setId("introScreen");
+        ueberschrift.setPadding(new Insets(0,0,100,0));
         this.setAlignment(Pos.CENTER);
         auswahlButton.setPadding(new Insets(20,0,20,0));
 
