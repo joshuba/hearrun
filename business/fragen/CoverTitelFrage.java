@@ -50,12 +50,15 @@ public class CoverTitelFrage extends Frage{
 
             //antworten generieren
             ArrayList<String> antworten = new ArrayList<>();
+
             for (int i = 0; i < 3; i++){
                 ID3v2 randAntwort = alleTitel[(int) (Math.random() * alleTitel.length)];
                 if(!randAntwort.getTitle().equals(titel) && !randAntwort.getAlbum().equals(srctags.getAlbum())) {//zweifach richtige antwort durch titel / album vermeiden
                     antworten.add(randAntwort.getTitle());
-                }else
+                }else {
+                    System.out.println(randAntwort.getTitle() + ", " + alleTitel.length);
                     i--;
+                }
             }
             antworten.add(titel);
             Collections.shuffle(antworten);

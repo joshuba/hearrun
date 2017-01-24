@@ -1,20 +1,17 @@
 package hearrun.view.layout;
 
-import hearrun.business.Spiel;
 import hearrun.business.SpielController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
 
 /**
@@ -28,14 +25,16 @@ public class LoadingScreen extends VBox{
     private SimpleBooleanProperty ladeMusik;
     private Button reset;
     private Label ueberschrift;
+    private Label fragenAnzahl;
 
 
 
-    public LoadingScreen(SimpleBooleanProperty ladeMusik, SimpleFloatProperty progres, SpielController spielController){
+    public LoadingScreen(SimpleBooleanProperty ladeMusik, SimpleFloatProperty progres, SimpleIntegerProperty anzahlFragenProp, SpielController spielController){
         this.setId("loadingScreen");
         this.spielController = spielController;
         this.progres = progres;
         this.ladeMusik = ladeMusik;
+        this.fragenAnzahl = new Label();
         bar = new ProgressBar();
         reset = new Button("reset");
         ueberschrift = new Label("Musik einlesen");
@@ -43,18 +42,14 @@ public class LoadingScreen extends VBox{
 
 
         text = new Label("Deine Musik wird eingelesen, dies kann abhängig von der Mediathekgröße einige Sekunden in Anspruch nehmen. \nFragen werden erstellt...");
-        this.getChildren().addAll(ueberschrift, text,bar, reset);
+        this.getChildren().addAll(ueberschrift, text,bar, fragenAnzahl,reset);
         bar.progressProperty().bind(progres);
 
         reset.setOnAction((e)-> spielController.resetMusicPathPropertie());
 
-        ladeMusik.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue==true){
-                    zeigeFertig();
-                }
-
+        ladeMusik.addListener((observable, oldValue, newValue) -> {
+            if(newValue){
+                zeigeFertig();
             }
         });
 

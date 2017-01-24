@@ -41,7 +41,7 @@ public class Frageliste {
     public Frage getRand(Fragetyp typ) {
         Frage rand = null;
         int index;
-        try{
+        try {
             switch (typ) {
                 case CoverTitelFrage:
                     index = (int) (Math.random() * coverTitelFragen.size());
@@ -68,7 +68,7 @@ public class Frageliste {
                     rand = titelFragen.get(index);
                     titelFragen.remove(index);
             }
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.err.println("Aus einer Liste wurden bereits alle Fragen gestellt");
             System.exit(1);
         }
@@ -76,7 +76,7 @@ public class Frageliste {
     }
 
     public Frage getRand() {
-        ArrayList <Frage> alleFragen = new ArrayList<>();
+        ArrayList<Frage> alleFragen = new ArrayList<>();
         if (coverTitelFragen.size() > 0)
             alleFragen.addAll(coverTitelFragen);
         if (coverWahlFragen.size() > 0)
@@ -91,7 +91,7 @@ public class Frageliste {
         return alleFragen.get((int) (Math.random() * alleFragen.size()));
     }
 
-    public int size(Fragetyp typ){
+    public int size(Fragetyp typ) {
         switch (typ) {
             case CoverTitelFrage:
                 return coverTitelFragen.size();
@@ -106,7 +106,16 @@ public class Frageliste {
         }
     }
 
-
-
-
+    public int size() {
+        return coverTitelFragen.size() +
+                coverWahlFragen.size() +
+                faktFragen.size() +
+                interpretFragen.size() +
+                titelFragen.size();
+    }
 }
+
+
+
+
+
