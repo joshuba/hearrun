@@ -66,11 +66,6 @@ public class FrageController {
         readingOnOff.setValue(false);
         musicReadingProgress.setValue(15);
         fragenAnzahl = new SimpleIntegerProperty();
-
-        fragenAnzahl.addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
-        });
-
     }
 
 
@@ -83,33 +78,22 @@ public class FrageController {
     }
 
     public void leseMusikEin(String path) {
-
-
         spielController.getLayout().getViewController().zeigeLadeScreen(readingOnOff, musicReadingProgress, fragenAnzahl);
         leseEinGeneriereFragen(path);
-
     }
 
     private void leseEinGeneriereFragen(String path) {
 
         new Thread(() -> {
-            System.out.println("Musik einlesen:");
 
             leseOrdnerEin(new File(path));
-
-            // if(!testeTracks())
-            //  throw new TracksNeededException();
-
-
             musicReadingProgress.setValue(0);
             fragenAnzahl.setValue(0);
-            System.out.println(musicReadingProgress.getValue());
 
 
             // dateien in Frageobjekte parsen
             // checken, wieviele Fragen pro Typ ca erstellt werden können
             // int anz = tracks.size() / MENGE_FRAGETYP;
-
             // Alle titel einlesen
             ID3v2[] titel = new ID3v2[tracks.size()];
 
@@ -150,7 +134,6 @@ public class FrageController {
                 try {
                     alleFragen.add(CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
                 } catch (TagNeededException e) {
-                    System.out.println(i);
                     akt++;
                     i--;
                     continue;
@@ -161,9 +144,7 @@ public class FrageController {
                 }
                 tracksCP.remove(akt);
             }
-            System.out.println("sout");
             musicReadingProgress.setValue(0.4);
-            System.out.println(musicReadingProgress.getValue());
 
 
             // CoverWahlFragen einlesen
@@ -186,7 +167,6 @@ public class FrageController {
 
             }
             musicReadingProgress.setValue(0.6);
-            System.out.println(musicReadingProgress.getValue());
 
 
             //InterpretFragen einlesen
@@ -208,7 +188,6 @@ public class FrageController {
                 tracksCP.remove(akt);
             }
             musicReadingProgress.setValue(0.8);
-            System.out.println(musicReadingProgress.getValue());
 
 
             // TitelFragen einlesen
@@ -232,10 +211,13 @@ public class FrageController {
             musicReadingProgress.setValue(1);
             fragenAnzahl.set(alleFragen.size());
 
-            System.out.println("DONE");
             readingOnOff.setValue(true);
 
             System.out.println(alleFragen.size() - alleFragen.size(Fragetyp.FaktFrage) + " Fragen generiert aus " + tracks.size() + " Songs.");
+            System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverWahlFrage) + " Cover-Wahl-Fragen");
+            System.out.println("Darunter " + alleFragen.size(Fragetyp.InterpretFrage) + " Interpret-Fragen");
+            System.out.println("Darunter " + alleFragen.size(Fragetyp.Titelfrage) + " Titel-Fragen");
+            System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverTitelFrage) + " Cover-Titel-Fragen");
         }).start();
     }
 

@@ -1,24 +1,17 @@
 package hearrun.view.layout;
 
 import hearrun.business.SpielController;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 
-import java.util.List;
-
 /**
- * Created by joshuabarth on 14.01.17.
+ * Created by joshuabarth on 14.01.17
  */
 public class MainMenu extends VBox{
-    private Button continu;
+    private Button cont;
     private Button newGame;
     private Button settings;
     private Button exit;
@@ -44,19 +37,18 @@ public class MainMenu extends VBox{
     public void activateContinue(){
         //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
             this.getChildren().removeAll(this.getChildren());
-            this.getChildren().addAll(continu, newGame, settings, exit);
+            this.getChildren().addAll(cont, newGame, settings, exit);
             continueAn = true;
 
 
     }
 
     public void deactivateContinue(){
-        this.getChildren().removeAll(continu, newGame, settings,exit);
+        this.getChildren().removeAll(cont, newGame, settings,exit);
         this.getChildren().addAll(newGame, settings, exit);
     }
 
     public void newGameWindow() {
-
         //Entferne Hauptmenü
         removeAllElements();
         spielController.getLayout().resetGameLayout();
@@ -80,8 +72,10 @@ public class MainMenu extends VBox{
         menuContainer.setLeft(links);
         menuContainer.setRight(rechts);
 
-        links.setPrefSize(400, 400);
-        rechts.setPrefSize(400, 400);
+        HBox.setHgrow(maps, Priority.SOMETIMES);
+        HBox.setHgrow(spieler, Priority.SOMETIMES);
+
+        menuContainer.setPadding(new Insets(40));
 
         links.getChildren().addAll(spielfeldText, maps);
         rechts.getChildren().addAll(spielerText, spieler, addSpieler);
@@ -91,10 +85,8 @@ public class MainMenu extends VBox{
 
         back.setOnAction((e) -> mainMenuWindow());
         start.setOnAction((e) -> spielController.starteSpiel());
-
-
-
     }
+
     public void removeAllElements(){
         this.getChildren().removeAll(this.getChildren());
     }
@@ -105,7 +97,7 @@ public class MainMenu extends VBox{
             removeAllElements();
 
             newGame = new Button("New Game");
-            continu =  new Button("Continue");
+            cont =  new Button("Continue");
             settings = new Button("Settings");
             exit = new Button("Exit Game");
 
@@ -113,7 +105,7 @@ public class MainMenu extends VBox{
 
             newGame.setOnAction((e) -> newGameWindow());
             exit.setOnAction((e) -> spielController.beendeProgramm());
-            continu.setOnAction((e)-> spielController.getLayout().setGameLayout());
+            cont.setOnAction((e)-> spielController.getLayout().setGameLayout());
             settings.setOnAction((e)-> settingsWindow());
 
 
@@ -122,7 +114,6 @@ public class MainMenu extends VBox{
     }
 
     public void settingsWindow(){
-        int gerundet;
         this.getChildren().removeAll(this.getChildren());
         Slider antwortZeit = new Slider(4,15,Integer.valueOf(spielController.getProperties().getProperty("antwortZeit")));
         antwortZeit.setBlockIncrement(12);
@@ -130,7 +121,6 @@ public class MainMenu extends VBox{
             spielController.getProperties().setProperty("antwortZeit",String.valueOf(newValue.intValue()));
             System.out.println(spielController.getProperties().getProperty("antwortZeit"));
         });
-
 
 
         Slider volume = new Slider();

@@ -42,6 +42,9 @@ public class InterpretFrage extends Frage {
         ArrayList<String> antworten = new ArrayList<>();
         for (int i = 0; i < 3; i++){
             ID3v2 randAntwort = alleInterpreten[(int) (Math.random() * alleInterpreten.length)];
+            if (randAntwort.getArtist() == null)
+                throw new TagNeededException();
+
             if(!randAntwort.getArtist().equals(interpret)) {//zweifach richtige antwort durch Interpret vermeiden
                 boolean add = true;
                 for (String s : antworten)

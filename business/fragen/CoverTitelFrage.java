@@ -56,7 +56,6 @@ public class CoverTitelFrage extends Frage{
                 if(!randAntwort.getTitle().equals(titel) && !randAntwort.getAlbum().equals(srctags.getAlbum())) {//zweifach richtige antwort durch titel / album vermeiden
                     antworten.add(randAntwort.getTitle());
                 }else {
-                    System.out.println(randAntwort.getTitle() + ", " + alleTitel.length);
                     i--;
                 }
             }
