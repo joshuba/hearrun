@@ -79,6 +79,7 @@ public class FrageController {
     }
 
     private void leseEinGeneriereFragen(String path) {
+
         Task<Integer> readMusic = new Task<Integer>() {
             @Override protected Integer call() throws Exception {
                 readingOnOff.setValue(false);

@@ -5,6 +5,7 @@ import hearrun.business.SpielController;
 import hearrun.view.IntroScreen;
 import hearrun.view.controller.ViewController;
 import hearrun.view.layout.FrageFenster.TextFrage;
+import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -88,5 +89,14 @@ public class CompleteLayout extends StackPane {
         this.getChildren().removeAll();
         this.getChildren().addAll(ls);
 
+    }
+
+    public void setFrageIntro(FrageIntro frageIntro){
+        this.getChildren().addAll(frageIntro);
+        frageIntro.setAlignment(Pos.CENTER);
+    }
+
+    public void removeFrageIntro(FrageIntro frageIntro){
+        this.getChildren().removeAll(frageIntro);
     }
 }

@@ -73,4 +73,8 @@ public class Spieler {
     public int getLogSize(){
         return log.size();
     }
+
+    public String getName(){
+        return this.name;
+    }
 }

@@ -103,7 +103,7 @@ public class SpielController {
         Frage frage = frageController.getFrage(fragetyp);
 
         //Zeige frage
-        getLayout().getViewController().zeigeFrage(frage, fragetyp);
+        getLayout().getViewController().zeigeIntroUndFrage(frage, fragetyp);
 
 
     }
