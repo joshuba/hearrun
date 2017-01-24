@@ -102,6 +102,7 @@ public class FrageController {
 
 
             musicReadingProgress.setValue(0);
+            fragenAnzahl.setValue(0);
             System.out.println(musicReadingProgress.getValue());
 
 
@@ -114,7 +115,6 @@ public class FrageController {
 
             for (int i = 0; i < tracks.size(); i++){
                 musicReadingProgress.setValue(musicReadingProgress.get() + 0.05/tracks.size());
-                fragenAnzahl.set(alleFragen.size());
                 try {
                     titel[i] = new Mp3File(tracks.get(i).getAbsolutePath()).getId3v2Tag();
                 } catch (IOException | UnsupportedTagException | InvalidDataException e) {
@@ -126,7 +126,6 @@ public class FrageController {
             ArrayList<Image> covers = new ArrayList<>();
             musicReadingProgress.setValue(musicReadingProgress.get() + 0.1/tracks.size());
             for (File track : tracks) {
-                fragenAnzahl.set(alleFragen.size());
                 try {
 
                     byte[] coverBytes = new Mp3File(track.getAbsolutePath()).getId3v2Tag().getAlbumImage();

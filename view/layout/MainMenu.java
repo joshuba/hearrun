@@ -6,6 +6,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
@@ -60,22 +62,31 @@ public class MainMenu extends VBox{
         spielController.getLayout().resetGameLayout();
 
 
-        //Baue neuesMenü auf
-        VBox container1 = new VBox();
+        //Baue neues Menü auf
+        BorderPane menuContainer = new BorderPane();
         HBox links = new HBox();
         HBox rechts = new HBox();
-        Label spielfeld = new Label("Waehle eine Karte: ");
-        Label spieleranzahl = new Label("Waehle Spieler: ");
+        Label spielfeldText = new Label("Waehle eine Karte: ");
+        Label spielerText = new Label("Waehle Spieler: ");
         ListView maps = new ListView();
         ListView spieler = new ListView();
         Button addSpieler = new Button("Add");
         Button back = new Button("Back");
         Button start = new Button("Start");
 
-        links.getChildren().addAll(spielfeld, maps);
-        rechts.getChildren().addAll(spieleranzahl, spieler, addSpieler);
-        this.getChildren().addAll(container1,back, start);
-        container1.getChildren().addAll(links, rechts);
+        // maps.setPrefSize(40,40);
+        // spieler.setPrefSize(40,40);
+
+        menuContainer.setLeft(links);
+        menuContainer.setRight(rechts);
+
+        links.setPrefSize(400, 400);
+        rechts.setPrefSize(400, 400);
+
+        links.getChildren().addAll(spielfeldText, maps);
+        rechts.getChildren().addAll(spielerText, spieler, addSpieler);
+
+        this.getChildren().addAll(menuContainer,back, start);
 
 
         back.setOnAction((e) -> mainMenuWindow());

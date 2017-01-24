@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Created by Josh on 23.01.17.
+ * Created by Josh on 23.01.17
  */
 public class LoadingScreen extends VBox{
     private Label text;
@@ -35,7 +35,7 @@ public class LoadingScreen extends VBox{
         this.spielController = spielController;
         this.progres = progres;
         this.ladeMusik = ladeMusik;
-        this.fragenAnzahl = new Label();
+        this.fragenAnzahl = new Label("Verzeichnis einlesen...");
         bar = new ProgressBar();
         reset = new Button("reset");
         ueberschrift = new Label("Musik einlesen");
@@ -62,20 +62,10 @@ public class LoadingScreen extends VBox{
         bar.setPadding(new Insets(40,0,30,0));
         bar.setMinWidth(600);
         ueberschrift.setPadding(new Insets(0,0,100,0));
-
-
-
-
-
     }
 
     private void zeigeFertig() {
-
-        KeyFrame k1 = new KeyFrame(Duration.millis(1000), a ->{
-            text.setText("DONE!");
-
-
-        });
+        KeyFrame k1 = new KeyFrame(Duration.millis(1000), a -> fragenAnzahl.setText("Abgeschlossen!"));
 
         Timeline done = new Timeline();
         done.setAutoReverse(false);
