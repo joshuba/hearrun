@@ -3,6 +3,7 @@ package hearrun.view.layout;
 import hearrun.business.SpielController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -52,6 +53,9 @@ public class LoadingScreen extends VBox{
                 zeigeFertig();
             }
         });
+
+        anzahlFragenProp.addListener((observable, oldValue, newValue)
+                -> Platform.runLater(() ->fragenAnzahl.setText(newValue + " Fragen generiert")));
 
         //styling
         this.setAlignment(Pos.CENTER);

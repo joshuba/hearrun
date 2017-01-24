@@ -12,11 +12,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * Created by Josh on 09.01.17.
+ * Created by Josh on 09.01.17
  */
 public class ViewController {
     private Stage stage;
@@ -263,11 +264,8 @@ public class ViewController {
         return this.stage;
     }
 
-    public void zeigeLadeScreen(SimpleBooleanProperty bool, SimpleFloatProperty prog){
-
-
-
-        LoadingScreen ls = new LoadingScreen(bool, prog, spielController);
+    public void zeigeLadeScreen(SimpleBooleanProperty bool, SimpleFloatProperty prog, SimpleIntegerProperty anzFragen){
+        LoadingScreen ls = new LoadingScreen(bool, prog, anzFragen, spielController);
         spielController.getLayout().setLoadingScreen(ls);
     }
 

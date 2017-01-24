@@ -85,7 +85,7 @@ public class FrageController {
     public void leseMusikEin(String path) {
 
 
-        spielController.getLayout().getViewController().zeigeLadeScreen(readingOnOff, musicReadingProgress);
+        spielController.getLayout().getViewController().zeigeLadeScreen(readingOnOff, musicReadingProgress, fragenAnzahl);
         leseEinGeneriereFragen(path);
 
     }
