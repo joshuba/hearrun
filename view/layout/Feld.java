@@ -3,6 +3,7 @@ package hearrun.view.layout;
 import hearrun.business.Fragetyp;
 import hearrun.view.controller.ViewController;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -98,6 +99,15 @@ public class Feld extends HBox{
         return null;
 
 
+    }
+
+    public void zoomIn(){
+        ScaleTransition st = new ScaleTransition(Duration.millis(2000), this);
+        st.setByX(1.2f);
+        st.setByY(1.2f);
+        st.setAutoReverse(true);
+
+        st.play();
     }
 
 

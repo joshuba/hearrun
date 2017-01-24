@@ -6,6 +6,7 @@ import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
 import hearrun.view.IntroScreen;
 import hearrun.view.layout.*;
+import hearrun.view.layout.FrageIntro;
 import hearrun.view.layout.FrageFenster.TextFrage;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -164,6 +165,7 @@ public class ViewController {
 
     public String erkenneFeldId(int x, int y) {
         int anz = spielController.getAktSpiel().getSpieleranzahl();
+
         boolean leer = true;
         String idZahl = "p";
 
@@ -210,6 +212,7 @@ public class ViewController {
     }
 
     public void zeigeFrage(Frage frage, Fragetyp fragetyp){
+
         if(fragetyp == Fragetyp.CoverTitelFrage){
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
@@ -262,8 +265,33 @@ public class ViewController {
 
     public void zeigeLadeScreen(SimpleBooleanProperty bool, SimpleFloatProperty prog){
 
+
+
         LoadingScreen ls = new LoadingScreen(bool, prog, spielController);
         spielController.getLayout().setLoadingScreen(ls);
+    }
+
+    public void zeigeIntroUndFrage(Frage frage, Fragetyp fragetyp){
+        FrageIntro fi = new FrageIntro(spielController);
+
+        KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
+            spielController.getLayout().setFrageIntro(fi);
+            System.out.println("INTRO DA");
+        });
+
+        KeyFrame k2 = new KeyFrame(Duration.millis(5000), a ->{
+            spielController.getLayout().removeFrageIntro(fi);
+            zeigeFrage(frage, fragetyp);
+            System.out.println("INTRO WEG");
+
+        });
+
+        Timeline fadeout = new Timeline();
+        fadeout.setAutoReverse(false);
+        fadeout.setCycleCount(1);
+        fadeout.getKeyFrames().addAll(k1, k2);
+        fadeout.play();
+
     }
 
 

@@ -72,6 +72,12 @@ Button{
     -fx-background-color: lightcoral;
 }
 
+#frageIntro{
+    -fx-background-color: black;
+
+}
+
+
 
 
 #negWuerfel, #posWuerfel{

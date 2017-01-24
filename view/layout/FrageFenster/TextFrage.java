@@ -23,9 +23,9 @@ import javafx.util.Duration;
  * Created by joshuabarth on 16.01.17.
  */
 public class TextFrage extends BorderPane {
-    private SpielController spielController;
+   private SpielController spielController;
     private Player effectPlayer;
-    private Player musicPlayer;
+    private  Player musicPlayer;
 
     private int zeit;
     float progressWert;
