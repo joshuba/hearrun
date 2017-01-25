@@ -25,7 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        spielController = new SpielController(primaryStage, "map1.txt", 3);
+        spielController = new SpielController(primaryStage);
 
         Scene scene = new Scene(spielController.getLayout());
 

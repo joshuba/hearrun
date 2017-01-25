@@ -22,7 +22,7 @@ public class CompleteLayout extends StackPane {
 
     public CompleteLayout(Stage stage, SpielController spielController){
         this.viewController = new ViewController(stage, spielController);
-        mainMenu = new MainMenu(spielController);
+        mainMenu = new MainMenu(spielController, viewController);
         this.spielController = spielController;
         this.musicPlayer = spielController.getMusicPlayer();
         this.stage = stage;

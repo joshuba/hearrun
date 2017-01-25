@@ -3,19 +3,20 @@ package hearrun.business;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
+import hearrun.view.layout.Map;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.Properties;
 
 /**
- * Created by joshuabarth on 12.01.17.
+ * Created by joshuabarth on 12.01.17
  */
 public class SpielController {
     private Spiel aktSpiel;
     private CompleteLayout completeLayout;
     private Stage stage;
-    private String dateiname;
+    private Map map;
     private int spieleranzahl;
     private FrageController frageController;
     private Player musicPlayer;
@@ -24,14 +25,12 @@ public class SpielController {
     private String path;
 
 
-    public SpielController(Stage stage, String dateiname, int spieleranzahl) {
+    public SpielController(Stage stage) {
         properties = new Properties();
         erstellePropPfad();
         this.stage = stage;
         this.musicPlayer = new Player();
         this.effectPlayer = new Player();
-        this.dateiname = dateiname;
-        this.spieleranzahl = spieleranzahl;
         this.completeLayout = new CompleteLayout(stage, this);
         readProperties();
 
@@ -41,9 +40,11 @@ public class SpielController {
 
     }
 
-    private void waehleMapErstelleSpiel(String dateiname, int spieleranzahl) {
 
-        this.aktSpiel = new Spiel(dateiname, spieleranzahl, completeLayout.getViewController()); //Erstelle spiel
+
+    private void waehleMapErstelleSpiel(Map map, int spieleranzahl) {
+
+        this.aktSpiel = new Spiel(map, spieleranzahl, completeLayout.getViewController()); //Erstelle spiel
         completeLayout.getViewController().baueSpielfeldAuf();
         completeLayout.getViewController().setFeldId(0, 0, completeLayout.getViewController().erkenneFeldId(0, 0)); //Setze Alle Player aufs erste Feld
 
@@ -77,7 +78,7 @@ public class SpielController {
         }
 
         completeLayout.getViewController().resetGameLayout();
-        waehleMapErstelleSpiel(dateiname, spieleranzahl);
+        waehleMapErstelleSpiel(map, spieleranzahl);
         completeLayout.getViewController().setGameLayout();
 
 
@@ -211,14 +212,11 @@ public class SpielController {
         properties.remove("musicPath");
     }
 
+    public void setMap(Map map) {
+        this.map = map;
+    }
 
-
-
-
-
-
-
-
-
-
+    public void setSpieleranzahl(int spieleranzahl) {
+        this.spieleranzahl = spieleranzahl;
+    }
 }

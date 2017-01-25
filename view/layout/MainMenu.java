@@ -1,27 +1,40 @@
 package hearrun.view.layout;
 
+import hearrun.business.Main;
 import hearrun.business.SpielController;
+import hearrun.business.Spieler;
+import hearrun.view.controller.ViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
+import javafx.util.Callback;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Observable;
 
 /**
  * Created by joshuabarth on 14.01.17
  */
-public class MainMenu extends VBox{
+public class MainMenu extends VBox {
     private Button cont;
     private Button newGame;
     private Button settings;
     private Button exit;
     private boolean continueAn;
     private SpielController spielController;
+    private ViewController viewController;
 
 
-
-    public MainMenu(SpielController spielController){
+    public MainMenu(SpielController spielController, ViewController viewController) {
         this.spielController = spielController;
+        this.viewController = viewController;
         continueAn = false;
         this.setId("mainMenu");
         this.setMinHeight(700);
@@ -33,18 +46,17 @@ public class MainMenu extends VBox{
     }
 
 
-
-    public void activateContinue(){
+    public void activateContinue() {
         //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
-            this.getChildren().removeAll(this.getChildren());
-            this.getChildren().addAll(cont, newGame, settings, exit);
-            continueAn = true;
+        this.getChildren().removeAll(this.getChildren());
+        this.getChildren().addAll(cont, newGame, settings, exit);
+        continueAn = true;
 
 
     }
 
-    public void deactivateContinue(){
-        this.getChildren().removeAll(cont, newGame, settings,exit);
+    public void deactivateContinue() {
+        this.getChildren().removeAll(cont, newGame, settings, exit);
         this.getChildren().addAll(newGame, settings, exit);
     }
 
@@ -60,65 +72,76 @@ public class MainMenu extends VBox{
         HBox rechts = new HBox();
         Label spielfeldText = new Label("Waehle eine Karte: ");
         Label spielerText = new Label("Waehle Spieler: ");
-        ListView maps = new ListView();
-        ListView spieler = new ListView();
+        ListView <Map> maps = new ListView<>();
+        ListView<Spieler> spieler = new ListView<>();
         Button addSpieler = new Button("Add");
         Button back = new Button("Back");
         Button start = new Button("Start");
 
-        // maps.setPrefSize(40,40);
-        // spieler.setPrefSize(40,40);
+        maps.setItems(leseMapsEin());
 
         menuContainer.setLeft(links);
         menuContainer.setRight(rechts);
-
-        HBox.setHgrow(maps, Priority.SOMETIMES);
-        HBox.setHgrow(spieler, Priority.SOMETIMES);
 
         menuContainer.setPadding(new Insets(40));
 
         links.getChildren().addAll(spielfeldText, maps);
         rechts.getChildren().addAll(spielerText, spieler, addSpieler);
 
-        this.getChildren().addAll(menuContainer,back, start);
+        this.getChildren().addAll(menuContainer, back, start);
 
 
         back.setOnAction((e) -> mainMenuWindow());
-        start.setOnAction((e) -> spielController.starteSpiel());
+        start.setOnAction((e) -> {
+            spielController.setMap(maps.getSelectionModel().getSelectedItem());
+            spielController.starteSpiel();
+        });
     }
 
-    public void removeAllElements(){
+    public void removeAllElements() {
         this.getChildren().removeAll(this.getChildren());
     }
 
-    public void mainMenuWindow(){
+    private ObservableList<Map> leseMapsEin() {
 
-            //Entferne new GameWindow falls es existiert
-            removeAllElements();
+        File mapsFile = new File(Main.class.getResource("/hearrun/resources/Data").getPath());
 
-            newGame = new Button("New Game");
-            cont =  new Button("Continue");
-            settings = new Button("Settings");
-            exit = new Button("Exit Game");
+        File[] maps = mapsFile.listFiles((dir, name) -> name.startsWith("map"));
 
-            this.getChildren().addAll(newGame,settings,exit);
+        ObservableList <Map> mapsList = FXCollections.observableArrayList();
 
-            newGame.setOnAction((e) -> newGameWindow());
-            exit.setOnAction((e) -> spielController.beendeProgramm());
-            cont.setOnAction((e)-> spielController.getLayout().setGameLayout());
-            settings.setOnAction((e)-> settingsWindow());
+        for (File f : maps)
+            mapsList.add(new Map(f.getPath(), viewController));
+        return mapsList;
 
+    }
 
+    public void mainMenuWindow() {
+
+        //Entferne new GameWindow falls es existiert
+        removeAllElements();
+
+        newGame = new Button("New Game");
+        cont = new Button("Continue");
+        settings = new Button("Settings");
+        exit = new Button("Exit Game");
+
+        this.getChildren().addAll(newGame, settings, exit);
+
+        newGame.setOnAction((e) -> newGameWindow());
+        exit.setOnAction((e) -> spielController.beendeProgramm());
+        cont.setOnAction((e) -> spielController.getLayout().setGameLayout());
+        settings.setOnAction((e) -> settingsWindow());
 
 
     }
 
-    public void settingsWindow(){
+    public void settingsWindow() {
         this.getChildren().removeAll(this.getChildren());
-        Slider antwortZeit = new Slider(4,15,Integer.valueOf(spielController.getProperties().getProperty("antwortZeit")));
+        Slider antwortZeit = new Slider(4, 15, Integer.valueOf(spielController.getProperties().getProperty("antwortZeit")));
         antwortZeit.setBlockIncrement(12);
         antwortZeit.valueProperty().addListener((obs, oldValue, newValue) -> {
-            spielController.getProperties().setProperty("antwortZeit",String.valueOf(newValue.intValue()));
+            spielController.getProperties().setProperty("antwortZeit", String.valueOf(newValue.intValue()));
             System.out.println(spielController.getProperties().getProperty("antwortZeit"));
         });
 
@@ -128,8 +151,8 @@ public class MainMenu extends VBox{
         Button button = new Button("Change Music Path");
         Label pfad = new Label(spielController.getProperties().getProperty("musicPath"));
         Button back = new Button("Back");
-        this.getChildren().addAll(antwortZeit,volume,button, pfad, back);
-        back.setOnAction((e)->spielController.getLayout().getViewController().setMainMenu());
+        this.getChildren().addAll(antwortZeit, volume, button, pfad, back);
+        back.setOnAction((e) -> spielController.getLayout().getViewController().setMainMenu());
 
 
         button.setOnAction((e) -> {
@@ -142,11 +165,12 @@ public class MainMenu extends VBox{
         });
     }
 
-    public void newGameAnAus(boolean anAus){
+    public void newGameAnAus(boolean anAus) {
         this.newGame.setDisable(!anAus);
     }
 
+    public static void main (String[] args){
+        System.out.println(Main.class.getResource("/hearrun/resources/Data").getPath());
 
-
-
+    }
 }

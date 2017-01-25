@@ -15,11 +15,11 @@ public class Spiel {
     private int spieleranzahl;
     private ViewController viewController;
 
-    public Spiel(String mapName, int spieleranzahl, ViewController viewController){
+    public Spiel(Map map, int spieleranzahl, ViewController viewController){
         this.viewController = viewController;
         this.spieleranzahl = spieleranzahl;
-        this.spielerListe = new ArrayList<Spieler>();
-        leseMapVonDateiEin(mapName);
+        this.spielerListe = new ArrayList<>();
+        this.aktMap = map;
         erstelleSpieler("testspieler");
 
 

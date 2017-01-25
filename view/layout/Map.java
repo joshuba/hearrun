@@ -19,15 +19,13 @@ public class Map {
     private int feldBreite;
     private int feldHoehe;
     private String dateiName;
-    private ViewController viewController;
 
     public Map(String dateiName, ViewController viewController){
         this.dateiName = dateiName;
-        this.viewController = viewController;
 
 
         try {
-            BufferedReader r = new BufferedReader(new FileReader("src/hearrun/resources/Data/" + dateiName));
+            BufferedReader r = new BufferedReader(new FileReader(dateiName));
             String line = r.readLine();
 
             //Titel und Groesse auslesen
@@ -101,7 +99,9 @@ public class Map {
 
     }
 
-
+    public String toString(){
+        return mapName;
+    }
 
 
 
