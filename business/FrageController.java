@@ -111,13 +111,18 @@ public class FrageController {
             musicReadingProgress.setValue(musicReadingProgress.get() + 0.1/tracks.size());
             for (File track : tracks) {
                 try {
+                    Mp3File mp3 = new Mp3File(track.getAbsolutePath());
+                    if (mp3.getId3v2Tag() != null) {
+                        byte[] coverBytes = mp3.getId3v2Tag().getAlbumImage();
 
-                    byte[] coverBytes = new Mp3File(track.getAbsolutePath()).getId3v2Tag().getAlbumImage();
-                    if (coverBytes != null)
-                        covers.add(SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(coverBytes)), null));
-
+                        if (coverBytes != null)
+                            covers.add(SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(coverBytes)), null));
+                    }
 
                 } catch (UnsupportedTagException | IOException | InvalidDataException e) {
+                    e.printStackTrace();
+                }catch (NullPointerException e){
+                    System.out.println(track.getName());
                     e.printStackTrace();
                 }
             }
@@ -227,7 +232,7 @@ public class FrageController {
         // Dateien einlesen
         if (files != null) {
             for (File f : files)
-                if (f.getName().endsWith(".mp3") || f.getName().endsWith(".wav"))
+                if (f.getName().endsWith(".mp3"))
                     tracks.add(f);
                 else if (f.isDirectory())
                     leseOrdnerEin(f);
