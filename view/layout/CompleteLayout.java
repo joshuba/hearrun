@@ -4,7 +4,7 @@ import hearrun.business.Player;
 import hearrun.business.SpielController;
 import hearrun.view.IntroScreen;
 import hearrun.view.controller.ViewController;
-import hearrun.view.layout.FrageFenster.TextFrage;
+import hearrun.view.layout.FrageFenster.FrageFenster;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -65,7 +65,7 @@ public class CompleteLayout extends StackPane {
         return this.mainMenu;
     }
 
-    public void zeigeTextFrage(TextFrage frage){
+    public void zeigeFrageFenster(FrageFenster frage){
         this.getChildren().add(frage);
 
 

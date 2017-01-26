@@ -6,8 +6,9 @@ import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
 import hearrun.view.IntroScreen;
 import hearrun.view.layout.*;
+import hearrun.view.layout.FrageFenster.CoverTitelFrage;
 import hearrun.view.layout.FrageIntro;
-import hearrun.view.layout.FrageFenster.TextFrage;
+import hearrun.view.layout.FrageFenster.ButtonFrage;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -215,13 +216,16 @@ public class ViewController {
     public void zeigeFrage(Frage frage, Fragetyp fragetyp){
 
         if(fragetyp == Fragetyp.CoverTitelFrage){
+            CoverTitelFrage ctf = new CoverTitelFrage(frage, spielController);
+            gameLayoutBlury(true);
+            spielController.getLayout().zeigeFrageFenster(ctf);
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
 
         }else{
-            TextFrage t = new TextFrage(frage, spielController);
+            ButtonFrage t = new ButtonFrage(frage, spielController);
             gameLayoutBlury(true);
-            spielController.getLayout().zeigeTextFrage(t);
+            spielController.getLayout().zeigeFrageFenster(t);
 
             t.starteAntworPhase();
 
@@ -277,7 +281,7 @@ public class ViewController {
             System.out.println("INTRO DA");
         });
 
-        KeyFrame k2 = new KeyFrame(Duration.millis(5000), a ->{
+        KeyFrame k2 = new KeyFrame(Duration.millis(100), a ->{
             spielController.getLayout().removeFrageIntro(fi);
             zeigeFrage(frage, fragetyp);
             System.out.println("INTRO WEG");

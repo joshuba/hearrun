@@ -21,6 +21,7 @@ public class TopLayout extends VBox {
         this.setId("topLayout");
         this.setMinHeight(50);
 
+
         Button settings = new Button("Menü");
         Button frage = new Button("FRAGE STELLEN");
 
