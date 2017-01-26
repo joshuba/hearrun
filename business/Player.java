@@ -109,13 +109,6 @@ public class Player {
 
     }
 
-
-    public static void main (String[] args){
-        new Player().playRandomNSeconds("cantina.mp3", 5);
-    }
-
-
-
     public void fadeIn(){
         int aktVol = getVolume();
         KeyFrame k1 = new KeyFrame(Duration.ZERO, a ->{
