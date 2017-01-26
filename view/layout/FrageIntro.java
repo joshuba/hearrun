@@ -38,13 +38,13 @@ public class FrageIntro extends HBox {
 
     public void start(){
 
-        ScaleTransition st = new ScaleTransition(Duration.millis(1000), bild);
+        ScaleTransition st = new ScaleTransition(Duration.millis(500), bild);
         st.setByX(150f);
         st.setByY(150f);
         st.setAutoReverse(false);
 
-        ScaleTransition st2 = new ScaleTransition(Duration.millis(1000), this);
-        st2.setByX(15f);
+        ScaleTransition st2 = new ScaleTransition(Duration.millis(500), this);
+        st2.setByX(1.5f);
         st2.setByY(1.5f);
         st.setAutoReverse(false);
 
@@ -55,7 +55,7 @@ public class FrageIntro extends HBox {
             st2.play();
         });
 
-        KeyFrame k2 = new KeyFrame(Duration.millis(1000), a ->{
+        KeyFrame k2 = new KeyFrame(Duration.millis(200), a ->{
             st.play();
         });
 
@@ -67,7 +67,7 @@ public class FrageIntro extends HBox {
         fadein.setAutoReverse(false);
         fadein.setCycleCount(1);
         fadein.getKeyFrames().addAll(k1,k2);
-        fadein.play();
+        //fadein.play();
 
 
     }

@@ -20,45 +20,42 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Created by joshuabarth on 16.01.17.
+ * Oberklasse der Fragefenster
  */
-public class TextFrage extends BorderPane {
-   private SpielController spielController;
-    private Player effectPlayer;
-    private  Player musicPlayer;
+public class FrageFenster extends BorderPane {
+
+    protected SpielController spielController;
+    protected Player effectPlayer;
+    protected   Player musicPlayer;
 
     private int zeit;
-    float progressWert;
-    float progressIndex;
+    private float progressWert;
+    private float progressIndex;
 
-    private  Frage frage;
-    private int richtigIndex;
-    private SimpleIntegerProperty falschRichtig;
-    private int decounter;
-    private SimpleIntegerProperty aktZeit;
-    private SimpleFloatProperty progress;
+    protected  Frage frage;
+    protected int richtigIndex;
+    protected SimpleIntegerProperty falschRichtig;
+    protected int decounter;
+    protected SimpleIntegerProperty aktZeit;
+    protected SimpleFloatProperty progress;
 
-
-    private VBox vBox;
-    private VBox timerBox;
-    private StackPane textfeld;
-    private Label fragetext;
-    private Button [] buttons;
-    private Button richtigButton;
-    private ProgressBar time;
-    private Label aktZeitAnzeige;
-    private Timeline timeline;
-    private Label aktSpieler;
-    private HBox catPic;
-    private VBox top;
+    protected VBox vBox;
+    protected VBox timerBox;
+    protected StackPane textfeld;
+    protected Label fragetext;
+    protected ProgressBar time;
+    protected Timeline timeline;
+    protected Label aktSpieler;
+    protected HBox catPic;
+    protected VBox top;
 
 
 
-    public TextFrage(Frage frage, SpielController spielController){
+    public FrageFenster(Frage frage, SpielController spielController){
         progress = new SimpleFloatProperty();
         zeit = Integer.valueOf(spielController.getProperties().getProperty("antwortZeit"));
 
-        this.setId("TextFrage");
+        this.setId("FrageFenster");
         this.spielController = spielController;
         this.musicPlayer = spielController.getMusicPlayer();
         this.effectPlayer = spielController.getEffectPlayer();
@@ -69,7 +66,6 @@ public class TextFrage extends BorderPane {
         aktZeit = new SimpleIntegerProperty();
         aktZeit.setValue(zeit);
         falschRichtig.setValue(-1); //= Nicht beantwortet
-        this.buttons = new Button[4];
 
         //Elemente erstellen
         vBox = new VBox();
@@ -77,22 +73,16 @@ public class TextFrage extends BorderPane {
         top = new VBox();
 
         textfeld = new StackPane();
-        fragetext = new Label("Frage: ");
-        buttons [0] = new Button();
-        buttons [1] = new Button();
-        buttons [2] = new Button();
-        buttons [3] = new Button();
+        fragetext = new Label();
         time = new ProgressBar();
         time.setId("progressBar");
-        aktZeitAnzeige = new Label();
         aktSpieler = new Label(spielController.getAktSpiel().getAktSpieler().getName());
         catPic = new HBox();
 
 
         //Zusammenbauen
         textfeld.getChildren().add(fragetext);
-        vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3]);
-        timerBox.getChildren().addAll(time, aktZeitAnzeige);
+        timerBox.getChildren().addAll(time);
         top.getChildren().addAll(catPic, aktSpieler);
         this.setTop(top);
         this.setCenter(vBox);
@@ -102,7 +92,7 @@ public class TextFrage extends BorderPane {
 
         //Stylen
         top.setAlignment(Pos.CENTER);
-        top.setPadding(new Insets(0,100,0,0));
+        top.setPadding(new Insets(20,100,0,0));
         catPic.setMinSize(80,80);
         catPic.setMaxSize(80,80);
         catPic.setId(spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY()).getLeerId());
@@ -114,11 +104,12 @@ public class TextFrage extends BorderPane {
 
         aktSpieler.setId("grossText");
 
+        time.minWidthProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(200));
         time.setRotate(90);
-        time.setMinWidth(700);
         time.setMinHeight(50);
         timerBox.setMinWidth(100);
         timerBox.setMaxWidth(100);
+        timerBox.setPadding(new Insets(0,0,110,0));
         timerBox.setAlignment(Pos.CENTER);
 
 
@@ -128,21 +119,7 @@ public class TextFrage extends BorderPane {
 
         //Frageninfos auslesen und in GUI einsetzen
         this.fragetext.setText(frage.getFragetext());
-        buttons[0].setText(frage.getAntworten()[0]);
-        buttons[1].setText(frage.getAntworten()[1]);
-        buttons[2].setText(frage.getAntworten()[2]);
-        buttons[3].setText(frage.getAntworten()[3]);
-        richtigButton = buttons[frage.getRichtigIndex()];
-        buttons[0].setId("normalButton");
-        buttons[1].setId("normalButton");
-        buttons[2].setId("normalButton");
-        buttons[3].setId("normalButton");
 
-
-        buttons[0].setOnAction((e)-> buttonPress(buttons[0]));
-        buttons[1].setOnAction((e)-> buttonPress(buttons[1]));
-        buttons[2].setOnAction((e)-> buttonPress(buttons[2]));
-        buttons[3].setOnAction((e)-> buttonPress(buttons[3]));
 
 
 
@@ -153,8 +130,6 @@ public class TextFrage extends BorderPane {
         zeit = Integer.valueOf(spielController.getProperties().getProperty("antwortZeit"));
         progressIndex = (100/zeit+1)/100F;
         progressWert = 0;
-
-
 
         musicPlayer.stop();
         if(frage.getPath() != null){
@@ -177,83 +152,30 @@ public class TextFrage extends BorderPane {
         timeline.play();
 
         time.progressProperty().bind(progress);
-        aktZeitAnzeige.textProperty().bind(aktZeit.asString());
 
 
     }
 
-    public void fertig(){
+    protected void fertig(){
         musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
-        disableAllButtons();
-
-
-
-
 
     }
 
-    public void buttonPress(Button bx){
-        disableAllButtons();
-        timeline.stop();
-
-        if(bx == richtigButton){
-            bx.setId("richtigButton");
-            this.falschRichtig.setValue(1);
-            fertig();
-
-            effectPlayer.play("src/hearrun/resources/sounds/right.mp3");
-
-
-        }else{
-            bx.setId("falschButton");
-            this.falschRichtig.setValue(0);
-            fertig();
-
-            effectPlayer.play("src/hearrun/resources/sounds/wrong.mp3");
-
-        }
-
-    }
 
     public SimpleIntegerProperty getResult(){
         return this.falschRichtig;
     }
 
-    public void disableAllButtons(){
-        buttons[0].setDisable(true);
-        buttons[1].setDisable(true);
-        buttons[2].setDisable(true);
-        buttons[3].setDisable(true);
-    }
+
+
 
     public void zeigeRichtigOderFalsch(){
-        KeyFrame k = new KeyFrame(
-                Duration.millis(300),
-                a -> richtigButtonFaerben()
-        );
-
-        Timeline t = new Timeline(k);
-        t.setCycleCount(6);
-        if(falschRichtig.getValue() == -1){
-            effectPlayer.play("src/hearrun/resources/sounds/wrong.mp3");
-
-        }
-
-        t.setOnFinished(b -> wuerfeln(falschRichtig.getValue()));
-        t.play();
 
 
     }
 
-    private void richtigButtonFaerben(){
-        if(richtigButton.getId().equals("richtigButton")){
-            richtigButton.setId("normalButton");
-        }else if(richtigButton.getId().equals("normalButton")){
-            richtigButton.setId("richtigButton");
-        }
 
-    }
 
     public void wuerfeln(int index){
         Wuerfel w = new Wuerfel(index, spielController);
@@ -264,8 +186,7 @@ public class TextFrage extends BorderPane {
 
     public void getProgress(){
         System.out.println(progressWert);
-
-         progress.setValue(progressWert);
+        progress.setValue(progressWert);
         progressWert += progressIndex;
 
     }

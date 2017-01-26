@@ -91,4 +91,8 @@ public class CoverTitelFrage extends Frage{
         return null;
     }
 
+    public Image getCover(){
+        return this.cover;
+    }
+
 }
