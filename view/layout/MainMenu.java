@@ -116,15 +116,16 @@ public class MainMenu extends VBox {
             spielerliste.get(t.getIndex()).setName(t.getNewValue());
         });
 
-        spieler.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<String>() {
-            @Override
-            public void onChanged(Change<? extends String> c) {
-                System.out.println(c);
-                if (spieler.getSelectionModel().getSelectedItems().size() > 0)
-                    removeSpieler.setDisable(false);
-                else
-                    removeSpieler.setDisable(true);
-            }
+        spielerObs.addListener((ListChangeListener<String>) c -> {
+            if (spielerObs.size() > 3)
+                addSpieler.setDisable(true);
+        });
+
+        spieler.getSelectionModel().getSelectedItems().addListener((ListChangeListener<String>) c -> {
+            if (spieler.getSelectionModel().getSelectedItems().size() > 0)
+                removeSpieler.setDisable(false);
+            else
+                removeSpieler.setDisable(true);
         });
 
         start.setOnAction((e) -> {
