@@ -101,6 +101,8 @@ public class FrageController {
                 musicReadingProgress.setValue(musicReadingProgress.get() + 0.05/tracks.size());
                 try {
                     titel[i] = new Mp3File(tracks.get(i).getAbsolutePath()).getId3v2Tag();
+
+
                 } catch (IOException | UnsupportedTagException | InvalidDataException e) {
                     e.printStackTrace();
                 }
