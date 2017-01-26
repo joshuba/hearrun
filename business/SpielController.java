@@ -104,7 +104,6 @@ public class SpielController {
 
         //Zeige frage
         getLayout().getViewController().zeigeIntroUndFrage(frage, fragetyp);
-        System.out.println("frage");
     }
 
     public Player getMusicPlayer() {
