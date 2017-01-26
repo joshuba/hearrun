@@ -1,6 +1,8 @@
 package hearrun.business.fragen;
 
 
+import hearrun.business.Fragetyp;
+
 public abstract class Frage {
 
     protected String fragetext;
@@ -29,6 +31,19 @@ public abstract class Frage {
 
     public String getPath(){
         return this.path;
+    }
+
+    public Fragetyp getFragetyp() {
+        if (this instanceof CoverWahlFrage)
+            return Fragetyp.CoverWahlFrage;
+        else if (this instanceof CoverTitelFrage)
+            return Fragetyp.CoverTitelFrage;
+        else if (this instanceof FaktFrage)
+            return Fragetyp.FaktFrage;
+        else if (this instanceof InterpretFrage)
+            return Fragetyp.InterpretFrage;
+        else
+            return Fragetyp.Titelfrage;
     }
 
 }
