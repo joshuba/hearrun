@@ -1,7 +1,9 @@
 package hearrun.view.layout.FrageFenster;
 
+import hearrun.business.Fragetyp;
 import hearrun.business.Player;
 import hearrun.business.SpielController;
+import hearrun.business.fragen.CoverTitelFrage;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Wuerfel;
 import javafx.animation.KeyFrame;
@@ -31,6 +33,15 @@ public class ButtonFrage extends FrageFenster {
 
     public ButtonFrage(Frage frage, SpielController spielController){
         super(frage,spielController);
+
+        if(frage.getFragetyp() == Fragetyp.CoverTitelFrage){
+            cover = new ImageView(((CoverTitelFrage)frage).getCover());
+            cover.fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(500));
+            cover.setPreserveRatio(true);
+
+            this.getChildren().add(2, cover);
+        }
+
 
 
         this.buttons = new Button[4];

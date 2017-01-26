@@ -46,4 +46,6 @@ public abstract class Frage {
             return Fragetyp.Titelfrage;
     }
 
+
+
 }
