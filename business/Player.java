@@ -9,7 +9,7 @@ import javafx.util.Duration;
 import java.util.Random;
 
 /**
- * Created by Josh on 28.12.16.
+ * Created by Josh on 28.12.16
  */
 public class Player {
     private SimpleAudioPlayer player;
