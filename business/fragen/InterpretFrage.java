@@ -39,18 +39,23 @@ public class InterpretFrage extends Frage {
             e.printStackTrace();
         }
 
+        if (interpret == null)
+            throw new TagNeededException();
+
         ArrayList<String> antworten = new ArrayList<>();
         for (int i = 0; i < 3; i++){
             ID3v2 randAntwort = alleInterpreten[(int) (Math.random() * alleInterpreten.length)];
             if (randAntwort.getArtist() == null)
                 throw new TagNeededException();
 
-            if(!randAntwort.getArtist().equals(interpret)) {//zweifach richtige antwort durch Interpret vermeiden
+            if(!(randAntwort.getArtist() == null) &&
+                    !randAntwort.getArtist().equals(interpret)) {//zweifach richtige antwort durch Interpret vermeiden
                 boolean add = true;
                 for (String s : antworten)
                     if (s.equals(randAntwort.getArtist())) {
                         i--;
                         add = false;
+                        break;
                     }
 
                 if (add)
@@ -61,10 +66,11 @@ public class InterpretFrage extends Frage {
         antworten.add(interpret);
         Collections.shuffle(antworten);
 
+
         int richtigIndex = -1;
         //richtigIndex finden
         for (int i = 0; i < antworten.size(); i++) {
-            if(antworten.get(i).equals(interpret)){
+            if(antworten.get(i).equals(interpret)) {
                 richtigIndex = i;
                 break;
             }

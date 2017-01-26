@@ -39,10 +39,14 @@ public class TitelFrage extends Frage {
             e.printStackTrace();
         }
 
+        if (titel == null)
+            throw new TagNeededException();
+
         ArrayList<String> antworten = new ArrayList<>();
         for (int i = 0; i < 3; i++){
             ID3v2 randAntwort = alleTitel[(int) (Math.random() * alleTitel.length)];
-            if(!randAntwort.getTitle().equals(titel)) { // zweifach richtige antwort durch Titel vermeiden
+            if(!(randAntwort.getTitle() == null) &&
+                    !randAntwort.getTitle().equals(titel)) { // zweifach richtige antwort durch Titel vermeiden
                 antworten.add(randAntwort.getTitle());
             }else
                 i--;
