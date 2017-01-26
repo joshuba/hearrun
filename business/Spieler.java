@@ -18,7 +18,7 @@ public class Spieler {
     public Spieler(int nr, String name){
         this.nr = nr;
         this.name = name;
-        log = new ArrayList<Point>();
+        log = new ArrayList<>();
         log.add(new Point(0,0)); //Für den Start wird die letzte Position auf 0 gesetzt
         log.add(new Point(0,0)); //aktPos
 
@@ -76,5 +76,9 @@ public class Spieler {
 
     public String getName(){
         return this.name;
+    }
+
+    public String toString() {
+        return getName();
     }
 }

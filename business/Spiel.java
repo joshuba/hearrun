@@ -12,15 +12,16 @@ public class Spiel {
     private Map aktMap;
     private ArrayList<Spieler> spielerListe;
     private int aktSpieler;
-    private int spieleranzahl;
     private ViewController viewController;
 
-    public Spiel(Map map, int spieleranzahl, ViewController viewController){
+    public Spiel(Map map, ArrayList<Spieler> spielerListe, ViewController viewController){
         this.viewController = viewController;
-        this.spieleranzahl = spieleranzahl;
         this.spielerListe = new ArrayList<>();
         this.aktMap = map;
-        erstelleSpieler("testspieler");
+        this.spielerListe = spielerListe;
+
+        for (Spieler s : spielerListe)
+            System.out.println(s);
 
 
     }
@@ -44,20 +45,13 @@ public class Spiel {
     }
 
     public int getSpieleranzahl(){
-        return this.spieleranzahl;
+        return spielerListe.size();
     }
 
-    public void erstelleSpieler(String name){
-        for (int i=0; i<spieleranzahl; i++){
-            Spieler spieler = new Spieler(i, name);
-            spielerListe.add(spieler);
 
-        }
-        aktSpieler = 0;
-    }
 
     public void nextSpieler(){
-        aktSpieler = (aktSpieler +1) %spieleranzahl;
+        aktSpieler = (aktSpieler +1) %spielerListe.size();
     }
 
     public void setPlayerNames(int nr, String name){

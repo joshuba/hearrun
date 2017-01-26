@@ -7,6 +7,7 @@ import hearrun.view.layout.Map;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -17,7 +18,7 @@ public class SpielController {
     private CompleteLayout completeLayout;
     private Stage stage;
     private Map map;
-    private int spieleranzahl;
+    private ArrayList<Spieler> spielerListe;
     private FrageController frageController;
     private Player musicPlayer;
     private Player effectPlayer;
@@ -42,12 +43,10 @@ public class SpielController {
 
 
 
-    private void waehleMapErstelleSpiel(Map map, int spieleranzahl) {
-
-        this.aktSpiel = new Spiel(map, spieleranzahl, completeLayout.getViewController()); //Erstelle spiel
+    private void waehleMapErstelleSpiel(Map map, ArrayList<Spieler> spielerListe) {
+        this.aktSpiel = new Spiel(map, spielerListe, completeLayout.getViewController()); //Erstelle spiel
         completeLayout.getViewController().baueSpielfeldAuf();
         completeLayout.getViewController().setFeldId(0, 0, completeLayout.getViewController().erkenneFeldId(0, 0)); //Setze Alle Player aufs erste Feld
-
     }
 
 
@@ -78,7 +77,7 @@ public class SpielController {
         }
 
         completeLayout.getViewController().resetGameLayout();
-        waehleMapErstelleSpiel(map, spieleranzahl);
+        waehleMapErstelleSpiel(map, spielerListe);
         completeLayout.getViewController().setGameLayout();
 
 
@@ -105,8 +104,7 @@ public class SpielController {
 
         //Zeige frage
         getLayout().getViewController().zeigeIntroUndFrage(frage, fragetyp);
-
-
+        System.out.println("frage");
     }
 
     public Player getMusicPlayer() {
@@ -216,7 +214,7 @@ public class SpielController {
         this.map = map;
     }
 
-    public void setSpieleranzahl(int spieleranzahl) {
-        this.spieleranzahl = spieleranzahl;
+    public void setSpieler(ArrayList<Spieler> spielerListe) {
+        this.spielerListe = spielerListe;
     }
 }

@@ -5,19 +5,16 @@ import hearrun.business.SpielController;
 import hearrun.business.Spieler;
 import hearrun.view.controller.ViewController;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
-import javafx.util.Callback;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Observable;
+import java.util.ArrayList;
 
 /**
  * Created by joshuabarth on 14.01.17
@@ -30,6 +27,7 @@ public class MainMenu extends VBox {
     private boolean continueAn;
     private SpielController spielController;
     private ViewController viewController;
+    private int spielerAnzahl;
 
 
     public MainMenu(SpielController spielController, ViewController viewController) {
@@ -40,6 +38,7 @@ public class MainMenu extends VBox {
         this.setMinHeight(700);
         this.setMinWidth(300);
         this.setAlignment(Pos.CENTER);
+        this.spielerAnzahl = 0;
 
         mainMenuWindow();
 
@@ -73,12 +72,24 @@ public class MainMenu extends VBox {
         Label spielfeldText = new Label("Waehle eine Karte: ");
         Label spielerText = new Label("Waehle Spieler: ");
         ListView <Map> maps = new ListView<>();
-        ListView<Spieler> spieler = new ListView<>();
+        ListView<String> spieler = new ListView<>();
+        ArrayList <Spieler> spielerliste = new ArrayList<>();
+        ObservableList <String> spielerObs = FXCollections.observableArrayList();
         Button addSpieler = new Button("Add");
         Button back = new Button("Back");
         Button start = new Button("Start");
 
+        // maps initialisieren
         maps.setItems(leseMapsEin());
+        maps.getSelectionModel().select(0);
+
+        spieler.setItems(spielerObs);
+        spieler.setCellFactory(TextFieldListCell.forListView());
+        spieler.setEditable(true);
+        spieler.setOnEditCommit((t) -> {
+            spielerObs.set(t.getIndex(), t.getNewValue());
+            spielerliste.get(t.getIndex()).setName(t.getNewValue());
+        });
 
         menuContainer.setLeft(links);
         menuContainer.setRight(rechts);
@@ -94,7 +105,14 @@ public class MainMenu extends VBox {
         back.setOnAction((e) -> mainMenuWindow());
         start.setOnAction((e) -> {
             spielController.setMap(maps.getSelectionModel().getSelectedItem());
+            spielController.setSpieler(spielerliste);
             spielController.starteSpiel();
+        });
+        addSpieler.setOnAction((e) -> {
+            spielerAnzahl++;
+            Spieler neuerSpieler = new Spieler(spielerAnzahl, "Spieler " + spielerAnzahl);
+            spielerliste.add(neuerSpieler);
+            spielerObs.add(neuerSpieler.toString());
         });
     }
 
