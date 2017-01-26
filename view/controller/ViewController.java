@@ -6,7 +6,6 @@ import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
 import hearrun.view.IntroScreen;
 import hearrun.view.layout.*;
-import hearrun.view.layout.FrageFenster.CoverTitelFrage;
 import hearrun.view.layout.FrageIntro;
 import hearrun.view.layout.FrageFenster.ButtonFrage;
 import javafx.animation.KeyFrame;
@@ -215,19 +214,15 @@ public class ViewController {
 
     public void zeigeFrage(Frage frage, Fragetyp fragetyp){
 
-        if(fragetyp == Fragetyp.CoverTitelFrage){
-            CoverTitelFrage ctf = new CoverTitelFrage(frage, spielController);
+        if(fragetyp == Fragetyp.CoverTitelFrage || fragetyp == Fragetyp.CoverTitelFrage){
+            ButtonFrage bf = new ButtonFrage(frage, spielController);
             gameLayoutBlury(true);
-            spielController.getLayout().zeigeFrageFenster(ctf);
+            spielController.getLayout().zeigeFrageFenster(bf);
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
 
         }else{
-            ButtonFrage t = new ButtonFrage(frage, spielController);
-            gameLayoutBlury(true);
-            spielController.getLayout().zeigeFrageFenster(t);
 
-            t.starteAntworPhase();
 
         }
     }
