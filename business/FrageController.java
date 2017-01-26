@@ -37,7 +37,7 @@ import java.util.Collections;
  */
 public class FrageController {
     private static final int FRAGEZEIT = 10;
-    private final String XMLPATH = "src/hearrun/resources/data/quiz.xml";
+    private final String XMLPATH = Main.class.getResource("../resources/Data/quiz.xml").getPath();
     private final int MENGE_FRAGETYP = 5;
 
     //Für Faktfragen

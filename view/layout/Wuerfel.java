@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.business.Main;
 import hearrun.business.Spiel;
 import hearrun.business.SpielController;
 import hearrun.business.fragen.InterpretFrage;
@@ -74,7 +75,7 @@ public class Wuerfel extends VBox{
 
 
     public void wuerfelProzess(){
-        spielcontroller.getMusicPlayer().play("src/hearrun/resources/sounds/wuerfel.mp3");
+        spielcontroller.getMusicPlayer().play(Main.class.getResource("../resources/sounds/wuerfel.mp3").getPath());
         wuerfeln.setDisable(true);
         ergebnis = wuerfeln();
         System.out.println("Ergebnis: " + ergebnis);

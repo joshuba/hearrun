@@ -18,12 +18,12 @@ import java.util.Collections;
  * Beschreibung
  */
 public class CoverWahlFrage extends Frage {
-    private Image[] anworten;
+    private Image[] antworten;
     private String path;
 
     public CoverWahlFrage(String fragetext, int richtigIndex, Image[] antworten, String path) {
         super(fragetext, null, richtigIndex);
-        this.anworten = antworten;
+        this.antworten = antworten;
         this.path = path;
     }
 
@@ -31,9 +31,6 @@ public class CoverWahlFrage extends Frage {
         return path;
     }
 
-    public Image[] getAnworten() {
-        return anworten;
-    }
 
     public static CoverWahlFrage generiereFrage(String path, Image[] alleCover) throws TagNeededException {
         String titel;
@@ -83,6 +80,10 @@ public class CoverWahlFrage extends Frage {
         String fragetext = texte[(int) (Math.random() * texte.length)];
 
         return new CoverWahlFrage(fragetext, richtigIndex, antworten.toArray(new Image[antworten.size()]), path);
+    }
+
+    public Image getCover(int i){
+        return antworten[i];
     }
 
 
