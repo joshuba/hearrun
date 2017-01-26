@@ -77,7 +77,7 @@ public class FrageIntro extends HBox {
         int y = spielController.getAktSpiel().getAktSpieler().getAktY();
 
         String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString();
-        feldtyp += "P" + (spielController.getAktSpiel().getAktSpieler().getNr()+1);
+        feldtyp += "leer";
 
         feldtyp = feldtyp.toLowerCase();
 

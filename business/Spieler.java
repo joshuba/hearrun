@@ -11,12 +11,10 @@ import java.util.ArrayList;
  */
 public class Spieler {
     private String name;
-    private int nr;
     private int time;
     private ArrayList<Point> log;
 
-    public Spieler(int nr, String name){
-        this.nr = nr;
+    public Spieler(String name){
         this.name = name;
         log = new ArrayList<>();
         log.add(new Point(0,0)); //Für den Start wird die letzte Position auf 0 gesetzt
@@ -46,10 +44,6 @@ public class Spieler {
 
     public int getLastY(){
             return log.get(log.size()-2).y;
-    }
-
-    public int getNr(){
-        return this.nr;
     }
 
     public boolean stehtAufFeld(int x, int y){

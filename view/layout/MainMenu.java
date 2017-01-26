@@ -4,15 +4,26 @@ import hearrun.business.Main;
 import hearrun.business.SpielController;
 import hearrun.business.Spieler;
 import hearrun.view.controller.ViewController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
+import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -27,7 +38,6 @@ public class MainMenu extends VBox {
     private boolean continueAn;
     private SpielController spielController;
     private ViewController viewController;
-    private int spielerAnzahl;
 
 
     public MainMenu(SpielController spielController, ViewController viewController) {
@@ -38,7 +48,6 @@ public class MainMenu extends VBox {
         this.setMinHeight(700);
         this.setMinWidth(300);
         this.setAlignment(Pos.CENTER);
-        this.spielerAnzahl = 0;
 
         mainMenuWindow();
 
@@ -72,10 +81,11 @@ public class MainMenu extends VBox {
         Label spielfeldText = new Label("Waehle eine Karte: ");
         Label spielerText = new Label("Waehle Spieler: ");
         ListView <Map> maps = new ListView<>();
-        ListView<String> spieler = new ListView<>();
+        ListView <String> spieler = new ListView<>();
         ArrayList <Spieler> spielerliste = new ArrayList<>();
         ObservableList <String> spielerObs = FXCollections.observableArrayList();
         Button addSpieler = new Button("Add");
+        Button removeSpieler = new Button("Remove");
         Button back = new Button("Back");
         Button start = new Button("Start");
 
@@ -86,10 +96,7 @@ public class MainMenu extends VBox {
         spieler.setItems(spielerObs);
         spieler.setCellFactory(TextFieldListCell.forListView());
         spieler.setEditable(true);
-        spieler.setOnEditCommit((t) -> {
-            spielerObs.set(t.getIndex(), t.getNewValue());
-            spielerliste.get(t.getIndex()).setName(t.getNewValue());
-        });
+
 
         menuContainer.setLeft(links);
         menuContainer.setRight(rechts);
@@ -97,23 +104,62 @@ public class MainMenu extends VBox {
         menuContainer.setPadding(new Insets(40));
 
         links.getChildren().addAll(spielfeldText, maps);
-        rechts.getChildren().addAll(spielerText, spieler, addSpieler);
+        rechts.getChildren().addAll(spielerText, spieler, new VBox(addSpieler, removeSpieler));
 
         this.getChildren().addAll(menuContainer, back, start);
 
 
         back.setOnAction((e) -> mainMenuWindow());
+
+        spieler.setOnEditCommit((t) -> {
+            spielerObs.set(t.getIndex(), t.getNewValue());
+            spielerliste.get(t.getIndex()).setName(t.getNewValue());
+        });
+
+        spieler.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> c) {
+                System.out.println(c);
+                if (spieler.getSelectionModel().getSelectedItems().size() > 0)
+                    removeSpieler.setDisable(false);
+                else
+                    removeSpieler.setDisable(true);
+            }
+        });
+
         start.setOnAction((e) -> {
             spielController.setMap(maps.getSelectionModel().getSelectedItem());
             spielController.setSpieler(spielerliste);
             spielController.starteSpiel();
         });
+
+        final Timeline animation = new Timeline(
+                new KeyFrame(Duration.seconds(0.1),
+                        actionEvent -> spieler.edit(spieler.getItems().size() - 1)));
+        animation.setCycleCount(1);
+
+
         addSpieler.setOnAction((e) -> {
-            spielerAnzahl++;
-            Spieler neuerSpieler = new Spieler(spielerAnzahl, "Spieler " + spielerAnzahl);
+            Spieler neuerSpieler = new Spieler("Spieler " + (spielerliste.size() + 1));
             spielerliste.add(neuerSpieler);
             spielerObs.add(neuerSpieler.toString());
+            animation.play();
+
         });
+
+        removeSpieler.setDisable(true);
+
+        removeSpieler.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE)
+                removeSpieler.fire();
+        });
+
+        removeSpieler.setOnAction(e -> {
+            spielerliste.remove(spieler.getSelectionModel().getSelectedIndex());
+            spielerObs.remove(spieler.getSelectionModel().getSelectedIndex());
+    });
+
+        addSpieler.fire();
     }
 
     public void removeAllElements() {

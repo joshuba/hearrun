@@ -85,7 +85,7 @@ public class TextFrage extends BorderPane {
         time = new ProgressBar();
         time.setId("progressBar");
         aktZeitAnzeige = new Label();
-        aktSpieler = new Label("Spieler " + Integer.toString(spielController.getAktSpiel().getAktSpieler().getNr()+1));
+        aktSpieler = new Label(spielController.getAktSpiel().getAktSpieler().getName());
         catPic = new HBox();
 
 

@@ -173,7 +173,7 @@ public class ViewController {
         //Wenn der spieler auf dem Feld steht merke zahl z.B. 13: spieler 1 und 3 auf feld
         for (int i = 0; i <anz; i++) {
             if(spielController.getAktSpiel().getSpielerByNr(i).stehtAufFeld(x,y)){
-                idZahl = idZahl + (spielController.getAktSpiel().getSpielerByNr(i).getNr()+1);
+                idZahl = idZahl + (i+1);
                 leer = false;
             }
         }
@@ -184,6 +184,7 @@ public class ViewController {
 
         String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString() + idZahl;
         feldtyp = feldtyp.toLowerCase();
+        System.out.println(feldtyp);
         return feldtyp;
 
     }
