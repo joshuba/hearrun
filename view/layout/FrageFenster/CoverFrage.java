@@ -5,6 +5,7 @@ import hearrun.business.Main;
 import hearrun.business.Player;
 import hearrun.business.SpielController;
 import hearrun.business.fragen.CoverTitelFrage;
+import hearrun.business.fragen.CoverWahlFrage;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Wuerfel;
 import javafx.animation.KeyFrame;
@@ -26,58 +27,71 @@ import javafx.util.Duration;
 /**
  * Created by joshuabarth on 16.01.17.
  */
-public class ButtonFrage extends FrageFenster {
-    private Button [] buttons;
-    private Button richtigButton;
+public class CoverFrage extends FrageFenster {
+    private ImageView [] buttons;
+    private ImageView richtigButton;
     private ImageView cover;
+    private HBox alleCover;
 
 
-    public ButtonFrage(Frage frage, SpielController spielController){
+    public CoverFrage(Frage frage, SpielController spielController){
         super(frage,spielController);
+        alleCover = new HBox();
 
-        //falls es eine CoverFrage ist
-        if(frage.getFragetyp() == Fragetyp.CoverTitelFrage){
-            cover = new ImageView(((CoverTitelFrage)frage).getCover());
-            cover.minHeight(20);
-            cover.fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(600));
-            cover.setPreserveRatio(true);
-            vBox.getChildren().addAll(cover);
-            VBox.setMargin(cover,new Insets(0,0,40,0));
+
+
+        this.buttons = new ImageView[4];
+        buttons [0] = new ImageView();
+        buttons [1] = new ImageView();
+        buttons [2] = new ImageView();
+        buttons [3] = new ImageView();
+        alleCover.getChildren().addAll(buttons[0], buttons[1], buttons[2], buttons[3]);
+
+        vBox.getChildren().addAll(textfeld, alleCover);
+
+
+        richtigButton = buttons[frage.getRichtigIndex()];
+
+        for(int i = 0; i<4; i++){
+            //Frageninfos auslesen und in GUI einsetzen
+            buttons[i].setImage((((CoverWahlFrage)frage).getCover(i)));
+            buttons[i].setId("normalButton");
+
+
+        buttons[0].setOnMouseClicked((e)-> buttonPress(buttons[0]));
+        buttons[1].setOnMouseClicked((e)-> buttonPress(buttons[1]));
+        buttons[2].setOnMouseClicked((e)-> buttonPress(buttons[2]));
+        buttons[3].setOnMouseClicked((e)-> buttonPress(buttons[3]));
+
+
+            buttons[0].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+            buttons[0].setPreserveRatio(true);
+            buttons[1].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+            buttons[1].setPreserveRatio(true);
+            buttons[2].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+            buttons[2].setPreserveRatio(true);
+            buttons[3].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+            buttons[3].setPreserveRatio(true);
+            alleCover.setSpacing(8);
+            alleCover.setAlignment(Pos.CENTER);
+
+
+
+
+
+
+
+
         }
 
 
-
-        this.buttons = new Button[4];
-        buttons [0] = new Button();
-        buttons [1] = new Button();
-        buttons [2] = new Button();
-        buttons [3] = new Button();
-
-        vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3]);
-
-        //Frageninfos auslesen und in GUI einsetzen
-        buttons[0].setText(frage.getAntworten()[0]);
-        buttons[1].setText(frage.getAntworten()[1]);
-        buttons[2].setText(frage.getAntworten()[2]);
-        buttons[3].setText(frage.getAntworten()[3]);
-        richtigButton = buttons[frage.getRichtigIndex()];
-        buttons[0].setId("normalButton");
-        buttons[1].setId("normalButton");
-        buttons[2].setId("normalButton");
-        buttons[3].setId("normalButton");
-
-
-        buttons[0].setOnAction((e)-> buttonPress(buttons[0]));
-        buttons[1].setOnAction((e)-> buttonPress(buttons[1]));
-        buttons[2].setOnAction((e)-> buttonPress(buttons[2]));
-        buttons[3].setOnAction((e)-> buttonPress(buttons[3]));
 
 
 
     }
 
-    public void buttonPress(Button bx){
-        disableAllButtons();
+    public void buttonPress(ImageView bx){
+        //disableAllButtons();
         timeline.stop();
 
         if(bx == richtigButton){

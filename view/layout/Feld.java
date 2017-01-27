@@ -66,10 +66,11 @@ public class Feld extends HBox{
         switch(this.feldtyp){
             case CoverFeld:
                 double rand = Math.random() * 1;
-
+                System.out.println(rand);
                 if (Math.round(rand) == 1) {
                     return Fragetyp.CoverTitelFrage;
-                }return Fragetyp.CoverWahlFrage;
+                }
+                return Fragetyp.CoverWahlFrage;
 
             case EreignisFeld:
                 System.out.println("TODO: Ereignisfeler");

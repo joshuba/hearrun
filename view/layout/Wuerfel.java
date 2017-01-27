@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.business.Main;
 import hearrun.business.Spiel;
 import hearrun.business.SpielController;
 import hearrun.business.fragen.InterpretFrage;
@@ -27,36 +28,43 @@ public class Wuerfel extends VBox{
 
     public Wuerfel(int index, SpielController spielController){
         this.spielcontroller = spielController;
-        anzeige = new Label();
-        anzeige.setId("grossText");
-        iv = new ImageView();
-        this.index = index;
+
+        if(spielController.getAktSpiel().getAktSpieler().getAktX() == 0 && spielController.getAktSpiel().getAktSpieler().getAktY() == 0 && index <=0){
+            zurueck();
+        }else{
+            anzeige = new Label();
+            anzeige.setId("grossText");
+            iv = new ImageView();
+            this.index = index;
 
 
-        if(index == -1){
-            this.wuerfeln = new Button();
-            wuerfeln.setId("negWuerfel");
+            if(index == -1){
+                this.wuerfeln = new Button();
+                wuerfeln.setId("negWuerfel");
 
-        }else if(index == 0){
-            this.wuerfeln = new Button();
-            wuerfeln.setId("negWuerfel");
+            }else if(index == 0){
+                this.wuerfeln = new Button();
+                wuerfeln.setId("negWuerfel");
 
-        }else if(index == 1){
-            this.wuerfeln = new Button();
-            wuerfeln.setId("posWuerfel");
+            }else if(index == 1){
+                this.wuerfeln = new Button();
+                wuerfeln.setId("posWuerfel");
+
+            }
+
+            //stylen
+            wuerfeln.setMinSize(60,60);
+            anzeige.setMinSize(60,60);
+            anzeige.setAlignment(Pos.CENTER);
+
+
+            rad = 0;
+
+            this.getChildren().addAll(iv, wuerfeln, anzeige);
+            wuerfeln.setOnAction((e) -> wuerfelProzess());
 
         }
 
-        //stylen
-        wuerfeln.setMinSize(60,60);
-        anzeige.setMinSize(60,60);
-        anzeige.setAlignment(Pos.CENTER);
-
-
-        rad = 0;
-
-        this.getChildren().addAll(iv, wuerfeln, anzeige);
-        wuerfeln.setOnAction((e) -> wuerfelProzess());
     }
 
 
@@ -74,7 +82,7 @@ public class Wuerfel extends VBox{
 
 
     public void wuerfelProzess(){
-        spielcontroller.getMusicPlayer().play("src/hearrun/resources/sounds/wuerfel.mp3");
+        spielcontroller.getMusicPlayer().play(Main.class.getResource("../resources/sounds/wuerfel.mp3").getPath());
         wuerfeln.setDisable(true);
         ergebnis = wuerfeln();
         System.out.println("Ergebnis: " + ergebnis);

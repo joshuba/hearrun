@@ -6,6 +6,7 @@ import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
 import hearrun.view.IntroScreen;
 import hearrun.view.layout.*;
+import hearrun.view.layout.FrageFenster.CoverFrage;
 import hearrun.view.layout.FrageIntro;
 import hearrun.view.layout.FrageFenster.ButtonFrage;
 import javafx.animation.KeyFrame;
@@ -222,6 +223,11 @@ public class ViewController {
             bf.starteAntworPhase();
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
+            CoverFrage cf = new CoverFrage(frage, spielController);
+            gameLayoutBlury(true);
+            spielController.getLayout().zeigeFrageFenster(cf);
+            cf.starteAntworPhase();
+
 
         }
     }

@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.business.Main;
 import hearrun.business.Player;
 import hearrun.business.SpielController;
 import hearrun.view.IntroScreen;
@@ -46,7 +47,7 @@ public class CompleteLayout extends StackPane {
         musicPlayer.stop();
 
 
-        musicPlayer.play("/hearrun/resources/music/4.mp3", true);
+        musicPlayer.play(Main.class.getResource("../resources/music/4.mp3").getPath(), true);
         this.getChildren().addAll(mainMenu);
         mainMenu.mainMenuWindow();
     }

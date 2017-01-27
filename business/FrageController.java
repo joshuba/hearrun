@@ -273,7 +273,7 @@ public class FrageController {
     }
 
     private void leseXMLein(String path) {
-        // Lese FrageXML ein
+
         dbFactory = DocumentBuilderFactory.newInstance();
 
         try {
