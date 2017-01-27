@@ -37,7 +37,7 @@ import java.util.Collections;
  */
 public class FrageController {
     private static final int FRAGEZEIT = 10;
-    private final String XMLPATH = "src/hearrun/resources/data/quiz.xml";
+    private final String XMLPATH = "/hearrun/resources/Data/quiz.xml";
     private final int MENGE_FRAGETYP = 5;
 
     //Für Faktfragen
@@ -273,13 +273,14 @@ public class FrageController {
     }
 
     private void leseXMLein(String path) {
-        //Lese FrageXML ein
-        inputFile = new File(path);
+        // Lese FrageXML ein
         dbFactory = DocumentBuilderFactory.newInstance();
 
         try {
+
             dBuilder = dbFactory.newDocumentBuilder();
-            doc = dBuilder.parse(inputFile);
+            doc = dBuilder.parse(Main.class.getResourceAsStream(path));
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }

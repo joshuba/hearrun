@@ -49,13 +49,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
-
-
-        //Player player = new Player();
-        //player.playRandomNSeconds("/Users/Josh/IdeaProjects/Hearrun/music/music/1-01 Carry On Wayward Son.mp3", 6);
-
-
     }
 
     @Override
