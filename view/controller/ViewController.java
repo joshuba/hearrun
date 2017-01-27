@@ -1,6 +1,7 @@
 package hearrun.view.controller;
 
 import hearrun.business.Fragetyp;
+import hearrun.business.Main;
 import hearrun.business.SpielController;
 import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
@@ -73,7 +74,7 @@ public class ViewController {
                 Duration.millis(400),
                 a -> {
                     nextPossibleField(s);
-                    spielController.getEffectPlayer().play("src/hearrun/resources/sounds/move.mp3");
+                    spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath());
                 }));
         forward.setCycleCount(anz);
 
@@ -81,7 +82,7 @@ public class ViewController {
                 Duration.millis(400),
                 a -> {
                     lastPossibleField(s);
-                    spielController.getEffectPlayer().play("src/hearrun/resources/sounds/move.mp3"); //Spiele sound nur so oft wie feld gewechselt wird
+                    spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath()); //Spiele sound nur so oft wie feld gewechselt wird
 
                 }));
         back.setCycleCount(anz);
@@ -95,7 +96,7 @@ public class ViewController {
             if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann
                 back.play();
             }else{
-                spielController.getEffectPlayer().play("src/hearrun/resources/sounds/moveFailure.mp3"); //Falls kein Feld mehr da ist
+                spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/moveFailure.mp3").getPath()); //Falls kein Feld mehr da ist
                 feldBlinkenLassen(0,0);
 
             }
@@ -216,7 +217,7 @@ public class ViewController {
 
     public void zeigeFrage(Frage frage, Fragetyp fragetyp){
 
-        if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage){
+        if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage || fragetyp == Fragetyp.FaktFrage){
             ButtonFrage bf = new ButtonFrage(frage, spielController);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeFrageFenster(bf);

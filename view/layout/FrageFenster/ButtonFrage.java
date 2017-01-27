@@ -85,7 +85,7 @@ public class ButtonFrage extends FrageFenster {
             this.falschRichtig.setValue(1);
             fertig();
 
-            effectPlayer.play(Main.class.getResource("../resources/sounds/right.mp3").getPath());
+            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/right.mp3").getPath());
 
 
         }else{
@@ -93,7 +93,7 @@ public class ButtonFrage extends FrageFenster {
             this.falschRichtig.setValue(0);
             fertig();
 
-            effectPlayer.play(Main.class.getResource("../resources/sounds/wrong.mp3").getPath());
+            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
 
         }
 
@@ -132,7 +132,7 @@ public class ButtonFrage extends FrageFenster {
         Timeline t = new Timeline(k);
         t.setCycleCount(6);
         if(falschRichtig.getValue() == -1){
-            effectPlayer.play(Main.class.getResource("../resources/sounds/wrong.mp3").getPath());
+            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
 
         }
 

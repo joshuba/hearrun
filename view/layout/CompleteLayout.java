@@ -47,7 +47,7 @@ public class CompleteLayout extends StackPane {
         musicPlayer.stop();
 
 
-        musicPlayer.play(Main.class.getResource("../resources/music/4.mp3").getPath(), true);
+        musicPlayer.play(Main.class.getResource("/hearrun/resources/music/4.mp3").getPath(), true);
         this.getChildren().addAll(mainMenu);
         mainMenu.mainMenuWindow();
     }
