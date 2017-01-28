@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -48,6 +49,7 @@ public class FrageFenster extends BorderPane {
     protected Label aktSpieler;
     protected HBox catPic;
     protected VBox top;
+    protected VBox wuerfelBox;
 
 
 
@@ -71,6 +73,7 @@ public class FrageFenster extends BorderPane {
         vBox = new VBox();
         timerBox = new VBox();
         top = new VBox();
+        wuerfelBox = new VBox();
 
         textfeld = new StackPane();
         fragetext = new Label();
@@ -111,6 +114,9 @@ public class FrageFenster extends BorderPane {
         timerBox.setMaxWidth(100);
         timerBox.setPadding(new Insets(0,0,110,0));
         timerBox.setAlignment(Pos.CENTER);
+
+        wuerfelBox.setMinHeight(140);
+        wuerfelBox.setId("wuerfelBox");
 
 
 
@@ -179,10 +185,12 @@ public class FrageFenster extends BorderPane {
 
     public void wuerfeln(int index){
         Wuerfel w = new Wuerfel(index, spielController);
-        w.setPadding(new Insets(30,0,0,0));
         w.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(w);
+        this.getChildren().add(w);
+        wuerfelBox.getChildren().addAll(w);
+
     }
+
 
     public void getProgress(){
         progress.setValue(progressWert);

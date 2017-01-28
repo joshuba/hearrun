@@ -42,8 +42,7 @@ public class CoverFrage extends FrageFenster {
         alleCover.getChildren().addAll(buttons[0], buttons[1], buttons[2], buttons[3]);
 
         hover();
-        vBox.getChildren().addAll(textfeld, alleCover);
-        vBox.setPadding(new Insets(0,0,100,0));
+        vBox.getChildren().addAll(textfeld, alleCover, wuerfelBox);
 
 
 
@@ -52,7 +51,7 @@ public class CoverFrage extends FrageFenster {
         for(int i = 0; i<4; i++){
             //Frageninfos auslesen und in GUI einsetzen
             buttons[i].setImage((((CoverWahlFrage)frage).getCover(i)));
-            buttons[i].setId("normalButton");
+            buttons[i].setId("coverButton");
 
 
         buttons[0].setOnMouseClicked((e)-> buttonPress(buttons[0]));
@@ -66,13 +65,13 @@ public class CoverFrage extends FrageFenster {
 
 
 
-            buttons[0].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[0].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[0].setPreserveRatio(true);
-            buttons[1].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[1].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[1].setPreserveRatio(true);
-            buttons[2].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[2].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[2].setPreserveRatio(true);
-            buttons[3].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[3].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[3].setPreserveRatio(true);
             alleCover.setSpacing(16);
             alleCover.setAlignment(Pos.CENTER);
@@ -97,7 +96,7 @@ public class CoverFrage extends FrageFenster {
         timeline.stop();
 
         if(bx == richtigButton){
-            bx.setId("richtigButton");
+            bx.setId("richtigCoverButton");
             this.falschRichtig.setValue(1);
             fertig();
 
@@ -105,7 +104,7 @@ public class CoverFrage extends FrageFenster {
 
 
         }else{
-            bx.setId("falschButton");
+            bx.setId("falschCoverButton");
             this.falschRichtig.setValue(0);
             fertig();
 
@@ -131,10 +130,10 @@ public class CoverFrage extends FrageFenster {
     }
 
     private void richtigButtonFaerben(){
-        if(richtigButton.getId().equals("richtigButton")){
-            richtigButton.setId("normalButton");
-        }else if(richtigButton.getId().equals("normalButton")){
-            richtigButton.setId("richtigButton");
+        if(richtigButton.getId().equals("richtigCoverButton")){
+            richtigButton.setId("coverButton");
+        }else if(richtigButton.getId().equals("coverButton")){
+            richtigButton.setId("richtigCoverButton");
         }
 
     }

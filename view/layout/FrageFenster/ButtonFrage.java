@@ -39,7 +39,7 @@ public class ButtonFrage extends FrageFenster {
         if(frage.getFragetyp() == Fragetyp.CoverTitelFrage){
             cover = new ImageView(((CoverTitelFrage)frage).getCover());
             cover.minHeight(20);
-            cover.fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(600));
+            cover.fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             cover.setPreserveRatio(true);
             vBox.getChildren().addAll(cover);
             VBox.setMargin(cover,new Insets(0,0,40,0));
@@ -53,7 +53,7 @@ public class ButtonFrage extends FrageFenster {
         buttons [2] = new Button();
         buttons [3] = new Button();
 
-        vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3]);
+        vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3], wuerfelBox);
 
         //Frageninfos auslesen und in GUI einsetzen
         buttons[0].setText(frage.getAntworten()[0]);

@@ -91,11 +91,14 @@ public class SpielController {
         this.completeLayout.getViewController().resetGameLayout();
         musicPlayer.stop();
         effectPlayer.stop();
+
+
     }
 
     public void beendeProgramm() {
         writeProperties();
         musicPlayer.stop();
+        effectPlayer.stop();
         effectPlayer.stop();
         stage.close();
     }

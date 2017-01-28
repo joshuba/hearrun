@@ -204,6 +204,7 @@ public class MainMenu extends VBox {
         this.getChildren().removeAll(this.getChildren());
         Slider antwortZeit = new Slider(4, 15, Integer.valueOf(spielController.getProperties().getProperty("antwortZeit")));
         antwortZeit.setBlockIncrement(12);
+        antwortZeit.setMaxWidth(300);
         antwortZeit.valueProperty().addListener((obs, oldValue, newValue) -> {
             spielController.getProperties().setProperty("antwortZeit", String.valueOf(newValue.intValue()));
             System.out.println(spielController.getProperties().getProperty("antwortZeit"));

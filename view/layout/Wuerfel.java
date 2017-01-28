@@ -6,10 +6,12 @@ import hearrun.business.SpielController;
 import hearrun.business.fragen.InterpretFrage;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -53,15 +55,15 @@ public class Wuerfel extends VBox{
             }
 
             //stylen
+            this.setMaxHeight(120);
             wuerfeln.setMinSize(60,60);
-            anzeige.setMinSize(60,60);
-            anzeige.setAlignment(Pos.CENTER);
-
 
             rad = 0;
-
+            this.setAlignment(Pos.TOP_CENTER);
+            this.setPadding(new Insets(30,0,0,0));
             this.getChildren().addAll(iv, wuerfeln, anzeige);
             wuerfeln.setOnAction((e) -> wuerfelProzess());
+
 
         }
 
