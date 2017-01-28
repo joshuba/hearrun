@@ -51,7 +51,7 @@ public class CoverFrage extends FrageFenster {
         for(int i = 0; i<4; i++){
             //Frageninfos auslesen und in GUI einsetzen
             buttons[i].setImage((((CoverWahlFrage)frage).getCover(i)));
-            buttons[i].setId("normalButton");
+            buttons[i].setId("coverButton");
 
 
         buttons[0].setOnMouseClicked((e)-> buttonPress(buttons[0]));
@@ -96,7 +96,7 @@ public class CoverFrage extends FrageFenster {
         timeline.stop();
 
         if(bx == richtigButton){
-            bx.setId("richtigButton");
+            bx.setId("richtigCoverButton");
             this.falschRichtig.setValue(1);
             fertig();
 
@@ -104,7 +104,7 @@ public class CoverFrage extends FrageFenster {
 
 
         }else{
-            bx.setId("falschButton");
+            bx.setId("falschCoverButton");
             this.falschRichtig.setValue(0);
             fertig();
 
@@ -130,10 +130,10 @@ public class CoverFrage extends FrageFenster {
     }
 
     private void richtigButtonFaerben(){
-        if(richtigButton.getId().equals("richtigButton")){
-            richtigButton.setId("normalButton");
-        }else if(richtigButton.getId().equals("normalButton")){
-            richtigButton.setId("richtigButton");
+        if(richtigButton.getId().equals("richtigCoverButton")){
+            richtigButton.setId("coverButton");
+        }else if(richtigButton.getId().equals("coverButton")){
+            richtigButton.setId("richtigCoverButton");
         }
 
     }

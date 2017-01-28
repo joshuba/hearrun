@@ -77,7 +77,15 @@ Button{
 
 }
 
+#richtigCoverButton{
+    -fx-effect: dropshadow(three-pass-box, rgba(72, 255, 104, 0.8), 10, 0.8, 0, 0);
 
+}
+
+#falschCoverButton{
+    -fx-effect: dropshadow(three-pass-box, #ff4e37, 10, 0.8, 0, 0);
+
+}
 
 
 
