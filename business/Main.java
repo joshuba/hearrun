@@ -31,8 +31,8 @@ public class Main extends Application {
 
 
         primaryStage.setTitle("Hear and Run - alpha 0.01");
-        primaryStage.setMinWidth(900);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(1100);
+        primaryStage.setMinHeight(800);
 
 
         primaryStage.setScene(scene);

@@ -106,7 +106,7 @@ public class FrageFenster extends BorderPane {
 
         time.minWidthProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(200));
         time.setRotate(90);
-        time.setMinHeight(50);
+        time.minHeightProperty().bind(spielController.getLayout().getViewController().getStage().widthProperty().divide(36));
         timerBox.setMinWidth(100);
         timerBox.setMaxWidth(100);
         timerBox.setPadding(new Insets(0,0,110,0));
@@ -185,7 +185,6 @@ public class FrageFenster extends BorderPane {
     }
 
     public void getProgress(){
-        System.out.println(progressWert);
         progress.setValue(progressWert);
         progressWert += progressIndex;
 

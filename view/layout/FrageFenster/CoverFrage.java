@@ -4,13 +4,18 @@ import hearrun.business.Main;
 import hearrun.business.SpielController;
 import hearrun.business.fragen.CoverWahlFrage;
 import hearrun.business.fragen.Frage;
-import javafx.animation.KeyFrame;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
+
+import java.util.AbstractCollection;
 
 /**
  * Created by joshuabarth on 16.01.17.
@@ -20,8 +25,7 @@ public class CoverFrage extends FrageFenster {
     private ImageView richtigButton;
     private ImageView cover;
     private HBox alleCover;
-    private boolean zoomOut;
-    private boolean zoomIn;
+
 
 
     public CoverFrage(Frage frage, SpielController spielController){
@@ -37,7 +41,10 @@ public class CoverFrage extends FrageFenster {
         buttons [3] = new ImageView();
         alleCover.getChildren().addAll(buttons[0], buttons[1], buttons[2], buttons[3]);
 
+        hover();
         vBox.getChildren().addAll(textfeld, alleCover);
+        vBox.setPadding(new Insets(0,0,100,0));
+
 
 
         richtigButton = buttons[frage.getRichtigIndex()];
@@ -53,15 +60,9 @@ public class CoverFrage extends FrageFenster {
         buttons[2].setOnMouseClicked((e)-> buttonPress(buttons[2]));
         buttons[3].setOnMouseClicked((e)-> buttonPress(buttons[3]));
 
-            buttons[0].setOnMouseEntered((e)-> hover(buttons[0], true));
-            buttons[1].setOnMouseEntered((e)-> hover(buttons[1], true));
-            buttons[2].setOnMouseEntered((e)-> hover(buttons[2], true));
-            buttons[3].setOnMouseEntered((e)-> hover(buttons[3], true));
 
-            buttons[0].setOnMouseExited((e)-> hover(buttons[0], false));
-            buttons[1].setOnMouseExited((e)-> hover(buttons[1], false));
-            buttons[2].setOnMouseExited((e)-> hover(buttons[2], false));
-            buttons[3].setOnMouseExited((e)-> hover(buttons[3], false));
+
+
 
 
 
@@ -157,32 +158,31 @@ public class CoverFrage extends FrageFenster {
 
     }
 
-    public void hover(ImageView iv, boolean anAus){
-        ScaleTransition st = new ScaleTransition(Duration.millis(100), iv);
-        st.setByX(0.1f);
-        st.setByY(0.1f);
-        st.setAutoReverse(false);
-        st.setOnFinished(e->  zoomIn = false);
+    public void hover(){
+
+        for(int i=0; i<buttons.length;i++){
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), buttons[i]);
+            scaleTransition.setCycleCount(1);
+            scaleTransition.setInterpolator(Interpolator.EASE_IN);
 
 
-        ScaleTransition st1 = new ScaleTransition(Duration.millis(100), iv);
-        st1.setByX(-0.1f);
-        st1.setByY(-0.1f);
-        st1.setAutoReverse(false);
-        st1.setOnFinished(e->  zoomOut = false);
+            buttons[i].setOnMouseEntered((MouseEvent t) -> {
+                scaleTransition.setFromX(getScaleX());
+                scaleTransition.setFromY(getScaleY());
+                scaleTransition.setToX(1.08);
+                scaleTransition.setToY(1.08);
+                scaleTransition.playFromStart();
+            });
+
+            buttons[i].setOnMouseExited((MouseEvent t) -> {
+                scaleTransition.setFromX(getScaleX());
+                scaleTransition.setFromY(getScaleY());
+                scaleTransition.setToX(1);
+                scaleTransition.setToY(1);
+                scaleTransition.playFromStart();
+            });
 
 
-
-        if(anAus && !zoomIn && !zoomOut ){
-            zoomIn = true;
-            st.play();
-
-
-            st.play();
-        }else if(!anAus && !zoomIn && !zoomOut){
-            System.out.println("DEHOVER");
-            zoomOut = true;
-            st1.play();
         }
 
 

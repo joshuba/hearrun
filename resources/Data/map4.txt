@@ -1,8 +1,8 @@
 *SimpleMap
 *6
-*1
+*2
 #C I T F E X
-
+#L L L L L L
 
 
 /
