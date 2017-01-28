@@ -1,4 +1,4 @@
-Button{
+Button {
 
     -fx-background-color: transparent;
     /* -fx-min-width: 50px;
@@ -6,53 +6,52 @@ Button{
  */
 }
 
-#sideBar{
+#sideBar {
     -fx-background-color: white;
 }
 
-#topLayout{
+#topLayout {
     -fx-background-color: white;
 }
 
-#kreis{
+#kreis {
     -fx-background-color: darkgreen;
 }
 
-
-#frageTextfeld{
+#frageTextfeld {
 }
 
-
-#richtigButton{
+#richtigButton {
     -fx-background-color: greenyellow;
 }
 
-#falschButton{
+#falschButton {
     -fx-background-color: crimson;
 }
 
-#normalButton{
+#normalButton {
 }
 
-#negWuerfel{
+#negWuerfel {
     -fx-background-image: url("../../../resources/icons/negWuerfel.png");
 }
 
-#posWuerfel{
+#posWuerfel {
     -fx-background-image: url("../../../resources/icons/posWuerfel.png");
 }
 
-#negWuerfel:pressed{
+#negWuerfel:pressed {
     -fx-background-image: url("../../../resources/icons/negWuerfel_pressed.png");
 }
 
-#posWuerfel:pressed{
+#posWuerfel:pressed {
     -fx-background-image: url("../../../resources/icons/posWuerfel_pressed.png");
 }
 
 .progress-bar .bar {
     -fx-background-color: chartreuse;
-    -fx-border-width: 0}
+    -fx-border-width: 0
+}
 
 .progress-bar .track {
     -fx-background-color: gainsboro;
@@ -60,37 +59,43 @@ Button{
 
 }
 
-#grossText{
+#grossText {
     -fx-font-size: 30;
 }
 
-#introScreen{
+#introScreen {
     -fx-background-color: dimgray;
 }
 
-#loadingScreen{
+#loadingScreen {
     -fx-background-color: lightcoral;
 }
 
-#frageIntro{
+#frageIntro {
     -fx-background-color: black;
 
 }
 
-#richtigCoverButton{
+#richtigCoverButton {
     -fx-effect: dropshadow(three-pass-box, rgba(72, 255, 104, 0.8), 10, 0.8, 0, 0);
 
 }
 
-#falschCoverButton{
+#falschCoverButton {
     -fx-effect: dropshadow(three-pass-box, #ff4e37, 10, 0.8, 0, 0);
 
 }
 
-
-
-
-#negWuerfel, #posWuerfel{
+#negWuerfel, #posWuerfel {
     -fx-background-repeat: stretch;
     -fx-background-size: 100%;
+}
+
+.spieler-nummer {
+    -fx-text-fill: white;
+    -fx-font-size: 30;
+}
+
+.spieler-box {
+    -fx-font-size: 15;
 }

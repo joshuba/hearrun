@@ -19,8 +19,8 @@ public class GameLayout extends BorderPane{
 
         //Panes initalisieren
         CenterLayout centerLayout = new CenterLayout(viewController);
-        SpielerAnzeige leftLayout = new SpielerAnzeige(spielController.getSpielerListe(), "links");
-        SpielerAnzeige rightLayout = new SpielerAnzeige(spielController.getSpielerListe(), "rechts");
+        SpielerAnzeige leftLayout = new SpielerAnzeige(spielController.getSpielerListe(), "links", viewController.getStage());
+        SpielerAnzeige rightLayout = new SpielerAnzeige(spielController.getSpielerListe(), "rechts", viewController.getStage());
         TopLayout topLayout = new TopLayout(viewController, spielController);
 
         //Komponenten zusammenfügen

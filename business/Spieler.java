@@ -2,11 +2,16 @@ package hearrun.business;
 
 
 import com.sun.javafx.scene.paint.GradientUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Created by joshuabarth on 13.01.17.
@@ -15,18 +20,22 @@ public class Spieler {
     private String name;
     private int time;
     private ArrayList<Point> log;
+    private ObservableMap<String, String> achievements;
+    private int gelaufen;
 
     public Spieler(String name){
         this.name = name;
         log = new ArrayList<>();
         log.add(new Point(0,0)); //Für den Start wird die letzte Position auf 0 gesetzt
         log.add(new Point(0,0)); //aktPos
+        achievements = FXCollections.observableHashMap();
+        gelaufen = 0;
     }
 
     public void move(int x, int y){
         log.add(new Point(x,y));
-
-
+        gelaufen++;
+        achievements.put("gelaufen", "Gelaufene Felder: " + gelaufen);
     }
 
     public int getAktX(){
@@ -60,7 +69,8 @@ public class Spieler {
     public void moveBack(){
 
             log.remove(log.size()-1);
-
+            gelaufen--;
+            achievements.put("gelaufen", "Gelaufene Felder: " + gelaufen);
 
     }
 
@@ -74,5 +84,13 @@ public class Spieler {
 
     public String toString() {
         return getName();
+    }
+
+    public void setAchievement(String achievement, String value) {
+        achievements.put(achievement, value);
+    }
+
+    public ObservableMap<String, String> getAchievements() {
+        return achievements;
     }
 }

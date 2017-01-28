@@ -2,26 +2,38 @@ package hearrun.view.layout;
 
 import hearrun.business.Main;
 import hearrun.business.Spieler;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Created by joshuabarth on 09.01.17.
  */
 public class SpielerAnzeige extends VBox {
-    public SpielerAnzeige(ArrayList<Spieler> spielerListe, String position) {
-        this.setId("sideBar");
+    private Stage stage;
+    public SpielerAnzeige(ArrayList<Spieler> spielerListe, String position, Stage stage) {
         this.setMaxWidth(200);
+        this.setMinWidth(200);
+        this.stage = stage;
 
+        VBox oben;
 
-        FlowPane oben;
-
-        FlowPane unten;
+        VBox unten;
 
         if (position.equals("links")) {
             // Spielernamen anzeigen
@@ -31,7 +43,7 @@ public class SpielerAnzeige extends VBox {
             if (spielerListe.size() > 2) { // Mehr als 2 Spieler: zeige oben und unten einen Spieler an.
                 unten = initSpielerAnzeige(2, spielerListe);
             } else { // sonst unten leer lassen
-                unten = new FlowPane();
+                unten = new VBox();
             }
         } else { // Position "rechts"
             if (spielerListe.size() > 1) { // Mehr als 1 Spieler: zeige oben einen Spieler an.
@@ -40,25 +52,45 @@ public class SpielerAnzeige extends VBox {
                 if (spielerListe.size() > 3) { // 4 Spieler: zeige unten auch einen Spieler an.
                     unten = initSpielerAnzeige(3, spielerListe);
                 } else { // Sonst lass unten leer
-                    unten = new FlowPane();
+                    unten = new VBox();
                 }
 
             } else { // nur ein Spieler: lass oben und unten leer.
-                oben = new FlowPane();
-                unten = new FlowPane();
+                oben = new VBox();
+                unten = new VBox();
             }
         }
 
         this.getChildren().addAll(oben, unten);
     }
 
-    private FlowPane initSpielerAnzeige(int spielerNummer, ArrayList<Spieler> spielerListe) {
-        FlowPane anzeige = new FlowPane();
+    private VBox initSpielerAnzeige(int spielerNummer, ArrayList<Spieler> spielerListe) {
+        VBox anzeige = new VBox();
+        anzeige.prefHeightProperty().bind(stage.heightProperty());
+        anzeige.setAlignment(Pos.TOP_CENTER);
+        anzeige.getStyleClass().add("spieler-box");
 
-        Circle spielerFarbe = new Circle(20);
+        StackPane spielerFarbe = new StackPane();
+        Circle farbKreis = new Circle(20);
+        farbKreis.setFill(getfarbeByNummer(spielerNummer));
+        Label nummerLabel = new Label("" + (spielerNummer + 1));
+        nummerLabel.getStyleClass().add("spieler-nummer");
+        spielerFarbe.getChildren().addAll(farbKreis, nummerLabel);
+        spielerFarbe.setAlignment(Pos.CENTER);
+
+        ListView<String> achievements = new ListView<>();
+        ObservableMap<String, String> achievementsMap = spielerListe.get(spielerNummer).getAchievements();
+        achievements.getItems().setAll(achievementsMap.values());
+
+        achievements.setMaxHeight(100);
+        spielerListe.get(spielerNummer).getAchievements().addListener((MapChangeListener<String, String> ) change -> {
+            achievements.getItems().removeAll();
+            achievements.getItems().setAll(achievementsMap.values());
+        });
+
+
         Label spielerName = new Label(spielerListe.get(spielerNummer).getName());
-        spielerFarbe.setFill(getfarbeByNummer(spielerNummer));
-        anzeige.getChildren().addAll(spielerFarbe, spielerName);
+        anzeige.getChildren().addAll(spielerFarbe, spielerName, achievements);
 
         return anzeige;
     }
