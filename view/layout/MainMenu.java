@@ -225,7 +225,6 @@ public class MainMenu extends VBox {
             pfad.setText(newpath);
             spielController.getProperties().setProperty("musicPath", newpath);
 
-            spielController.beendeSpiel();
             spielController.ladeMusik();
         });
     }

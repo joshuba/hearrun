@@ -228,6 +228,7 @@ public class ViewController {
     }
 
     public void resetGameLayout(){
+
         spielController.getLayout().resetGameLayout();
     }
 

@@ -59,7 +59,6 @@ public class CompleteLayout extends StackPane {
     public void resetGameLayout(){
         this.getChildren().removeAll(gameLayout);
         gameLayout = new GameLayout(stage, spielController, viewController);
-
     }
 
     public MainMenu getMainMenu(){
