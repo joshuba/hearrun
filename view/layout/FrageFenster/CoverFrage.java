@@ -1,28 +1,21 @@
 package hearrun.view.layout.FrageFenster;
 
-import hearrun.business.Fragetyp;
 import hearrun.business.Main;
-import hearrun.business.Player;
 import hearrun.business.SpielController;
-import hearrun.business.fragen.CoverTitelFrage;
 import hearrun.business.fragen.CoverWahlFrage;
 import hearrun.business.fragen.Frage;
-import hearrun.view.layout.Wuerfel;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.animation.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import java.util.AbstractCollection;
 
 /**
  * Created by joshuabarth on 16.01.17.
@@ -32,6 +25,7 @@ public class CoverFrage extends FrageFenster {
     private ImageView richtigButton;
     private ImageView cover;
     private HBox alleCover;
+
 
 
     public CoverFrage(Frage frage, SpielController spielController){
@@ -47,7 +41,10 @@ public class CoverFrage extends FrageFenster {
         buttons [3] = new ImageView();
         alleCover.getChildren().addAll(buttons[0], buttons[1], buttons[2], buttons[3]);
 
+        hover();
         vBox.getChildren().addAll(textfeld, alleCover);
+        vBox.setPadding(new Insets(0,0,100,0));
+
 
 
         richtigButton = buttons[frage.getRichtigIndex()];
@@ -64,15 +61,20 @@ public class CoverFrage extends FrageFenster {
         buttons[3].setOnMouseClicked((e)-> buttonPress(buttons[3]));
 
 
-            buttons[0].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+
+
+
+
+
+            buttons[0].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
             buttons[0].setPreserveRatio(true);
-            buttons[1].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+            buttons[1].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
             buttons[1].setPreserveRatio(true);
-            buttons[2].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+            buttons[2].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
             buttons[2].setPreserveRatio(true);
-            buttons[3].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(700));
+            buttons[3].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
             buttons[3].setPreserveRatio(true);
-            alleCover.setSpacing(8);
+            alleCover.setSpacing(16);
             alleCover.setAlignment(Pos.CENTER);
 
 
@@ -99,7 +101,7 @@ public class CoverFrage extends FrageFenster {
             this.falschRichtig.setValue(1);
             fertig();
 
-            effectPlayer.play(Main.class.getResource("../resources/sounds/right.mp3").getPath());
+            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/right.mp3").getPath());
 
 
         }else{
@@ -107,7 +109,7 @@ public class CoverFrage extends FrageFenster {
             this.falschRichtig.setValue(0);
             fertig();
 
-            effectPlayer.play(Main.class.getResource("../resources/sounds/wrong.mp3").getPath());
+            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
 
         }
 
@@ -146,7 +148,7 @@ public class CoverFrage extends FrageFenster {
         Timeline t = new Timeline(k);
         t.setCycleCount(6);
         if(falschRichtig.getValue() == -1){
-            effectPlayer.play(Main.class.getResource("../resources/sounds/wrong.mp3").getPath());
+            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
 
         }
 
@@ -155,6 +157,40 @@ public class CoverFrage extends FrageFenster {
 
 
     }
+
+    public void hover(){
+
+        for(int i=0; i<buttons.length;i++){
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), buttons[i]);
+            scaleTransition.setCycleCount(1);
+            scaleTransition.setInterpolator(Interpolator.EASE_IN);
+
+
+            buttons[i].setOnMouseEntered((MouseEvent t) -> {
+                scaleTransition.setFromX(getScaleX());
+                scaleTransition.setFromY(getScaleY());
+                scaleTransition.setToX(1.08);
+                scaleTransition.setToY(1.08);
+                scaleTransition.playFromStart();
+            });
+
+            buttons[i].setOnMouseExited((MouseEvent t) -> {
+                scaleTransition.setFromX(getScaleX());
+                scaleTransition.setFromY(getScaleY());
+                scaleTransition.setToX(1);
+                scaleTransition.setToY(1);
+                scaleTransition.playFromStart();
+            });
+
+
+        }
+
+
+
+
+    }
+
+
 
 
 

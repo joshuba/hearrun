@@ -1,4 +1,4 @@
-*SimpleMap
+*Slalom
 *15
 *9
 #C I I T T T C T E F I C T E F

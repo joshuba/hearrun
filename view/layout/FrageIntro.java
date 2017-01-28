@@ -37,10 +37,14 @@ public class FrageIntro extends HBox {
     }
 
     public void start(){
+        Feld aktfeld = spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY());
 
-        ScaleTransition st = new ScaleTransition(Duration.millis(500), bild);
-        st.setByX(150f);
-        st.setByY(150f);
+        ScaleTransition st = new ScaleTransition(Duration.millis(500)), bild;
+        st.setByX(1.5f);
+        st.setByY(1.5f);
+        st.byXProperty().bind(this.widthProperty());
+        st.byYProperty().bind(this.heightProperty());
+
         st.setAutoReverse(false);
 
         ScaleTransition st2 = new ScaleTransition(Duration.millis(500), this);
@@ -55,7 +59,7 @@ public class FrageIntro extends HBox {
             st2.play();
         });
 
-        KeyFrame k2 = new KeyFrame(Duration.millis(200), a ->{
+        KeyFrame k2 = new KeyFrame(Duration.millis(1000), a ->{
             st.play();
         });
 

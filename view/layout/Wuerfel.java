@@ -82,7 +82,7 @@ public class Wuerfel extends VBox{
 
 
     public void wuerfelProzess(){
-        spielcontroller.getMusicPlayer().play(Main.class.getResource("../resources/sounds/wuerfel.mp3").getPath());
+        spielcontroller.getMusicPlayer().play(Main.class.getResource("/hearrun/resources/sounds/wuerfel.mp3").getPath());
         wuerfeln.setDisable(true);
         ergebnis = wuerfeln();
         System.out.println("Ergebnis: " + ergebnis);

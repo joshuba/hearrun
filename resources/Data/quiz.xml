@@ -6,7 +6,7 @@
       <antwort korrekt="nein">Rihanna</antwort>
       <antwort korrekt="nein">Jack Sparrow</antwort>
       <antwort korrekt="nein">Peter Gabriel</antwort>
-      <antwort korrekt="ja">Ringo Star</antwort>
+      <antwort korrekt="ja">Ringo Starr</antwort>
     </antwortmoeglichkeiten>
   </frage>
 
@@ -76,7 +76,7 @@
             <antwort korrekt="ja">Diamonds</antwort>
             <antwort korrekt="nein">Juwels</antwort>
             <antwort korrekt="nein">Gold</antwort>
-            <antwort korrekt="nein">Silver</antwort>
+            <antwort korrekt="nein">LSD</antwort>
         </antwortmoeglichkeiten>
     </frage>
 
@@ -87,6 +87,16 @@
             <antwort korrekt="nein">Herr Barth</antwort>
             <antwort korrekt="nein">Justin Biber</antwort>
             <antwort korrekt="ja">Wolfgang Amadeus Mozart</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage stufe="1">
+        <fragetext>Wofür stehen die Begriffe "piano" und "forte" in der Musik?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Hoch und tief</antwort>
+            <antwort korrekt="nein">Fest und weich</antwort>
+            <antwort korrekt="ja">Leise und laut</antwort>
+            <antwort korrekt="nein">Schnell und langsam</antwort>
         </antwortmoeglichkeiten>
     </frage>
 

@@ -1,6 +1,7 @@
 package hearrun.view.controller;
 
 import hearrun.business.Fragetyp;
+import hearrun.business.Main;
 import hearrun.business.SpielController;
 import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
@@ -14,6 +15,9 @@ import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -73,7 +77,8 @@ public class ViewController {
                 Duration.millis(400),
                 a -> {
                     nextPossibleField(s);
-                    spielController.getEffectPlayer().play("src/hearrun/resources/sounds/move.mp3");
+                    spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath());
+
                 }));
         forward.setCycleCount(anz);
 
@@ -81,7 +86,7 @@ public class ViewController {
                 Duration.millis(400),
                 a -> {
                     lastPossibleField(s);
-                    spielController.getEffectPlayer().play("src/hearrun/resources/sounds/move.mp3"); //Spiele sound nur so oft wie feld gewechselt wird
+                    spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath()); //Spiele sound nur so oft wie feld gewechselt wird
 
                 }));
         back.setCycleCount(anz);
@@ -94,8 +99,9 @@ public class ViewController {
         }else{
             if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann
                 back.play();
+
             }else{
-                spielController.getEffectPlayer().play("src/hearrun/resources/sounds/moveFailure.mp3"); //Falls kein Feld mehr da ist
+                spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/moveFailure.mp3").getPath()); //Falls kein Feld mehr da ist
                 feldBlinkenLassen(0,0);
 
             }
@@ -119,6 +125,7 @@ public class ViewController {
                 spieler.move(x + 1, y); //bewegeSPieler
                 map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY())); //Setze aktuelles Feld zurueck
                 spielController.getAktSpiel().getAktMap().getFeld(x + 1, y).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY())); //Setze neues Feld auf besetzt
+                map.getFeld(x+1, y).zoomIn();
 
             }
             //nach links
@@ -126,20 +133,27 @@ public class ViewController {
                 spieler.move(x - 1, y);
                 map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
                 map.getFeld(x - 1, y).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+                map.getFeld(x-1, y).zoomIn();
+
             }
             //nach Oben
             else if (y - 1 >= 0 && map.getFeld(x, y - 1).getFeldtyp() != Feldtyp.LeeresFeld && y - 1 != spieler.getLastY()) {
                 spieler.move(x, y - 1);
                 map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
                 map.getFeld(x, y - 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+                map.getFeld(x, y-1).zoomIn();
+
             }
             //nach unten
             else if (y + 1 <= map.getFeldHoehe() && map.getFeld(x, y + 1).getFeldtyp() != Feldtyp.LeeresFeld && y + 1 != spieler.getLastY()) {
                 spieler.move(x, y + 1);
                 map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
                 map.getFeld(x, y + 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
+                map.getFeld(x, y+1).zoomIn();
+
             }
             erkenneFeldId(x,y);
+
 
 
     }
@@ -156,6 +170,7 @@ public class ViewController {
             spieler.moveBack(); //Gehe zurück
             map.getFeld(x, y).setBesetztID(erkenneFeldId(x, y)); //Setze aktuelles Feld zurueck
             spielController.getAktSpiel().getAktMap().getFeld(spieler.getAktX(), spieler.getAktY()).setBesetztID(erkenneFeldId(spieler.getAktX(), spieler.getAktY())); //Setze neues Feld auf b
+            map.getFeld(spieler.getAktX(), spieler.getAktY()).zoomIn();
 
         }
 
@@ -186,6 +201,8 @@ public class ViewController {
         String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString() + idZahl;
         feldtyp = feldtyp.toLowerCase();
         System.out.println(feldtyp);
+
+
         return feldtyp;
 
     }
@@ -216,7 +233,7 @@ public class ViewController {
 
     public void zeigeFrage(Frage frage, Fragetyp fragetyp){
 
-        if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage){
+        if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage || fragetyp == Fragetyp.FaktFrage){
             ButtonFrage bf = new ButtonFrage(frage, spielController);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeFrageFenster(bf);
@@ -294,8 +311,28 @@ public class ViewController {
         fadeout.getKeyFrames().addAll(k1, k2);
         fadeout.play();
 
+
+
     }
 
+    public void macheFelderKlickbar(){
+        int breite = spielController.getAktSpiel().getAktMap().getFeldBreite();
+        int hoehe = spielController.getAktSpiel().getAktMap().getFeldHoehe();
+        for(int i = 0; i<breite;i++){
+            for(int j=0; j<hoehe; j++){
+                Feld f = spielController.getAktSpiel().getAktMap().getFeld(i,j);
+                EventHandler<MouseEvent> panePressed = (e -> {
+
+                    if (e.getButton() == MouseButton.PRIMARY && f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY())){
+                        spielController.stelleAktFrage();
+                    }
+                });
+                f.addEventHandler(MouseEvent.MOUSE_PRESSED, panePressed);
+
+
+            }
+        }
+    }
 
 
 

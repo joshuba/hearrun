@@ -44,9 +44,11 @@ public class SpielController {
 
 
     private void waehleMapErstelleSpiel(Map map, ArrayList<Spieler> spielerListe) {
-        this.aktSpiel = new Spiel(map, spielerListe, completeLayout.getViewController()); //Erstelle spiel
+        this.aktSpiel = new Spiel(map, spielerListe, this); //Erstelle spiel
         completeLayout.getViewController().baueSpielfeldAuf();
         completeLayout.getViewController().setFeldId(0, 0, completeLayout.getViewController().erkenneFeldId(0, 0)); //Setze Alle Player aufs erste Feld
+        getLayout().getViewController().macheFelderKlickbar();
+
     }
 
 
@@ -61,6 +63,7 @@ public class SpielController {
 
     public void nextSpieler() {
         this.getAktSpiel().nextSpieler();
+
     }
 
     public Spiel getAktSpiel() {
