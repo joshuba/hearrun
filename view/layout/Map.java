@@ -25,6 +25,7 @@ public class Map {
         this.dateiName = dateiName;
 
 
+
         try {
             BufferedReader r = new BufferedReader(new FileReader(dateiName));
             String line = r.readLine();

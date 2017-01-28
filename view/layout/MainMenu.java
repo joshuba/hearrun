@@ -158,7 +158,7 @@ public class MainMenu extends VBox {
         removeSpieler.setOnAction(e -> {
             spielerliste.remove(spieler.getSelectionModel().getSelectedIndex());
             spielerObs.remove(spieler.getSelectionModel().getSelectedIndex());
-    });
+        });
 
         addSpieler.fire();
     }
