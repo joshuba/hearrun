@@ -57,9 +57,19 @@ public class CoverWahlFrage extends Frage {
         // Antworten generieren
         for (int i = 0; i < 3; i++) {
             Image randAntwort = alleCover[(int) (Math.random() * alleCover.length)];
-            if (!randAntwort.equals(srcCover))
-                antworten.add(randAntwort);
-            else
+            if (!randAntwort.equals(srcCover)) {
+                boolean add = true;
+
+                for (Image img : antworten) {
+                    if (img.equals(randAntwort)) {
+                        i--;
+                        add = false;
+                        break;
+                    }
+                }
+                if (add)
+                    antworten.add(randAntwort);
+            } else
                 i--;
         }
         antworten.add(srcCover);
@@ -82,10 +92,9 @@ public class CoverWahlFrage extends Frage {
         return new CoverWahlFrage(fragetext, richtigIndex, antworten.toArray(new Image[antworten.size()]), path);
     }
 
-    public Image getCover(int i){
+    public Image getCover(int i) {
         return antworten[i];
     }
-
 
 
 }
