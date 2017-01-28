@@ -79,6 +79,8 @@ public class FrageController {
 
     public void leseMusikEin(String path) {
         spielController.getLayout().getViewController().zeigeLadeScreen(readingOnOff, musicReadingProgress, fragenAnzahl);
+        readingOnOff.setValue(false);
+
         leseEinGeneriereFragen(path);
     }
 
@@ -215,7 +217,6 @@ public class FrageController {
             fragenAnzahl.set(alleFragen.size());
 
             readingOnOff.setValue(true);
-            readingOnOff.setValue(false);
 
 
             System.out.println(alleFragen.size() - alleFragen.size(Fragetyp.FaktFrage) + " Fragen generiert aus " + tracks.size() + " Songs.");
