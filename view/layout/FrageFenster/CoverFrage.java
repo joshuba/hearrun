@@ -42,8 +42,7 @@ public class CoverFrage extends FrageFenster {
         alleCover.getChildren().addAll(buttons[0], buttons[1], buttons[2], buttons[3]);
 
         hover();
-        vBox.getChildren().addAll(textfeld, alleCover);
-        vBox.setPadding(new Insets(0,0,100,0));
+        vBox.getChildren().addAll(textfeld, alleCover, wuerfelBox);
 
 
 
@@ -66,13 +65,13 @@ public class CoverFrage extends FrageFenster {
 
 
 
-            buttons[0].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[0].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[0].setPreserveRatio(true);
-            buttons[1].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[1].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[1].setPreserveRatio(true);
-            buttons[2].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[2].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[2].setPreserveRatio(true);
-            buttons[3].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().subtract(750));
+            buttons[3].fitHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty().divide(4));
             buttons[3].setPreserveRatio(true);
             alleCover.setSpacing(16);
             alleCover.setAlignment(Pos.CENTER);
