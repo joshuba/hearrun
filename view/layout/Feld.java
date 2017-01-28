@@ -1,12 +1,19 @@
 package hearrun.view.layout;
 
 import hearrun.business.Fragetyp;
+import hearrun.business.Spiel;
+import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
+import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -18,11 +25,13 @@ import java.util.Random;
  */
 public class Feld extends HBox{
     private Feldtyp feldtyp;
+    private SpielController spielController;
 
 
 
-    public Feld(Feldtyp feldtyp, ViewController viewController){
+    public Feld(Feldtyp feldtyp, SpielController spielController){
         this.feldtyp = feldtyp;
+        this.spielController = spielController;
         setLeer();
         /*
         RotateTransition rt = new RotateTransition(Duration.millis(1000), this);
@@ -30,11 +39,14 @@ public class Feld extends HBox{
         rt.setCycleCount(200);
         rt.setAutoReverse(true);
         rt.play();
+
 */
 
 
-        this.prefHeightProperty().bind(viewController.getStage().heightProperty());
-        this.prefWidthProperty().bind(viewController.getStage().widthProperty());
+
+
+        this.prefHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty());
+        this.prefWidthProperty().bind(spielController.getLayout().getViewController().getStage().widthProperty());
     }
 
     public Feldtyp getFeldtyp(){
@@ -98,18 +110,37 @@ public class Feld extends HBox{
 
         }
         return null;
-
-
     }
 
     public void zoomIn(){
-        ScaleTransition st = new ScaleTransition(Duration.millis(2000), this);
-        st.setByX(1.2f);
-        st.setByY(1.2f);
-        st.setAutoReverse(true);
+        ScaleTransition st = new ScaleTransition(Duration.millis(50), this);
+        st.setByX(0.2f);
+        st.setByY(0.2f);
+        st.setAutoReverse(false);
 
-        st.play();
+        ScaleTransition st2 = new ScaleTransition(Duration.millis(50), this);
+        st2.setByX(-0.2f);
+        st2.setByY(-0.2f);
+        st2.setAutoReverse(false);
+
+
+
+        KeyFrame k1 = new KeyFrame(Duration.millis(200), a ->{
+            st.play();
+        });
+        KeyFrame k2 = new KeyFrame(Duration.millis(100), a ->{
+            st2.play();
+        });
+        Timeline t = new Timeline(k2,k1);
+        t.play();
+
+
+
     }
+
+
+
+
 
 
 

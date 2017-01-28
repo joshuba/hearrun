@@ -12,10 +12,10 @@ public class Spiel {
     private Map aktMap;
     private ArrayList<Spieler> spielerListe;
     private int aktSpieler;
-    private ViewController viewController;
+    private SpielController spielController;
 
-    public Spiel(Map map, ArrayList<Spieler> spielerListe, ViewController viewController){
-        this.viewController = viewController;
+    public Spiel(Map map, ArrayList<Spieler> spielerListe, SpielController spielController){
+        this.spielController = spielController;
         this.spielerListe = new ArrayList<>();
         this.aktMap = map;
         this.spielerListe = spielerListe;
@@ -27,7 +27,7 @@ public class Spiel {
     }
 
     public void leseMapVonDateiEin(String mapName){
-        this.aktMap = new Map(mapName, viewController);
+        this.aktMap = new Map(mapName, spielController);
 
     }
 
@@ -57,4 +57,6 @@ public class Spiel {
     public void setPlayerNames(int nr, String name){
         spielerListe.get(nr).setName(name);
     }
+
+
 }

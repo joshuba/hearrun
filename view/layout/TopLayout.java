@@ -23,12 +23,12 @@ public class TopLayout extends VBox {
 
 
         Button settings = new Button("Menü");
-        Button frage = new Button("FRAGE STELLEN");
+        //Button frage = new Button("FRAGE STELLEN");
 
         settings.setOnAction((e) -> viewController.setMainMenu());
-        frage.setOnAction((e) -> spielController.stelleAktFrage());
+        //frage.setOnAction((e) -> spielController.stelleAktFrage());
 
 
-        this.getChildren().addAll(settings, frage);
+        this.getChildren().addAll(settings);
     }
 }

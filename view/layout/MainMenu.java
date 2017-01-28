@@ -175,7 +175,7 @@ public class MainMenu extends VBox {
         ObservableList <Map> mapsList = FXCollections.observableArrayList();
 
         for (File f : maps)
-            mapsList.add(new Map(f.getPath(), viewController));
+            mapsList.add(new Map(f.getPath(), spielController));
         return mapsList;
 
     }

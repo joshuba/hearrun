@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
 //import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ public class Map {
     private int feldHoehe;
     private String dateiName;
 
-    public Map(String dateiName, ViewController viewController){
+    public Map(String dateiName, SpielController spielController){
         this.dateiName = dateiName;
 
 
@@ -44,7 +45,7 @@ public class Map {
                 line = line.substring(1);
                 String zeichen [] = line.split(" ");
                 for (int i = 0; i<zeichen.length; i++){
-                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), viewController);
+                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), spielController);
                        spielFeld[i][row] = feld;
 
                 }
