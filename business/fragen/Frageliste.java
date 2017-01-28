@@ -113,6 +113,14 @@ public class Frageliste {
                 interpretFragen.size() +
                 titelFragen.size();
     }
+
+    public void clear() {
+        faktFragen.clear();
+        titelFragen.clear();
+        interpretFragen.clear();
+        coverTitelFragen.clear();
+        coverWahlFragen.clear();
+    }
 }
 
 

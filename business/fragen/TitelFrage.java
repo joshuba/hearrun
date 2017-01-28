@@ -47,6 +47,17 @@ public class TitelFrage extends Frage {
             ID3v2 randAntwort = alleTitel[(int) (Math.random() * alleTitel.length)];
             if(!(randAntwort.getTitle() == null) &&
                     !randAntwort.getTitle().equals(titel)) { // zweifach richtige antwort durch Titel vermeiden
+
+                boolean add = true;
+
+                for (String s : antworten) {
+                    if (s.equals(randAntwort.getTitle())) {
+                        i--;
+                        add = false;
+                        break;
+                    }
+                }
+
                 antworten.add(randAntwort.getTitle());
             }else
                 i--;

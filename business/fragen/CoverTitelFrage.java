@@ -19,11 +19,11 @@ import java.util.Collections;
 /**
  * Created by Josh on 28.12.16.
  */
-public class CoverTitelFrage extends Frage{
+public class CoverTitelFrage extends Frage {
 
     private Image cover;
 
-    public CoverTitelFrage(String fragetext, String [] antworten, int richtigIndex, Image cover){
+    public CoverTitelFrage(String fragetext, String[] antworten, int richtigIndex, Image cover) {
         super(fragetext, antworten, richtigIndex);
         this.cover = cover;
 
@@ -52,13 +52,25 @@ public class CoverTitelFrage extends Frage{
             ArrayList<String> antworten = new ArrayList<>();
 
 
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
                 ID3v2 randAntwort = alleTitel[(int) (Math.random() * alleTitel.length)];
 
-                if(!(randAntwort.getTitle() == null && randAntwort.getAlbum() == null) &&
+                if (!(randAntwort.getTitle() == null && randAntwort.getAlbum() == null) &&
                         !randAntwort.getTitle().equals(titel) && !randAntwort.getAlbum().equals(srctags.getAlbum())) {//zweifach richtige antwort durch titel / album vermeiden
-                    antworten.add(randAntwort.getTitle());
-                }else {
+
+                    boolean add = true;
+
+                    for (String s : antworten) {
+                        if (s.equals(randAntwort.getTitle())) {
+                            i--;
+                            add = false;
+                            break;
+                        }
+                    }
+
+                    if (add)
+                        antworten.add(randAntwort.getTitle());
+                } else {
                     i--;
                 }
 
@@ -69,7 +81,7 @@ public class CoverTitelFrage extends Frage{
             int richtigIndex = -1;
             //richtigIndex finden
             for (int i = 0; i < antworten.size(); i++) {
-                if(antworten.get(i).equals(titel)){
+                if (antworten.get(i).equals(titel)) {
                     richtigIndex = i;
                     break;
                 }
@@ -80,9 +92,9 @@ public class CoverTitelFrage extends Frage{
                     "Welcher Titel erscheint in diesem Album?",
                     "Auf diesem Album ist einer der folgenden Titel erschienen. Welcher ist es?",
                     "Einer der folgenden Titel ist Teil dieses Albums. Welcher ist es?"};
-            String fragetext = texte[(int)(Math.random() * texte.length)];
+            String fragetext = texte[(int) (Math.random() * texte.length)];
 
-            return new CoverTitelFrage(fragetext,antworten.toArray(new String[antworten.size()]), richtigIndex, cover);
+            return new CoverTitelFrage(fragetext, antworten.toArray(new String[antworten.size()]), richtigIndex, cover);
 
 
         } catch (IOException e) {
@@ -91,7 +103,7 @@ public class CoverTitelFrage extends Frage{
         return null;
     }
 
-    public Image getCover(){
+    public Image getCover() {
         return this.cover;
     }
 
