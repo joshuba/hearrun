@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -62,6 +63,7 @@ public class Wuerfel extends VBox{
             this.setPadding(new Insets(30,0,0,0));
             this.getChildren().addAll(iv, wuerfeln, anzeige);
             wuerfeln.setOnAction((e) -> wuerfelProzess());
+
 
         }
 

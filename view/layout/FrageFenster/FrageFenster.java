@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -187,6 +188,7 @@ public class FrageFenster extends BorderPane {
         w.setAlignment(Pos.CENTER);
         this.getChildren().add(w);
         wuerfelBox.getChildren().addAll(w);
+
     }
 
 
