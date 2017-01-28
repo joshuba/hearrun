@@ -130,8 +130,6 @@ public class FrageFenster extends BorderPane {
 
 
 
-
-
     }
 
     public void starteAntworPhase(){
@@ -189,6 +187,7 @@ public class FrageFenster extends BorderPane {
         Wuerfel w = new Wuerfel(index, spielController);
         w.setAlignment(Pos.CENTER);
         this.getChildren().add(w);
+        w.requestFocus(); // Fokus darauf setzen damit Shortcut funktioniert.
         wuerfelBox.getChildren().addAll(w);
 
     }
