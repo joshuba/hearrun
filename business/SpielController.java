@@ -219,4 +219,8 @@ public class SpielController {
     public void setSpieler(ArrayList<Spieler> spielerListe) {
         this.spielerListe = spielerListe;
     }
+
+    public ArrayList<Spieler> getSpielerListe() {
+        return this.spielerListe;
+    }
 }

@@ -2,6 +2,8 @@ package hearrun.business;
 
 
 import com.sun.javafx.scene.paint.GradientUtils;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,8 +21,6 @@ public class Spieler {
         log = new ArrayList<>();
         log.add(new Point(0,0)); //Für den Start wird die letzte Position auf 0 gesetzt
         log.add(new Point(0,0)); //aktPos
-
-
     }
 
     public void move(int x, int y){

@@ -27,8 +27,8 @@ import javafx.util.Duration;
 public class ViewController {
     private Stage stage;
     private CenterLayout centerLayout;
-    private SideBar leftLayout;
-    private SideBar rightLayout;
+    private SpielerAnzeige leftLayout;
+    private SpielerAnzeige rightLayout;
     private SpielController spielController;
 
 
@@ -42,11 +42,11 @@ public class ViewController {
         this.centerLayout = centerLayout;
     }
 
-    public void setLeftLayout(SideBar leftLayout) {
+    public void setLeftLayout(SpielerAnzeige leftLayout) {
         this.leftLayout = leftLayout;
     }
 
-    public void setRightLayout(SideBar rightLayout) {
+    public void setRightLayout(SpielerAnzeige rightLayout) {
         this.rightLayout = rightLayout;
     }
 

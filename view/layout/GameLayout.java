@@ -2,8 +2,10 @@ package hearrun.view.layout;
 
 import hearrun.business.SpielController;
 import hearrun.view.controller.ViewController;
+import javafx.scene.control.Button;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -17,8 +19,8 @@ public class GameLayout extends BorderPane{
 
         //Panes initalisieren
         CenterLayout centerLayout = new CenterLayout(viewController);
-        SideBar leftLayout = new SideBar();
-        SideBar rightLayout = new SideBar();
+        SpielerAnzeige leftLayout = new SpielerAnzeige(spielController.getSpielerListe(), "links");
+        SpielerAnzeige rightLayout = new SpielerAnzeige(spielController.getSpielerListe(), "rechts");
         TopLayout topLayout = new TopLayout(viewController, spielController);
 
         //Komponenten zusammenfügen
@@ -31,8 +33,6 @@ public class GameLayout extends BorderPane{
         viewController.setCenterLayout(centerLayout);
         viewController.setLeftLayout(leftLayout);
         viewController.setRightLayout(rightLayout);
-
-
     }
 
     public void Blury(boolean anAus){

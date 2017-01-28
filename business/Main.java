@@ -3,6 +3,7 @@ package hearrun.business;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -12,6 +13,12 @@ import java.util.Properties;
  * Created by Josh on 09.01.17
  */
 public class Main extends Application {
+    public static final Color spielerEinsFarbe = new Color(221f/255, 66f/255, 85f/255, 1);
+    public static final Color spielerZweiFarbe = new Color(51f/255, 195f/255, 98f/255, 1);
+    public static final Color spielerDreiFarbe = new Color(47f/255, 42f/255, 1, 1);
+    public static final Color spielerVierFarbe = new Color(109f/255, 106f/255, 94f/255, 1);
+
+
     private Stage primaryStage;
     private SpielController spielController;
 
@@ -24,6 +31,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        System.out.println(221f/225);
         this.primaryStage = primaryStage;
         spielController = new SpielController(primaryStage);
 

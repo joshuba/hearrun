@@ -71,8 +71,6 @@ public class MainMenu extends VBox {
     public void newGameWindow() {
         //Entferne Hauptmenü
         removeAllElements();
-        spielController.getLayout().resetGameLayout();
-
 
         //Baue neues Menü auf
         BorderPane menuContainer = new BorderPane();
@@ -131,6 +129,7 @@ public class MainMenu extends VBox {
         start.setOnAction((e) -> {
             spielController.setMap(maps.getSelectionModel().getSelectedItem());
             spielController.setSpieler(spielerliste);
+            spielController.getLayout().resetGameLayout();
             spielController.starteSpiel();
         });
 
