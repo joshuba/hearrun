@@ -85,20 +85,16 @@ public class FrageController {
     private void leseEinGeneriereFragen(String path) {
 
         new Thread(() -> {
-
+            tracks.clear();
+            alleFragen.clear();
             leseOrdnerEin(new File(path));
             musicReadingProgress.setValue(0);
             fragenAnzahl.setValue(0);
 
-
-            // dateien in Frageobjekte parsen
-            // checken, wieviele Fragen pro Typ ca erstellt werden können
-            // int anz = tracks.size() / MENGE_FRAGETYP;
-            // Alle titel einlesen
             ID3v2[] titel = new ID3v2[tracks.size()];
 
-            for (int i = 0; i < tracks.size(); i++){
-                musicReadingProgress.setValue(musicReadingProgress.get() + 0.05/tracks.size());
+            for (int i = 0; i < tracks.size(); i++) {
+                musicReadingProgress.setValue(musicReadingProgress.get() + 0.05 / tracks.size());
                 try {
                     titel[i] = new Mp3File(tracks.get(i).getAbsolutePath()).getId3v2Tag();
 
@@ -110,7 +106,7 @@ public class FrageController {
 
             // Alle Cover einlesen
             ArrayList<Image> covers = new ArrayList<>();
-            musicReadingProgress.setValue(musicReadingProgress.get() + 0.1/tracks.size());
+            musicReadingProgress.setValue(musicReadingProgress.get() + 0.1 / tracks.size());
             for (File track : tracks) {
                 try {
                     Mp3File mp3 = new Mp3File(track.getAbsolutePath());
@@ -123,7 +119,7 @@ public class FrageController {
 
                 } catch (UnsupportedTagException | IOException | InvalidDataException e) {
                     e.printStackTrace();
-                }catch (NullPointerException e){
+                } catch (NullPointerException e) {
                     System.out.println(track.getName());
                     e.printStackTrace();
                 }
@@ -310,7 +306,7 @@ public class FrageController {
             // Füge die Frage der Frageliste hinzu
             alleFragen.add(new FaktFrage(fragetext, antwortTexte, richtigIndex));
         }
-
-
     }
+
+
 }
