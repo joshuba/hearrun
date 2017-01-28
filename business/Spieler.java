@@ -30,6 +30,10 @@ public class Spieler {
         log.add(new Point(0,0)); //aktPos
         achievements = FXCollections.observableHashMap();
         gelaufen = 0;
+
+        achievements.put("gelaufen", "Gelaufene Felder: " + gelaufen);
+        achievements.put("fragen", "Richtige Fragen: " + gelaufen);
+
     }
 
     public void move(int x, int y){
@@ -69,7 +73,7 @@ public class Spieler {
     public void moveBack(){
 
             log.remove(log.size()-1);
-            gelaufen--;
+            gelaufen++;
             achievements.put("gelaufen", "Gelaufene Felder: " + gelaufen);
 
     }

@@ -6,8 +6,10 @@ import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Wuerfel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -165,7 +167,7 @@ public class FrageFenster extends BorderPane {
     protected void fertig(){
         musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
-
+        aktualisiereAchievement();
     }
 
 
@@ -195,6 +197,18 @@ public class FrageFenster extends BorderPane {
     public void getProgress(){
         progress.setValue(progressWert);
         progressWert += progressIndex;
+
+    }
+
+    protected void aktualisiereAchievement() {
+        // Statistik zu gewonnenen Spielen aktualisieren
+        if (falschRichtig.getValue() == 1) {
+            ObservableMap<String, String> achievements = spielController.getAktSpiel().getAktSpieler().getAchievements();
+            int gewonneneSpiele = Character.getNumericValue(
+                    achievements.get("fragen").charAt(achievements.get("fragen").length()-1)
+            );
+            achievements.put("fragen", "Richtige Fragen: " + ++gewonneneSpiele);
+        }
 
     }
 

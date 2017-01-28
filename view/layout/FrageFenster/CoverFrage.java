@@ -7,6 +7,7 @@ import hearrun.business.fragen.Frage;
 import javafx.animation.*;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableMap;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -118,8 +119,7 @@ public class CoverFrage extends FrageFenster {
         musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
         disableAllButtons();
-
-
+        aktualisiereAchievement();
     }
 
     public void disableAllButtons(){

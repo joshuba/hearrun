@@ -11,6 +11,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -103,8 +104,7 @@ public class ButtonFrage extends FrageFenster {
         musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
         disableAllButtons();
-
-
+        aktualisiereAchievement();
     }
 
     public void disableAllButtons(){
