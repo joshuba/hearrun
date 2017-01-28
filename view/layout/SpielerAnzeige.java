@@ -81,12 +81,12 @@ public class SpielerAnzeige extends VBox {
         ListView<String> achievements = new ListView<>();
         ObservableMap<String, String> achievementsMap = spielerListe.get(spielerNummer).getAchievements();
         achievements.getItems().setAll(achievementsMap.values());
-
         achievements.setMaxHeight(100);
-        spielerListe.get(spielerNummer).getAchievements().addListener((MapChangeListener<String, String> ) change -> {
+        achievementsMap.addListener((MapChangeListener<String, String> ) change -> {
             achievements.getItems().removeAll();
             achievements.getItems().setAll(achievementsMap.values());
         });
+        achievements.getStyleClass().add("achievements");
 
 
         Label spielerName = new Label(spielerListe.get(spielerNummer).getName());

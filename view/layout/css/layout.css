@@ -99,3 +99,16 @@ Button {
 .spieler-box {
     -fx-font-size: 15;
 }
+
+.achievements .list-cell {
+    -fx-background-color: transparent;
+    -fx-alignment: baseline-center;
+}
+
+.achievements {
+    -fx-background-color: transparent;
+}
+
+.achievements:selected {
+    -fx-border-width: 0;
+}
