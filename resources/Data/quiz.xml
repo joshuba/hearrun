@@ -100,9 +100,88 @@
         </antwortmoeglichkeiten>
     </frage>
 
+    <frage>
+        <fragetext>
+            Wie heißt der deutsche Liedermacher, der 1953 in die DDR übersiedelte und
+            1976 wieder ausgebürgert wurde und in die BRD zurückkam?
+        </fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Reinhard Mey</antwort>
+            <antwort korrekt="ja">Wolf Biermann</antwort>
+            <antwort korrekt="nein">Marius Müller-Westernhagen</antwort>
+            <antwort korrekt="nein">Hannes Wader</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
 
+    <frage>
+        <fragetext>Wie heißen die in der Alpenregion beheimateten, bis zu vier Meter langen Holztrompeten?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="ja">Alphorn</antwort>
+            <antwort korrekt="nein">Schweizer Horn</antwort>
+            <antwort korrekt="nein">Matterhorn</antwort>
+            <antwort korrekt="nein">Schmetterhorn</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
 
+    <frage>
+        <fragetext>Wie heißt der aus Jamaika stammende Begründer der Reggae-Musik?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="ja">Bob Marley</antwort>
+            <antwort korrekt="nein">Dave Barker</antwort>
+            <antwort korrekt="nein">Peter Tosh</antwort>
+            <antwort korrekt="nein">Don Carlos</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
 
+    <frage>
+        <fragetext>Bei welcher Rockband haben die beiden Hauptmitglieder meterlange Bärte?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="ja">ZZ Top</antwort>
+            <antwort korrekt="nein">Motörhead</antwort>
+            <antwort korrekt="nein">AC/DC</antwort>
+            <antwort korrekt="nein">Aerosmith</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage>
+        <fragetext>Wie wird Abbas "Dancing Queen" zu Beginn des Refrains charakterisiert?\n "You are the Dancing Queen..."</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">"...nice and clean only seventeen."</antwort>
+            <antwort korrekt="ja">"...young and sweet only seventeen."</antwort>
+            <antwort korrekt="nein">"...young and sweet I have never seen."</antwort>
+            <antwort korrekt="nein">"...smart and chic only nineteen."</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage>
+        <fragetext>Welche Frau wurde von Fettes Brot aufgefordert, ihre sekundären Geschlechtsteile einzupacken?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Karina</antwort>
+            <antwort korrekt="nein">Aisha</antwort>
+            <antwort korrekt="ja">Bettina</antwort>
+            <antwort korrekt="nein">Alina</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage>
+        <fragetext>Unter welcher Telefonnummer ist Rosi aus dem Spider-Murphy-Gang-Song "Skandal im Sperrbezirk" zu erreichen?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">0611</antwort>
+            <antwort korrekt="nein">34198</antwort>
+            <antwort korrekt="nein">057688</antwort>
+            <antwort korrekt="ja">32168</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
+
+    <frage>
+        <fragetext>In welcher Britpop-Band spielten und stritten die Gallagher-Brüder?</fragetext>
+        <antwortmoeglichkeiten>
+            <antwort korrekt="nein">Bloodhound Gang</antwort>
+            <antwort korrekt="ja">Oasis</antwort>
+            <antwort korrekt="nein">Green Day</antwort>
+            <antwort korrekt="nein">Papa Roach</antwort>
+        </antwortmoeglichkeiten>
+    </frage>
 </fragekatalog>
 
 
