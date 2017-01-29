@@ -3,7 +3,6 @@ package hearrun.view.layout;
 import hearrun.business.Main;
 import hearrun.business.Player;
 import hearrun.business.SpielController;
-import hearrun.view.IntroScreen;
 import hearrun.view.controller.ViewController;
 import hearrun.view.layout.FrageFenster.FrageFenster;
 import javafx.geometry.Pos;

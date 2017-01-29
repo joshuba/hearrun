@@ -1,4 +1,4 @@
-package hearrun.view;
+package hearrun.view.layout;
 
 import hearrun.business.Spiel;
 import hearrun.business.SpielController;

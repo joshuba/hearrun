@@ -5,7 +5,7 @@ import hearrun.business.Main;
 import hearrun.business.SpielController;
 import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
-import hearrun.view.IntroScreen;
+import hearrun.view.layout.IntroScreen;
 import hearrun.view.layout.*;
 import hearrun.view.layout.FrageFenster.CoverFrage;
 import hearrun.view.layout.FrageIntro;
