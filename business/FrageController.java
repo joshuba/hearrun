@@ -25,6 +25,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -266,16 +267,19 @@ public class FrageController {
             // 2.: Alben prüfen
             // erstelle Bibliothek aus allen, nicht doppelten, Alben mit vorhandenem Cover.
             ArrayList<byte[]> coverBytes = new ArrayList<>();
+            ArrayList<String> covers = new ArrayList<>();
             for (File f : tracks) {
                 ID3v2 tags = new Mp3File(f.getAbsolutePath()).getId3v2Tag();
                 // Wenn im aktuellen Song tags, Album und Cover vorhanden sind:
                 if (tags != null && tags.getAlbumImage() != null && tags.getAlbum() != null) {
-                    if (coverBytes.size() == 0) // füge erstes Album hinzu
+                    if (coverBytes.size() == 0) { // füge erstes Album hinzu
                         coverBytes.add(tags.getAlbumImage());
+                        covers.add(tags.getAlbum());
+                    }
                     else { // teste ob Album des Songs doppelt vorkommt
                         boolean istVorhanden = false;
-                        for (byte[] b : coverBytes) {
-                            if (Arrays.equals(b, tags.getAlbumImage())) {
+                        for (String s: covers) {
+                            if (s.equals(tags.getAlbum())) {
                                 istVorhanden = true;
                                 break;
                             }
@@ -283,7 +287,8 @@ public class FrageController {
                         // füge sowohl Album-String der
                         if (!istVorhanden) {
                             coverBytes.add(tags.getAlbumImage());
-                            covers.add(SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(tags.getAlbumImage())), null));
+                            this.covers.add(SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(tags.getAlbumImage())), null));
+                            covers.add(tags.getAlbum());
 
                         }
                     }
