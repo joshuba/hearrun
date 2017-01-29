@@ -1,6 +1,7 @@
 package hearrun.view.controller;
 
 import hearrun.business.*;
+import hearrun.business.ereignisse.Ereignis;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
@@ -43,7 +44,6 @@ public class SpielController {
 
 
     }
-
 
 
     private void waehleMapErstelleSpiel(Map map, ArrayList<Spieler> spielerListe) {
@@ -109,10 +109,15 @@ public class SpielController {
     public void stelleAktFrage() {
         Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
         Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
-        Frage frage = frageController.getFrage(fragetyp);
+        Frage frage;
+        if (fragetyp == Fragetyp.Ereignis)
+            getLayout().getViewController().zeigeEreignis(Ereignis.zufallsEreignis());
+        else {
+            getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp);
+        }
 
-        //Zeige frage
-        getLayout().getViewController().zeigeIntroUndFrage(frage, fragetyp);
+
+
     }
 
     public Player getMusicPlayer() {
@@ -123,11 +128,6 @@ public class SpielController {
         return this.effectPlayer;
     }
 
-    public void stelleFrage() {
-        stelleAktFrage();
-
-    }
-
     public void moveAndAskNext(int schritte) {
         completeLayout.getViewController().movePlayer(schritte, aktSpiel.getAktSpieler());
         nextSpieler();
@@ -135,11 +135,11 @@ public class SpielController {
     }
 
 
-    public void ladeMusik(){
-        if(properties.getProperty("musicPath")== null){
+    public void ladeMusik() {
+        if (properties.getProperty("musicPath") == null) {
             getLayout().getViewController().zeigeIntroScreen();
-        }else{
-            System.out.println("Versuche Musik einzulesen: " + properties.getProperty("musicPath"));
+        } else {
+            System.out.println("Lese Musik ein: " + properties.getProperty("musicPath"));
             completeLayout.getViewController().zeigeLadeScreen(
                     frageController.readingOnOffProperty(),
                     frageController.musicReadingProgressProperty(),
@@ -149,7 +149,7 @@ public class SpielController {
             frageController.leseMusikEin(properties.getProperty("musicPath"));
 
             frageController.successProperty().addListener((observable, oldValue, newValue) -> {
-                if(!newValue) {
+                if (!newValue) {
                     getLayout().getViewController().getLoadingScreen().zeigeFehler();
                 }
             });
@@ -157,8 +157,7 @@ public class SpielController {
     }
 
 
-
-    public void readProperties(){
+    public void readProperties() {
         //Prüfe ob Properties angelegt wurden
         try {
             InputStream input = new FileInputStream(path);
@@ -175,7 +174,7 @@ public class SpielController {
 
     }
 
-    public void writeProperties(){
+    public void writeProperties() {
 
         try {
             OutputStream output = new FileOutputStream(path);
@@ -193,9 +192,9 @@ public class SpielController {
 
     }
 
-    private void erstellePropPfad(){
+    private void erstellePropPfad() {
         //MAC
-        if(System.getProperties().getProperty("os.name").contains("Mac")){
+        if (System.getProperties().getProperty("os.name").contains("Mac")) {
             System.out.println("Du nutzt macOs");
             File file = new File(System.getProperty("user.home") + "/Library/Application Support/HearRun");
             file.mkdir();
@@ -203,7 +202,7 @@ public class SpielController {
             System.out.println(path);
         }
         //Windows
-        if(System.getProperties().getProperty("os.name").contains("Win")){
+        if (System.getProperties().getProperty("os.name").contains("Win")) {
             System.out.println("Du nutzt Windows, ieh");
             File file = new File(System.getProperty("user.home") + "/AppData/Local/HearRun");
             file.mkdir();
@@ -211,7 +210,7 @@ public class SpielController {
 
         }
         //Linux
-        if(System.getProperties().getProperty("os.name").contains("Lin")){
+        if (System.getProperties().getProperty("os.name").contains("Lin")) {
             System.out.println("Du nutzt Linux");
             File file = new File(System.getProperty("user.home") + ".congig/HearRun");
             file.mkdir();
@@ -219,11 +218,11 @@ public class SpielController {
         }
     }
 
-    public Properties getProperties(){
+    public Properties getProperties() {
         return this.properties;
     }
 
-    public void resetMusicPathPropertie(){
+    public void resetMusicPathPropertie() {
         properties.remove("musicPath");
     }
 

@@ -73,10 +73,7 @@ public class Feld extends HBox{
                 }
                 return Fragetyp.CoverWahlFrage;
 
-            case EreignisFeld:
-                System.out.println("TODO: Ereignisfeler");
-                return null;
-
+            case EreignisFeld: return Fragetyp.Ereignis;
             case FaktFeld: return Fragetyp.FaktFrage;
             case InterpretFeld: return Fragetyp.InterpretFrage;
             case TitelFeld: return Fragetyp.Titelfrage;

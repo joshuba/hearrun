@@ -49,7 +49,7 @@ public class InterpretFrage extends Frage {
                 throw new TagNeededException();
 
             if(!(randAntwort.getArtist() == null) &&
-                    !randAntwort.getArtist().equals(interpret)) {//zweifach richtige antwort durch Interpret vermeiden
+                    !randAntwort.getArtist().equals(interpret)) { //zweifach richtige antwort durch Interpret vermeiden
                 boolean add = true;
                 for (String s : antworten)
                     if (s.equals(randAntwort.getArtist())) {

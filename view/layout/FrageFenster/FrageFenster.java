@@ -22,7 +22,7 @@ import javafx.util.Duration;
 /**
  * Oberklasse der Fragefenster
  */
-public class FrageFenster extends BorderPane {
+public class FrageFenster extends Fenster {
 
     protected SpielController spielController;
     protected Player effectPlayer;

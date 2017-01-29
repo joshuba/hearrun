@@ -3,6 +3,7 @@ package hearrun.view.controller;
 import hearrun.business.Fragetyp;
 import hearrun.Main;
 import hearrun.business.Spieler;
+import hearrun.business.ereignisse.Ereignis;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.IntroScreen;
 import hearrun.view.layout.*;
@@ -237,17 +238,21 @@ public class ViewController {
         if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage || fragetyp == Fragetyp.FaktFrage){
             ButtonFrage bf = new ButtonFrage(frage, spielController);
             gameLayoutBlury(true);
-            spielController.getLayout().zeigeFrageFenster(bf);
+            spielController.getLayout().zeigeFenster(bf);
             bf.starteAntworPhase();
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
             CoverFrage cf = new CoverFrage(frage, spielController);
             gameLayoutBlury(true);
-            spielController.getLayout().zeigeFrageFenster(cf);
+            spielController.getLayout().zeigeFenster(cf);
             cf.starteAntworPhase();
 
 
         }
+    }
+
+    public void zeigeEreignis(Ereignis e) {
+
     }
 
 
