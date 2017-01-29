@@ -1,20 +1,15 @@
 package hearrun.view.layout;
 
-import hearrun.business.Main;
-import hearrun.business.Spiel;
-import hearrun.business.SpielController;
-import hearrun.business.fragen.InterpretFrage;
+import hearrun.Main;
+import hearrun.view.controller.SpielController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 

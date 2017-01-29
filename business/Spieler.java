@@ -1,17 +1,9 @@
 package hearrun.business;
 
-
-import com.sun.javafx.scene.paint.GradientUtils;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import javafx.scene.paint.*;
-import javafx.scene.paint.Color;
-
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  * Created by joshuabarth on 13.01.17.

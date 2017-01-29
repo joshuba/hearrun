@@ -1,13 +1,12 @@
 package hearrun.view.layout;
 
-import hearrun.business.SpielController;
-import hearrun.view.controller.ViewController;
+import hearrun.view.controller.SpielController;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 //import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-import javafx.stage.Stage;
 //import sun.rmi.rmic.Main;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -21,7 +20,7 @@ public class Map {
     private int feldHoehe;
     private String dateiName;
 
-    public Map(String dateiName, SpielController spielController){
+    public Map(String dateiName, ReadOnlyDoubleProperty widthProperty, ReadOnlyDoubleProperty heightProperty){
         this.dateiName = dateiName;
 
 
@@ -46,7 +45,7 @@ public class Map {
                 line = line.substring(1);
                 String zeichen [] = line.split(" ");
                 for (int i = 0; i<zeichen.length; i++){
-                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), spielController);
+                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), widthProperty, heightProperty);
                        spielFeld[i][row] = feld;
 
                 }

@@ -1,25 +1,19 @@
 package hearrun.view.layout;
 
-import hearrun.business.Main;
+import hearrun.Main;
 import hearrun.business.Spieler;
 import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  * Created by joshuabarth on 09.01.17.

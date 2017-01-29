@@ -1,22 +1,15 @@
 package hearrun.view.layout.FrageFenster;
 
-import hearrun.business.Main;
-import hearrun.business.SpielController;
+import hearrun.Main;
+import hearrun.view.controller.SpielController;
 import hearrun.business.fragen.CoverWahlFrage;
 import hearrun.business.fragen.Frage;
 import javafx.animation.*;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.collections.ObservableMap;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-
-import java.util.AbstractCollection;
 
 /**
  * Created by joshuabarth on 16.01.17.

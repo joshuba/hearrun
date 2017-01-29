@@ -1,13 +1,11 @@
-package hearrun.business;
+package hearrun;
 
+import hearrun.view.controller.SpielController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.util.Properties;
 
 /**
  * Created by Josh on 09.01.17

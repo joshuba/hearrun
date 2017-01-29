@@ -4,15 +4,12 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import hearrun.Main;
 import hearrun.business.exceptions.TagNeededException;
-import hearrun.business.exceptions.TracksNeededException;
 import hearrun.business.fragen.*;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import org.w3c.dom.Document;
@@ -29,6 +26,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 
@@ -36,30 +34,27 @@ import java.util.Collections;
  * Created by Josh on 28.12.16
  */
 public class FrageController {
-    private static final int FRAGEZEIT = 10;
     private final String XMLPATH = "/hearrun/resources/Data/quiz.xml";
-    private final int MENGE_FRAGETYP = 5;
 
     //Für Faktfragen
-    private File inputFile;
-    private DocumentBuilderFactory dbFactory;
-    private DocumentBuilder dBuilder;
     private Document doc;
+
     private Frageliste alleFragen;
-    private SpielController spielController;
 
     private SimpleFloatProperty musicReadingProgress;
     private SimpleBooleanProperty readingOnOff;
     private SimpleIntegerProperty fragenAnzahl;
 
-    ArrayList<File> tracks;
+    private ArrayList<File> tracks;
+    private ArrayList<Image> covers;
 
 
-    public FrageController(SpielController spielController) {
+
+    public FrageController() {
 
         alleFragen = new Frageliste();
-        this.spielController = spielController;
         tracks = new ArrayList<>();
+        covers = new ArrayList<>();
         musicReadingProgress = new SimpleFloatProperty();
         readingOnOff = new SimpleBooleanProperty();
         readingOnOff.setValue(false);
@@ -77,7 +72,6 @@ public class FrageController {
     }
 
     public void leseMusikEin(String path) {
-        spielController.getLayout().getViewController().zeigeLadeScreen(readingOnOff, musicReadingProgress, fragenAnzahl);
         readingOnOff.setValue(false);
         leseEinGeneriereFragen(path);
         leseXMLein(XMLPATH);
@@ -92,143 +86,126 @@ public class FrageController {
             musicReadingProgress.setValue(0);
             fragenAnzahl.setValue(0);
 
-            ID3v2[] titel = new ID3v2[tracks.size()];
+            if (testeTracks()) {
 
-            for (int i = 0; i < tracks.size(); i++) {
-                musicReadingProgress.setValue(musicReadingProgress.get() + 0.05 / tracks.size());
-                try {
-                    titel[i] = new Mp3File(tracks.get(i).getAbsolutePath()).getId3v2Tag();
+                // Alle Titel - Tags einlesen
+                ID3v2[] titel = new ID3v2[tracks.size()];
+                for (int i = 0; i < tracks.size(); i++) {
+                    musicReadingProgress.setValue(musicReadingProgress.get() + 0.05 / tracks.size());
+                    try {
+                        titel[i] = new Mp3File(tracks.get(i).getAbsolutePath()).getId3v2Tag();
 
 
-                } catch (IOException | UnsupportedTagException | InvalidDataException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            // Alle Cover einlesen
-            ArrayList<Image> covers = new ArrayList<>();
-            musicReadingProgress.setValue(musicReadingProgress.get() + 0.1 / tracks.size());
-            for (File track : tracks) {
-                try {
-                    Mp3File mp3 = new Mp3File(track.getAbsolutePath());
-                    if (mp3.getId3v2Tag() != null) {
-                        byte[] coverBytes = mp3.getId3v2Tag().getAlbumImage();
-
-                        if (coverBytes != null)
-                            covers.add(SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(coverBytes)), null));
+                    } catch (IOException | UnsupportedTagException | InvalidDataException e) {
+                        e.printStackTrace();
                     }
-
-                } catch (UnsupportedTagException | IOException | InvalidDataException e) {
-                    e.printStackTrace();
-                } catch (NullPointerException e) {
-                    System.out.println(track.getName());
-                    e.printStackTrace();
                 }
-            }
 
-            //Zufallsfaktor erhöhen
-            Collections.shuffle(tracks);
+                //Zufallsfaktor erhöhen
+                Collections.shuffle(tracks);
 
-            //CoverTitelFragen einlesen
-            ArrayList<File> tracksCP = (ArrayList<File>) tracks.clone();
-            int akt = 0;
-            for (int i = 0; i < tracks.size(); i++) {
-                musicReadingProgress.setValue(musicReadingProgress.get() + 0.3 / tracks.size());
+                //CoverTitelFragen einlesen
+                ArrayList<File> tracksCP = (ArrayList<File>) tracks.clone();
+                int akt = 0;
+                for (int i = 0; i < tracks.size(); i++) {
+                    musicReadingProgress.setValue(musicReadingProgress.get() + 0.3 / tracks.size());
+                    fragenAnzahl.set(alleFragen.size());
+                    try {
+                        alleFragen.add(CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
+                    } catch (TagNeededException e) {
+                        akt++;
+                        i--;
+                        continue;
+                    } catch (UnsupportedTagException | IOException | InvalidDataException e) {
+                        e.printStackTrace();
+                    } catch (IndexOutOfBoundsException e) {
+                        break;
+                    }
+                    tracksCP.remove(akt);
+                }
+                musicReadingProgress.setValue(0.4);
+
+
+                // CoverWahlFragen einlesen
+                tracksCP = (ArrayList<File>) tracks.clone();
+                akt = 0;
+                for (int i = 0; i < tracks.size(); i++) {
+                    musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
+                    fragenAnzahl.set(alleFragen.size());
+                    try {
+                        alleFragen.add(CoverWahlFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), covers.toArray(new Image[covers.size()])));
+
+                    } catch (TagNeededException e) {
+                        akt++;
+                        i--;
+                        continue;
+                    } catch (IndexOutOfBoundsException e) {
+                        break;
+                    }
+                    tracksCP.remove(akt);
+
+                }
+                musicReadingProgress.setValue(0.6);
+
+
+                //InterpretFragen einlesen
+                tracksCP = (ArrayList<File>) tracks.clone();
+                akt = 0;
+
+                for (int i = 0; i < tracks.size(); i++) {
+                    musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
+                    fragenAnzahl.set(alleFragen.size());
+                    try {
+                        alleFragen.add(InterpretFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+                    } catch (TagNeededException e) {
+                        akt++;
+                        i--;
+                        continue;
+                    } catch (IndexOutOfBoundsException e) {
+                        break;
+                    }
+                    tracksCP.remove(akt);
+                }
+                musicReadingProgress.setValue(0.8);
+
+
+                // TitelFragen einlesen
+                tracksCP = (ArrayList<File>) tracks.clone();
+                akt = 0;
+
+                for (int i = 0; i < tracks.size(); i++) {
+                    musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
+                    fragenAnzahl.set(alleFragen.size());
+                    try {
+                        alleFragen.add(TitelFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+                    } catch (TagNeededException e) {
+                        akt++;
+                        i--;
+                        continue;
+                    } catch (IndexOutOfBoundsException e) {
+                        break;
+                    }
+                    tracksCP.remove(akt);
+                }
+                musicReadingProgress.setValue(1);
                 fragenAnzahl.set(alleFragen.size());
-                try {
-                    alleFragen.add(CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
-                } catch (TagNeededException e) {
-                    akt++;
-                    i--;
-                    continue;
-                } catch (UnsupportedTagException | IOException | InvalidDataException e) {
-                    e.printStackTrace();
-                } catch (IndexOutOfBoundsException e) {
-                    break;
-                }
-                tracksCP.remove(akt);
-            }
-            musicReadingProgress.setValue(0.4);
+
+                readingOnOff.setValue(true);
 
 
-            // CoverWahlFragen einlesen
-            tracksCP = (ArrayList<File>) tracks.clone();
-            akt = 0;
-            for (int i = 0; i < tracks.size(); i++) {
-                musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
-                fragenAnzahl.set(alleFragen.size());
-                try {
-                    alleFragen.add(CoverWahlFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), covers.toArray(new Image[covers.size()])));
-
-                } catch (TagNeededException e) {
-                    akt++;
-                    i--;
-                    continue;
-                } catch (IndexOutOfBoundsException e) {
-                    break;
-                }
-                tracksCP.remove(akt);
-
-            }
-            musicReadingProgress.setValue(0.6);
-
-
-            //InterpretFragen einlesen
-            tracksCP = (ArrayList<File>) tracks.clone();
-            akt = 0;
-
-            for (int i = 0; i < tracks.size(); i++) {
-                musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
-                fragenAnzahl.set(alleFragen.size());
-                try {
-                    alleFragen.add(InterpretFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
-                } catch (TagNeededException e) {
-                    akt++;
-                    i--;
-                    continue;
-                } catch (IndexOutOfBoundsException e) {
-                    break;
-                }
-                tracksCP.remove(akt);
-            }
-            musicReadingProgress.setValue(0.8);
-
-
-            // TitelFragen einlesen
-            tracksCP = (ArrayList<File>) tracks.clone();
-            akt = 0;
-
-            for (int i = 0; i < tracks.size(); i++) {
-                musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
-                fragenAnzahl.set(alleFragen.size());
-                try {
-                    alleFragen.add(TitelFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
-                } catch (TagNeededException e) {
-                    akt++;
-                    i--;
-                    continue;
-                } catch (IndexOutOfBoundsException e) {
-                    break;
-                }
-                tracksCP.remove(akt);
-            }
-            musicReadingProgress.setValue(1);
-            fragenAnzahl.set(alleFragen.size());
-
-            readingOnOff.setValue(true);
-
-
-            System.out.println(alleFragen.size() - alleFragen.size(Fragetyp.FaktFrage) + " Fragen generiert aus " + tracks.size() + " Songs.");
-            System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverWahlFrage) + " Cover-Wahl-Fragen");
-            System.out.println("Darunter " + alleFragen.size(Fragetyp.InterpretFrage) + " Interpret-Fragen");
-            System.out.println("Darunter " + alleFragen.size(Fragetyp.Titelfrage) + " Titel-Fragen");
-            System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverTitelFrage) + " Cover-Titel-Fragen");
-            System.out.println("Darunter " + alleFragen.size(Fragetyp.FaktFrage) + " Fakt-Fragen");
+                System.out.println(alleFragen.size() - alleFragen.size(Fragetyp.FaktFrage) + " Fragen generiert aus " + tracks.size() + " Songs.");
+                System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverWahlFrage) + " Cover-Wahl-Fragen");
+                System.out.println("Darunter " + alleFragen.size(Fragetyp.InterpretFrage) + " Interpret-Fragen");
+                System.out.println("Darunter " + alleFragen.size(Fragetyp.Titelfrage) + " Titel-Fragen");
+                System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverTitelFrage) + " Cover-Titel-Fragen");
+                System.out.println("Darunter " + alleFragen.size(Fragetyp.FaktFrage) + " Fakt-Fragen");
+            } else
+                System.out.println("verkackt!");
         }).start();
     }
 
 
-    public void leseOrdnerEin(File root) {
+    private void leseOrdnerEin(File root) {
         File[] files = root.listFiles();
         // Dateien einlesen
         if (files != null) {
@@ -240,44 +217,92 @@ public class FrageController {
         }
     }
 
-    private void testeTracks() {
-        // erstelle sortierte Bibliothek aus Interpreten
+    /**
+     * erstellt eine Statistik über die einglesene Bibliothek. Diese Methode sichert ab, dass
+     * keine Bibliotheken eingelesen werden können, die zu wenige Cover, Interpreten oder auch Tracks enthalten.
+     *
+     * Aus Laufzeit-Gründen liest sie wärend des Testens auch gleich alle, nicht doppelten, Cover ein.
+     *
+     * @return wahr, wenn Anzahl und Variabilität der Tracks genügt, sonst falsch
+     */
+    private boolean testeTracks() {
         ArrayList<String> interpreten = new ArrayList<>();
-        int anzahlVerschInterpreten = 0;
-        for (File f : tracks) {
-            try {
-                String interpret = new Mp3File(f.getAbsolutePath()).getId3v2Tag().getArtist();
 
-                // den ersten Interpret hinzufügen
-                if (interpreten.size() == 0) {
-                    interpreten.add(interpret);
-                    anzahlVerschInterpreten++;
-                } else
-                    // ist der interpret in interpreten?
-                    for (String s : interpreten)
-                        if (!s.equals(interpret)) {
-                            interpreten.add(interpret); // wenn ja, erhöhe Anzahl der Interpreten
-                            anzahlVerschInterpreten++;
-                            break;
+        try {
+            // 1.: Interpreten prüfen
+            // erstelle sortierte Bibliothek aus Interpreten
+            for (File f : tracks) {
+
+                ID3v2 tags = new Mp3File(f.getAbsolutePath()).getId3v2Tag();
+                if (tags != null && tags.getArtist() != null) {
+
+                    String interpret = new Mp3File(f.getAbsolutePath()).getId3v2Tag().getArtist();
+
+
+                    // den ersten Interpret hinzufügen
+                    if (interpreten.size() == 0) {
+                        interpreten.add(interpret);
+                    } else {
+                        // ist der interpret in interpreten?
+                        boolean istVorhanden = false;
+                        for (String s : interpreten) {
+                            if (s.equals(interpret)) {
+                                istVorhanden = true;// wenn ja, füge ihn nicht noch einmal hinzu
+                                break;
+                            }
                         }
 
-            } catch (IOException | UnsupportedTagException | InvalidDataException e) {
-                e.printStackTrace();
+                        if (!istVorhanden) // Wenn er noch nicht vorhanden ist, füge ihn hinzu
+                            interpreten.add(interpret);
+                    }
+                }
             }
 
-            // if (tracks.size() > )
 
+            // 2.: Alben prüfen
+            // erstelle Bibliothek aus allen, nicht doppelten, Alben mit vorhandenem Cover.
+            ArrayList<byte[]> coverBytes = new ArrayList<>();
+            for (File f : tracks) {
+                ID3v2 tags = new Mp3File(f.getAbsolutePath()).getId3v2Tag();
+                // Wenn im aktuellen Song tags, Album und Cover vorhanden sind:
+                if (tags != null && tags.getAlbumImage() != null && tags.getAlbum() != null) {
+                    if (coverBytes.size() == 0) // füge erstes Album hinzu
+                        coverBytes.add(tags.getAlbumImage());
+                    else { // teste ob Album des Songs doppelt vorkommt
+                        boolean istVorhanden = false;
+                        for (byte[] b : coverBytes) {
+                            if (Arrays.equals(b, tags.getAlbumImage())) {
+                                istVorhanden = true;
+                                break;
+                            }
+                        }
+                        // füge sowohl Album-String der
+                        if (!istVorhanden) {
+                            coverBytes.add(tags.getAlbumImage());
+                            covers.add(SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(tags.getAlbumImage())), null));
 
+                        }
+                    }
+                }
+            }
+        } catch (IOException | UnsupportedTagException | InvalidDataException e) {
+            e.printStackTrace();
         }
+
+        System.out.println("Anzahl Tracks: " + tracks.size() +
+                "\nAnzahl einzelner Alben: " + covers.size() +
+                "\nAnzahl einzelner Interpreten: " + interpreten.size());
+
+        return tracks.size() >= 40 && interpreten.size() >= 30 && covers.size() >= 30;
     }
 
     private void leseXMLein(String path) {
 
-        dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
         try {
 
-            dBuilder = dbFactory.newDocumentBuilder();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(Main.class.getResourceAsStream(path));
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
@@ -311,5 +336,15 @@ public class FrageController {
         }
     }
 
+    public SimpleFloatProperty musicReadingProgressProperty() {
+        return musicReadingProgress;
+    }
 
+    public SimpleBooleanProperty readingOnOffProperty() {
+        return readingOnOff;
+    }
+
+    public SimpleIntegerProperty fragenAnzahlProperty() {
+        return fragenAnzahl;
+    }
 }

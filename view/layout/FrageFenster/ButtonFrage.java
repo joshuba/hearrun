@@ -1,26 +1,15 @@
 package hearrun.view.layout.FrageFenster;
 
 import hearrun.business.Fragetyp;
-import hearrun.business.Main;
-import hearrun.business.Player;
-import hearrun.business.SpielController;
+import hearrun.Main;
+import hearrun.view.controller.SpielController;
 import hearrun.business.fragen.CoverTitelFrage;
 import hearrun.business.fragen.Frage;
-import hearrun.view.layout.Wuerfel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 

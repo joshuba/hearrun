@@ -1,37 +1,26 @@
 package hearrun.view.layout;
 
 import hearrun.business.Fragetyp;
-import hearrun.business.Spiel;
-import hearrun.business.SpielController;
-import hearrun.view.controller.ViewController;
+import hearrun.view.controller.SpielController;
 import javafx.animation.KeyFrame;
-import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.util.Random;
 
 /**
  * Created by joshuabarth on 10.01.17.
  */
 public class Feld extends HBox{
     private Feldtyp feldtyp;
-    private SpielController spielController;
 
 
 
-    public Feld(Feldtyp feldtyp, SpielController spielController){
+
+    public Feld(Feldtyp feldtyp, ReadOnlyDoubleProperty widthProperty, ReadOnlyDoubleProperty heightProperty){
         this.feldtyp = feldtyp;
-        this.spielController = spielController;
         setLeer();
         /*
         RotateTransition rt = new RotateTransition(Duration.millis(1000), this);
@@ -45,8 +34,8 @@ public class Feld extends HBox{
 
 
 
-        this.prefHeightProperty().bind(spielController.getLayout().getViewController().getStage().heightProperty());
-        this.prefWidthProperty().bind(spielController.getLayout().getViewController().getStage().widthProperty());
+        this.prefHeightProperty().bind(heightProperty);
+        this.prefWidthProperty().bind(widthProperty);
     }
 
     public Feldtyp getFeldtyp(){

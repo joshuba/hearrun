@@ -1,8 +1,7 @@
 package hearrun.view.controller;
 
 import hearrun.business.Fragetyp;
-import hearrun.business.Main;
-import hearrun.business.SpielController;
+import hearrun.Main;
 import hearrun.business.Spieler;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.IntroScreen;

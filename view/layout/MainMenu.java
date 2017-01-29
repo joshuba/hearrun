@@ -1,7 +1,7 @@
 package hearrun.view.layout;
 
-import hearrun.business.Main;
-import hearrun.business.SpielController;
+import hearrun.Main;
+import hearrun.view.controller.SpielController;
 import hearrun.business.Spieler;
 import hearrun.view.controller.ViewController;
 import javafx.animation.KeyFrame;
@@ -170,7 +170,7 @@ public class MainMenu extends VBox {
         ObservableList <Map> mapsList = FXCollections.observableArrayList();
 
         for (File f : maps)
-            mapsList.add(new Map(f.getPath(), spielController));
+            mapsList.add(new Map(f.getPath(), spielController.getStage().widthProperty(), spielController.getStage().heightProperty()));
         return mapsList;
 
     }

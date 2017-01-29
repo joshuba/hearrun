@@ -1,13 +1,9 @@
 package hearrun.view.layout;
 
-import hearrun.business.Spiel;
-import hearrun.business.SpielController;
+import hearrun.view.controller.SpielController;
 import hearrun.view.controller.ViewController;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import javax.swing.text.View;
 
 /**
  * Created by joshuabarth on 09.01.17.

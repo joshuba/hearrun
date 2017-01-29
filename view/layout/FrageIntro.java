@@ -1,12 +1,9 @@
 package hearrun.view.layout;
 
-import hearrun.business.Spiel;
-import hearrun.business.SpielController;
-import hearrun.view.layout.Feldtyp;
+import hearrun.view.controller.SpielController;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;

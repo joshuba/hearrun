@@ -1,6 +1,5 @@
 package hearrun.business;
 
-import hearrun.view.controller.ViewController;
 import hearrun.view.layout.Map;
 
 import java.util.ArrayList;
@@ -12,10 +11,8 @@ public class Spiel {
     private Map aktMap;
     private ArrayList<Spieler> spielerListe;
     private int aktSpieler;
-    private SpielController spielController;
 
-    public Spiel(Map map, ArrayList<Spieler> spielerListe, SpielController spielController){
-        this.spielController = spielController;
+    public Spiel(Map map, ArrayList<Spieler> spielerListe){
         this.spielerListe = new ArrayList<>();
         this.aktMap = map;
         this.spielerListe = spielerListe;
@@ -23,11 +20,6 @@ public class Spiel {
         for (Spieler s : spielerListe)
             System.out.println(s);
 
-
-    }
-
-    public void leseMapVonDateiEin(String mapName){
-        this.aktMap = new Map(mapName, spielController);
 
     }
 

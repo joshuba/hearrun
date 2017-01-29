@@ -1,5 +1,6 @@
-package hearrun.business;
+package hearrun.view.controller;
 
+import hearrun.business.*;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
@@ -35,7 +36,7 @@ public class SpielController {
         this.completeLayout = new CompleteLayout(stage, this);
         readProperties();
 
-        frageController = new FrageController(this);
+        frageController = new FrageController();
         ladeMusik();
 
 
@@ -44,7 +45,7 @@ public class SpielController {
 
 
     private void waehleMapErstelleSpiel(Map map, ArrayList<Spieler> spielerListe) {
-        this.aktSpiel = new Spiel(map, spielerListe, this); //Erstelle spiel
+        this.aktSpiel = new Spiel(map, spielerListe); //Erstelle spiel
         completeLayout.getViewController().baueSpielfeldAuf();
         completeLayout.getViewController().setFeldId(0, 0, completeLayout.getViewController().erkenneFeldId(0, 0)); //Setze Alle Player aufs erste Feld
         getLayout().getViewController().macheFelderKlickbar();
@@ -137,6 +138,11 @@ public class SpielController {
             getLayout().getViewController().zeigeIntroScreen();
         }else{
             System.out.println("Versuche Musik einzulesen: " + properties.getProperty("musicPath"));
+            completeLayout.getViewController().zeigeLadeScreen(
+                    frageController.readingOnOffProperty(),
+                    frageController.musicReadingProgressProperty(),
+                    frageController.fragenAnzahlProperty()
+            );
             frageController.leseMusikEin(properties.getProperty("musicPath"));
 
         }
@@ -225,5 +231,9 @@ public class SpielController {
 
     public ArrayList<Spieler> getSpielerListe() {
         return this.spielerListe;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }
