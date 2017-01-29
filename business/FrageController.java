@@ -289,7 +289,6 @@ public class FrageController {
                             coverBytes.add(tags.getAlbumImage());
                             this.covers.add(SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(tags.getAlbumImage())), null));
                             covers.add(tags.getAlbum());
-
                         }
                     }
                 }

@@ -149,7 +149,6 @@ public class SpielController {
             frageController.leseMusikEin(properties.getProperty("musicPath"));
 
             frageController.successProperty().addListener((observable, oldValue, newValue) -> {
-                System.out.println("old: " + oldValue + ", new: " + newValue);
                 if(!newValue) {
                     getLayout().getViewController().getLoadingScreen().zeigeFehler();
                 }
