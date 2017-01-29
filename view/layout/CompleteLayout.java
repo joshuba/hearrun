@@ -4,9 +4,7 @@ import hearrun.Main;
 import hearrun.business.Player;
 import hearrun.view.controller.SpielController;
 import hearrun.view.controller.ViewController;
-import hearrun.view.layout.FrageFenster.EreignisFenster;
 import hearrun.view.layout.FrageFenster.Fenster;
-import hearrun.view.layout.FrageFenster.FrageFenster;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -71,7 +69,7 @@ public class CompleteLayout extends StackPane {
     }
 
     public void bluryAnAus(boolean anAus){
-        this.gameLayout.Blury(anAus);
+        this.gameLayout.blury(anAus);
     }
 
     public void newGameAnAus(boolean anAus){

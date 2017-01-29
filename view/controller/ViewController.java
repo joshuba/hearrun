@@ -5,6 +5,7 @@ import hearrun.Main;
 import hearrun.business.Spieler;
 import hearrun.business.ereignisse.Ereignis;
 import hearrun.business.fragen.Frage;
+import hearrun.view.layout.FrageFenster.EreignisFenster;
 import hearrun.view.layout.IntroScreen;
 import hearrun.view.layout.*;
 import hearrun.view.layout.FrageFenster.CoverFrage;
@@ -252,7 +253,9 @@ public class ViewController {
     }
 
     public void zeigeEreignis(Ereignis e) {
-
+        gameLayoutBlury(true);
+        EreignisFenster ereignisFenster = new EreignisFenster(e, spielController);
+        spielController.getLayout().zeigeFenster(ereignisFenster);
     }
 
 
