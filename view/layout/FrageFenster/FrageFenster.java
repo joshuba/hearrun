@@ -117,7 +117,7 @@ public class FrageFenster extends Fenster {
 
     }
 
-    public void starteAntworPhase(){
+    public void starteAntwortPhase(){
         zeit = Integer.valueOf(spielController.getProperties().getProperty("antwortZeit"));
         progressIndex = (100/zeit+1)/100F;
         progressWert = 0;
@@ -151,6 +151,7 @@ public class FrageFenster extends Fenster {
         musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
         aktualisiereAchievement();
+
     }
 
 
@@ -169,11 +170,16 @@ public class FrageFenster extends Fenster {
 
 
     public void wuerfeln(int index){
-        Wuerfel w = new Wuerfel(index, spielController);
-        w.setAlignment(Pos.CENTER);
-        this.getChildren().add(w);
-        w.requestFocus(); // Fokus darauf setzen damit Shortcut funktioniert.
-        wuerfelBox.getChildren().addAll(w);
+        if (spielController.getAktSpiel().getAktSpieler().getLeben() > 0) {
+            spielController.stelleAktFrage();
+            spielController.getAktSpiel().getAktSpieler().removeLeben();
+        } else {
+            Wuerfel w = new Wuerfel(index, spielController);
+            w.setAlignment(Pos.CENTER);
+            this.getChildren().add(w);
+            w.requestFocus(); // Fokus darauf setzen damit Shortcut funktioniert.
+            wuerfelBox.getChildren().addAll(w);
+        }
     }
 
 

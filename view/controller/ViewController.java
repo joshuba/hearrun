@@ -235,18 +235,17 @@ public class ViewController {
     }
 
     public void zeigeFrage(Frage frage, Fragetyp fragetyp){
-
         if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage || fragetyp == Fragetyp.FaktFrage){
             ButtonFrage bf = new ButtonFrage(frage, spielController);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeFenster(bf);
-            bf.starteAntworPhase();
+            bf.starteAntwortPhase();
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
             CoverFrage cf = new CoverFrage(frage, spielController);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeFenster(cf);
-            cf.starteAntworPhase();
+            cf.starteAntwortPhase();
 
 
         }

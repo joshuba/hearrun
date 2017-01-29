@@ -65,6 +65,7 @@ public class CompleteLayout extends StackPane {
     }
 
     public void zeigeFenster(Fenster fenster){
+        this.getChildren().clear();
         this.getChildren().add(fenster);
     }
 

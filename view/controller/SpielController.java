@@ -109,7 +109,6 @@ public class SpielController {
     public void stelleAktFrage() {
         Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
         Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
-        Frage frage;
         if (fragetyp == Fragetyp.Ereignis)
             getLayout().getViewController().zeigeEreignis(Ereignis.zufallsEreignis());
         else {

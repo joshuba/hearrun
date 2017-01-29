@@ -82,7 +82,6 @@ public class SpielerAnzeige extends VBox {
         });
         achievements.getStyleClass().add("achievements");
 
-        this.setAlignment(Pos.BOTTOM_CENTER);
 
         Label spielerName = new Label(spielerListe.get(spielerNummer).getName());
         anzeige.getChildren().addAll(spielerFarbe, spielerName, achievements);

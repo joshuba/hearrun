@@ -1,7 +1,7 @@
 *EreignisTestMap
 *6
 *2
-#E E E F E X
+#E T E F E X
 #L L L L L L
 
 

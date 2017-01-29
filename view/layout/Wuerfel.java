@@ -133,7 +133,11 @@ public class Wuerfel extends VBox {
         );
 
         Timeline t = new Timeline(k);
-        t.setOnFinished(b -> zurueck());
+        t.setOnFinished(b -> {
+
+            zurueck();
+
+        });
         t.play();
 
     }

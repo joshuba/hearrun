@@ -40,9 +40,10 @@ public class EreignisFenster extends Fenster {
             ueberschrift.setText("Extra-Leben");
             text.setText(
                     "Du erhältst ein zusätzliches Leben! \n" +
-                            "Wenn du die nächste Frage falsch beantwortest,\n" +
-                            "kannst du eine weitere Frage von demselben Typ beantworten."
+                    "Wenn du die nächste Frage falsch beantwortest,\n" +
+                    "kannst du eine weitere Frage von demselben Typ beantworten."
             );
+            spielController.getAktSpiel().getAktSpieler().addLeben();
         } else if (ereignis == LAUFEN_POSITIV) {
             ereignisIcon.getStyleClass().add("feld-icon-positiv");
             ueberschrift.setText("Felder vor rücken.");
