@@ -29,6 +29,7 @@ public class ViewController {
     private SpielerAnzeige leftLayout;
     private SpielerAnzeige rightLayout;
     private SpielController spielController;
+    LoadingScreen ls;
 
 
     public ViewController(Stage stage, SpielController spielController){
@@ -286,7 +287,7 @@ public class ViewController {
     }
 
     public void zeigeLadeScreen(SimpleBooleanProperty bool, SimpleFloatProperty prog, SimpleIntegerProperty anzFragen){
-        LoadingScreen ls = new LoadingScreen(bool, prog, anzFragen, spielController);
+        ls = new LoadingScreen(bool, prog, anzFragen, spielController);
         spielController.getLayout().setLoadingScreen(ls);
     }
 
@@ -334,7 +335,9 @@ public class ViewController {
         }
     }
 
-
+    public LoadingScreen getLoadingScreen() {
+        return ls;
+    }
 
 
 

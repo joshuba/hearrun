@@ -5,8 +5,10 @@ import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
 import hearrun.view.layout.Map;
+import javafx.beans.value.ObservableValue;
 import javafx.stage.Stage;
 
+import javax.swing.event.ChangeListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -143,11 +145,16 @@ public class SpielController {
                     frageController.musicReadingProgressProperty(),
                     frageController.fragenAnzahlProperty()
             );
+
             frageController.leseMusikEin(properties.getProperty("musicPath"));
 
+            frageController.successProperty().addListener((observable, oldValue, newValue) -> {
+                System.out.println("old: " + oldValue + ", new: " + newValue);
+                if(!newValue) {
+                    getLayout().getViewController().getLoadingScreen().zeigeFehler();
+                }
+            });
         }
-
-
     }
 
 

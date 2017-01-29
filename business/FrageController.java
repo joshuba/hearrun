@@ -43,11 +43,11 @@ public class FrageController {
 
     private SimpleFloatProperty musicReadingProgress;
     private SimpleBooleanProperty readingOnOff;
+    private SimpleBooleanProperty success;
     private SimpleIntegerProperty fragenAnzahl;
 
     private ArrayList<File> tracks;
     private ArrayList<Image> covers;
-
 
 
     public FrageController() {
@@ -56,8 +56,8 @@ public class FrageController {
         tracks = new ArrayList<>();
         covers = new ArrayList<>();
         musicReadingProgress = new SimpleFloatProperty();
-        readingOnOff = new SimpleBooleanProperty();
-        readingOnOff.setValue(false);
+        readingOnOff = new SimpleBooleanProperty(false);
+        success = new SimpleBooleanProperty(true);
         musicReadingProgress.setValue(15);
         fragenAnzahl = new SimpleIntegerProperty();
     }
@@ -78,7 +78,6 @@ public class FrageController {
     }
 
     private void leseEinGeneriereFragen(String path) {
-
         new Thread(() -> {
             tracks.clear();
             alleFragen.clear();
@@ -199,8 +198,13 @@ public class FrageController {
                 System.out.println("Darunter " + alleFragen.size(Fragetyp.Titelfrage) + " Titel-Fragen");
                 System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverTitelFrage) + " Cover-Titel-Fragen");
                 System.out.println("Darunter " + alleFragen.size(Fragetyp.FaktFrage) + " Fakt-Fragen");
-            } else
-                System.out.println("verkackt!");
+
+
+            } else {
+                success.setValue(true);
+                success.setValue(false);
+            }
+
         }).start();
     }
 
@@ -220,7 +224,7 @@ public class FrageController {
     /**
      * erstellt eine Statistik über die einglesene Bibliothek. Diese Methode sichert ab, dass
      * keine Bibliotheken eingelesen werden können, die zu wenige Cover, Interpreten oder auch Tracks enthalten.
-     *
+     * <p>
      * Aus Laufzeit-Gründen liest sie wärend des Testens auch gleich alle, nicht doppelten, Cover ein.
      *
      * @return wahr, wenn Anzahl und Variabilität der Tracks genügt, sonst falsch
@@ -346,5 +350,9 @@ public class FrageController {
 
     public SimpleIntegerProperty fragenAnzahlProperty() {
         return fragenAnzahl;
+    }
+
+    public SimpleBooleanProperty successProperty() {
+        return success;
     }
 }

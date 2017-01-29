@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
 
 /**
@@ -30,10 +31,10 @@ public class LoadingScreen extends VBox{
 
 
 
-    public LoadingScreen(SimpleBooleanProperty ladeMusik, SimpleFloatProperty progres, SimpleIntegerProperty anzahlFragenProp, SpielController spielController){
+    public LoadingScreen(SimpleBooleanProperty ladeMusik, SimpleFloatProperty progress, SimpleIntegerProperty anzahlFragenProp, SpielController spielController){
         this.setId("loadingScreen");
         this.spielController = spielController;
-        this.progres = progres;
+        this.progres = progress;
         this.ladeMusik = ladeMusik;
         this.fragenAnzahl = new Label("Verzeichnis einlesen...");
         bar = new ProgressBar();
@@ -44,7 +45,7 @@ public class LoadingScreen extends VBox{
 
         text = new Label("Deine Musik wird eingelesen, dies kann abhängig von der Mediathekgröße einige Sekunden in Anspruch nehmen. \nFragen werden erstellt...");
         this.getChildren().addAll(ueberschrift, text,bar, fragenAnzahl,reset);
-        bar.progressProperty().bind(progres);
+        bar.progressProperty().bind(progress);
 
         reset.setOnAction((e)-> spielController.resetMusicPathPropertie());
 
@@ -73,7 +74,22 @@ public class LoadingScreen extends VBox{
         done.getKeyFrames().addAll(k1);
         done.setOnFinished(a -> spielController.getLayout().getViewController().setMainMenu());
         done.play();
+    }
 
-
+    public void zeigeFehler () {
+        Platform.runLater( () -> {
+            ueberschrift.setText("Fehler");
+            text.setText(
+                    "Die eingelesene Mediathek enthält nicht genug Titel, Alben oder Albumcover.\n" +
+                            "Daher kann keine ausreichende Fragenanzahl generiert werden.\n" +
+                            "Bitte wähle einen neuen Pfad."
+            );
+            reset.setText("Neuen Pfad wählen");
+            reset.setOnAction(e -> {
+                String newpath = new DirectoryChooser().showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
+                spielController.getProperties().setProperty("musicPath", newpath);
+                spielController.ladeMusik();
+            });
+        });
     }
 }
