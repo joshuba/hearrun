@@ -60,7 +60,6 @@ public class FrageController {
         alleFragen = new Frageliste();
         this.spielController = spielController;
         tracks = new ArrayList<>();
-        leseXMLein(XMLPATH);
         musicReadingProgress = new SimpleFloatProperty();
         readingOnOff = new SimpleBooleanProperty();
         readingOnOff.setValue(false);
@@ -80,8 +79,8 @@ public class FrageController {
     public void leseMusikEin(String path) {
         spielController.getLayout().getViewController().zeigeLadeScreen(readingOnOff, musicReadingProgress, fragenAnzahl);
         readingOnOff.setValue(false);
-
         leseEinGeneriereFragen(path);
+        leseXMLein(XMLPATH);
     }
 
     private void leseEinGeneriereFragen(String path) {
@@ -224,6 +223,7 @@ public class FrageController {
             System.out.println("Darunter " + alleFragen.size(Fragetyp.InterpretFrage) + " Interpret-Fragen");
             System.out.println("Darunter " + alleFragen.size(Fragetyp.Titelfrage) + " Titel-Fragen");
             System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverTitelFrage) + " Cover-Titel-Fragen");
+            System.out.println("Darunter " + alleFragen.size(Fragetyp.FaktFrage) + " Fakt-Fragen");
         }).start();
     }
 
