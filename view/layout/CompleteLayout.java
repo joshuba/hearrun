@@ -37,6 +37,8 @@ public class CompleteLayout extends StackPane {
             this.getChildren().addAll(gameLayout);
         }
         musicPlayer.stop();
+        mainMenu.kreisSpawningAnAus(false);
+        System.out.println("Kreise aus");
 
     }
 
@@ -46,9 +48,13 @@ public class CompleteLayout extends StackPane {
         musicPlayer.stop();
 
 
+        System.out.println("MUSIK AN");
         musicPlayer.play(Main.class.getResource("/hearrun/resources/music/4.mp3").getPath(), true);
         this.getChildren().addAll(mainMenu);
         mainMenu.mainMenuWindow();
+        mainMenu.kreisSpawningAnAus(true);
+        System.out.println("Kreise an");
+
     }
 
     public ViewController getViewController(){

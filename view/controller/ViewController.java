@@ -29,7 +29,7 @@ public class ViewController {
     private SpielerAnzeige leftLayout;
     private SpielerAnzeige rightLayout;
     private SpielController spielController;
-    LoadingScreen ls;
+    private LoadingScreen ls;
 
 
     public ViewController(Stage stage, SpielController spielController){

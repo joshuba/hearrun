@@ -6,6 +6,9 @@ import hearrun.business.Spieler;
 import hearrun.view.controller.ViewController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 /**
  * Created by joshuabarth on 14.01.17
  */
-public class MainMenu extends VBox {
+public class MainMenu extends StackPane {
     private Button cont;
     private Button newGame;
     private Button settings;
@@ -33,34 +36,47 @@ public class MainMenu extends VBox {
     private boolean continueAn;
     private SpielController spielController;
     private ViewController viewController;
+    private VBox mainMenuElements;
+    private CircleSpawner circleSpawner;
+
 
 
     public MainMenu(SpielController spielController, ViewController viewController) {
+        mainMenuElements = new VBox();
+        mainMenuElements.setAlignment(Pos.CENTER);
         this.spielController = spielController;
         this.viewController = viewController;
         continueAn = false;
-        this.setId("mainMenu");
+        mainMenuElements.setId("mainMenu");
         this.setMinHeight(700);
         this.setMinWidth(300);
         this.setAlignment(Pos.CENTER);
+        circleSpawner = new CircleSpawner(spielController.getStage());
+
+        this.getChildren().addAll(circleSpawner, mainMenuElements);
+        kreisSpawningAnAus(true);
 
         mainMenuWindow();
+
+
+
+
 
     }
 
 
     public void activateContinue() {
         //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
-        this.getChildren().removeAll(this.getChildren());
-        this.getChildren().addAll(cont, newGame, settings, exit);
+        mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
+        mainMenuElements.getChildren().addAll(cont, newGame, settings, exit);
         continueAn = true;
 
 
     }
 
     public void deactivateContinue() {
-        this.getChildren().removeAll(cont, newGame, settings, exit);
-        this.getChildren().addAll(newGame, settings, exit);
+        mainMenuElements.getChildren().removeAll(cont, newGame, settings, exit);
+        mainMenuElements.getChildren().addAll(newGame, settings, exit);
     }
 
     public void newGameWindow() {
@@ -99,7 +115,7 @@ public class MainMenu extends VBox {
         links.getChildren().addAll(spielfeldText, maps);
         rechts.getChildren().addAll(spielerText, spieler, new VBox(addSpieler, removeSpieler));
 
-        this.getChildren().addAll(menuContainer, back, start);
+        mainMenuElements.getChildren().addAll(menuContainer, back, start);
 
 
         back.setOnAction((e) -> mainMenuWindow());
@@ -126,6 +142,7 @@ public class MainMenu extends VBox {
             spielController.setSpieler(spielerliste);
             spielController.getLayout().resetGameLayout();
             spielController.starteSpiel();
+
         });
 
         final Timeline animation = new Timeline(
@@ -158,7 +175,7 @@ public class MainMenu extends VBox {
     }
 
     public void removeAllElements() {
-        this.getChildren().removeAll(this.getChildren());
+        mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
     }
 
     private ObservableList<Map> leseMapsEin() {
@@ -177,6 +194,7 @@ public class MainMenu extends VBox {
 
     public void mainMenuWindow() {
 
+
         //Entferne new GameWindow falls es existiert
         removeAllElements();
 
@@ -185,7 +203,7 @@ public class MainMenu extends VBox {
         settings = new Button("Settings");
         exit = new Button("Exit Game");
 
-        this.getChildren().addAll(newGame, settings, exit);
+        mainMenuElements.getChildren().addAll(newGame, settings, exit);
 
         newGame.setOnAction((e) -> newGameWindow());
         exit.setOnAction((e) -> spielController.beendeProgramm());
@@ -196,7 +214,7 @@ public class MainMenu extends VBox {
     }
 
     public void settingsWindow() {
-        this.getChildren().removeAll(this.getChildren());
+        mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
         Slider antwortZeit = new Slider(4, 15, Integer.valueOf(spielController.getProperties().getProperty("antwortZeit")));
         antwortZeit.setBlockIncrement(12);
         antwortZeit.setMaxWidth(300);
@@ -211,8 +229,8 @@ public class MainMenu extends VBox {
         Button button = new Button("Change Music Path");
         Label pfad = new Label(spielController.getProperties().getProperty("musicPath"));
         Button back = new Button("Back");
-        this.getChildren().addAll(antwortZeit, volume, button, pfad, back);
-        back.setOnAction((e) -> spielController.getLayout().getViewController().setMainMenu());
+        mainMenuElements.getChildren().addAll(antwortZeit, volume, button, pfad, back);
+        back.setOnAction((e) -> mainMenuWindow());
 
 
         button.setOnAction((e) -> {
@@ -232,4 +250,15 @@ public class MainMenu extends VBox {
         System.out.println(Main.class.getResource("/hearrun/resources/Data").getPath());
 
     }
+
+    public void kreisSpawningAnAus(boolean anAus){
+        if(anAus){
+            circleSpawner.play();
+        }else{
+            circleSpawner.stop();
+        }
+
+    }
+
+
 }

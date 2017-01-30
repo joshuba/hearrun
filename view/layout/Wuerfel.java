@@ -74,7 +74,7 @@ public class Wuerfel extends VBox{
 
 
     public int wuerfeln(){
-        int zahl = (int)(Math.random() * 3 + 1);
+        int zahl = (int)(Math.random() * 4 + 1);
         //Falls die Frage falsch oder gar nicht beantwortet wurde
         if(index <= 0){
             return zahl*(-1);

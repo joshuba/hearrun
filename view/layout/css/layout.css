@@ -6,17 +6,52 @@ Button {
  */
 }
 
+#gameLayout{
+    -fx-background-image: url("../../../resources/icons/wallpaper.jpg");;
+}
+
+
+
 #sideBar {
     -fx-background-color: white;
 }
 
 #topLayout {
-    -fx-background-color: white;
 }
 
-#kreis {
-    -fx-background-color: darkgreen;
+#kreis0{
+    -fx-fill: rgba(255, 255, 255, 0.8);
 }
+
+#kreis1 {
+    -fx-fill: rgba(221, 66, 85, 0.8);
+}
+
+#kreis2 {
+    -fx-fill: rgba(51, 195, 98, 0.8);
+}
+
+#kreis3 {
+    -fx-fill: rgba(66, 107, 221, 0.8);;
+}
+
+#kreis4 {
+    -fx-fill: rgba(252, 179, 74, 0.8);
+}
+
+#kreis5 {
+    -fx-fill: rgba(90, 90, 100, 0.8);
+}
+
+#kreis6 {
+    -fx-fill: rgba(80, 191, 180, 0.8);
+}
+
+#kreis7 {
+    -fx-fill: rgba(242, 157, 163, 0.8)
+}
+
+
 
 #frageTextfeld {
 }
@@ -112,3 +147,4 @@ Button {
 .achievements:selected {
     -fx-border-width: 0;
 }
+
