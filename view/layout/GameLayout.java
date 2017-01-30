@@ -33,7 +33,7 @@ public class GameLayout extends BorderPane{
         viewController.setRightLayout(rightLayout);
     }
 
-    public void Blury(boolean anAus){
+    public void blury(boolean anAus){
         BoxBlur bb = new BoxBlur();
         this.setEffect(bb);
 

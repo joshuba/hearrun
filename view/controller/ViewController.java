@@ -3,7 +3,9 @@ package hearrun.view.controller;
 import hearrun.business.Fragetyp;
 import hearrun.Main;
 import hearrun.business.Spieler;
+import hearrun.business.ereignisse.Ereignis;
 import hearrun.business.fragen.Frage;
+import hearrun.view.layout.FrageFenster.EreignisFenster;
 import hearrun.view.layout.IntroScreen;
 import hearrun.view.layout.*;
 import hearrun.view.layout.FrageFenster.CoverFrage;
@@ -233,21 +235,26 @@ public class ViewController {
     }
 
     public void zeigeFrage(Frage frage, Fragetyp fragetyp){
-
         if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage || fragetyp == Fragetyp.FaktFrage){
             ButtonFrage bf = new ButtonFrage(frage, spielController);
             gameLayoutBlury(true);
-            spielController.getLayout().zeigeFrageFenster(bf);
-            bf.starteAntworPhase();
+            spielController.getLayout().zeigeFenster(bf);
+            bf.starteAntwortPhase();
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
             CoverFrage cf = new CoverFrage(frage, spielController);
             gameLayoutBlury(true);
-            spielController.getLayout().zeigeFrageFenster(cf);
-            cf.starteAntworPhase();
+            spielController.getLayout().zeigeFenster(cf);
+            cf.starteAntwortPhase();
 
 
         }
+    }
+
+    public void zeigeEreignis(Ereignis e) {
+        gameLayoutBlury(true);
+        EreignisFenster ereignisFenster = new EreignisFenster(e, spielController);
+        spielController.getLayout().zeigeFenster(ereignisFenster);
     }
 
 
