@@ -43,6 +43,8 @@ public class MainMenu extends StackPane {
 
     public MainMenu(SpielController spielController, ViewController viewController) {
         mainMenuElements = new VBox();
+        mainMenuElements.setSpacing(20);
+
         mainMenuElements.setAlignment(Pos.CENTER);
         this.spielController = spielController;
         this.viewController = viewController;
@@ -88,15 +90,15 @@ public class MainMenu extends StackPane {
         HBox links = new HBox();
         HBox rechts = new HBox();
         Label spielfeldText = new Label("Waehle eine Karte: ");
-        Label spielerText = new Label("Waehle Spieler: ");
+        Label spielerText = new Label("Wähle Spieler: ");
         ListView <Map> maps = new ListView<>();
         ListView <String> spieler = new ListView<>();
         ArrayList <Spieler> spielerliste = new ArrayList<>();
         ObservableList <String> spielerObs = FXCollections.observableArrayList();
-        Button addSpieler = new Button("Add");
-        Button removeSpieler = new Button("Remove");
-        Button back = new Button("Back");
-        Button start = new Button("Start");
+        Button addSpieler = new Button("+");
+        Button removeSpieler = new Button("-");
+        Button back = new Button("zurück");
+        Button start = new Button("Starte Spiel");
 
         // maps initialisieren
         maps.setItems(leseMapsEin());
@@ -198,10 +200,11 @@ public class MainMenu extends StackPane {
         //Entferne new GameWindow falls es existiert
         removeAllElements();
 
-        newGame = new Button("New Game");
-        cont = new Button("Continue");
-        settings = new Button("Settings");
-        exit = new Button("Exit Game");
+        newGame = new Button("Neues Spiel");
+        cont = new Button("Fortfahren");
+        settings = new Button("Einstellungen");
+        exit = new Button("Spiel beenden");
+        exit.setId("buttonRedHover");
 
         mainMenuElements.getChildren().addAll(newGame, settings, exit);
 
@@ -226,9 +229,9 @@ public class MainMenu extends StackPane {
 
         Slider volume = new Slider();
 
-        Button button = new Button("Change Music Path");
+        Button button = new Button("Musikpfad ändern");
         Label pfad = new Label(spielController.getProperties().getProperty("musicPath"));
-        Button back = new Button("Back");
+        Button back = new Button("zurück");
         mainMenuElements.getChildren().addAll(antwortZeit, volume, button, pfad, back);
         back.setOnAction((e) -> mainMenuWindow());
 

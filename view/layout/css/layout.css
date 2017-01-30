@@ -1,13 +1,40 @@
 Button {
 
     -fx-background-color: transparent;
-    /* -fx-min-width: 50px;
-     -fx-min-height: 50px;
- */
+    -fx-min-width: 180px;
+    -fx-min-height: 35px;
+    -fx-border-radius: 20;
+    -fx-background-size: contain;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-image:  url("../../../resources/icons/menuButton.png");
+
+}
+
+Button:hover {
+
+    -fx-background-image:  url("../../../resources/icons/menuButtonHover.png");
+    -fx-text-fill: black;
+}
+
+Button:hover:pressed{
+    -fx-background-image:  url("../../../resources/icons/menuButtonPressed.png");
+    -fx-text-fill: white;
+}
+
+#buttonRedHover:hover:pressed{
+    -fx-background-image:  url("../../../resources/icons/menuButtonExit.png");
+    -fx-text-fill: white;
+}
+
+#buttonRedHover:hover{
+    -fx-background-image:  url("../../../resources/icons/menButtonExitHover.png");
+    -fx-text-fill: white;
 }
 
 #gameLayout{
-    -fx-background-image: url("../../../resources/icons/wallpaper.jpg");;
+    -fx-background-color: linear-gradient(#2c3e50, #bdc3c7);
+
 }
 
 

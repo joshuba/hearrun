@@ -87,7 +87,6 @@ public class CircleSpawner extends GridPane {
 
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
-
             ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(10000), getFromGrid(x,y));
             scaleTransition.setCycleCount(1);
             int faktor = randomWithRange(4,16);
@@ -134,10 +133,6 @@ public class CircleSpawner extends GridPane {
     }
 
     public void play(){
-
-
-
-
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
             createRandomCircle();
 
@@ -160,12 +155,12 @@ public class CircleSpawner extends GridPane {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-                if(newValue.intValue() < 5){
+                if(newValue.intValue() < 2){
                     spawn.playFromStart();
 
 
                 }
-                if(newValue.intValue() == 5){
+                if(newValue.intValue() == 2){
                     anzahl.setValue(0);
                     index = 0;
                 }
