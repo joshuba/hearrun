@@ -196,6 +196,14 @@ Button:hover:pressed{
     -fx-background-size: 100%;
 }
 
+#aktFeldMakierung{
+    -fx-background-image: url("../../../resources/icons/aktMakierung.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+
+}
+
 .spieler-nummer {
     -fx-text-fill: white;
     -fx-font-size: 30;

@@ -17,7 +17,6 @@ public class CenterLayout extends GridPane {
     public CenterLayout(ViewController viewController){
         this.viewController = viewController;
         this.setId("centerLayout");
-        this.setGridLinesVisible(false);
         this.setAlignment(Pos.CENTER);
     }
 

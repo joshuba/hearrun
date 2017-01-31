@@ -77,7 +77,9 @@
 
 }
 
-
+#interpretfeldp3{
+    -fx-background-image: url("../../../resources/icons/artistfeldP3.png");
+}
 
 #coverfeldp3{
     -fx-background-image: url("../../../resources/icons/coverfeldP3.png");
@@ -431,6 +433,9 @@
 
     -fx-background-repeat: stretch;
     -fx-background-size: 100%;
+    -fx-background-position: center;
 
 }
+
+
 

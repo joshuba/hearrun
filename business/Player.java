@@ -60,7 +60,6 @@ public class Player {
     }
 
     public void playRandomNSeconds(String file, int n) {
-
         try {
             SimpleMinim minim = new SimpleMinim(true);
             player = minim.loadMP3File(file);
@@ -68,8 +67,10 @@ public class Player {
 
 
             int start = (new Random().nextInt(player.length() - n));
+            System.out.println("Song: " + file + "Anfang: " + start + "Ende: " + (start+1000*n));
 
-                player.play(start);
+
+            player.play(start);
                 fadeIn();
 
 

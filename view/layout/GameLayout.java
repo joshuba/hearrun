@@ -4,6 +4,7 @@ import hearrun.view.controller.SpielController;
 import hearrun.view.controller.ViewController;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -14,6 +15,7 @@ public class GameLayout extends BorderPane{
 
     public GameLayout(Stage stage, SpielController spielController, ViewController viewController){
         this.setId("gameLayout");
+
 
         //Panes initalisieren
         CenterLayout centerLayout = new CenterLayout(viewController);
@@ -26,6 +28,12 @@ public class GameLayout extends BorderPane{
         this.setLeft(leftLayout);
         this.setRight(rightLayout);
         this.setTop(topLayout);
+
+        HBox bottom = new HBox();
+        bottom.setMinHeight(50);
+
+        this.setBottom(bottom);
+
 
         //Dem Viewcontroller übergeben
         viewController.setCenterLayout(centerLayout);

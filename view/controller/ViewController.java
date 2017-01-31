@@ -14,6 +14,8 @@ import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -30,11 +32,34 @@ public class ViewController {
     private SpielerAnzeige rightLayout;
     private SpielController spielController;
     private LoadingScreen ls;
+    private SimpleBooleanProperty feldAuswahlMakierung;
 
 
     public ViewController(Stage stage, SpielController spielController){
         this.spielController = spielController;
         this.stage = stage;
+        feldAuswahlMakierung = new SimpleBooleanProperty(false);
+
+
+        feldAuswahlMakierung.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue.booleanValue() == true){
+                    spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(true);
+
+                }
+
+                if(newValue.booleanValue() == false){
+                    spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(false);
+                }
+
+
+                //feldBlinkenLassen(spielController.getAktSpiel().getAktFeld().getX(), spielController.getAktSpiel().getAktFeld().getY());
+                //System.out.println("aktfeld = " + spielController.getAktSpiel().getAktFeld().getX() + " " + spielController.getAktSpiel().getAktFeld().getY());
+
+            }
+        });
     }
 
 
@@ -94,15 +119,23 @@ public class ViewController {
 
 
         if(i>0){
-            System.out.println("FORWARD");
             forward.play();
+            forward.setOnFinished(e -> {
+                feldAuswahlMakierung.setValue(true);
+
+            });
         }else{
             if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann
                 back.play();
+                back.setOnFinished(e -> {
+                    feldAuswahlMakierung.setValue(true);
+                });
 
             }else{
                 spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/moveFailure.mp3").getPath()); //Falls kein Feld mehr da ist
                 feldBlinkenLassen(0,0);
+                feldAuswahlMakierung.setValue(true);
+
 
             }
         }
@@ -200,7 +233,6 @@ public class ViewController {
 
         String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString() + idZahl;
         feldtyp = feldtyp.toLowerCase();
-        System.out.println(feldtyp);
 
 
         return feldtyp;
@@ -326,6 +358,7 @@ public class ViewController {
 
                     if (e.getButton() == MouseButton.PRIMARY && f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY())){
                         spielController.stelleAktFrage();
+                        feldAuswahlMakierung.setValue(false);
                     }
                 });
                 f.addEventHandler(MouseEvent.MOUSE_PRESSED, panePressed);
@@ -338,6 +371,18 @@ public class ViewController {
     public LoadingScreen getLoadingScreen() {
         return ls;
     }
+
+
+
+    public void setFeldAuswahlMakierung(boolean anAus){
+        if(anAus){
+            feldAuswahlMakierung.setValue(true);
+        }else{
+            feldAuswahlMakierung.set(false);
+        }
+    }
+
+
 
 
 

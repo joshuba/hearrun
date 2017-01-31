@@ -98,7 +98,6 @@ public class CircleSpawner extends GridPane {
             scaleTransition.setToY(faktor);
             scaleTransition.play();
 
-
         });
 
         KeyFrame k2 = new KeyFrame(Duration.millis(100), a ->{
@@ -199,6 +198,12 @@ public class CircleSpawner extends GridPane {
     }
 
     private boolean hatNachbarOderGleich(int x, int y){
+/* x+1 <= 9 && raster[x+1][y].getChildren().isEmpty() &&
+                x-1 >= 0 && raster[x-1][y].getChildren().isEmpty() &&
+                y+1 <= 4 && raster[x][y+1].getChildren().isEmpty() &&
+                y-1 >= 0 && raster[x][y-1].getChildren().isEmpty() &&
+                */
+
 
         //falls kein kreis nebenan oder auf dem selben feld ist
         if(x+1 <= 9 && raster[x+1][y].getChildren().isEmpty() &&

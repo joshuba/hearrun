@@ -160,7 +160,6 @@ public class FrageFenster extends BorderPane {
 
             aktZeit.set(decounter--);
             getProgress();
-            System.out.println(progress);
         });
 
 

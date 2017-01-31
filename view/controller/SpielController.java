@@ -52,6 +52,7 @@ public class SpielController {
         completeLayout.getViewController().setFeldId(0, 0, completeLayout.getViewController().erkenneFeldId(0, 0)); //Setze Alle Player aufs erste Feld
         getLayout().getViewController().macheFelderKlickbar();
 
+
     }
 
 
@@ -85,6 +86,11 @@ public class SpielController {
         completeLayout.getViewController().resetGameLayout();
         waehleMapErstelleSpiel(map, spielerListe);
         completeLayout.getViewController().setGameLayout();
+        getLayout().getViewController().setFeldAuswahlMakierung(false);
+
+        getLayout().getViewController().setFeldAuswahlMakierung(true);
+
+
 
 
     }

@@ -1,5 +1,6 @@
 package hearrun.business;
 
+import hearrun.view.layout.Feld;
 import hearrun.view.layout.Map;
 
 import java.util.ArrayList;
@@ -48,6 +49,10 @@ public class Spiel {
 
     public void setPlayerNames(int nr, String name){
         spielerListe.get(nr).setName(name);
+    }
+
+    public Feld getAktFeld(){
+        return aktMap.getFeld(spielerListe.get(aktSpieler).getAktX(), spielerListe.get(aktSpieler).getAktY());
     }
 
 
