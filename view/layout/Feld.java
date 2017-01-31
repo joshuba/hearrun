@@ -107,6 +107,7 @@ public class Feld extends StackPane{
         st.setByY(0.2f);
         st.setAutoReverse(false);
 
+
         ScaleTransition st2 = new ScaleTransition(Duration.millis(50), this);
         st2.setByX(-0.2f);
         st2.setByY(-0.2f);
@@ -158,9 +159,18 @@ public class Feld extends StackPane{
                 RotateTransition rt = new RotateTransition(Duration.millis(2000), ladeRad);
                 rt.setByAngle(360);
                 rt.setCycleCount(Animation.INDEFINITE);
-                rt.play();
+                //rt.play();
 
-                ScaleTransition st = new ScaleTransition(Duration.millis(1000), aktBild);
+                FadeTransition ft = new FadeTransition(Duration.millis(1000), ladeRad);
+                ft.setFromValue(100);
+                ft.setToValue(0);
+                ft.setCycleCount(Animation.INDEFINITE);
+               ft.setAutoReverse(true);
+               ft.play();
+
+
+
+             ScaleTransition st = new ScaleTransition(Duration.millis(1000), aktBild);
                 st.setFromY(getScaleY()+0.1);
                 st.setFromX(getScaleY()+0.1);
                 st.setToY(0.9);
@@ -178,6 +188,7 @@ public class Feld extends StackPane{
         }else{
             this.getChildren().removeAll(this.getChildren());
             System.out.println("MakierungAus");
+
 
 
 
