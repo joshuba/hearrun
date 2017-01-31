@@ -43,15 +43,16 @@ public class CompleteLayout extends StackPane {
     }
 
     public void setMainMenu(){
-        this.getChildren().removeAll(this.getChildren());
+
 
         musicPlayer.stop();
-
-
-        System.out.println("MUSIK AN");
         musicPlayer.play(Main.class.getResource("/hearrun/resources/music/4.mp3").getPath(), true);
+        this.getChildren().removeAll(this.getChildren());
+
+
+
         this.getChildren().addAll(mainMenu);
-        mainMenu.mainMenuWindow();
+        mainMenu.showMainMenu();
         mainMenu.kreisSpawningAnAus(true);
         System.out.println("Kreise an");
 
@@ -101,5 +102,9 @@ public class CompleteLayout extends StackPane {
 
     public void removeFrageIntro(FrageIntro frageIntro){
         this.getChildren().removeAll(frageIntro);
+    }
+
+    public GameLayout getGameLayout(){
+        return this.gameLayout;
     }
 }

@@ -24,7 +24,7 @@ Button:hover:pressed{
 
 #buttonRedHover:hover:pressed{
     -fx-background-image:  url("../../../resources/icons/menuButtonExit.png");
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #buttonRedHover:hover{
@@ -33,7 +33,7 @@ Button:hover:pressed{
 }
 
 #gameLayout{
-    -fx-background-color: linear-gradient(#2c3e50, #bdc3c7);
+    -fx-background-image: url("../../../resources/icons/wallpaper.png");
 
 }
 
@@ -96,18 +96,46 @@ Button:hover:pressed{
 
 #negWuerfel {
     -fx-background-image: url("../../../resources/icons/negWuerfel.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
 }
 
 #posWuerfel {
     -fx-background-image: url("../../../resources/icons/posWuerfel.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
 }
 
 #negWuerfel:pressed {
     -fx-background-image: url("../../../resources/icons/negWuerfel_pressed.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
 }
 
 #posWuerfel:pressed {
     -fx-background-image: url("../../../resources/icons/posWuerfel_pressed.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
+}
+
+#progressBarOrange .bar{
+    -fx-background-color: darkorange;
+    -fx-border-width: 0
+
+}
+
+#progressBarRed .bar{
+    -fx-background-color: #ff514c;
+    -fx-border-width: 0
+
 }
 
 .progress-bar .bar {
@@ -120,6 +148,8 @@ Button:hover:pressed{
     -fx-border-style: none;
 
 }
+
+
 
 #grossText {
     -fx-font-size: 30;
@@ -145,6 +175,19 @@ Button:hover:pressed{
 
 #falschCoverButton {
     -fx-effect: dropshadow(three-pass-box, #ff4e37, 10, 0.8, 0, 0);
+
+}
+
+#pauseButton{
+    -fx-background-image: url("../../../resources/icons/pause.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+
+}
+
+#pauseButton:pressed{
+    -fx-background-image: url("../../../resources/icons/pause_pressed.png");
 
 }
 
@@ -174,4 +217,6 @@ Button:hover:pressed{
 .achievements:selected {
     -fx-border-width: 0;
 }
+
+
 
