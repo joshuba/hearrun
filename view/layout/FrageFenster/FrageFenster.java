@@ -8,6 +8,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -115,6 +117,20 @@ public class FrageFenster extends Fenster {
 
 
 
+        progress.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if(newValue.floatValue() >= 0.6 && newValue.floatValue() < 0.8){
+                    time.setId("progressBarOrange");
+                }else if(newValue.floatValue() >= 0.8){
+                    time.setId("progressBarRed");
+
+                }
+            }
+        });
+
+
+
     }
 
     public void starteAntwortPhase(){
@@ -132,7 +148,6 @@ public class FrageFenster extends Fenster {
 
             aktZeit.set(decounter--);
             getProgress();
-            System.out.println(progress);
         });
 
 

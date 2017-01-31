@@ -1,22 +1,84 @@
 Button {
 
     -fx-background-color: transparent;
-    /* -fx-min-width: 50px;
-     -fx-min-height: 50px;
- */
+    -fx-min-width: 180px;
+    -fx-min-height: 35px;
+    -fx-border-radius: 20;
+    -fx-background-size: contain;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-image:  url("../../../resources/icons/menuButton.png");
+
 }
+
+Button:hover {
+
+    -fx-background-image:  url("../../../resources/icons/menuButtonHover.png");
+    -fx-text-fill: black;
+}
+
+Button:hover:pressed{
+    -fx-background-image:  url("../../../resources/icons/menuButtonPressed.png");
+    -fx-text-fill: white;
+}
+
+#buttonRedHover:hover:pressed{
+    -fx-background-image:  url("../../../resources/icons/menuButtonExit.png");
+    -fx-text-fill: black;
+}
+
+#buttonRedHover:hover{
+    -fx-background-image:  url("../../../resources/icons/menButtonExitHover.png");
+    -fx-text-fill: white;
+}
+
+#gameLayout{
+    -fx-background-image: url("../../../resources/icons/wallpaper.png");
+
+}
+
+
 
 #sideBar {
     -fx-background-color: white;
 }
 
 #topLayout {
-    -fx-background-color: white;
 }
 
-#kreis {
-    -fx-background-color: darkgreen;
+#kreis0{
+    -fx-fill: rgba(255, 255, 255, 0.8);
 }
+
+#kreis1 {
+    -fx-fill: rgba(221, 66, 85, 0.8);
+}
+
+#kreis2 {
+    -fx-fill: rgba(51, 195, 98, 0.8);
+}
+
+#kreis3 {
+    -fx-fill: rgba(66, 107, 221, 0.8);;
+}
+
+#kreis4 {
+    -fx-fill: rgba(252, 179, 74, 0.8);
+}
+
+#kreis5 {
+    -fx-fill: rgba(90, 90, 100, 0.8);
+}
+
+#kreis6 {
+    -fx-fill: rgba(80, 191, 180, 0.8);
+}
+
+#kreis7 {
+    -fx-fill: rgba(242, 157, 163, 0.8)
+}
+
+
 
 #frageTextfeld {
 }
@@ -34,18 +96,46 @@ Button {
 
 #negWuerfel {
     -fx-background-image: url("../../../resources/icons/negWuerfel.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
 }
 
 #posWuerfel {
     -fx-background-image: url("../../../resources/icons/posWuerfel.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
 }
 
 #negWuerfel:pressed {
     -fx-background-image: url("../../../resources/icons/negWuerfel_pressed.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
 }
 
 #posWuerfel:pressed {
     -fx-background-image: url("../../../resources/icons/posWuerfel_pressed.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+
+}
+
+#progressBarOrange .bar{
+    -fx-background-color: darkorange;
+    -fx-border-width: 0
+
+}
+
+#progressBarRed .bar{
+    -fx-background-color: #ff514c;
+    -fx-border-width: 0
+
 }
 
 .progress-bar .bar {
@@ -58,6 +148,8 @@ Button {
     -fx-border-style: none;
 
 }
+
+
 
 #grossText {
     -fx-font-size: 30;
@@ -86,9 +178,30 @@ Button {
 
 }
 
+#pauseButton{
+    -fx-background-image: url("../../../resources/icons/pause.png");
+    -fx-background-color: transparent;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+
+}
+
+#pauseButton:pressed{
+    -fx-background-image: url("../../../resources/icons/pause_pressed.png");
+
+}
+
 #negWuerfel, #posWuerfel {
     -fx-background-repeat: stretch;
     -fx-background-size: 100%;
+}
+
+#aktFeldMakierung{
+    -fx-background-image: url("../../../resources/icons/aktMakierung.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+
 }
 
 .spieler-nummer {
@@ -112,3 +225,6 @@ Button {
 .achievements:selected {
     -fx-border-width: 0;
 }
+
+
+

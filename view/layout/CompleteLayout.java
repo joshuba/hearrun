@@ -37,18 +37,25 @@ public class CompleteLayout extends StackPane {
             this.getChildren().addAll(gameLayout);
         }
         musicPlayer.stop();
+        mainMenu.kreisSpawningAnAus(false);
+        System.out.println("Kreise aus");
 
     }
 
     public void setMainMenu(){
-        this.getChildren().removeAll(this.getChildren());
+
 
         musicPlayer.stop();
-
-
         musicPlayer.play(Main.class.getResource("/hearrun/resources/music/4.mp3").getPath(), true);
+        this.getChildren().removeAll(this.getChildren());
+
+
+
         this.getChildren().addAll(mainMenu);
-        mainMenu.mainMenuWindow();
+        mainMenu.showMainMenu();
+        mainMenu.kreisSpawningAnAus(true);
+        System.out.println("Kreise an");
+
     }
 
     public ViewController getViewController(){
@@ -96,5 +103,9 @@ public class CompleteLayout extends StackPane {
 
     public void removeFrageIntro(FrageIntro frageIntro){
         this.getChildren().removeAll(frageIntro);
+    }
+
+    public GameLayout getGameLayout(){
+        return this.gameLayout;
     }
 }

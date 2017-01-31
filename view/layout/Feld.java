@@ -2,26 +2,33 @@ package hearrun.view.layout;
 
 import hearrun.business.Fragetyp;
 import hearrun.view.controller.SpielController;
-import javafx.animation.KeyFrame;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.geometry.Point3D;
+import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 /**
  * Created by joshuabarth on 10.01.17.
  */
-public class Feld extends HBox{
+public class Feld extends StackPane{
     private Feldtyp feldtyp;
+    private int x;
+    private int y;
 
 
 
 
-    public Feld(Feldtyp feldtyp, ReadOnlyDoubleProperty widthProperty, ReadOnlyDoubleProperty heightProperty){
+    public Feld(Feldtyp feldtyp, ReadOnlyDoubleProperty widthProperty, ReadOnlyDoubleProperty heightProperty, int x, int y){
         this.feldtyp = feldtyp;
         setLeer();
+        this.x = x;
+        this.y = y;
+
         /*
         RotateTransition rt = new RotateTransition(Duration.millis(1000), this);
         rt.setByAngle(180);
@@ -30,10 +37,6 @@ public class Feld extends HBox{
         rt.play();
 
 */
-
-
-
-
         this.prefHeightProperty().bind(heightProperty);
         this.prefWidthProperty().bind(widthProperty);
     }
@@ -124,12 +127,63 @@ public class Feld extends HBox{
 
     }
 
+    public int getX(){
+        return this.x;
+
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
+    public void aktuellesFeldMakierung(boolean anAus){
+        if(anAus){
+            System.out.println("MakierungAN");
+            HBox aktBild = new HBox();
+            aktBild.setId(this.getId());
+            aktBild.setAlignment(Pos.CENTER);
+            aktBild.setStyle("-fx-background-size: 80%");
+
+
+
+            HBox ladeRad = new HBox();
+            ladeRad.setId("aktFeldMakierung");
+            ladeRad.setAlignment(Pos.CENTER);
+
+
+            this.getChildren().removeAll(this.getChildren());
+            this.getChildren().addAll(ladeRad, aktBild);
+
+
+                RotateTransition rt = new RotateTransition(Duration.millis(2000), ladeRad);
+                rt.setByAngle(360);
+                rt.setCycleCount(Animation.INDEFINITE);
+                rt.play();
+
+                ScaleTransition st = new ScaleTransition(Duration.millis(1000), aktBild);
+                st.setFromY(getScaleY()+0.1);
+                st.setFromX(getScaleY()+0.1);
+                st.setToY(0.9);
+                st.setToX(0.9);
+                st.setCycleCount(Animation.INDEFINITE);
+                st.setAutoReverse(true);
+
+
+                st.play();
 
 
 
 
 
+        }else{
+            this.getChildren().removeAll(this.getChildren());
+            System.out.println("MakierungAus");
 
+
+
+        }
+
+    }
 
 
 

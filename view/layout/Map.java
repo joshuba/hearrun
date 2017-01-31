@@ -45,7 +45,7 @@ public class Map {
                 line = line.substring(1);
                 String zeichen [] = line.split(" ");
                 for (int i = 0; i<zeichen.length; i++){
-                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), widthProperty, heightProperty);
+                       Feld feld = new Feld(erkenneFeldtyp(zeichen[i]), widthProperty, heightProperty, i, row);
                        spielFeld[i][row] = feld;
 
                 }
