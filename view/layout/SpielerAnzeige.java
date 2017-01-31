@@ -129,7 +129,8 @@ public class SpielerAnzeige extends VBox {
         achievements.getItems().clear();
         achievements.getItems().add(new Herzen());
 
-        Label fragenRichtig = new Label(achievementMap.get("fragenRichtig") + " Fragen richtig beantwortet");
+        Integer anz = achievementMap.get("fragenRichtig");
+        Label fragenRichtig = new Label(anz + ((anz == 1)?" Frage" : " Fragen") + " richtig beantwortet");
         fragenRichtig.setTextAlignment(TextAlignment.CENTER);
         HBox hb = new HBox(fragenRichtig);
         hb.setAlignment(Pos.BASELINE_CENTER);

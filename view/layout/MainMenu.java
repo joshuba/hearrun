@@ -216,11 +216,14 @@ public class MainMenu extends VBox {
 
 
         button.setOnAction((e) -> {
-            String newpath = new DirectoryChooser().showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
-            pfad.setText(newpath);
-            spielController.getProperties().setProperty("musicPath", newpath);
+            try {
+                String newpath = new DirectoryChooser().showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
+                pfad.setText(newpath);
+                spielController.getProperties().setProperty("musicPath", newpath);
+                spielController.ladeMusik();
+            } catch (NullPointerException ignored){}
 
-            spielController.ladeMusik();
+
         });
     }
 
