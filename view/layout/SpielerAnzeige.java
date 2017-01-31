@@ -22,7 +22,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by joshuabarth on 09.01.17.
+ * Created by joshuabarth on 09.01.17
  */
 public class SpielerAnzeige extends VBox {
     private Stage stage;
