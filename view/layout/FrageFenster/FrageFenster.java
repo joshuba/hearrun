@@ -170,7 +170,7 @@ public class FrageFenster extends Fenster {
 
 
     public void wuerfeln(int index){
-        if (spielController.getAktSpiel().getAktSpieler().getLeben() > 0) {
+        if (spielController.getAktSpiel().getAktSpieler().getLeben() > 0 && index != 1) {
             spielController.stelleAktFrage();
             spielController.getAktSpiel().getAktSpieler().removeLeben();
         } else {
