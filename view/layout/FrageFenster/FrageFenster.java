@@ -1,6 +1,7 @@
 package hearrun.view.layout.FrageFenster;
 
 import hearrun.business.Player;
+import hearrun.business.Spieler;
 import hearrun.view.controller.SpielController;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Wuerfel;
@@ -192,11 +193,8 @@ public class FrageFenster extends Fenster {
     protected void aktualisiereAchievement() {
         // Statistik zu gewonnenen Spielen aktualisieren
         if (falschRichtig.getValue() == 1) {
-            ObservableMap<String, String> achievements = spielController.getAktSpiel().getAktSpieler().getAchievements();
-            int gewonneneSpiele = Character.getNumericValue(
-                    achievements.get("fragen").charAt(achievements.get("fragen").length()-1)
-            );
-            achievements.put("fragen", "Richtige Fragen: " + ++gewonneneSpiele);
+            Spieler spieler = spielController.getAktSpiel().getAktSpieler();
+            spieler.addRichtigeFrage();
         }
 
     }

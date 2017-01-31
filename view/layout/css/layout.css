@@ -112,3 +112,9 @@ Button {
 .achievements:selected {
     -fx-border-width: 0;
 }
+
+.leben-icon {
+    -fx-background-image: url("../../../resources/icons/herz.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
