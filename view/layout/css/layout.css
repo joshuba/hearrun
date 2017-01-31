@@ -204,6 +204,10 @@ Button:hover:pressed{
 
 }
 
+#frageButton{
+    -fx-text-alignment: left;
+}
+
 .spieler-nummer {
     -fx-text-fill: white;
     -fx-font-size: 30;
@@ -225,6 +229,8 @@ Button:hover:pressed{
 .achievements:selected {
     -fx-border-width: 0;
 }
+
+
 
 
 

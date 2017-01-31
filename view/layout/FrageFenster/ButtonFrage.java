@@ -46,15 +46,16 @@ public class ButtonFrage extends FrageFenster {
         vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3], wuerfelBox);
 
         //Frageninfos auslesen und in GUI einsetzen
-        buttons[0].setText(frage.getAntworten()[0]);
-        buttons[1].setText(frage.getAntworten()[1]);
-        buttons[2].setText(frage.getAntworten()[2]);
-        buttons[3].setText(frage.getAntworten()[3]);
+        buttons[0].setText("A" + "   " + frage.getAntworten()[0]);
+        buttons[1].setText("B" + "   " + frage.getAntworten()[1]);
+        buttons[2].setText("C" + "   " + frage.getAntworten()[2]);
+        buttons[3].setText("D" + "   " + frage.getAntworten()[3]);
+
         richtigButton = buttons[frage.getRichtigIndex()];
-        buttons[0].setId("normalButton");
-        buttons[1].setId("normalButton");
-        buttons[2].setId("normalButton");
-        buttons[3].setId("normalButton");
+        buttons[0].setId("frageButton");
+        buttons[1].setId("frageButton");
+        buttons[2].setId("frageButton");
+        buttons[3].setId("frageButton");
 
 
         buttons[0].setOnAction((e)-> buttonPress(buttons[0]));
