@@ -107,18 +107,25 @@ public class SpielerAnzeige extends VBox {
 
     private void updateAchievements(ObservableMap<String, Integer> achievementMap, ListView<HBox> achievements) {
         class Herzen extends HBox {
-            public Herzen() {
+            private Herzen() {
                 int leben = achievementMap.get("leben");
                 this.setAlignment(Pos.BASELINE_CENTER);
                 for(int i = 0; i < leben; i++) {
-                    System.out.println("herz hinzufügen..." + "\nAnzahl Leben = " + leben);
                     Label l = new Label();
                     l.getStyleClass().add("leben-icon");
                     l.setMinSize(30,30);
                     getChildren().add(l);
                 }
+
+                if (leben == 0) {
+                    Label l = new Label();
+                    l.getStyleClass().add("kein-leben-icon");
+                    l.setMinSize(30,30);
+                    getChildren().add(l);
+                }
             }
         }
+
         achievements.getItems().clear();
         achievements.getItems().add(new Herzen());
 
