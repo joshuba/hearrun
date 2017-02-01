@@ -419,6 +419,26 @@
 
 }
 
+#interpretfeldleerBIG{
+    -fx-background-image: url("../../../resources/icons/artistfeldLeerBIG.png");
+
+}
+
+#coverfeldleerBIG{
+    -fx-background-image: url("../../../resources/icons/coverfeldLeerBIG.png");
+
+}
+
+#faktfeldleerBIG{
+    -fx-background-image: url("../../../resources/icons/faktfeldLeerBIG.png");
+}
+
+#titelfeldleerBIG{
+    -fx-background-image: url("../../../resources/icons/titelfeldLeerBIG.png");
+}
+
+
+
 
 
 
@@ -429,7 +449,7 @@
 #endfeldp4, #interpretfeldp4, #coverfeldp4, #ereignisfeldp4, #faktfeldp4, #titelfeldp4, #endfeldp4, #interpretfeldp13, #coverfeldp13, #ereignisfeldp13, #faktfeldp13, #titelfeldp13, #endfeldp13, #interpretfeldp14, #coverfeldp14, #ereignisfeldp14, #faktfeldp14, #titelfeldp14, #endfeldp14,
 #interpretfeldp23, #coverfeldp23, #ereignisfeldp23, #faktfeldp23, #titelfeldp23, #endfeldp23, #interpretfeldp24, #coverfeldp24, #ereignisfeldp24, #faktfeldp24, #titelfeldp24, #endfeldp24, #interpretfeldp34, #coverfeldp34, #ereignisfeldp34, #faktfeldp34, #titelfeldp34, #endfeldp34,
 #interpretfeldp123, #coverfeldp123, #ereignisfeldp123, #faktfeldp123, #titelfeldp123, #endfeldp123, #interpretfeldp124, #coverfeldp124, #ereignisfeldp124, #faktfeldp124, #titelfeldp124, #endfeldp124, #interpretfeldp134, #coverfeldp134, #ereignisfeldp134, #faktfeldp134, #titelfeldp134, #endfeldp134,
-#interpretfeldp234, #coverfeldp234, #ereignisfeldp234, #faktfeldp234, #titelfeldp234, #endfeldp234, #interpretfeldp1234, #coverfeldp1234, #ereignisfeldp1234, #faktfeldp1234, #titelfeldp1234, #endfeldp1234{
+#interpretfeldp234, #coverfeldp234, #ereignisfeldp234, #faktfeldp234, #titelfeldp234, #endfeldp234, #interpretfeldp1234, #coverfeldp1234, #ereignisfeldp1234, #faktfeldp1234, #titelfeldp1234, #endfeldp1234, #interpretfeldleerBIG, #coverfeldleerBIG, #faktfeldleerBIG, #titelfeldleerBIG{
 
     -fx-background-repeat: stretch;
     -fx-background-size: 100%;

@@ -29,13 +29,16 @@ public class MainMenu extends StackPane {
     private Button newGame;
     private Button settings;
     private Button exit;
+    private Button help;
     private boolean continueAn;
     private SpielController spielController;
     private ViewController viewController;
     private VBox mainMenuElements;
     private VBox settingsElements;
     private VBox newGameElements;
+    private VBox helpElements;
     private CircleSpawner circleSpawner;
+    private PictureGalery p;
 
 
 
@@ -46,8 +49,12 @@ public class MainMenu extends StackPane {
         settingsElements.setSpacing(15);
         newGameElements = new VBox();
         newGameElements.setSpacing(15);
+        helpElements = new VBox();
+        helpElements.setSpacing(15);
 
         mainMenuElements.setAlignment(Pos.CENTER);
+        p = new PictureGalery(Main.class.getResource("/hearrun/resources/manual/").getPath());
+        this.setId("mainMenu");
         this.spielController = spielController;
         this.viewController = viewController;
         continueAn = false;
@@ -62,13 +69,14 @@ public class MainMenu extends StackPane {
 
 
 
+
     }
 
 
     public void activateContinue() {
         //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
         mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
-        mainMenuElements.getChildren().addAll(cont, newGame, settings, exit);
+        mainMenuElements.getChildren().addAll(cont, newGame, help, settings, exit);
         continueAn = true;
 
 
@@ -206,13 +214,14 @@ public class MainMenu extends StackPane {
         newGame = new Button("Neues Spiel");
         cont = new Button("Fortfahren");
         settings = new Button("Einstellungen");
+        help = new Button("Hilfe");
         exit = new Button("Spiel beenden");
         exit.setId("buttonRedHover");
 
         if(continueAn){
             activateContinue();
         }else{
-            mainMenuElements.getChildren().addAll(newGame, settings, exit);
+            mainMenuElements.getChildren().addAll(newGame, help, settings, exit);
 
         }
 
@@ -231,6 +240,11 @@ public class MainMenu extends StackPane {
                 menuUebergang(mainMenuElements, settingsElements, true);
 
             });
+        help.setOnAction(e -> {
+            initHelpMenu();
+            menuUebergang(mainMenuElements, helpElements, true);
+
+        });
 
     }
 
@@ -266,6 +280,21 @@ public class MainMenu extends StackPane {
 
     }
 
+    private void initHelpMenu(){
+        Button button = new Button("Zurück");
+        helpElements.getChildren().addAll(p, button);
+        helpElements.setAlignment(Pos.CENTER);
+        p.minHeightProperty().bind(viewController.getStage().heightProperty().subtract(400));
+        p.maxHeightProperty().bind(viewController.getStage().heightProperty().subtract(400));
+
+        button.setOnAction((e) -> {
+            initMainMenuWindow();
+            menuUebergang(helpElements, mainMenuElements, false);
+        });
+
+
+    }
+
 
     public void newGameAnAus(boolean anAus) {
         this.newGame.setDisable(!anAus);
@@ -297,11 +326,11 @@ public class MainMenu extends StackPane {
         this.getChildren().addAll(zu);
         zu.setOpacity(0);
 
-        FadeTransition ft = new FadeTransition(Duration.millis(250), von);
+        FadeTransition ft = new FadeTransition(Duration.millis(100), von);
         ft.setFromValue(1.0f);
         ft.setToValue(0.0);
 
-        ScaleTransition st = new ScaleTransition(Duration.millis(350), zu);
+        ScaleTransition st = new ScaleTransition(Duration.millis(250), zu);
         st.setFromX(zoomVon);
         st.setFromY(zoomVon);
         st.setToX(zoomZu);
@@ -313,12 +342,12 @@ public class MainMenu extends StackPane {
 
         });
 
-        KeyFrame k2 = new KeyFrame(Duration.millis(300), a ->{
+        KeyFrame k2 = new KeyFrame(Duration.millis(50), a ->{
             zu.setOpacity(1);
 
         });
 
-        KeyFrame k3 = new KeyFrame(Duration.millis(250), a ->{
+        KeyFrame k3 = new KeyFrame(Duration.millis(1), a ->{
             st.play();
         });
 

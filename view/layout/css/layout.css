@@ -11,6 +11,9 @@ Button {
 
 }
 
+
+
+
 Button:hover {
 
     -fx-background-image:  url("../../../resources/icons/menuButtonHover.png");
@@ -29,7 +32,17 @@ Button:hover:pressed{
 
 #buttonRedHover:hover{
     -fx-background-image:  url("../../../resources/icons/menButtonExitHover.png");
-    -fx-text-fill: white;
+    -fx-text-fill: black;
+}
+
+#buttonGreenHover:hover {
+    -fx-background-image: url("../../../resources/icons/menButtonStartHover.png");
+    -fx-text-fill: black;
+}
+
+#buttonGreenHover:hover:pressed{
+    -fx-background-image:  url("../../../resources/icons/menuButtonStartPressed.png");
+    -fx-text-fill: black;
 }
 
 #gameLayout{
@@ -41,6 +54,12 @@ Button:hover:pressed{
 
 #sideBar {
     -fx-background-color: white;
+}
+
+#mainMenu{
+    -fx-background-color: linear-gradient(#E0EAFC, #CFDEF3);
+    -fx-background-position: center;
+    -fx-background-size: stretch;
 }
 
 #topLayout {
@@ -156,7 +175,7 @@ Button:hover:pressed{
 }
 
 #introScreen {
-    -fx-background-color: dimgray;
+    -fx-background-color: rgba(0,0,0,0.67);
 }
 
 #loadingScreen {
@@ -229,6 +248,47 @@ Button:hover:pressed{
 .achievements:selected {
     -fx-border-width: 0;
 }
+
+#imageViewerLeft{
+    -fx-background-image: url("../../../resources/icons/imageViewerLeft.png");
+}
+
+#imageViewerLeft:hover{
+    -fx-background-image: url("../../../resources/icons/imageViewerLeft_Hover.png");
+
+}
+
+#imageViewerLeft:hover:pressed{
+    -fx-background-image: url("../../../resources/icons/imageViewerLeft_Pressed.png");
+}
+
+
+#imageViewerRight{
+    -fx-background-image: url("../../../resources/icons/imageViewerRight.png");
+}
+
+#imageViewerRight:hover{
+    -fx-background-image: url("../../../resources/icons/imageViewerRight_Hover.png");
+
+}
+
+#imageViewerRight:hover:pressed{
+    -fx-background-image: url("../../../resources/icons/imageViewerRight_Pressed.png");
+}
+
+#imageViewerLeft, #imageViewerRight{
+    -fx-background-size: 30%;
+}
+
+#schriftMittel, #frageText{
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-font-family: Verdana;
+
+
+}
+
+
 
 
 

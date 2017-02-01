@@ -2,6 +2,7 @@ package hearrun;
 
 import hearrun.view.controller.SpielController;
 import hearrun.view.layout.CircleSpawner;
+import hearrun.view.layout.PictureGalery;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
@@ -35,6 +36,7 @@ public class Main extends Application {
         spielController = new SpielController(primaryStage);
 
 
+
         Scene scene = new Scene(spielController.getLayout());
 
 
@@ -57,6 +59,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 
     @Override

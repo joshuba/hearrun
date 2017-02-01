@@ -108,20 +108,24 @@ public class Feld extends StackPane{
         st.setAutoReverse(false);
 
 
-        ScaleTransition st2 = new ScaleTransition(Duration.millis(50), this);
+        ScaleTransition st2 = new ScaleTransition(Duration.millis(100), this);
         st2.setByX(-0.2f);
         st2.setByY(-0.2f);
         st2.setAutoReverse(false);
 
 
 
-        KeyFrame k1 = new KeyFrame(Duration.millis(200), a ->{
+        KeyFrame k1 = new KeyFrame(Duration.millis(100), a ->{
             st.play();
         });
-        KeyFrame k2 = new KeyFrame(Duration.millis(100), a ->{
+        KeyFrame k2 = new KeyFrame(Duration.millis(1), a ->{
             st2.play();
         });
         Timeline t = new Timeline(k2,k1);
+        t.setOnFinished(e -> {
+            this.setScaleX(0);
+            this.setScaleY(0);
+        });
         t.play();
 
 

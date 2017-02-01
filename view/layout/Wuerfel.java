@@ -73,12 +73,11 @@ public class Wuerfel extends VBox {
 
 
     public int wuerfeln() {
-        int zahl = (int) (Math.random() * 3 + 1);
-        //Falls die Frage falsch oder gar nicht beantwortet wurde
         if (index <= 0) {
-            return zahl * (-1);
+            return (int) ((Math.random() * 3 + 1)) * (-1);
+
         } else {
-            return zahl;
+            return (int) (Math.random() * 6 + 1);
         }
     }
 
@@ -100,23 +99,36 @@ public class Wuerfel extends VBox {
         KeyFrame k3 = new KeyFrame(Duration.millis(100), a -> {
             anzeige.setText(Integer.toString(3));
         });
-        KeyFrame k4 = new KeyFrame(Duration.millis(0), a -> {
+        KeyFrame k4 = new KeyFrame(Duration.millis(150), a -> {
+            anzeige.setText(Integer.toString(4));
+        });
+        KeyFrame k5 = new KeyFrame(Duration.millis(200), a -> {
+            anzeige.setText(Integer.toString(5));
+        });
+        KeyFrame k6 = new KeyFrame(Duration.millis(250), a -> {
+            anzeige.setText(Integer.toString(6));
+        });
+
+        KeyFrame k7 = new KeyFrame(Duration.millis(0), a -> {
             anzeige.setText(Integer.toString(-1));
         });
-        KeyFrame k5 = new KeyFrame(Duration.millis(50), a -> {
+        KeyFrame k8 = new KeyFrame(Duration.millis(50), a -> {
             anzeige.setText(Integer.toString(-2));
         });
-        KeyFrame k6 = new KeyFrame(Duration.millis(100), a -> {
+        KeyFrame k9 = new KeyFrame(Duration.millis(100), a -> {
             anzeige.setText(Integer.toString(-3));
         });
 
         Timeline wuerfelt = new Timeline();
         wuerfelt.setAutoReverse(true);
-        wuerfelt.setCycleCount(30);
+
+
         if (index <= 0) {
-            wuerfelt.getKeyFrames().addAll(k4, k5, k6);
+            wuerfelt.setCycleCount(30);
+            wuerfelt.getKeyFrames().addAll(k7, k8, k9);
         } else {
-            wuerfelt.getKeyFrames().addAll(k1, k2, k3);
+            wuerfelt.setCycleCount(13);
+            wuerfelt.getKeyFrames().addAll(k1, k2, k3, k4, k5, k6);
 
         }
         wuerfelt.setOnFinished(b -> ergebnisZeigen());

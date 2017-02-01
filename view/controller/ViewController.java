@@ -335,10 +335,12 @@ public class ViewController {
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
             spielController.getLayout().setFrageIntro(fi);
+            spielController.getEffectPlayer().play((Main.class.getResource("/hearrun/resources/sounds/fragestellung.mp3").getPath()));
+
             System.out.println("INTRO DA");
         });
 
-        KeyFrame k2 = new KeyFrame(Duration.millis(100), a ->{
+        KeyFrame k2 = new KeyFrame(Duration.millis(2000), a ->{
             spielController.getLayout().removeFrageIntro(fi);
             zeigeFrage(frage, fragetyp);
             System.out.println("INTRO WEG");

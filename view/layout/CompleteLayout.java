@@ -30,6 +30,9 @@ public class CompleteLayout extends StackPane {
     }
 
     public void setGameLayout(){
+        musicPlayer.stop();
+        musicPlayer.play(Main.class.getResource("/hearrun/resources/music/Lakechiller.mp3").getPath(), false);
+
         bluryAnAus(false);
         this.getChildren().removeAll(this.getChildren());
         //Falls das gamelayout nicht da ist hinzufuegen

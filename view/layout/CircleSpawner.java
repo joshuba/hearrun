@@ -79,11 +79,19 @@ public class CircleSpawner extends GridPane {
         c1.centerXProperty().setValue(x);
         c1.centerYProperty().setValue(y);
         c1.setFill(Color.WHITE);
+        c1.setOpacity(0);
 
 
         getFromGrid(x,y).getChildren().addAll(c1);
         getFromGrid(x,y).setAlignment(Pos.CENTER);
 
+        KeyFrame k0 = new KeyFrame(Duration.millis(1), a ->{
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), c1);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(150);
+            fadeTransition.play();
+
+        });
 
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
@@ -123,7 +131,7 @@ public class CircleSpawner extends GridPane {
         Timeline zoom = new Timeline();
         zoom.setAutoReverse(false);
         zoom.setCycleCount(1);
-        zoom.getKeyFrames().addAll(k1,k2, k3);
+        zoom.getKeyFrames().addAll(k0, k1,k2, k3);
         zoom.play();
 
 

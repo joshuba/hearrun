@@ -74,6 +74,7 @@ public class FrageFenster extends Fenster {
 
         textfeld = new StackPane();
         fragetext = new Label();
+        fragetext.setId("frageText");
         time = new ProgressBar();
         time.setId("progressBar");
 
