@@ -244,7 +244,7 @@ public class FrageController {
         // Dateien einlesen
         if (files != null) {
             for (File f : files)
-                if (f.getName().endsWith(".mp3"))
+                if (f.getName().endsWith(".mp3") && !f.getName().startsWith("."))
                     tracks.add(f);
                 else if (f.isDirectory())
                     leseOrdnerEin(f);
