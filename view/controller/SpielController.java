@@ -36,7 +36,7 @@ public class SpielController {
 
     public SpielController(Stage stage) {
         properties = new Properties();
-        erstellePropPfad();
+        path = erstellePropPfad();
         this.stage = stage;
         this.musicPlayer = new Player();
         this.effectPlayer = new Player();
@@ -212,7 +212,9 @@ public class SpielController {
 
     }
 
-    private void erstellePropPfad() {
+    public static String erstellePropPfad() {
+        String path = null;
+
         //MAC
         if (System.getProperties().getProperty("os.name").contains("Mac")) {
             System.out.println("Du nutzt macOs");
@@ -236,6 +238,7 @@ public class SpielController {
             file.mkdir();
             path = System.getProperties().getProperty("user.home") + "/.congig/HearRun/game.properties";
         }
+        return path;
     }
 
     public Properties getProperties() {

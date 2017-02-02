@@ -74,7 +74,7 @@ public class ButtonFrage extends FrageFenster {
             this.falschRichtig.setValue(1);
             fertig();
 
-            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/right.mp3").getPath());
+            effectPlayer.play("/hearrun/resources/sounds/right.mp3");
 
 
         } else {
@@ -82,7 +82,7 @@ public class ButtonFrage extends FrageFenster {
             this.falschRichtig.setValue(0);
             fertig();
 
-            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
+            effectPlayer.play("/hearrun/resources/sounds/wrong.mp3");
 
         }
 

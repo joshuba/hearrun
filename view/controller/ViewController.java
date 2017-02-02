@@ -103,7 +103,7 @@ public class ViewController {
 
                     if(spielController.getAktSpiel().getSiegStatus().getValue() == false){
                         nextPossibleField(s);
-                        spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath());
+                        spielController.getEffectPlayer().play("/hearrun/resources/sounds/move.mp3");
                     }
 
 
@@ -114,7 +114,7 @@ public class ViewController {
                 Duration.millis(400),
                 a -> {
                     lastPossibleField(s);
-                    spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath()); //Spiele sound nur so oft wie feld gewechselt wird
+                    spielController.getEffectPlayer().play("/hearrun/resources/sounds/move.mp3"); //Spiele sound nur so oft wie feld gewechselt wird
 
                 }));
         back.setCycleCount(anz);
@@ -138,7 +138,7 @@ public class ViewController {
                 });
 
             }else{
-                spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/moveFailure.mp3").getPath()); //Falls kein Feld mehr da ist
+                spielController.getEffectPlayer().play("/hearrun/resources/sounds/moveFailure.mp3"); //Falls kein Feld mehr da ist
                 feldBlinkenLassen(0,0);
                 feldAuswahlMakierung.setValue(true);
                 spielController.nextSpieler();
@@ -348,7 +348,7 @@ public class ViewController {
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
             spielController.getLayout().setFrageIntro(fi);
-            spielController.getEffectPlayer().play((Main.class.getResource("/hearrun/resources/sounds/fragestellung.mp3").getPath()));
+            spielController.getEffectPlayer().play("/hearrun/resources/sounds/fragestellung.mp3");
 
             System.out.println("INTRO DA");
         });

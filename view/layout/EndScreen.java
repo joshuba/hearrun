@@ -35,7 +35,7 @@ public class EndScreen extends BorderPane {
         back = new Button("Hauptmenü");
 
 
-        spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/sieg.mp3").getPath());
+        spielController.getEffectPlayer().play("/hearrun/resources/sounds/sieg.mp3");
         spielController.getLayout().getViewController().gameLayoutBlury(true);
         showResults();
 

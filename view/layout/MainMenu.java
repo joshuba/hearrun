@@ -54,7 +54,7 @@ public class MainMenu extends StackPane {
         helpElements.setSpacing(15);
 
         mainMenuElements.setAlignment(Pos.CENTER);
-        p = new PictureGalery(Main.class.getResource("/hearrun/resources/manual/").getPath());
+        p = new PictureGalery("/hearrun/resources/manual/");
         this.setId("mainMenu");
         this.spielController = spielController;
         this.viewController = viewController;
@@ -175,15 +175,19 @@ public class MainMenu extends StackPane {
 
 
     private ObservableList<Map> leseMapsEin() {
-
-        File mapsFile = new File(Main.class.getResource("/hearrun/resources/Data").getPath());
-
-        File[] maps = mapsFile.listFiles((dir, name) -> name.startsWith("map"));
-
         ObservableList<Map> mapsList = FXCollections.observableArrayList();
 
-        for (File f : maps)
-            mapsList.add(new Map(f.getPath(), spielController.getStage().widthProperty(), spielController.getStage().heightProperty()));
+        int i = 1;
+        while (true) {
+            try {
+                String path = new File((Main.getFilePathFromResourcePath("/hearrun/resources/Data/map" + i + ".txt"))).getAbsolutePath();
+                mapsList.add(new Map(path, spielController.getStage().widthProperty(), spielController.getStage().widthProperty()));
+            } catch (NullPointerException e){
+                break;
+            }
+            i++;
+        }
+
         return mapsList;
 
     }

@@ -31,7 +31,7 @@ public class IntroScreen extends VBox {
         this.spielController = spielController;
         this.stage = stage;
         this.setId("introScreen");
-        p = new PictureGalery(Main.class.getResource("/hearrun/resources/manual/").getPath());
+        p = new PictureGalery("/hearrun/resources/manual/");
         auswahlButton = new Button("Wähle Pfad");
         path = new Label();
         path.setStyle("-fx-text-fill: white");

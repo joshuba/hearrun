@@ -2,10 +2,12 @@ package hearrun.business;
 
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import hearrun.Main;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 /**
@@ -40,12 +42,11 @@ public class Player {
     }
 
     public void play(String file) {
-
-        new Thread(() -> {
-            SimpleMinim minim = new SimpleMinim();
-            minim.loadMP3File(file).play();
-            minim.stop();
-        }).start();
+            new Thread(() -> {
+                SimpleMinim minim = new SimpleMinim();
+                minim.loadMP3File(Main.getFilePathFromResourcePath(file)).play();
+                minim.stop();
+            }).start();
     }
 
     /**

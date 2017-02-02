@@ -21,9 +21,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -61,7 +64,7 @@ public class PictureGalery extends BorderPane {
         rechtecke = new ArrayList<Rectangle>();
 
         this.path = path;
-        readFiles(new File(path));
+        readFiles(path);
         size = imageViews.size();
 
 
@@ -284,35 +287,16 @@ public class PictureGalery extends BorderPane {
      * fuegt sie in eine Arraylist
      * @param path Dateipfad der Bilder
      */
-    public void readFiles(File path){
-        File[] files = path.listFiles();
-        // Dateien einlesen
-        if (files != null) {
-            for (File f : files)
-                if (f.getName().endsWith(".png") || f.getName().endsWith(".JPG")){
-                    try {
-                        FileInputStream fis = new FileInputStream(f);
-                        Image i = new Image(fis);
-                        ImageView iv = new ImageView(i);
-                        iv.fitHeightProperty().bind(this.heightProperty());
-                        iv.fitWidthProperty().bind(this.widthProperty());
-                        iv.setPreserveRatio(true);
-                        imageViews.add(iv);
-
-
-
-
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-
-
-
-                }
-
-                else if (f.isDirectory())
-                    readFiles(f);
+    public void readFiles(String path){
+        int i = 1;
+        while (true) {
+            try {
+                System.out.println(path + i + ".png");
+                imageViews.add(new ImageView(new Image(Main.class.getResourceAsStream(path+i+".png"))));
+            } catch (NullPointerException e) {
+                break;
+            }
+            i++;
         }
 
     }

@@ -188,7 +188,7 @@ public abstract class FrageFenster extends Fenster {
         Timeline t = new Timeline(k);
         t.setCycleCount(6);
         if (falschRichtig.getValue() == -1) {
-            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
+            effectPlayer.play("/hearrun/resources/sounds/wrong.mp3");
 
         }
 
