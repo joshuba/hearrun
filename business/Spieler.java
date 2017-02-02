@@ -14,8 +14,10 @@ public class Spieler {
     private ObservableMap<String, Integer> achievements;
     private int gelaufen;
     private int leben;
+    private int nr;
 
     public Spieler(String name) {
+        this.nr = nr;
         this.name = name;
         log = new ArrayList<>();
         log.add(new Point(0, 0)); //Für den Start wird die letzte Position auf 0 gesetzt
@@ -101,5 +103,14 @@ public class Spieler {
 
     public ObservableMap<String, Integer> getAchievements() {
         return achievements;
+    }
+
+    public int getNr(){
+        return this.nr;
+    }
+
+    public void setNr(int nr){
+        this.nr = nr;
+
     }
 }

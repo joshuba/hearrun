@@ -80,9 +80,6 @@ public class Feld extends StackPane{
             case FaktFeld: return Fragetyp.FaktFrage;
             case InterpretFeld: return Fragetyp.InterpretFrage;
             case TitelFeld: return Fragetyp.Titelfrage;
-            case EndFeld:
-                System.out.println("TODO: Gewinnfeld");
-                return null;
 
         }
         return null;
@@ -102,16 +99,22 @@ public class Feld extends StackPane{
     }
 
     public void zoomIn(){
-        ScaleTransition st = new ScaleTransition(Duration.millis(50), this);
-        st.setByX(0.2f);
-        st.setByY(0.2f);
-        st.setAutoReverse(false);
+        double x = this.getScaleX();
+        double y = this.getScaleY();
+
+        ScaleTransition st = new ScaleTransition(Duration.millis(80), this);
+        st.setFromY(0.6);
+        st.setFromY(0.6);
+        st.setToY(1.0);
+        st.setToX(1.0);
 
 
-        ScaleTransition st2 = new ScaleTransition(Duration.millis(100), this);
-        st2.setByX(-0.2f);
-        st2.setByY(-0.2f);
-        st2.setAutoReverse(false);
+        ScaleTransition st2 = new ScaleTransition(Duration.millis(120), this);
+        st2.setFromY(1.0);
+        st2.setFromX(1.0);
+        st2.setToY(0.6);
+        st2.setToX(0.6);
+
 
 
 
@@ -121,10 +124,12 @@ public class Feld extends StackPane{
         KeyFrame k2 = new KeyFrame(Duration.millis(1), a ->{
             st2.play();
         });
+
         Timeline t = new Timeline(k2,k1);
         t.setOnFinished(e -> {
-            this.setScaleX(0);
-            this.setScaleY(0);
+            //st3.play();
+
+
         });
         t.play();
 
@@ -181,7 +186,6 @@ public class Feld extends StackPane{
                 st.setToX(0.9);
                 st.setCycleCount(Animation.INDEFINITE);
                 st.setAutoReverse(true);
-
 
                 st.play();
 

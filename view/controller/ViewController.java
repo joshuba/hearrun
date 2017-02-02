@@ -37,7 +37,7 @@ public class ViewController {
     private SimpleBooleanProperty feldAuswahlMakierung;
 
 
-    public ViewController(Stage stage, SpielController spielController){
+    public ViewController(Stage stage, SpielController spielController) {
         this.spielController = spielController;
         this.stage = stage;
         feldAuswahlMakierung = new SimpleBooleanProperty(false);
@@ -47,13 +47,16 @@ public class ViewController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 
-                if(newValue.booleanValue() == true){
+                if (newValue.booleanValue() == true && spielController.getAktSpiel().getSiegStatus().getValue() == false) {
+                    //spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),spielController.getAktSpiel().getAktSpieler().getAktY()).aktuellesFeldMakierung(true);
                     spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(true);
 
                 }
 
-                if(newValue.booleanValue() == false){
+                if (newValue.booleanValue() == false) {
                     spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(false);
+                    //spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),spielController.getAktSpiel().getAktSpieler().getAktY()).aktuellesFeldMakierung(false);
+
                 }
 
 
@@ -62,6 +65,8 @@ public class ViewController {
 
             }
         });
+
+
     }
 
 
@@ -103,8 +108,12 @@ public class ViewController {
         Timeline forward = new Timeline(new KeyFrame(
                 Duration.millis(400),
                 a -> {
-                    nextPossibleField(s);
-                    spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath());
+
+                    if(spielController.getAktSpiel().getSiegStatus().getValue() == false){
+                        nextPossibleField(s);
+                        spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/move.mp3").getPath());
+                    }
+
 
                 }));
         forward.setCycleCount(anz);
@@ -123,13 +132,16 @@ public class ViewController {
         if(i>0){
             forward.play();
             forward.setOnFinished(e -> {
+                spielController.nextSpieler();
                 feldAuswahlMakierung.setValue(true);
+
 
             });
         }else{
             if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann
                 back.play();
                 back.setOnFinished(e -> {
+                    spielController.nextSpieler();
                     feldAuswahlMakierung.setValue(true);
                 });
 
@@ -137,9 +149,12 @@ public class ViewController {
                 spielController.getEffectPlayer().play(Main.class.getResource("/hearrun/resources/sounds/moveFailure.mp3").getPath()); //Falls kein Feld mehr da ist
                 feldBlinkenLassen(0,0);
                 feldAuswahlMakierung.setValue(true);
+                spielController.nextSpieler();
+
 
 
             }
+
         }
 
 
@@ -153,6 +168,9 @@ public class ViewController {
         int x = spieler.getAktX();
         int y = spieler.getAktY();
         Map map = this.spielController.getAktSpiel().getAktMap();
+
+        //Falls das neue Feld das Endfeld ist
+
 
 
             //nach rechts
@@ -187,7 +205,14 @@ public class ViewController {
                 map.getFeld(x, y+1).zoomIn();
 
             }
+
+        if(map.getFeld(x + 1, y).getFeldtyp() == Feldtyp.EndFeld){
+            spielController.getAktSpiel().setSieg();
+        }
+
             erkenneFeldId(x,y);
+
+
 
 
 
@@ -237,6 +262,7 @@ public class ViewController {
         feldtyp = feldtyp.toLowerCase();
 
 
+
         return feldtyp;
 
     }
@@ -251,14 +277,9 @@ public class ViewController {
     }
 
     public void setMainMenu(){
-        //Wenn das spiel laeuft schalte continue ein
-        if(spielController.getAktSpiel() != null){
+
             spielController.getLayout().setMainMenu();
-            spielController.getLayout().getMainMenu().activateContinue();
-            gameLayoutBlury(true);
-        }else{
-            spielController.getLayout().setMainMenu();
-        }
+
     }
 
     public void resetGameLayout(){
@@ -389,6 +410,17 @@ public class ViewController {
         }else{
             feldAuswahlMakierung.set(false);
         }
+    }
+
+    public void zeigeEndscreen() {
+
+        EndScreen endScreen = new EndScreen(spielController);
+        spielController.getLayout().showEndScreen(endScreen);
+        endScreen.showResults();
+
+        System.out.println("ENDE GELÄNDE SIEG");
+
+
     }
 
 

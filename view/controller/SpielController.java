@@ -5,7 +5,9 @@ import hearrun.business.ereignisse.Ereignis;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
+import hearrun.view.layout.Feldtyp;
 import hearrun.view.layout.Map;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.stage.Stage;
 
@@ -28,6 +30,8 @@ public class SpielController {
     private Player effectPlayer;
     private Properties properties;
     private String path;
+    private SimpleBooleanProperty sieg;
+
 
 
     public SpielController(Stage stage) {
@@ -37,6 +41,7 @@ public class SpielController {
         this.musicPlayer = new Player();
         this.effectPlayer = new Player();
         this.completeLayout = new CompleteLayout(stage, this);
+
         readProperties();
 
         frageController = new FrageController();
@@ -48,9 +53,22 @@ public class SpielController {
 
     private void waehleMapErstelleSpiel(Map map, ArrayList<Spieler> spielerListe) {
         this.aktSpiel = new Spiel(map, spielerListe); //Erstelle spiel
+        sieg = getAktSpiel().getSiegStatus();
         completeLayout.getViewController().baueSpielfeldAuf();
         completeLayout.getViewController().setFeldId(0, 0, completeLayout.getViewController().erkenneFeldId(0, 0)); //Setze Alle Player aufs erste Feld
         getLayout().getViewController().macheFelderKlickbar();
+
+        //Wenn das spiel zuende ist rufe endscreen auf
+        sieg.addListener(new javafx.beans.value.ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue.booleanValue() == true && oldValue.booleanValue() == false){
+                    getLayout().getViewController().zeigeEndscreen();
+                }
+            }
+        });
+
+
 
 
     }
@@ -86,8 +104,8 @@ public class SpielController {
         completeLayout.getViewController().resetGameLayout();
         waehleMapErstelleSpiel(map, spielerListe);
         completeLayout.getViewController().setGameLayout();
+        //Property :)
         getLayout().getViewController().setFeldAuswahlMakierung(false);
-
         getLayout().getViewController().setFeldAuswahlMakierung(true);
 
 
@@ -120,9 +138,6 @@ public class SpielController {
         else {
             getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp);
         }
-
-
-
     }
 
     public Player getMusicPlayer() {
@@ -135,7 +150,7 @@ public class SpielController {
 
     public void moveAndAskNext(int schritte) {
         completeLayout.getViewController().movePlayer(schritte, aktSpiel.getAktSpieler());
-        nextSpieler();
+        //next wird nach dem laufen aufgerufen
 
     }
 

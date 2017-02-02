@@ -72,7 +72,9 @@ public class LoadingScreen extends VBox{
         done.setAutoReverse(false);
         done.setCycleCount(2);
         done.getKeyFrames().addAll(k1);
-        done.setOnFinished(a -> spielController.getLayout().getViewController().setMainMenu());
+        done.setOnFinished(a -> {
+            spielController.getLayout().setMainMenu();
+        });
         done.play();
     }
 

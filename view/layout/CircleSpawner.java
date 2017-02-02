@@ -162,12 +162,12 @@ public class CircleSpawner extends GridPane {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-                if(newValue.intValue() < 2){
+                if(newValue.intValue() < 10){
                     spawn.playFromStart();
 
 
                 }
-                if(newValue.intValue() == 2){
+                if(newValue.intValue() >= 10){
                     anzahl.setValue(0);
                     index = 0;
                 }
@@ -206,12 +206,6 @@ public class CircleSpawner extends GridPane {
     }
 
     private boolean hatNachbarOderGleich(int x, int y){
-/* x+1 <= 9 && raster[x+1][y].getChildren().isEmpty() &&
-                x-1 >= 0 && raster[x-1][y].getChildren().isEmpty() &&
-                y+1 <= 4 && raster[x][y+1].getChildren().isEmpty() &&
-                y-1 >= 0 && raster[x][y-1].getChildren().isEmpty() &&
-                */
-
 
         //falls kein kreis nebenan oder auf dem selben feld ist
         if(x+1 <= 9 && raster[x+1][y].getChildren().isEmpty() &&

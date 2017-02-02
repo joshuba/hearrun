@@ -73,15 +73,6 @@ public class MainMenu extends StackPane {
     }
 
 
-    public void activateContinue() {
-        //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
-        mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
-        mainMenuElements.getChildren().addAll(cont, newGame, help, settings, exit);
-        continueAn = true;
-
-
-    }
-
 
     public void initNewGameWindow() {
 
@@ -163,6 +154,7 @@ public class MainMenu extends StackPane {
         addSpieler.setOnAction((e) -> {
             Spieler neuerSpieler = new Spieler("Spieler " + (spielerliste.size() + 1));
             spielerliste.add(neuerSpieler);
+            neuerSpieler.setNr(spielerliste.indexOf(neuerSpieler));
             spielerObs.add(neuerSpieler.toString());
             animation.play();
 
@@ -199,13 +191,25 @@ public class MainMenu extends StackPane {
     }
 
     public void showMainMenu(){
+        //Falls ein spiel erstellt wurde schalte continue an
         if(spielController.getAktSpiel() != null){
             continueAn = true;
+        }else{
+            initMainMenuWindow();
+            this.getChildren().addAll(mainMenuElements);
         }
-        initMainMenuWindow();
-        this.getChildren().addAll(mainMenuElements);
         mainMenuElements.setOpacity(1);
-        //Falls ein spiel erstellt wurde schalte continue an
+
+
+
+    }
+
+
+    public void activateContinue() {
+        //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
+        mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
+        mainMenuElements.getChildren().addAll(cont, newGame, help, settings, exit);
+        continueAn = true;
 
 
     }
@@ -275,6 +279,8 @@ public class MainMenu extends StackPane {
                 String newpath = new DirectoryChooser().showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
                 pfad.setText(newpath);
                 spielController.getProperties().setProperty("musicPath", newpath);
+                settingsElements.getChildren().clear();
+                this.getChildren().clear();
                 spielController.ladeMusik();
             } catch (NullPointerException ignored){}
 

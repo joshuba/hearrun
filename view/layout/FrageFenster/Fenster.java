@@ -25,7 +25,9 @@ public abstract class Fenster extends BorderPane {
         catPic = new HBox();
         catPic.setMinSize(80,80);
         catPic.setMaxSize(80,80);
-        catPic.setId(spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY()).getLeerId());
+
+
+        catPic.setId(getID());
 
         top = new VBox();
         top.setAlignment(Pos.CENTER);
@@ -33,5 +35,16 @@ public abstract class Fenster extends BorderPane {
         top.setPadding(new Insets(20,0,0,0));
         this.setTop(top);
 
+    }
+
+    private String getID() {
+        int x = spielController.getAktSpiel().getAktSpieler().getAktX();
+        int y = spielController.getAktSpiel().getAktSpieler().getAktY();
+
+        String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString();
+        feldtyp = feldtyp.toLowerCase();
+        feldtyp += "p" + (spielController.getAktSpiel().getAktSpieler().getNr() + 1);
+        System.out.println("MAAAAHN: " + feldtyp);
+        return feldtyp;
     }
 }

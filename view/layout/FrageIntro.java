@@ -138,13 +138,12 @@ public class FrageIntro extends StackPane {
         int y = spielController.getAktSpiel().getAktSpieler().getAktY();
 
         String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString();
-        feldtyp += "leer";
-
         feldtyp = feldtyp.toLowerCase();
-        feldtyp += "BIG";
+        feldtyp += "p" + (spielController.getAktSpiel().getAktSpieler().getNr()+1) + "BIG";
         System.out.println(feldtyp);
 
 
-        bild.setId(feldtyp);
+
+        this.bild.setId(feldtyp);
     }
 }
