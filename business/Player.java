@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.util.Random;
 
 /**
- * Created by Josh on 28.12.16
+ * Der Musik-Player. Er kapselt Funktionalitäten des Minim-Players.
  */
 public class Player {
     private SimpleAudioPlayer player;
@@ -28,6 +28,12 @@ public class Player {
 
     }
 
+    /**
+     * Spielt den übergebenen Song per Threading ab.
+     *
+     * @param file Pfad zur Datei, die abgespielt werden soll.
+     * @param loop ob der Song gelooped wird oder nicht
+     */
     public void play(String file, boolean loop) {
 
         if (loop) {
@@ -89,23 +95,14 @@ public class Player {
         minim.stop();
     }
 
-    public void setVolume(float volume) {
+    private void setVolume(float volume) {
         float gain = (float) (20 * Math.log10(volume / 100));   //Linear zu DB umrechnungsformel
         player.setGain(gain);
     }
 
-    public int getVolume() {
+    private int getVolume() {
         float gain = player.getGain();
         return (int) Math.pow(10, ((gain / 20) + 2));
-
-    }
-
-    public void setMute(boolean anAus) {
-        if (anAus) {
-            player.mute();
-        } else {
-            player.unmute();
-        }
 
     }
 
@@ -197,27 +194,6 @@ public class Player {
 
         if (!fadeIn)
             fadeout.play();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        Player p = new Player();
-
-        new Thread(() -> {
-            p.play("C:\\Users\\Leo\\IdeaProjects\\Benutzeroberflaechen\\HearRun\\" +
-                    "src\\hearrun\\resources\\music\\cantina.mp3", true);
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            p.play("C:\\Users\\Leo\\IdeaProjects\\Benutzeroberflaechen\\HearRun\\" +
-                    "src\\hearrun\\resources\\music\\cantina.mp3", true);
-        }).start();
-
-        Thread.sleep(10000);
-
-
-        p.stop();
     }
 }
 

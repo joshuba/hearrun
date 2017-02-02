@@ -32,7 +32,8 @@ import java.util.Collections;
 
 
 /**
- * Created by Josh on 28.12.16
+ * Der Fragecontroller ist im wesentliche für das Einlesen der Musikbibliothek bei Programmstart,
+ * sowie für die Bereitstellung der generierten Fragen zuständig.
  */
 public class FrageController {
     private final String XMLPATH = "/hearrun/resources/Data/quiz.xml";
@@ -63,11 +64,21 @@ public class FrageController {
         fragenAnzahl = new SimpleIntegerProperty();
     }
 
-
+    /**
+     * Gibt eine Frage zum angegebenen Fragetyp mit.
+     *
+     * @param fragetyp Der gewünschte Fragetyp.
+     * @return eine zufällige Frage zum übergebenen Fragetyp
+     */
     public Frage getFrage(Fragetyp fragetyp) {
         return alleFragen.getRand(fragetyp);
     }
 
+    /**
+     * Gibt eine zufällige Frage zum angegebenen Fragetyp mit.
+     *
+     * @return eine zufällige Frage  aus der Frageliste.
+     */
     public Frage getFrage() {
         return alleFragen.getRand();
     }
@@ -78,6 +89,24 @@ public class FrageController {
         leseXMLein(XMLPATH);
     }
 
+    /**
+     * Diese Methode liest rekursiv den übergebenen Ordner ein.
+     * Danach prüft sie, ob der eingelesene Ordner genügend gepflegte Mp3-Tags
+     * enthält, um eine ausreichende Fragenanzahl generieren zu können.
+     * <p>
+     * Dabei geht sie für jeden der Fragetypen ähnlich vor:
+     * 1.   Eine Liste aus Mp3-Tags erstellen, die als entsprechender Antworten-Pool dienen
+     * 2.   Jede Datei durchgehen und zu jeder (validen) Datei eine Frage erstellen
+     * (Wobei die Datei als richtige Antwort für die jeweilige Frage dient)
+     * <p>
+     * Dabei fängt sie "TagsNeededExceptions" ab. Diese bedeuten, dass der Datei ein Tag fehlt, der
+     * essentiell ist für die Beantwortung der Frage (beispielsweise das Cover für CoverWahlFragen)
+     * <p>
+     * Währenddessen atualisiert sie eine IntegerProperty, die von der GUI als Grundlage für eine
+     * ProgressBar genutzt wird.
+     *
+     * @param path Der Pfad, aus dem die Musik eingelesen werden soll.
+     */
     private void leseEinGeneriereFragen(String path) {
         new Thread(() -> {
             tracks.clear();
@@ -275,10 +304,9 @@ public class FrageController {
                     if (coverBytes.size() == 0) { // füge erstes Album hinzu
                         coverBytes.add(tags.getAlbumImage());
                         covers.add(tags.getAlbum());
-                    }
-                    else { // teste ob Album des Songs doppelt vorkommt
+                    } else { // teste ob Album des Songs doppelt vorkommt
                         boolean istVorhanden = false;
-                        for (String s: covers) {
+                        for (String s : covers) {
                             if (s.equals(tags.getAlbum())) {
                                 istVorhanden = true;
                                 break;
@@ -304,6 +332,10 @@ public class FrageController {
         return tracks.size() >= 40 && interpreten.size() >= 30 && covers.size() >= 30;
     }
 
+    /**
+     *  Liest eine XML.Datei mit statischen Fakt-Fragen ein.
+     * @param path der Pfad zur XML-Datei
+     */
     private void leseXMLein(String path) {
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

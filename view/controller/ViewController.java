@@ -142,18 +142,11 @@ public class ViewController {
                 feldBlinkenLassen(0,0);
                 feldAuswahlMakierung.setValue(true);
                 spielController.nextSpieler();
-
-
-
             }
-
         }
-
-
     }
 
     private void nextPossibleField(Spieler spieler) {
-        int counter = 0;
         if (spieler == null) {
             spieler = spielController.getAktSpiel().getAktSpieler();
         }
