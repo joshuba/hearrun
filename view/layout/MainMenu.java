@@ -10,6 +10,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -194,7 +195,9 @@ public class MainMenu extends StackPane {
         }
         initMainMenuWindow();
 
-        this.getChildren().clear();
+
+        getChildren().clear();
+        getChildren().add(circleSpawner);
         this.getChildren().addAll(mainMenuElements);
 
         mainMenuElements.setOpacity(1);
