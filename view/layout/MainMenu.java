@@ -194,10 +194,10 @@ public class MainMenu extends StackPane {
         //Falls ein spiel erstellt wurde schalte continue an
         if(spielController.getAktSpiel() != null){
             continueAn = true;
-        }else{
+        }
             initMainMenuWindow();
             this.getChildren().addAll(mainMenuElements);
-        }
+
         mainMenuElements.setOpacity(1);
 
 
@@ -205,14 +205,7 @@ public class MainMenu extends StackPane {
     }
 
 
-    public void activateContinue() {
-        //Falls noch kein Spiel erstellt wurde wird ein Continue Button angezeigt, der bleibt
-        mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
-        mainMenuElements.getChildren().addAll(cont, newGame, help, settings, exit);
-        continueAn = true;
 
-
-    }
 
     private void initMainMenuWindow() {
         newGame = new Button("Neues Spiel");
@@ -223,10 +216,11 @@ public class MainMenu extends StackPane {
         exit.setId("buttonRedHover");
 
         if(continueAn){
-            activateContinue();
+            mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
+            mainMenuElements.getChildren().addAll(cont, newGame, help, settings, exit);
+
         }else{
             mainMenuElements.getChildren().addAll(newGame, help, settings, exit);
-
         }
 
         newGame.setOnAction((e) -> {
