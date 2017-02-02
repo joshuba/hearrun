@@ -1,0 +1,29 @@
+*Titelfrage-Testmap
+*6
+*2
+#T T T T T X
+#L L L L L L
+
+
+/
+
+
+
+____________________________________
+
+*   (1)Name
+*   (2)Breite
+*   (3)Hoehe
+#   Feldtypen
+/   Ende des Dokuments
+
+I   InterpretFeld
+C   CoverFeld
+T   Titelfeld
+E   Ereignisfeld
+F   Faktfeld
+X   Endfeld
+L   Leeres Feld
+R   RandomFeld
+_________________________________
+
