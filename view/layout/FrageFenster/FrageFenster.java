@@ -210,6 +210,12 @@ public class FrageFenster extends Fenster {
         if (falschRichtig.getValue() == 1) {
             Spieler spieler = spielController.getAktSpiel().getAktSpieler();
             spieler.addRichtigeFrage();
+        }else if(falschRichtig.getValue() == 0){
+            Spieler spieler = spielController.getAktSpiel().getAktSpieler();
+            spieler.addFalscheFrage();
+        }else if(falschRichtig.getValue() == -1){
+            Spieler spieler = spielController.getAktSpiel().getAktSpieler();
+            spieler.addZeitAbgelaufen();
         }
 
     }

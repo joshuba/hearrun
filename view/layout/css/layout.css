@@ -57,7 +57,6 @@ Button:hover:pressed{
 }
 
 #mainMenu{
-    -fx-background-color: linear-gradient(#E0EAFC, #CFDEF3);
     -fx-background-position: center;
     -fx-background-size: stretch;
 }

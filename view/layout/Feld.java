@@ -165,10 +165,7 @@ public class Feld extends StackPane{
             this.getChildren().addAll(ladeRad, aktBild);
 
 
-                RotateTransition rt = new RotateTransition(Duration.millis(2000), ladeRad);
-                rt.setByAngle(360);
-                rt.setCycleCount(Animation.INDEFINITE);
-                //rt.play();
+
 
                 FadeTransition ft = new FadeTransition(Duration.millis(1000), ladeRad);
                 ft.setFromValue(100);
@@ -195,6 +192,10 @@ public class Feld extends StackPane{
 
         }else{
             this.getChildren().removeAll(this.getChildren());
+            this.setLayoutX(1);
+            this.setLayoutY(1);
+            this.setScaleX(1);
+            this.setScaleY(1);
             System.out.println("MakierungAus");
 
 

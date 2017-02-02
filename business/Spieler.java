@@ -29,11 +29,17 @@ public class Spieler {
         achievements.put("felder", 0);
         achievements.put("fragenRichtig", 0);
         achievements.put("leben", 0);
+        achievements.put("fragenFalsch" , 0);
+        achievements.put("zeitAbgelaufen" , 0);
+
     }
 
     public void move(int x, int y) {
         log.add(new Point(x, y));
         gelaufen++;
+        achievements.put("felder", gelaufen);
+
+
     }
 
     public int getAktX() {
@@ -112,5 +118,15 @@ public class Spieler {
     public void setNr(int nr){
         this.nr = nr;
 
+    }
+
+    public void addFalscheFrage() {
+        int falschefragen = achievements.get("fragenFalsch");
+        achievements.put("fragenFalsch", falschefragen + 1);
+    }
+
+    public void addZeitAbgelaufen() {
+        int zeitAbgelaufen = achievements.get("zeitAbgelaufen");
+        achievements.put("zeitAbgelaufen", zeitAbgelaufen + 1);
     }
 }

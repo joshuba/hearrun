@@ -205,8 +205,6 @@ public class MainMenu extends StackPane {
     }
 
 
-
-
     private void initMainMenuWindow() {
         newGame = new Button("Neues Spiel");
         cont = new Button("Fortfahren");

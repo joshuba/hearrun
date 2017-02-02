@@ -87,7 +87,7 @@ public class SpielerAnzeige extends VBox {
         return anzeige;
     }
 
-    private Color getfarbeByNummer(int nr) {
+    public static Color getfarbeByNummer(int nr) {
         switch (nr) {
             case 0:
                 return Main.spielerEinsFarbe;
