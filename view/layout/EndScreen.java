@@ -61,7 +61,7 @@ public class EndScreen extends BorderPane {
             mitte.getChildren().addAll(lv);
 
             //Styling Listview
-            lv.prefHeightProperty().bind(spielController.getStage().heightProperty().divide(4));
+            lv.prefHeightProperty().bind(spielController.getStage().heightProperty().divide(3));
             lv.minWidth(500);
             lv.maxWidth(500);
         }
