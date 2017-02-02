@@ -118,7 +118,12 @@ public class MainMenu extends StackPane {
 
         spieler.setOnEditCommit((t) -> {
             spielerObs.set(t.getIndex(), t.getNewValue());
-            spielerliste.get(t.getIndex()).setName(t.getNewValue());
+            String nameS = t.getNewValue();
+            if(t.getNewValue().length() >= 12){
+                nameS = t.getNewValue().substring(0,14);
+                nameS += " ...";
+            }
+            spielerliste.get(t.getIndex()).setName(nameS);
         });
 
         spielerObs.addListener((ListChangeListener<String>) c -> {

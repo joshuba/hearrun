@@ -28,10 +28,14 @@ public class EreignisFenster extends Fenster {
         catPic.setPadding(new Insets(0, 0, 0, 500));
 
         HBox ereignisIcon = new HBox();
-        ereignisIcon.setMaxSize(50, 50);
+        ereignisIcon.setMaxSize(80, 80);
+        ereignisIcon.setMinSize(80, 80);
+
         ereignisIcon.setAlignment(Pos.CENTER);
         Label ueberschrift = new Label();
         Label text = new Label();
+        text.setId("schriftMittel");
+
         Button weiterspielen = new Button("Weiterspielen");
 
         schritte = 1;
@@ -62,6 +66,7 @@ public class EreignisFenster extends Fenster {
 
         VBox all = new VBox(ereignisIcon, ueberschrift, text, weiterspielen);
         all.setAlignment(Pos.CENTER);
+        all.setSpacing(20);
         setCenter(all);
 
         weiterspielen.setOnAction(e -> {

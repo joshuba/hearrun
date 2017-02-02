@@ -201,6 +201,14 @@ Button:hover:pressed{
     -fx-background-color: transparent;
     -fx-min-width: 30px;
     -fx-min-height: 30px;
+}
+
+#pauseButton:hover{
+    -fx-background-image: url("../../../resources/icons/pause_hover.png");
+}
+
+#pauseButton:hover:pressed{
+    -fx-background-image: url("../../../resources/icons/pause_pressed.png");
 
 }
 
@@ -291,6 +299,15 @@ Button:hover:pressed{
     -fx-background-image: url("../../../resources/icons/leben.png");
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: 100%;
+}
+
+.feld-icon-positiv{
+    -fx-background-image: url("../../../resources/icons/feldIconPositiv.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100%;
+
 }
 
 .kein-leben-icon {
@@ -298,3 +315,77 @@ Button:hover:pressed{
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
 }
+
+#gelaufeneFelder{
+    -fx-background-image: url("../../../resources/icons/gelaufeneFelder.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+}
+
+#lebenAmEnde{
+    -fx-background-image: url("../../../resources/icons/lebenAmEnde.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+}
+
+#richtigeAntworten{
+    -fx-background-image: url("../../../resources/icons/richtigeAntworten.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+}
+
+#falscheAntworten{
+    -fx-background-image: url("../../../resources/icons/falscheAntworten.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+}
+
+#falscheAntworten{
+    -fx-background-image: url("../../../resources/icons/falscheAntworten.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+}
+
+#durchschnitt{
+    -fx-background-image: url("../../../resources/icons/durchschnitt.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+}
+
+#zeitAbgelaufen{
+    -fx-background-image: url("../../../resources/icons/zeitAbgelaufen.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+}
+
+#gewinnerListView{
+    -fx-background-color: darkorange;
+}
+
+#gewinnerListView.list-cell, #gewinnerListView:filled:selected:focused, #gewinnerListView:filled:selected, #gewinnerListView.list-cell:even, #gewinnerListView:filled:hover{
+    -fx-background-color: darkorange;
+}
+
+#endScreenFill1{
+    -fx-background-color: #ff8e7d;
+}
+
+#endScreenFill2{
+    -fx-background-color: #a3ffaa;
+}
+
+#endScreenFill3{
+    -fx-background-color: #5fbbff;
+}
+
+#endScreenFill4{
+    -fx-background-color: #b1b4b2;
+}
+
