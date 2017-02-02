@@ -189,10 +189,8 @@ public class Feld extends StackPane{
 
                 st.play();
 
-
-
-
-
+                // Damit KeyListener funktioniert.
+                this.requestFocus();
         }else{
             this.getChildren().removeAll(this.getChildren());
             System.out.println("MakierungAus");

@@ -37,8 +37,7 @@ public class GameLayout extends BorderPane{
 
         //Dem Viewcontroller übergeben
         viewController.setCenterLayout(centerLayout);
-        viewController.setLeftLayout(leftLayout);
-        viewController.setRightLayout(rightLayout);
+
     }
 
     public void blury(boolean anAus){

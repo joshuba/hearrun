@@ -19,6 +19,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -30,8 +32,6 @@ import javafx.util.Duration;
 public class ViewController {
     private Stage stage;
     private CenterLayout centerLayout;
-    private SpielerAnzeige leftLayout;
-    private SpielerAnzeige rightLayout;
     private SpielController spielController;
     private LoadingScreen ls;
     private SimpleBooleanProperty feldAuswahlMakierung;
@@ -72,14 +72,6 @@ public class ViewController {
 
     public void setCenterLayout(CenterLayout centerLayout) {
         this.centerLayout = centerLayout;
-    }
-
-    public void setLeftLayout(SpielerAnzeige leftLayout) {
-        this.leftLayout = leftLayout;
-    }
-
-    public void setRightLayout(SpielerAnzeige rightLayout) {
-        this.rightLayout = rightLayout;
     }
 
     public void baueSpielfeldAuf(){
@@ -392,6 +384,15 @@ public class ViewController {
                     }
                 });
                 f.addEventHandler(MouseEvent.MOUSE_PRESSED, panePressed);
+
+                f.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+                    if (event.getCode() == KeyCode.SPACE) {
+                        if (f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY())){
+                            spielController.stelleAktFrage();
+                            feldAuswahlMakierung.setValue(false);
+                        }
+                    }
+                });
 
 
             }
