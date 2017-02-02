@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Created by joshuabarth on 16.01.17.
+ * Created by joshuabarth on 16.01.17
  */
 public class ButtonFrage extends FrageFenster {
     private Button[] buttons;
@@ -25,7 +25,7 @@ public class ButtonFrage extends FrageFenster {
     public ButtonFrage(Frage frage, SpielController spielController) {
         super(frage, spielController);
 
-        //falls es eine CoverFrage ist
+        //falls es eine CoverTitelFrage ist
         if (frage.getFragetyp() == Fragetyp.CoverTitelFrage) {
             cover = new ImageView(((CoverTitelFrage) frage).getCover());
             cover.minHeight(20);
@@ -102,33 +102,13 @@ public class ButtonFrage extends FrageFenster {
         buttons[3].setDisable(true);
     }
 
-    private void richtigButtonFaerben() {
+    protected void richtigButtonFaerben() {
+        System.out.println("F#rbe Button");
         if (richtigButton.getId().equals("richtigButton")) {
-            richtigButton.setId("normalButton");
-        } else if (richtigButton.getId().equals("normalButton")) {
+            richtigButton.setId("frageButton");
+        } else if (richtigButton.getId().equals("frageButton")) {
             richtigButton.setId("richtigButton");
         }
 
     }
-
-    public void zeigeRichtigOderFalsch() {
-        KeyFrame k = new KeyFrame(
-                Duration.millis(300),
-                a -> richtigButtonFaerben()
-        );
-
-        Timeline t = new Timeline(k);
-        t.setCycleCount(6);
-        if (falschRichtig.getValue() == -1) {
-            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
-
-        }
-
-        t.setOnFinished(b -> wuerfeln(falschRichtig.getValue()));
-        t.play();
-
-
-    }
-
-
 }

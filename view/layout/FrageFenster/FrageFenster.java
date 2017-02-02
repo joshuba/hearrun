@@ -1,5 +1,6 @@
 package hearrun.view.layout.FrageFenster;
 
+import hearrun.Main;
 import hearrun.business.Player;
 import hearrun.business.Spieler;
 import hearrun.view.controller.SpielController;
@@ -24,7 +25,7 @@ import javafx.util.Duration;
 /**
  * Oberklasse der Fragefenster
  */
-public class FrageFenster extends Fenster {
+public abstract class FrageFenster extends Fenster {
 
     protected Player effectPlayer;
     protected   Player musicPlayer;
@@ -175,12 +176,24 @@ public class FrageFenster extends Fenster {
         return this.falschRichtig;
     }
 
+    abstract void richtigButtonFaerben();
 
 
+    public void zeigeRichtigOderFalsch() {
+        KeyFrame k = new KeyFrame(
+                Duration.millis(300),
+                a -> richtigButtonFaerben()
+        );
 
-    public void zeigeRichtigOderFalsch(){
+        Timeline t = new Timeline(k);
+        t.setCycleCount(6);
+        if (falschRichtig.getValue() == -1) {
+            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
 
+        }
 
+        t.setOnFinished(b -> wuerfeln(falschRichtig.getValue()));
+        t.play();
     }
 
 

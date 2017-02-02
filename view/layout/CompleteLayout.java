@@ -6,6 +6,7 @@ import hearrun.view.controller.SpielController;
 import hearrun.view.controller.ViewController;
 import hearrun.view.layout.FrageFenster.Fenster;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -20,7 +21,7 @@ public class CompleteLayout extends StackPane {
     private Stage stage;
     private Player musicPlayer;
 
-    public CompleteLayout(Stage stage, SpielController spielController){
+    public CompleteLayout(Stage stage, SpielController spielController) {
         this.viewController = new ViewController(stage, spielController);
         mainMenu = new MainMenu(spielController, viewController);
         this.spielController = spielController;
@@ -29,22 +30,18 @@ public class CompleteLayout extends StackPane {
 
     }
 
-    public void setGameLayout(){
+    public void setGameLayout() {
         musicPlayer.stop();
         musicPlayer.play(Main.class.getResource("/hearrun/resources/music/Lakechiller.mp3").getPath(), true);
 
         bluryAnAus(false);
-        this.getChildren().removeAll(this.getChildren());
-        //Falls das gamelayout nicht da ist hinzufuegen
-        if(this.getChildren().isEmpty()){
-            this.getChildren().addAll(gameLayout);
-        }
-        mainMenu.kreisSpawningAnAus(false);
-        System.out.println("Kreise aus");
+        this.getChildren().clear();
+        this.getChildren().addAll(gameLayout);
 
+        mainMenu.kreisSpawningAnAus(false);
     }
 
-    public void setMainMenu(){
+    public void setMainMenu() {
         musicPlayer.stop();
         musicPlayer.play(Main.class.getResource("/hearrun/resources/music/4.mp3").getPath(), true);
         this.getChildren().clear();
@@ -55,29 +52,39 @@ public class CompleteLayout extends StackPane {
         System.out.println(mainMenu.getChildren().size());
     }
 
-    public ViewController getViewController(){
+    public ViewController getViewController() {
         return this.viewController;
     }
 
-    public void resetGameLayout(){
+    public void resetGameLayout() {
         this.getChildren().removeAll(gameLayout);
         gameLayout = new GameLayout(stage, spielController, viewController);
     }
 
-    public MainMenu getMainMenu(){
+    public MainMenu getMainMenu() {
         return this.mainMenu;
     }
 
-    public void zeigeFenster(Fenster fenster){
-        this.getChildren().clear();
-        this.getChildren().add(fenster);
+    public void zeigeFenster(Fenster fenster) {
+
+        for (Node n : getChildren()) {
+            if (n instanceof Fenster) {
+                getChildren().remove(n);
+                break;
+            }
+        }
+
+        bluryAnAus(true);
+        getChildren().add(fenster);
+        // Leertaste für neue Frage ausschalten
+        fenster.requestFocus();
     }
 
-    public void bluryAnAus(boolean anAus){
+    public void bluryAnAus(boolean anAus) {
         this.gameLayout.blury(anAus);
     }
 
-    public void newGameAnAus(boolean anAus){
+    public void newGameAnAus(boolean anAus) {
         mainMenu.newGameAnAus(anAus);
     }
 
@@ -93,20 +100,20 @@ public class CompleteLayout extends StackPane {
 
     }
 
-    public void setFrageIntro(FrageIntro frageIntro){
+    public void setFrageIntro(FrageIntro frageIntro) {
         this.getChildren().addAll(frageIntro);
         frageIntro.setAlignment(Pos.CENTER);
     }
 
-    public void removeFrageIntro(FrageIntro frageIntro){
+    public void removeFrageIntro(FrageIntro frageIntro) {
         this.getChildren().removeAll(frageIntro);
     }
 
-    public void showEndScreen(EndScreen endScreen){
+    public void showEndScreen(EndScreen endScreen) {
         this.getChildren().addAll(endScreen);
     }
 
-    public GameLayout getGameLayout(){
+    public GameLayout getGameLayout() {
         return this.gameLayout;
     }
 }

@@ -122,7 +122,7 @@ public class CoverFrage extends FrageFenster {
         buttons[3].setDisable(true);
     }
 
-    private void richtigButtonFaerben(){
+    protected void richtigButtonFaerben(){
         if(richtigButton.getId().equals("richtigCoverButton")){
             richtigButton.setId("coverButton");
         }else if(richtigButton.getId().equals("coverButton")){
@@ -131,24 +131,6 @@ public class CoverFrage extends FrageFenster {
 
     }
 
-    public void zeigeRichtigOderFalsch(){
-        KeyFrame k = new KeyFrame(
-                Duration.millis(300),
-                a -> richtigButtonFaerben()
-        );
-
-        Timeline t = new Timeline(k);
-        t.setCycleCount(6);
-        if(falschRichtig.getValue() == -1){
-            effectPlayer.play(Main.class.getResource("/hearrun/resources/sounds/wrong.mp3").getPath());
-
-        }
-
-        t.setOnFinished(b -> wuerfeln(falschRichtig.getValue()));
-        t.play();
-
-
-    }
 
     public void hover(){
 
