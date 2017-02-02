@@ -1,7 +1,7 @@
-*EreignisTestMap
+*Cover-Testmap
 *6
 *2
-#E T E F E X
+#C C C C C C
 #L L L L L L
 
 

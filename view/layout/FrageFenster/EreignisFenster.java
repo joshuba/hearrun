@@ -28,8 +28,8 @@ public class EreignisFenster extends Fenster {
         catPic.setPadding(new Insets(0, 0, 0, 500));
 
         HBox ereignisIcon = new HBox();
-        ereignisIcon.setPrefSize(50, 50);
-
+        ereignisIcon.setMaxSize(50, 50);
+        ereignisIcon.setAlignment(Pos.CENTER);
         Label ueberschrift = new Label();
         Label text = new Label();
         Button weiterspielen = new Button("Weiterspielen");

@@ -288,9 +288,14 @@ Button:hover:pressed{
 
 }
 
+.leben-icon {
+    -fx-background-image: url("../../../resources/icons/leben.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
 
-
-
-
-
-
+.kein-leben-icon {
+    -fx-background-image: url("../../../resources/icons/leben_grau.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}

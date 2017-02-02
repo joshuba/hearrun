@@ -2,8 +2,7 @@ package hearrun.business;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 public class Spieler {
     private String name;
     private ArrayList<Point> log;
-    private ObservableMap<String, String> achievements;
+    private ObservableMap<String, Integer> achievements;
     private int gelaufen;
     private int leben;
 
@@ -25,16 +24,14 @@ public class Spieler {
         gelaufen = 0;
         leben = 0;
 
-        achievements.put("gelaufen", "Gelaufene Felder: " + gelaufen);
-        achievements.put("fragen", "Richtige Fragen: " + gelaufen);
-        achievements.put("leben", "" + leben);
-
+        achievements.put("felder", 0);
+        achievements.put("fragenRichtig", 0);
+        achievements.put("leben", 0);
     }
 
     public void move(int x, int y) {
         log.add(new Point(x, y));
         gelaufen++;
-        achievements.put("gelaufen", "Gelaufene Felder: " + gelaufen);
     }
 
     public int getAktX() {
@@ -66,11 +63,9 @@ public class Spieler {
     }
 
     public void moveBack() {
-
         log.remove(log.size() - 1);
         gelaufen++;
-        achievements.put("gelaufen", "Gelaufene Felder: " + gelaufen);
-
+        achievements.put("felder", gelaufen);
     }
 
     public int getLogSize() {
@@ -86,20 +81,25 @@ public class Spieler {
     }
 
     public void addLeben() {
-        int leben = Integer.parseInt(achievements.get("leben"));
-        achievements.put("leben", "" + (leben + 1));
+        int leben = achievements.get("leben");
+        achievements.put("leben", leben + 1);
     }
 
     public void removeLeben() {
-        int leben = Integer.parseInt(achievements.get("leben"));
-        achievements.put("leben", "" + (leben - 1));
+        int leben = achievements.get("leben");
+        achievements.put("leben", leben - 1);
     }
 
     public int getLeben() {
-        return Integer.parseInt(achievements.get("leben"));
+        return achievements.get("leben");
     }
 
-    public ObservableMap<String, String> getAchievements() {
+    public void addRichtigeFrage() {
+        int richtigeFragen = achievements.get("fragenRichtig");
+        achievements.put("fragenRichtig", richtigeFragen + 1);
+    }
+
+    public ObservableMap<String, Integer> getAchievements() {
         return achievements;
     }
 }
