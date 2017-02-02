@@ -292,7 +292,12 @@ public class PictureGalery extends BorderPane {
         while (true) {
             try {
                 System.out.println(path + i + ".png");
-                imageViews.add(new ImageView(new Image(Main.class.getResourceAsStream(path+i+".png"))));
+                ImageView iv = new ImageView(new Image(Main.class.getResourceAsStream(path + i + ".png")));
+                iv.fitHeightProperty().bind(this.heightProperty());
+                iv.fitWidthProperty().bind(this.widthProperty());
+                iv.setPreserveRatio(true);
+                imageViews.add(iv);
+
             } catch (NullPointerException e) {
                 break;
             }
