@@ -31,7 +31,7 @@ public class CompleteLayout extends StackPane {
 
     public void setGameLayout(){
         musicPlayer.stop();
-        musicPlayer.play(Main.class.getResource("/hearrun/resources/music/Lakechiller.mp3").getPath(), false);
+        musicPlayer.play(Main.class.getResource("/hearrun/resources/music/Lakechiller.mp3").getPath(), true);
 
         bluryAnAus(false);
         this.getChildren().removeAll(this.getChildren());
@@ -39,7 +39,6 @@ public class CompleteLayout extends StackPane {
         if(this.getChildren().isEmpty()){
             this.getChildren().addAll(gameLayout);
         }
-        musicPlayer.stop();
         mainMenu.kreisSpawningAnAus(false);
         System.out.println("Kreise aus");
 

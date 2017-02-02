@@ -14,17 +14,12 @@ import java.util.Random;
 public class Player {
     private SimpleAudioPlayer player;
     private SimpleMinim minim;
-    private boolean loop;
-    private Thread loopedPlayer;
-    private float aktVolume;
-    private int panVol;
     private boolean fadeIn;
     private boolean fadeOut;
 
 
     public Player() {
         minim = new SimpleMinim();
-        aktVolume = 80;
         fadeOut = false;
         fadeIn = false;
 
@@ -34,34 +29,29 @@ public class Player {
 
     public void play(String file, boolean loop) {
 
-        player = minim.loadMP3File(file);
         if (loop) {
-            player = minim.loadMP3File(file);
-
-            player.loop();
+            minim = new SimpleMinim();
+            new Thread( () -> {
+                player = minim.loadMP3File(file);
+                player.loop();
+            }).start();
         }else {
             play(file);
         }
     }
 
-    public void stop() {
-        minim.stop();
-    }
-
-
-
     public void play(String file) {
 
-        Thread player = new Thread(() -> {
+        new Thread(() -> {
+            SimpleMinim minim = new SimpleMinim();
             minim.loadMP3File(file).play();
             minim.stop();
-        });
-        player.start();
+        }).start();
     }
 
     public void playRandomNSeconds(String file, int n) {
         try {
-            SimpleMinim minim = new SimpleMinim(true);
+            minim = new SimpleMinim(true);
             player = minim.loadMP3File(file);
 
 
@@ -85,9 +75,13 @@ public class Player {
             timeline.play();
 
         } catch (IllegalArgumentException e) {
-            System.err.println("Der Song " + file + " ist zu kürzer als " + n + "s!\n\n");
+            System.err.println("Der Song " + file + " ist kürzer als " + n + "s!\n\n");
             e.printStackTrace();
         }
+    }
+
+    public void stop() {
+        minim.stop();
     }
 
     public void setVolume(float volume){
@@ -143,8 +137,6 @@ public class Player {
         fadein.setCycleCount(1);
         fadein.getKeyFrames().addAll(k1,k2, k3, k4, k5, k6);
 
-
-
         fadeIn = true;
 
         if(!fadeOut){
@@ -188,19 +180,34 @@ public class Player {
         fadeout.setAutoReverse(false);
         fadeout.setCycleCount(1);
         fadeout.getKeyFrames().addAll(k1,k2, k3, k4);
-
-
+        fadeout.setOnFinished( e -> stop());
 
         fadeOut = true;
 
         if(!fadeIn)
             fadeout.play();
-
-
-
     }
 
+    public static void main (String[] args) throws InterruptedException {
+        Player p = new Player();
 
+        new Thread(()-> {
+            p.play("C:\\Users\\Leo\\IdeaProjects\\Benutzeroberflaechen\\HearRun\\" +
+                    "src\\hearrun\\resources\\music\\cantina.mp3", true);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            p.play("C:\\Users\\Leo\\IdeaProjects\\Benutzeroberflaechen\\HearRun\\" +
+                    "src\\hearrun\\resources\\music\\cantina.mp3", true);
+        }).start();
+
+        Thread.sleep(10000);
+
+
+        p.stop();
+    }
 }
 
 
