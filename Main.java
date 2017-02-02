@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static final Color spielerEinsFarbe = new Color(221f/255, 66f/255, 85f/255, 1);
     public static final Color spielerZweiFarbe = new Color(51f/255, 195f/255, 98f/255, 1);
-    public static final Color spielerDreiFarbe = new Color(47f/255, 42f/255, 1, 1);
+    public static final Color spielerDreiFarbe = new Color(66f/255, 107f/255, 221f/255, 1);
     public static final Color spielerVierFarbe = new Color(109f/255, 106f/255, 94f/255, 1);
 
 

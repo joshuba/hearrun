@@ -419,7 +419,6 @@ public class ViewController {
         spielController.getLayout().showEndScreen(endScreen);
         endScreen.showResults();
 
-        System.out.println("ENDE GELÄNDE SIEG");
 
 
     }
