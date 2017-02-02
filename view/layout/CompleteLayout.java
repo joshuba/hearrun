@@ -47,12 +47,12 @@ public class CompleteLayout extends StackPane {
     public void setMainMenu(){
         musicPlayer.stop();
         musicPlayer.play(Main.class.getResource("/hearrun/resources/music/4.mp3").getPath(), true);
-        this.getChildren().removeAll(this.getChildren());
+        this.getChildren().clear();
         this.getChildren().addAll(mainMenu);
         mainMenu.showMainMenu();
         mainMenu.kreisSpawningAnAus(true);
-        System.out.println("Kreise an");
 
+        System.out.println(mainMenu.getChildren().size());
     }
 
     public ViewController getViewController(){

@@ -18,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -39,7 +40,6 @@ public class MainMenu extends StackPane {
     private VBox helpElements;
     private CircleSpawner circleSpawner;
     private PictureGalery p;
-
 
 
     public MainMenu(SpielController spielController, ViewController viewController) {
@@ -68,10 +68,7 @@ public class MainMenu extends StackPane {
         kreisSpawningAnAus(true);
 
 
-
-
     }
-
 
 
     public void initNewGameWindow() {
@@ -83,10 +80,10 @@ public class MainMenu extends StackPane {
         HBox rechts = new HBox();
         Label spielfeldText = new Label("Waehle eine Karte: ");
         Label spielerText = new Label("Wähle Spieler: ");
-        ListView <Map> maps = new ListView<>();
-        ListView <String> spieler = new ListView<>();
-        ArrayList <Spieler> spielerliste = new ArrayList<>();
-        ObservableList <String> spielerObs = FXCollections.observableArrayList();
+        ListView<Map> maps = new ListView<>();
+        ListView<String> spieler = new ListView<>();
+        ArrayList<Spieler> spielerliste = new ArrayList<>();
+        ObservableList<String> spielerObs = FXCollections.observableArrayList();
         Button addSpieler = new Button("+");
         Button removeSpieler = new Button("-");
         Button back = new Button("zurück");
@@ -182,7 +179,7 @@ public class MainMenu extends StackPane {
 
         File[] maps = mapsFile.listFiles((dir, name) -> name.startsWith("map"));
 
-        ObservableList <Map> mapsList = FXCollections.observableArrayList();
+        ObservableList<Map> mapsList = FXCollections.observableArrayList();
 
         for (File f : maps)
             mapsList.add(new Map(f.getPath(), spielController.getStage().widthProperty(), spielController.getStage().heightProperty()));
@@ -190,21 +187,20 @@ public class MainMenu extends StackPane {
 
     }
 
-    public void showMainMenu(){
+    public void showMainMenu() {
         //Falls ein spiel erstellt wurde schalte continue an
-        if(spielController.getAktSpiel() != null){
+        if (spielController.getAktSpiel() != null) {
             continueAn = true;
         }
-            initMainMenuWindow();
-            this.getChildren().addAll(mainMenuElements);
+        initMainMenuWindow();
+
+        this.getChildren().clear();
+        this.getChildren().addAll(mainMenuElements);
 
         mainMenuElements.setOpacity(1);
 
 
-
     }
-
-
 
 
     private void initMainMenuWindow() {
@@ -215,12 +211,13 @@ public class MainMenu extends StackPane {
         exit = new Button("Spiel beenden");
         exit.setId("buttonRedHover");
 
-        if(continueAn){
+        if (continueAn) {
             mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
             mainMenuElements.getChildren().addAll(cont, newGame, help, settings, exit);
 
-        }else{
-            mainMenuElements.getChildren().addAll(newGame, help, settings, exit);
+        } else {
+            if (mainMenuElements.getChildren().size() == 0)
+                mainMenuElements.getChildren().addAll(newGame, help, settings, exit);
         }
 
         newGame.setOnAction((e) -> {
@@ -234,10 +231,10 @@ public class MainMenu extends StackPane {
 
         });
         settings.setOnAction(e -> {
-                ititSettingsWindow();
-                menuUebergang(mainMenuElements, settingsElements, true);
+            ititSettingsWindow();
+            menuUebergang(mainMenuElements, settingsElements, true);
 
-            });
+        });
         help.setOnAction(e -> {
             initHelpMenu();
             menuUebergang(mainMenuElements, helpElements, true);
@@ -260,7 +257,6 @@ public class MainMenu extends StackPane {
         Button button = new Button("Musikpfad ändern");
         Label pfad = new Label(spielController.getProperties().getProperty("musicPath"));
         Button back = new Button("zurück");
-        settingsElements.getChildren().addAll(antwortZeit, volume, button, pfad, back);
         settingsElements.setAlignment(Pos.CENTER);
         back.setOnAction((e) -> {
             initMainMenuWindow();
@@ -270,20 +266,21 @@ public class MainMenu extends StackPane {
 
         button.setOnAction((e) -> {
             try {
-                String newpath = new DirectoryChooser().showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
+                DirectoryChooser dc = new DirectoryChooser();
+                dc.setInitialDirectory(new File(spielController.getProperties().get("musicPath").toString()));
+                String newpath = dc.showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
                 pfad.setText(newpath);
                 spielController.getProperties().setProperty("musicPath", newpath);
                 settingsElements.getChildren().clear();
                 this.getChildren().clear();
                 spielController.ladeMusik();
-            } catch (NullPointerException ignored){}
-
-
+            } catch (NullPointerException ignored) {}
         });
+        settingsElements.getChildren().addAll(antwortZeit, volume, button, pfad, back);
 
     }
 
-    private void initHelpMenu(){
+    private void initHelpMenu() {
         Button button = new Button("Zurück");
         helpElements.getChildren().addAll(p, button);
         helpElements.setAlignment(Pos.CENTER);
@@ -303,24 +300,24 @@ public class MainMenu extends StackPane {
         this.newGame.setDisable(!anAus);
     }
 
-    public static void main (String[] args){
+    public static void main(String[] args) {
         System.out.println(Main.class.getResource("/hearrun/resources/Data").getPath());
 
     }
 
-    public void kreisSpawningAnAus(boolean anAus){
-        if(anAus){
+    public void kreisSpawningAnAus(boolean anAus) {
+        if (anAus) {
             circleSpawner.play();
-        }else{
+        } else {
             circleSpawner.stop();
         }
 
     }
 
-    private void menuUebergang(VBox von, VBox zu, boolean vorwaerts){
+    private void menuUebergang(VBox von, VBox zu, boolean vorwaerts) {
         int zoomVon = 0;
         int zoomZu = 1;
-        if(!vorwaerts){
+        if (!vorwaerts) {
             zoomVon = 4;
             zoomZu = 1;
         }
@@ -340,17 +337,17 @@ public class MainMenu extends StackPane {
         st.setToY(zoomZu);
 
 
-        KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
+        KeyFrame k1 = new KeyFrame(Duration.millis(1), a -> {
             ft.play();
 
         });
 
-        KeyFrame k2 = new KeyFrame(Duration.millis(50), a ->{
+        KeyFrame k2 = new KeyFrame(Duration.millis(50), a -> {
             zu.setOpacity(1);
 
         });
 
-        KeyFrame k3 = new KeyFrame(Duration.millis(1), a ->{
+        KeyFrame k3 = new KeyFrame(Duration.millis(1), a -> {
             st.play();
         });
 
@@ -358,9 +355,8 @@ public class MainMenu extends StackPane {
         Timeline t = new Timeline();
         t.setAutoReverse(false);
         t.setCycleCount(1);
-        t.getKeyFrames().addAll(k1,k2,k3);
+        t.getKeyFrames().addAll(k1, k2, k3);
         t.play();
-
 
 
         ft.setOnFinished(e -> {
