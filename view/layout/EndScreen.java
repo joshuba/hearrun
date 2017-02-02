@@ -33,7 +33,5 @@ public class EndScreen extends StackPane {
 
         //styling
         ueberschrift.setAlignment(Pos.CENTER);
-
-
     }
 }
