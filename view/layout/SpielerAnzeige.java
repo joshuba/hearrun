@@ -46,7 +46,6 @@ public class SpielerAnzeige extends VBox {
 
             if (spielerListe.size() > 2) { // Mehr als 2 Spieler: zeige oben und unten einen Spieler an.
                 unten = initSpielerAnzeige(2, spielerListe);
-                unten.setAlignment(Pos.BOTTOM_CENTER);
             } else { // sonst unten leer lassen
                 unten = new VBox();
             }
@@ -56,7 +55,6 @@ public class SpielerAnzeige extends VBox {
 
                 if (spielerListe.size() > 3) { // 4 Spieler: zeige unten auch einen Spieler an.
                     unten = initSpielerAnzeige(3, spielerListe);
-                    unten.setAlignment(Pos.BOTTOM_CENTER);
                 } else { // Sonst lass unten leer
                     unten = new VBox();
                 }
@@ -67,10 +65,12 @@ public class SpielerAnzeige extends VBox {
             }
         }
 
-        BorderPane b = new BorderPane();
-        b.setTop(oben);
-        b.setBottom(unten);
-        this.getChildren().add(b);
+        VBox boxUnten = new VBox(unten);
+        boxUnten.setVgrow(boxUnten, Priority.ALWAYS);
+        boxUnten.setAlignment(Pos.BOTTOM_CENTER);
+        VBox boxOben = new VBox(oben);
+        boxOben.setAlignment(Pos.TOP_CENTER);
+        this.getChildren().addAll(boxOben, boxUnten);
     }
 
     private VBox initSpielerAnzeige(int spielerNummer, ArrayList<Spieler> spielerListe) {
@@ -87,6 +87,7 @@ public class SpielerAnzeige extends VBox {
         nummerLabel.getStyleClass().add("spieler-nummer");
         spielerFarbe.getChildren().addAll(farbKreis, nummerLabel);
         spielerFarbe.setAlignment(Pos.CENTER);
+        spielerFarbe.setPadding(new Insets(10, 0,0,0));
 
         ListView<HBox> achievements = new ListView<>();
         ObservableMap<String, Integer> achievementsMap = spielerListe.get(spielerNummer).getAchievements();

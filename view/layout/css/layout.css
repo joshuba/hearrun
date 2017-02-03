@@ -510,4 +510,6 @@ Button:hover:pressed{
 
 .aktiv {
     -fx-background-color: #ff8e7d;
+    -fx-opacity: 0.7;
+    -fx-background-radius: 20;
 }
