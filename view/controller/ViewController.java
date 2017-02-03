@@ -45,6 +45,13 @@ public class ViewController {
         spielerLaeuft.setValue(false);
         feldAuswahlMakierung = new SimpleBooleanProperty(false);
 
+        feldAuswahlMakierung.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println("NEU " + newValue.booleanValue());
+            }
+        });
+
 
         feldAuswahlMakierung.addListener((observable, oldValue, newValue) -> {
 
@@ -85,6 +92,7 @@ public class ViewController {
 
     public void movePlayer(int i, Spieler s){
         int anz;
+        spielerLaeuft.setValue(true);
 
         //Falls man mehr Felder zurueck muss als da sind, landet man auf dem ersten
         if(i>0){
@@ -123,7 +131,6 @@ public class ViewController {
 
         if(i>0){
             forward.play();
-            spielerLaeuft.setValue(true);
 
             forward.setOnFinished(e -> {
                 spielerLaeuft.setValue(false);
@@ -136,7 +143,6 @@ public class ViewController {
         }else{
             if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann
                 back.play();
-                spielerLaeuft.setValue(true);
 
                 back.setOnFinished(e -> {
                     spielerLaeuft.setValue(false);
@@ -394,8 +400,7 @@ public class ViewController {
                 EventHandler<MouseEvent> panePressed = (e -> {
 
                     if (e.getButton() == MouseButton.PRIMARY && f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),
-                            spielController.getAktSpiel().getAktSpieler().getAktY()) && !spielerLaeuft.getValue().booleanValue());
-            {
+                            spielController.getAktSpiel().getAktSpieler().getAktY()) && !spielerLaeuft.getValue().booleanValue()){
                         spielController.stelleAktFrage(false);
                         feldAuswahlMakierung.setValue(false);
 

@@ -31,7 +31,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        System.out.println(221f / 225);
         this.primaryStage = primaryStage;
         spielController = new SpielController(primaryStage);
 

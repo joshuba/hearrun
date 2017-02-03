@@ -10,8 +10,17 @@ Button {
     -fx-background-repeat: stretch;
     -fx-background-position: center;
     -fx-text-fill: white;
-    -fx-font-family: Verdana, Geneva, sans-serif;
+    -fx-font-family: sans-serif;
     -fx-background-image:  url("../../../resources/icons/menuButton.png");
+
+}
+
+Label{
+    -fx-font-family: sans-serif;
+    -fx-font-size: 15;
+    -fx-text-fill: #585858;
+
+
 
 }
 
@@ -54,14 +63,24 @@ Button:hover:pressed{
 
 }
 
+#hearRunLogo{
+    -fx-background-image: url("../../../resources/icons/Logo.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+
+
+
+}
+
 
 #frageButtonTrue{
     -fx-background-image: inherit;
     -fx-background-color: #91db47;
     -fx-background-radius: 5;
-    -fx-font-size: 12;
+    -fx-font-size: 14;
     -fx-min-width: 400px;
-    -fx-background-size: stretch;
+    -fx-background-size: contain;
     -fx-alignment: center-left;
 
 
@@ -74,9 +93,9 @@ Button:hover:pressed{
     -fx-background-image: inherit;
     -fx-background-color: #f06373;
     -fx-background-radius: 5;
-    -fx-font-size: 12;
+    -fx-font-size: 14;
     -fx-min-width: 400px;
-    -fx-background-size: stretch;
+    -fx-background-size: contain;
     -fx-alignment: center-left;
 
 
@@ -90,7 +109,7 @@ Button:hover:pressed{
     -fx-background-color: #5b797f;
     -fx-background-radius: 5;
     -fx-text-fill: white;
-    -fx-font-size: 12;
+    -fx-font-size: 14;
     -fx-min-width: 400px;
     -fx-background-size: contain;
     -fx-alignment: center-left;
@@ -107,8 +126,10 @@ Button:hover:pressed{
     -fx-background-radius: 5;
     -fx-text-fill: white;
     -fx-min-width: 400px;
-    -fx-background-size: stretch;
+    -fx-background-size: contain;
     -fx-alignment: center-left;
+    -fx-font-size: 14;
+
 
 
 
@@ -237,7 +258,8 @@ Button:hover:pressed{
 
 
 #grossText {
-    -fx-font-size: 30;
+    -fx-font-size: 34;
+    -fx-font-weight: bold;
 }
 
 #introScreen {
@@ -354,11 +376,19 @@ Button:hover:pressed{
     -fx-background-size: 30%;
 }
 
-#schriftMittel, #frageText{
+#schriftMittel{
     -fx-font-size: 14;
     -fx-font-weight: bold;
-    -fx-font-family: Verdana;
+    -fx-font-family: sans-serif;
 
+
+}
+
+#frageText{
+    -fx-font-size: 19;
+    -fx-font-weight: bold;
+    -fx-font-family: sans-serif;
+    -fx-text-alignment: center;
 
 }
 

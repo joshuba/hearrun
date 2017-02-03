@@ -27,7 +27,7 @@ public class TitelFrage extends Frage {
 
         // Fragetext generieren
         String[] texte = {"Aus welchem Song stammt der abgespielte Songschnipsel?",
-                "Zu welchem der 4 Songs lässt sich das Songschnipsel zuordnen?",
+                "Zu welchem der 4 Songs lässt sich der Songschnipsel zuordnen?",
                 "Welcher Song wird gerade abgespielt?"};
         String fragetext = texte[(int) (Math.random() * texte.length)];
         String titel = "";

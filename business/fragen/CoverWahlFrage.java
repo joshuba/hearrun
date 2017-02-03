@@ -83,8 +83,8 @@ public class CoverWahlFrage extends Frage {
 
         // Fragetext generieren
         String[] texte = {
-                "Der folgende Titel erschien in einem der folgenden Alben. Welches ist es?",
-                "Als Teil welches Albums erschien der folgende Titel?"
+                "Der folgende Titel erschien in einem der folgenden Alben. \nWelcher ist es?",
+                "Als Teil welchen Albums erschien der folgende Titel?"
         };
         String fragetext = texte[(int) (Math.random() * texte.length)];
 

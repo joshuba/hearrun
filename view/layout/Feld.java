@@ -126,6 +126,8 @@ public class Feld extends StackPane{
         Timeline t = new Timeline(k2,k1);
         t.setOnFinished(e -> {
             //st3.play();
+            resetSizeZoom();
+
 
 
         });
@@ -193,12 +195,20 @@ public class Feld extends StackPane{
             this.setScaleX(1);
             this.setScaleY(1);
             System.out.println("MakierungAus");
+            resetSizeZoom();
 
 
 
 
         }
 
+    }
+    public void resetSizeZoom(){
+        this.setOpacity(150);
+        this.setLayoutX(0);
+        this.setLayoutY(0);
+        this.setScaleX(1);
+        this.setScaleY(1);
     }
 
 
