@@ -36,6 +36,7 @@ public class SpielerAnzeige extends VBox {
 
             if (spielerListe.size() > 2) { // Mehr als 2 Spieler: zeige oben und unten einen Spieler an.
                 unten = initSpielerAnzeige(2, spielerListe);
+                unten.setAlignment(Pos.BOTTOM_CENTER);
             } else { // sonst unten leer lassen
                 unten = new VBox();
             }
@@ -45,6 +46,7 @@ public class SpielerAnzeige extends VBox {
 
                 if (spielerListe.size() > 3) { // 4 Spieler: zeige unten auch einen Spieler an.
                     unten = initSpielerAnzeige(3, spielerListe);
+                    unten.setAlignment(Pos.BOTTOM_CENTER);
                 } else { // Sonst lass unten leer
                     unten = new VBox();
                 }

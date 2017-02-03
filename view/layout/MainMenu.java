@@ -129,6 +129,8 @@ public class MainMenu extends StackPane {
         spielerObs.addListener((ListChangeListener<String>) c -> {
             if (spielerObs.size() > 3)
                 addSpieler.setDisable(true);
+            else if (spielerObs.size() < 4)
+                addSpieler.setDisable(false);
         });
 
         spieler.getSelectionModel().getSelectedItems().addListener((ListChangeListener<String>) c -> {
