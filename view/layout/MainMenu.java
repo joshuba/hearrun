@@ -278,6 +278,7 @@ public class MainMenu extends StackPane {
 
         button.setOnAction((e) -> {
             try {
+                spielController.getMusicPlayer().fadeOut();
                 DirectoryChooser dc = new DirectoryChooser();
                 dc.setInitialDirectory(new File(spielController.getProperties().get("musicPath").toString()));
                 String newpath = dc.showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();

@@ -140,7 +140,7 @@ public abstract class FrageFenster extends Fenster {
         progressIndex = (100/zeit+1)/100F;
         progressWert = 0;
 
-        musicPlayer.stop();
+        musicPlayer.fadeOut();
         if(frage.getPath() != null){
             musicPlayer.playRandomNSeconds(frage.getPath(),zeit);
         }
