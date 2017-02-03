@@ -73,8 +73,6 @@ public class MainMenu extends StackPane {
 
 
     public void initNewGameWindow() {
-
-
         //Baue neues Menü auf
         BorderPane menuContainer = new BorderPane();
         HBox links = new HBox();
@@ -189,7 +187,7 @@ public class MainMenu extends StackPane {
         int i = 1;
         while (true) {
             try {
-                String path = new File((Main.getFilePathFromResourcePath("/hearrun/resources/Data/map" + i + ".txt"))).getAbsolutePath();
+                String path = new File((Main.getFilePathFromResourcePath("/hearrun/resources/Data/map" + i + ".txt", true))).getAbsolutePath();
                 mapsList.add(new Map(path, spielController.getStage().widthProperty(), spielController.getStage().widthProperty()));
             } catch (NullPointerException e){
                 break;

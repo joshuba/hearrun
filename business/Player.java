@@ -50,7 +50,7 @@ public class Player {
     public void play(String file) {
             new Thread(() -> {
                 SimpleMinim minim = new SimpleMinim();
-                minim.loadMP3File(Main.getFilePathFromResourcePath(file)).play();
+                minim.loadMP3File(Main.getFilePathFromResourcePath(file, false)).play();
                 minim.stop();
             }).start();
     }

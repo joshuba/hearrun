@@ -1,7 +1,7 @@
 *Cover-Testmap
 *6
 *2
-#C C C C C X
+#E C E C C X
 #L L L L L L
 
 

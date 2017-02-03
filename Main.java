@@ -68,7 +68,7 @@ public class Main extends Application {
         System.exit(0);
     }
 
-    public static String getFilePathFromResourcePath(String path) {
+    public static String getFilePathFromResourcePath(String path, boolean overwrite) {
         String syspath = SpielController.erstellePropPfad();
 
         syspath = syspath.substring(0, syspath.lastIndexOf("/"));
@@ -77,13 +77,11 @@ public class Main extends Application {
         String dateiName = pfadSplit[pfadSplit.length - 1];
 
         File f = new File(syspath + "/" + dateiName);
-        System.out.println(f.getAbsolutePath());
 
-        if (!f.exists()) {
+        if (!f.exists() || overwrite) {
             try {
 
                 InputStream stream = Main.class.getResourceAsStream(path);
-                System.out.println(stream);
 
                 byte[] fileBytes = inputStreamToByteArray(stream);
 
@@ -102,7 +100,7 @@ public class Main extends Application {
 
     }
 
-    public static byte[] inputStreamToByteArray(InputStream inStream) throws IOException {
+    private static byte[] inputStreamToByteArray(InputStream inStream) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] buffer = new byte[8192];
         int bytesRead;
