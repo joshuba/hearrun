@@ -42,7 +42,8 @@ public class FrageIntro extends StackPane {
 
         //spielController.getLayout().getGameLayout().blury(true);
 
-        label = new Label(spielController.getAktSpiel().getAktSpieler().getName() + "\n" + "Mach Dich Bereit!");
+        label = new Label(spielController.getAktSpiel().getAktSpieler().getName() + "\n" + spielController
+        .getAktSpiel().getAktFeld().getPassendenFragetyp());
         label.setStyle("-fx-text-alignment: center; -fx-font-size: 20");
 
 

@@ -111,33 +111,27 @@ public class Player {
         int aktVol = getVolume();
         KeyFrame k1 = new KeyFrame(Duration.ZERO, a -> {
             setVolume(0);
-            System.out.println(getVolume());
         });
 
         KeyFrame k2 = new KeyFrame(Duration.millis(300), a -> {
             setVolume(aktVol / 10);
-            System.out.println(getVolume());
         });
 
         KeyFrame k3 = new KeyFrame(Duration.millis(500), a -> {
             setVolume(aktVol / 4);
-            System.out.println(getVolume());
         });
 
         KeyFrame k4 = new KeyFrame(Duration.millis(600), a -> {
             setVolume(aktVol / 3);
-            System.out.println(getVolume());
         });
 
         KeyFrame k5 = new KeyFrame(Duration.millis(700), a -> {
             setVolume(aktVol / 2);
-            System.out.println(getVolume());
             fadeIn = false;
         });
 
         KeyFrame k6 = new KeyFrame(Duration.millis(800), a -> {
             setVolume(aktVol);
-            System.out.println(getVolume());
             fadeIn = false;
         });
 
@@ -162,27 +156,23 @@ public class Player {
         int aktVol = getVolume();
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a -> {
             setVolume(aktVol);
-            System.out.println(aktVol);
 
         });
 
         KeyFrame k2 = new KeyFrame(Duration.millis(100), a -> {
             setVolume(aktVol - ((int) aktVol / 4));
-            System.out.println(aktVol - ((int) aktVol / 4));
 
 
         });
 
         KeyFrame k3 = new KeyFrame(Duration.millis(200), a -> {
             setVolume(aktVol - ((int) aktVol / 2));
-            System.out.println(aktVol - ((int) aktVol / 2));
 
         });
 
         KeyFrame k4 = new KeyFrame(Duration.millis(300), a -> {
             setVolume(0);
             fadeOut = false;
-            System.out.println(0);
 
 
 

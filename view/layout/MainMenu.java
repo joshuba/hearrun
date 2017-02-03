@@ -5,6 +5,9 @@ import hearrun.view.controller.SpielController;
 import hearrun.business.Spieler;
 import hearrun.view.controller.ViewController;
 import javafx.animation.*;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -40,11 +43,12 @@ public class MainMenu extends StackPane {
     private VBox helpElements;
     private CircleSpawner circleSpawner;
     private PictureGalery p;
+    private HBox logo;
 
 
     public MainMenu(SpielController spielController, ViewController viewController) {
         mainMenuElements = new VBox();
-        mainMenuElements.setSpacing(15);
+        //mainMenuElements.setSpacing(15);
         settingsElements = new VBox();
         settingsElements.setSpacing(15);
         newGameElements = new VBox();
@@ -61,6 +65,7 @@ public class MainMenu extends StackPane {
         //mainMenuElements.setId("mainMenu");
         this.setMinHeight(700);
         this.setMinWidth(300);
+
         this.setAlignment(Pos.CENTER);
         circleSpawner = new CircleSpawner(spielController.getStage());
 
@@ -231,14 +236,27 @@ public class MainMenu extends StackPane {
         help = new Button("Hilfe");
         exit = new Button("Spiel beenden");
         exit.setId("buttonRedHover");
+        //Baue neues Menü auf
+        logo = new HBox();
+        logo.setId("hearRunLogo");
+        logo.setMaxHeight(150);
+        logo.setMinHeight(150);
+        logo.setAlignment(Pos.TOP_CENTER);
+        VBox buttons = new VBox();
+        buttons.setAlignment(Pos.CENTER);
+        buttons.setPadding(new Insets(60,0,0,0));
+        buttons.setSpacing(15);
+        mainMenuElements.getChildren().addAll(logo, buttons);
+
+
 
         if (continueAn) {
-            mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
-            mainMenuElements.getChildren().addAll(cont, newGame, help, settings, exit);
+            buttons.getChildren().removeAll(buttons.getChildren());
+            buttons.getChildren().addAll(cont, newGame, help, settings, exit);
 
         } else {
-            if (mainMenuElements.getChildren().size() == 0)
-                mainMenuElements.getChildren().addAll(newGame, help, settings, exit);
+            if (buttons.getChildren().size() == 0)
+                buttons.getChildren().addAll(newGame, help, settings, exit);
         }
 
         newGame.setOnAction((e) -> {
@@ -265,13 +283,32 @@ public class MainMenu extends StackPane {
     }
 
     private void ititSettingsWindow() {
+        Label ueberschrift = new Label("Einstellungen");
+        ueberschrift.setId("grossText");
+        ueberschrift.setPadding(new Insets(0,0,40,0));
+
+        HBox antwortBox = new HBox();
+        Label aktZeit = new Label();
+        Label zeitTitel = new Label("Antwortzeit");
+        zeitTitel.setId("schriftMittel");
+
+        zeitTitel.setPadding(new Insets(0,0,10,0));
+        SimpleIntegerProperty time = new SimpleIntegerProperty();
+
+
         Slider antwortZeit = new Slider(4, 15, Integer.valueOf(spielController.getProperties().getProperty("antwortZeit")));
         antwortZeit.setBlockIncrement(12);
         antwortZeit.setMaxWidth(300);
+        antwortZeit.setMinWidth(300);
+
         antwortZeit.valueProperty().addListener((obs, oldValue, newValue) -> {
             spielController.getProperties().setProperty("antwortZeit", String.valueOf(newValue.intValue()));
-            System.out.println(spielController.getProperties().getProperty("antwortZeit"));
         });
+        antwortBox.setAlignment(Pos.CENTER);
+        antwortBox.setSpacing(10);
+        antwortBox.getChildren().addAll(antwortZeit, aktZeit);
+        time.bind(antwortZeit.valueProperty());
+        aktZeit.textProperty().bind(time.asString().concat(" s"));
 
 
         Button button = new Button("Musikpfad ändern");
@@ -299,13 +336,15 @@ public class MainMenu extends StackPane {
                 spielController.ladeMusik();
             } catch (NullPointerException ignored) {}
         });
-        settingsElements.getChildren().addAll(antwortZeit, button, pfad, back);
+        settingsElements.getChildren().addAll(ueberschrift, zeitTitel, antwortBox, button, pfad, back);
 
     }
 
     private void initHelpMenu() {
+        Label text = new Label("Hilfe");
+        text.setId("grossText");
         Button button = new Button("Zurück");
-        helpElements.getChildren().addAll(p, button);
+        helpElements.getChildren().addAll(text, p, button);
         helpElements.setAlignment(Pos.CENTER);
         p.minHeightProperty().bind(viewController.getStage().heightProperty().subtract(400));
         p.maxHeightProperty().bind(viewController.getStage().heightProperty().subtract(400));

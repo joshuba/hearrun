@@ -218,7 +218,6 @@ public class SpielController {
 
         //MAC
         if (System.getProperties().getProperty("os.name").contains("Mac")) {
-            System.out.println("Du nutzt macOs");
             File file = new File(System.getProperty("user.home") + "/Library/Application Support/HearRun");
             file.mkdir();
             path = System.getProperties().getProperty("user.home") + "/Library/Application Support/HearRun/game.properties";
@@ -226,7 +225,6 @@ public class SpielController {
         }
         //Windows
         if (System.getProperties().getProperty("os.name").contains("Win")) {
-            System.out.println("Du nutzt Windows, ieh");
             File file = new File(System.getProperty("user.home") + "/AppData/Local/HearRun");
             file.mkdir();
             path = System.getProperties().getProperty("user.home") + "/AppData/Local/HearRun/game.properties";

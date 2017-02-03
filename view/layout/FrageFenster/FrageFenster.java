@@ -77,6 +77,7 @@ public abstract class FrageFenster extends Fenster {
         textfeld = new StackPane();
         fragetext = new Label();
         fragetext.setId("frageText");
+        fragetext.setWrapText(true);
         time = new ProgressBar();
         time.setId("progressBar");
 
@@ -245,10 +246,7 @@ public abstract class FrageFenster extends Fenster {
         FadeTransition ft2 = new FadeTransition(Duration.millis(150), ereignisHeart);
         ft2.setFromValue(0);
         ft2.setToValue(100);
-        ft2.setOnFinished(e -> {
-            this.getChildren().removeAll(ereignisHeart);
-            wuerfelBox.getChildren().removeAll(ereignisHeart);
-        });
+
 
         FadeTransition ft = new FadeTransition(Duration.millis(800), ereignisHeart);
         ft.setFromValue(100);
