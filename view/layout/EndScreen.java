@@ -180,7 +180,7 @@ public class EndScreen extends BorderPane {
             durchschnitt = a.get("fragenRichtig") / durchschnitt;
         }
         DecimalFormat f = new DecimalFormat("#0.00");
-        Label d = new Label(" Im Durchschnitt richtig:       " + f.format(durchschnitt)+ "%");
+        Label d = new Label(String.format(" Im Durchschnitt richtig: %10s Prozent", f.format(durchschnitt)));
         durchschnittsbox.getChildren().addAll(icon6, d);
 
 

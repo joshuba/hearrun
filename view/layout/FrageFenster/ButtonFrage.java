@@ -89,7 +89,8 @@ public class ButtonFrage extends FrageFenster {
     }
 
     public void fertig() {
-        musicPlayer.fadeOut();
+        if (!(frage.getFragetyp() == Fragetyp.CoverTitelFrage))
+            musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
         disableAllButtons();
         aktualisiereAchievement();

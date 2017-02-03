@@ -10,7 +10,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -87,6 +86,8 @@ public class MainMenu extends StackPane {
         Button removeSpieler = new Button("-");
         Button back = new Button("zurück");
         Button start = new Button("Starte Spiel");
+
+        start.setId("buttonGreenHover");
 
         // maps initialisieren
         maps.setItems(leseMapsEin());
@@ -219,6 +220,7 @@ public class MainMenu extends StackPane {
 
     private void initMainMenuWindow() {
         newGame = new Button("Neues Spiel");
+        newGame.setId("buttonGreenHover");
         cont = new Button("Fortfahren");
         settings = new Button("Einstellungen");
         help = new Button("Hilfe");
@@ -266,10 +268,11 @@ public class MainMenu extends StackPane {
             System.out.println(spielController.getProperties().getProperty("antwortZeit"));
         });
 
-        Slider volume = new Slider();
 
         Button button = new Button("Musikpfad ändern");
         Label pfad = new Label(spielController.getProperties().getProperty("musicPath"));
+        button.setId("buttonRedHover");
+
         Button back = new Button("zurück");
         settingsElements.setAlignment(Pos.CENTER);
         back.setOnAction((e) -> {
@@ -280,7 +283,7 @@ public class MainMenu extends StackPane {
 
         button.setOnAction((e) -> {
             try {
-                spielController.getMusicPlayer().fadeOut();
+                spielController.getLoopPlayer().fadeOut();
                 DirectoryChooser dc = new DirectoryChooser();
                 dc.setInitialDirectory(new File(spielController.getProperties().get("musicPath").toString()));
                 String newpath = dc.showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
@@ -291,7 +294,7 @@ public class MainMenu extends StackPane {
                 spielController.ladeMusik();
             } catch (NullPointerException ignored) {}
         });
-        settingsElements.getChildren().addAll(antwortZeit, volume, button, pfad, back);
+        settingsElements.getChildren().addAll(antwortZeit, button, pfad, back);
 
     }
 

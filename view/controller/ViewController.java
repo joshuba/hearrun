@@ -186,7 +186,7 @@ public class ViewController {
                 map.getFeld(x, y - 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
                 map.getFeld(x, y-1).zoomIn();
 
-                if(map.getFeld(y - 1, y).getFeldtyp() == Feldtyp.EndFeld){
+                if(map.getFeld(x, y-1).getFeldtyp() == Feldtyp.EndFeld){
                     spielController.getAktSpiel().setSieg();
                 }
 
@@ -198,7 +198,7 @@ public class ViewController {
                 map.getFeld(x, y + 1).setBesetztID(erkenneFeldId(spieler.getAktX(), spieler.getAktY()));
                 map.getFeld(x, y + 1).zoomIn();
 
-                if (map.getFeld(y + 1, y).getFeldtyp() == Feldtyp.EndFeld) {
+                if (map.getFeld(x, y+1).getFeldtyp() == Feldtyp.EndFeld) {
                     spielController.getAktSpiel().setSieg();
 
                 }

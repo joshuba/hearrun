@@ -1,8 +1,8 @@
-*Cover-Testmap
-*6
+*Quickie
+*1
 *2
-#E C E C C X
-#L L L L L L
+#C
+#X
 
 
 /

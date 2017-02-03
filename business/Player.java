@@ -37,11 +37,9 @@ public class Player {
     public void play(String file, boolean loop) {
 
         if (loop) {
-            minim = new SimpleMinim();
-            new Thread(() -> {
+            minim = new SimpleMinim(true);
                 player = minim.loadMP3File(file);
                 player.loop();
-            }).start();
         } else {
             play(file);
         }
@@ -162,26 +160,30 @@ public class Player {
      */
     public void fadeOut() {
         int aktVol = getVolume();
-        KeyFrame k1 = new KeyFrame(Duration.ZERO, a -> {
+        KeyFrame k1 = new KeyFrame(Duration.millis(1), a -> {
             setVolume(aktVol);
+            System.out.println(aktVol);
 
         });
 
         KeyFrame k2 = new KeyFrame(Duration.millis(100), a -> {
             setVolume(aktVol - ((int) aktVol / 4));
+            System.out.println(aktVol - ((int) aktVol / 4));
 
 
         });
 
         KeyFrame k3 = new KeyFrame(Duration.millis(200), a -> {
             setVolume(aktVol - ((int) aktVol / 2));
-
+            System.out.println(aktVol - ((int) aktVol / 2));
 
         });
 
         KeyFrame k4 = new KeyFrame(Duration.millis(300), a -> {
             setVolume(0);
             fadeOut = false;
+            System.out.println(0);
+
 
 
         });
