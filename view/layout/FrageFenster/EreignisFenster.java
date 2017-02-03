@@ -61,6 +61,7 @@ public class EreignisFenster extends Fenster {
             ueberschrift.setText("Felder zurück rücken.");
             schritte = 2 + new Random().nextInt(4);
             text.setText(String.format("Du rückst %s Felder nach hinten!", schritte));
+            schritte *= -1;
         }
 
         ueberschrift.setId("grossText");
