@@ -136,7 +136,7 @@ public class SpielController {
         if (fragetyp == Fragetyp.Ereignis)
             getLayout().getViewController().zeigeEreignis(Ereignis.zufallsEreignis());
         else {
-            getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp);
+            getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp, mitHeart);
         }
     }
 

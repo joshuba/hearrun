@@ -284,15 +284,15 @@ public class ViewController {
         spielController.getLayout().resetGameLayout();
     }
 
-    public void zeigeFrage(Frage frage, Fragetyp fragetyp){
+    public void zeigeFrage(Frage frage, Fragetyp fragetyp, boolean mitHeart){
         if(fragetyp == Fragetyp.Titelfrage || fragetyp == Fragetyp.InterpretFrage || fragetyp == Fragetyp.CoverTitelFrage || fragetyp == Fragetyp.FaktFrage){
-            ButtonFrage bf = new ButtonFrage(frage, spielController);
+            ButtonFrage bf = new ButtonFrage(frage, spielController, mitHeart);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeFenster(bf);
             bf.starteAntwortPhase();
 
         }else if (fragetyp == Fragetyp.CoverWahlFrage){
-            CoverFrage cf = new CoverFrage(frage, spielController);
+            CoverFrage cf = new CoverFrage(frage, spielController, mitHeart);
             gameLayoutBlury(true);
             spielController.getLayout().zeigeFenster(cf);
             cf.starteAntwortPhase();
@@ -349,7 +349,7 @@ public class ViewController {
         spielController.getLayout().setLoadingScreen(ls);
     }
 
-    public void zeigeIntroUndFrage(Frage frage, Fragetyp fragetyp){
+    public void zeigeIntroUndFrage(Frage frage, Fragetyp fragetyp, boolean mitHeart){
         FrageIntro fi = new FrageIntro(spielController);
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
@@ -362,7 +362,7 @@ public class ViewController {
 
         KeyFrame k2 = new KeyFrame(Duration.millis(2000), a ->{
             spielController.getLayout().removeFrageIntro(fi);
-            zeigeFrage(frage, fragetyp);
+            zeigeFrage(frage, fragetyp, mitHeart);
         });
 
         Timeline fadeout = new Timeline();
@@ -384,7 +384,7 @@ public class ViewController {
                 EventHandler<MouseEvent> panePressed = (e -> {
 
                     if (e.getButton() == MouseButton.PRIMARY && f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY())){
-                        spielController.stelleAktFrage();
+                        spielController.stelleAktFrage(false);
                         feldAuswahlMakierung.setValue(false);
                     }
                 });
@@ -393,7 +393,7 @@ public class ViewController {
                 f.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
                     if (event.getCode() == KeyCode.SPACE) {
                         if (f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY())){
-                            spielController.stelleAktFrage();
+                            spielController.stelleAktFrage(false);
                             feldAuswahlMakierung.setValue(false);
                         }
                     }
