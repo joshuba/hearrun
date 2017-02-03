@@ -87,6 +87,9 @@ public class MainMenu extends StackPane {
         Button back = new Button("zurück");
         Button start = new Button("Starte Spiel");
 
+        addSpieler.setId("plus-minus-button");
+        removeSpieler.setId("plus-minus-button");
+
         start.setId("buttonGreenHover");
 
         // maps initialisieren

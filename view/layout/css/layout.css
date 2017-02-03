@@ -436,3 +436,7 @@ Button:hover:pressed{
 .maps-spieler-liste .list-cell:focused, .maps-spieler-liste .list-cell:selected {
     -fx-background-color: lightgray;
 }
+
+#plus-minus-button {
+    -fx-max-width: 4;
+}
