@@ -165,7 +165,7 @@ public class EndScreen extends BorderPane {
         HBox icon5 = new HBox();
         icon5.setMinSize(21,21);
         icon5.setId("lebenAmEnde");
-        Label leben = new Label(" Leben am Ende:       " + a.get("leben").toString());
+        Label leben = new Label(" Eingesetzte Leben:       " + a.get("usedHearts").toString());
         lebenAmEnde.getChildren().addAll(icon5, leben);
 
         //Box mit Durchschnittswert

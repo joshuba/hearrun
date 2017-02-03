@@ -165,6 +165,10 @@ public class ViewController {
                 spielController.getAktSpiel().getAktMap().getFeld(x + 1, y).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY())); //Setze neues Feld auf besetzt
                 map.getFeld(x+1, y).zoomIn();
 
+                if(map.getFeld(x + 1, y).getFeldtyp() == Feldtyp.EndFeld){
+                    spielController.getAktSpiel().setSieg();
+                }
+
             }
             //nach links
             else if (x - 1 >= 0 && map.getFeld(x - 1, y).getFeldtyp() != Feldtyp.LeeresFeld && x - 1 != spieler.getLastX()) {
@@ -172,6 +176,10 @@ public class ViewController {
                 map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
                 map.getFeld(x - 1, y).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
                 map.getFeld(x-1, y).zoomIn();
+
+                if(map.getFeld(x - 1, y).getFeldtyp() == Feldtyp.EndFeld){
+                    spielController.getAktSpiel().setSieg();
+                }
 
             }
             //nach Oben
@@ -181,24 +189,28 @@ public class ViewController {
                 map.getFeld(x, y - 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
                 map.getFeld(x, y-1).zoomIn();
 
+                if(map.getFeld(y - 1, y).getFeldtyp() == Feldtyp.EndFeld){
+                    spielController.getAktSpiel().setSieg();
+                }
+
             }
             //nach unten
             else if (y + 1 <= map.getFeldHoehe() && map.getFeld(x, y + 1).getFeldtyp() != Feldtyp.LeeresFeld && y + 1 != spieler.getLastY()) {
                 spieler.move(x, y + 1);
-                map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(),spieler.getLastY()));
-                map.getFeld(x, y + 1).setBesetztID(erkenneFeldId(spieler.getAktX(),spieler.getAktY()));
-                map.getFeld(x, y+1).zoomIn();
+                map.getFeld(x, y).setBesetztID(erkenneFeldId(spieler.getLastX(), spieler.getLastY()));
+                map.getFeld(x, y + 1).setBesetztID(erkenneFeldId(spieler.getAktX(), spieler.getAktY()));
+                map.getFeld(x, y + 1).zoomIn();
+
+                if (map.getFeld(y + 1, y).getFeldtyp() == Feldtyp.EndFeld) {
+                    spielController.getAktSpiel().setSieg();
+
+                }
+
+
+                erkenneFeldId(x, y);
+
 
             }
-
-        if(map.getFeld(x + 1, y).getFeldtyp() == Feldtyp.EndFeld){
-            spielController.getAktSpiel().setSieg();
-        }
-
-            erkenneFeldId(x,y);
-
-
-
 
 
     }
@@ -292,6 +304,7 @@ public class ViewController {
     public void zeigeEreignis(Ereignis e) {
         gameLayoutBlury(true);
         EreignisFenster ereignisFenster = new EreignisFenster(e, spielController);
+
         spielController.getLayout().zeigeFenster(ereignisFenster);
     }
 

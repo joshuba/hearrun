@@ -21,7 +21,8 @@ public class Spiel {
         this.spielerListe = new ArrayList<>();
         this.aktMap = map;
         this.spielerListe = spielerListe;
-        sieg = new SimpleBooleanProperty(false);
+        sieg = new SimpleBooleanProperty();
+        sieg.set(false);
 
         for (Spieler s : spielerListe)
             System.out.println(s);

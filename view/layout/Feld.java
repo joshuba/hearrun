@@ -21,8 +21,6 @@ public class Feld extends StackPane{
     private int y;
 
 
-
-
     public Feld(Feldtyp feldtyp, ReadOnlyDoubleProperty widthProperty, ReadOnlyDoubleProperty heightProperty, int x, int y){
         this.feldtyp = feldtyp;
         setLeer();

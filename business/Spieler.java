@@ -25,12 +25,13 @@ public class Spieler {
         achievements = FXCollections.observableHashMap();
         gelaufen = 0;
         leben = 0;
-
         achievements.put("felder", 0);
         achievements.put("fragenRichtig", 0);
         achievements.put("leben", 0);
         achievements.put("fragenFalsch" , 0);
         achievements.put("zeitAbgelaufen" , 0);
+        achievements.put("usedHearts" , 0);
+
 
     }
 
@@ -128,5 +129,10 @@ public class Spieler {
     public void addZeitAbgelaufen() {
         int zeitAbgelaufen = achievements.get("zeitAbgelaufen");
         achievements.put("zeitAbgelaufen", zeitAbgelaufen + 1);
+    }
+
+    public void addUsedHeart() {
+        int hearts = achievements.get("usedHearts");
+        achievements.put("usedHearts", hearts + 1);
     }
 }
