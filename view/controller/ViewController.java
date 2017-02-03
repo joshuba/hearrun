@@ -35,11 +35,14 @@ public class ViewController {
     private SpielController spielController;
     private LoadingScreen ls;
     private SimpleBooleanProperty feldAuswahlMakierung;
+    private SimpleBooleanProperty spielerLaeuft;
 
 
     public ViewController(Stage stage, SpielController spielController) {
         this.spielController = spielController;
         this.stage = stage;
+        spielerLaeuft = new SimpleBooleanProperty();
+        spielerLaeuft.setValue(false);
         feldAuswahlMakierung = new SimpleBooleanProperty(false);
 
 
@@ -120,7 +123,11 @@ public class ViewController {
 
         if(i>0){
             forward.play();
+            spielerLaeuft.setValue(true);
+
             forward.setOnFinished(e -> {
+                spielerLaeuft.setValue(false);
+
                 spielController.nextSpieler();
                 feldAuswahlMakierung.setValue(true);
 
@@ -129,7 +136,11 @@ public class ViewController {
         }else{
             if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann
                 back.play();
+                spielerLaeuft.setValue(true);
+
                 back.setOnFinished(e -> {
+                    spielerLaeuft.setValue(false);
+
                     spielController.nextSpieler();
                     feldAuswahlMakierung.setValue(true);
                 });
@@ -139,6 +150,8 @@ public class ViewController {
                 feldBlinkenLassen(0,0);
                 feldAuswahlMakierung.setValue(true);
                 spielController.nextSpieler();
+                spielerLaeuft.setValue(false);
+
             }
         }
     }
@@ -380,9 +393,12 @@ public class ViewController {
                 Feld f = spielController.getAktSpiel().getAktMap().getFeld(i,j);
                 EventHandler<MouseEvent> panePressed = (e -> {
 
-                    if (e.getButton() == MouseButton.PRIMARY && f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(), spielController.getAktSpiel().getAktSpieler().getAktY())){
+                    if (e.getButton() == MouseButton.PRIMARY && f == spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),
+                            spielController.getAktSpiel().getAktSpieler().getAktY()) && !spielerLaeuft.getValue().booleanValue());
+            {
                         spielController.stelleAktFrage(false);
                         feldAuswahlMakierung.setValue(false);
+
                     }
                 });
                 f.addEventHandler(MouseEvent.MOUSE_PRESSED, panePressed);

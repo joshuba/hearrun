@@ -56,28 +56,63 @@ Button:hover:pressed{
 
 
 #frageButtonTrue{
-    -fx-background-image: url("../../../resources/icons/frageButtonTrue.png");
+    -fx-background-image: inherit;
+    -fx-background-color: #91db47;
+    -fx-background-radius: 5;
     -fx-font-size: 12;
+    -fx-min-width: 400px;
+    -fx-background-size: stretch;
+    -fx-alignment: center-left;
+
+
+
+
 
 }
 
 #frageButtonFalse{
-    -fx-background-image: url("../../../resources/icons/frageButtonWrong.png");
+    -fx-background-image: inherit;
+    -fx-background-color: #f06373;
+    -fx-background-radius: 5;
     -fx-font-size: 12;
+    -fx-min-width: 400px;
+    -fx-background-size: stretch;
+    -fx-alignment: center-left;
+
+
+
+
 
 }
 
 #frageButton{
-    -fx-background-image: url("../../../resources/icons/frageButton.png");
+    -fx-background-image: inherit;
+    -fx-background-color: #5b797f;
+    -fx-background-radius: 5;
     -fx-text-fill: white;
     -fx-font-size: 12;
+    -fx-min-width: 400px;
+    -fx-background-size: contain;
+    -fx-alignment: center-left;
+
+
+
 
 
 }
 
 #frageButton:hover{
-    -fx-background-image: url("../../../resources/icons/frageButtonHover.png");
+    -fx-background-image: inherit;
+    -fx-background-color: #5aa0ad;
+    -fx-background-radius: 5;
     -fx-text-fill: white;
+    -fx-min-width: 400px;
+    -fx-background-size: stretch;
+    -fx-alignment: center-left;
+
+
+
+
 
 }
 
@@ -134,6 +169,7 @@ Button:hover:pressed{
 
 #richtigButton {
     -fx-background-color: greenyellow;
+
 }
 
 #falschButton {

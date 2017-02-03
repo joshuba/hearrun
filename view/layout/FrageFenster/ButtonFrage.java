@@ -8,7 +8,9 @@ import hearrun.business.fragen.Frage;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -41,14 +43,25 @@ public class ButtonFrage extends FrageFenster {
         buttons[1] = new Button();
         buttons[2] = new Button();
         buttons[3] = new Button();
+        buttons[0].setMaxSize(400, 400);
+        buttons[1].setMaxSize(400, 400);
+        buttons[2].setMaxSize(400, 400);
+        buttons[3].setMaxSize(400, 400);
+
+
+
+
+
 
         vBox.getChildren().addAll(textfeld, buttons[0], buttons[1], buttons[2], buttons[3], wuerfelBox);
+        vBox.setSpacing(5);
 
         //Frageninfos auslesen und in GUI einsetzen
-        buttons[0].setText("A" + "   " + frage.getAntworten()[0]);
-        buttons[1].setText("B" + "   " + frage.getAntworten()[1]);
-        buttons[2].setText("C" + "   " + frage.getAntworten()[2]);
-        buttons[3].setText("D" + "   " + frage.getAntworten()[3]);
+        buttons[0].setText("A" + "\t" + frage.getAntworten()[0]);
+        buttons[1].setText("B" + "\t" + frage.getAntworten()[1]);
+        buttons[2].setText("C" + "\t" + frage.getAntworten()[2]);
+        buttons[3].setText("D" + "\t" + frage.getAntworten()[3]);
+
 
         richtigButton = buttons[frage.getRichtigIndex()];
         buttons[0].setId("frageButton");

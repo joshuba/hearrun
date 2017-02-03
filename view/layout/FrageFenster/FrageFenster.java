@@ -223,7 +223,6 @@ public abstract class FrageFenster extends Fenster {
     }
 
     private void addHeartAnimation() {
-        System.out.println("HEARTANIMATION");
         HBox ereignisHeart = new HBox();
         ereignisHeart.setAlignment(Pos.CENTER);
         ereignisHeart.setMinSize(50,50);

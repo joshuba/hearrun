@@ -44,7 +44,6 @@ public abstract class Fenster extends BorderPane {
         String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString();
         feldtyp = feldtyp.toLowerCase();
         feldtyp += "p" + (spielController.getAktSpiel().getAktSpieler().getNr() + 1);
-        System.out.println("MAAAAHN: " + feldtyp);
         return feldtyp;
     }
 }
