@@ -47,11 +47,13 @@ public abstract class FrageFenster extends Fenster {
     protected ProgressBar time;
     protected Timeline timeline;
     protected VBox wuerfelBox;
+    protected boolean heartAnimation;
 
 
 
-    public FrageFenster(Frage frage, SpielController spielController){
+    public FrageFenster(Frage frage, SpielController spielController, boolean heartAnimation){
         super(spielController);
+        this.heartAnimation = heartAnimation;
         progress = new SimpleFloatProperty();
         zeit = Integer.valueOf(spielController.getProperties().getProperty("antwortZeit"));
 
@@ -113,7 +115,9 @@ public abstract class FrageFenster extends Fenster {
 
 
 
-
+        if(heartAnimation){
+            addHeartAnimation();
+        }
 
 
 
@@ -204,10 +208,10 @@ public abstract class FrageFenster extends Fenster {
 
     public void wuerfeln(int index){
         if (spielController.getAktSpiel().getAktSpieler().getLeben() > 0 && index != 1) {
-            spielController.stelleAktFrage();
+            spielController.stelleAktFrage(true);
             spielController.getAktSpiel().getAktSpieler().removeLeben();
             spielController.getAktSpiel().getAktSpieler().addUsedHeart();
-            this.addHeartAnimation();
+
 
         } else {
             Wuerfel w = new Wuerfel(index, spielController);
@@ -249,11 +253,8 @@ public abstract class FrageFenster extends Fenster {
         });
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1000), a -> {
-
             ft.play();
             st.play();
-
-
         });
 
         Timeline f = new Timeline();
