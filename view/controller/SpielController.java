@@ -130,13 +130,13 @@ public class SpielController {
         stage.close();
     }
 
-    public void stelleAktFrage() {
+    public void stelleAktFrage(boolean mitHeart) {
         Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
         Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
         if (fragetyp == Fragetyp.Ereignis)
             getLayout().getViewController().zeigeEreignis(Ereignis.zufallsEreignis());
         else {
-            getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp);
+            getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp, mitHeart);
         }
     }
 

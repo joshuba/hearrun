@@ -1,15 +1,16 @@
-*Slalom
-*15
-*9
-#C I I T T T C T E F I C T E F
-#L L L L L L L L L L L L L L I
-#I F E T C I F E T C I F E T C
-#C L L L L L L L L L L L L L L
-#T E F I C T E F T C I F E T C
-#L L L L L L L L L L L L L L T
-#T C I F E T C I F E T C I F E
-#E L L L L L L L L L L L L L L
-#F I C T E F I C T E F I C T X
+*Little Snake
+*10
+*7
+#I L L L C T E F I C
+#C L L L I L L L L T
+#T L L L F L L L L E
+#E L L L E L L L L F
+#F L L L T L L L L I
+#I L L L C L L L L C
+#C T E F I L L L L X
+
+
+
 
 /
 

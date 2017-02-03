@@ -22,8 +22,8 @@ public class CoverFrage extends FrageFenster {
 
 
 
-    public CoverFrage(Frage frage, SpielController spielController){
-        super(frage,spielController);
+    public CoverFrage(Frage frage, SpielController spielController, boolean mitHeart){
+        super(frage,spielController, mitHeart);
         alleCover = new HBox();
 
 

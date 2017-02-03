@@ -22,8 +22,8 @@ public class ButtonFrage extends FrageFenster {
     private ImageView cover;
 
 
-    public ButtonFrage(Frage frage, SpielController spielController) {
-        super(frage, spielController);
+    public ButtonFrage(Frage frage, SpielController spielController, boolean mitHeart) {
+        super(frage, spielController, mitHeart);
 
         //falls es eine CoverTitelFrage ist
         if (frage.getFragetyp() == Fragetyp.CoverTitelFrage) {
