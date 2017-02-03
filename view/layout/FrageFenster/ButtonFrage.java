@@ -103,7 +103,6 @@ public class ButtonFrage extends FrageFenster {
     }
 
     protected void richtigButtonFaerben() {
-        System.out.println("F#rbe Button");
         if (richtigButton.getId().equals("richtigButton")) {
             richtigButton.setId("frageButton");
         } else if (richtigButton.getId().equals("frageButton")) {

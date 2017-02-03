@@ -354,16 +354,15 @@ public class ViewController {
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1), a ->{
             spielController.getLayout().setFrageIntro(fi);
+            fi.requestFocus();
+            System.out.println(fi.isFocused());
             spielController.getEffectPlayer().play("/hearrun/resources/sounds/fragestellung.mp3");
 
-            System.out.println("INTRO DA");
         });
 
         KeyFrame k2 = new KeyFrame(Duration.millis(2000), a ->{
             spielController.getLayout().removeFrageIntro(fi);
             zeigeFrage(frage, fragetyp);
-            System.out.println("INTRO WEG");
-
         });
 
         Timeline fadeout = new Timeline();

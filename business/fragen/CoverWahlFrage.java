@@ -70,7 +70,6 @@ public class CoverWahlFrage extends Frage {
                 if (add)
                     antworten.add(randAntwort);
             } else {
-                System.out.println("Cover wurden als gleich erkannt.");
                 i--;
             }
         }

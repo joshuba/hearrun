@@ -98,6 +98,8 @@ public class MainMenu extends StackPane {
         spieler.setCellFactory(TextFieldListCell.forListView());
         spieler.setEditable(true);
 
+        maps.getStyleClass().add("maps-spieler-liste");
+        spieler.getStyleClass().add("maps-spieler-liste");
 
         menuContainer.setLeft(links);
         menuContainer.setRight(rechts);
@@ -129,6 +131,8 @@ public class MainMenu extends StackPane {
         spielerObs.addListener((ListChangeListener<String>) c -> {
             if (spielerObs.size() > 3)
                 addSpieler.setDisable(true);
+            else if (spielerObs.size() < 4)
+                addSpieler.setDisable(false);
         });
 
         spieler.getSelectionModel().getSelectedItems().addListener((ListChangeListener<String>) c -> {
@@ -278,6 +282,7 @@ public class MainMenu extends StackPane {
 
         button.setOnAction((e) -> {
             try {
+                spielController.getMusicPlayer().fadeOut();
                 DirectoryChooser dc = new DirectoryChooser();
                 dc.setInitialDirectory(new File(spielController.getProperties().get("musicPath").toString()));
                 String newpath = dc.showDialog(spielController.getLayout().getViewController().getStage()).getAbsolutePath();
