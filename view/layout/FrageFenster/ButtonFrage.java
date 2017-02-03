@@ -70,7 +70,7 @@ public class ButtonFrage extends FrageFenster {
         timeline.stop();
 
         if (bx == richtigButton) {
-            bx.setId("richtigButton");
+            bx.setId("frageButtonTrue");
             this.falschRichtig.setValue(1);
             fertig();
 
@@ -78,7 +78,7 @@ public class ButtonFrage extends FrageFenster {
 
 
         } else {
-            bx.setId("falschButton");
+            bx.setId("frageButtonFalse");
             this.falschRichtig.setValue(0);
             fertig();
 
@@ -104,10 +104,10 @@ public class ButtonFrage extends FrageFenster {
     }
 
     protected void richtigButtonFaerben() {
-        if (richtigButton.getId().equals("richtigButton")) {
+        if (richtigButton.getId().equals("frageButtonTrue")) {
             richtigButton.setId("frageButton");
         } else if (richtigButton.getId().equals("frageButton")) {
-            richtigButton.setId("richtigButton");
+            richtigButton.setId("frageButtonTrue");
         }
 
     }

@@ -55,6 +55,33 @@ Button:hover:pressed{
 }
 
 
+#frageButtonTrue{
+    -fx-background-image: url("../../../resources/icons/frageButtonTrue.png");
+    -fx-font-size: 12;
+
+}
+
+#frageButtonFalse{
+    -fx-background-image: url("../../../resources/icons/frageButtonWrong.png");
+    -fx-font-size: 12;
+
+}
+
+#frageButton{
+    -fx-background-image: url("../../../resources/icons/frageButton.png");
+    -fx-text-fill: white;
+    -fx-font-size: 12;
+
+
+}
+
+#frageButton:hover{
+    -fx-background-image: url("../../../resources/icons/frageButtonHover.png");
+    -fx-text-fill: white;
+
+}
+
+
 
 #sideBar {
     -fx-background-color: white;
