@@ -32,7 +32,7 @@ public class CompleteLayout extends StackPane {
 
     public void setGameLayout() {
         spielController.getLoopPlayer().stop();
-        spielController.getLoopPlayer().play(Main.getFilePathFromResourcePath("/hearrun/resources/music/Lakechiller.mp3"), true);
+        spielController.getLoopPlayer().play(Main.getFilePathFromResourcePath("/hearrun/resources/music/Lakechiller.mp3", false), true);
 
         bluryAnAus(false);
         this.getChildren().clear();
@@ -43,7 +43,7 @@ public class CompleteLayout extends StackPane {
 
     public void setMainMenu() {
         spielController.getLoopPlayer().stop();
-        spielController.getLoopPlayer().play(Main.getFilePathFromResourcePath("/hearrun/resources/music/1.mp3"), true);
+        spielController.getLoopPlayer().play(Main.getFilePathFromResourcePath("/hearrun/resources/music/1.mp3", false), true);
         this.getChildren().clear();
         this.getChildren().addAll(mainMenu);
         mainMenu.showMainMenu();

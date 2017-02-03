@@ -10,9 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by Josh on 28.12.16.
- */
+
 public class TitelFrage extends Frage {
     private String path;
 
@@ -21,14 +19,14 @@ public class TitelFrage extends Frage {
         this.path = path;
     }
 
-    public String getPath(){
+    public String getPath() {
         return path;
     }
 
     public static TitelFrage generiereFrage(String path, ID3v2[] alleTitel) throws TagNeededException {
 
         // Fragetext generieren
-        String[] texte = {"Aus welchem Song stammt der abgespielte Songscnipsel?",
+        String[] texte = {"Aus welchem Song stammt der abgespielte Songschnipsel?",
                 "Zu welchem der 4 Songs lässt sich das Songschnipsel zuordnen?",
                 "Welcher Song wird gerade abgespielt?"};
         String fragetext = texte[(int) (Math.random() * texte.length)];
@@ -43,9 +41,9 @@ public class TitelFrage extends Frage {
             throw new TagNeededException();
 
         ArrayList<String> antworten = new ArrayList<>();
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             ID3v2 randAntwort = alleTitel[(int) (Math.random() * alleTitel.length)];
-            if(!(randAntwort.getTitle() == null) &&
+            if (!(randAntwort.getTitle() == null) &&
                     !randAntwort.getTitle().equals(titel)) { // zweifach richtige antwort durch Titel vermeiden
 
                 boolean add = true;
@@ -59,7 +57,7 @@ public class TitelFrage extends Frage {
                 }
 
                 antworten.add(randAntwort.getTitle());
-            }else
+            } else
                 i--;
         }
         antworten.add(titel);
@@ -68,7 +66,7 @@ public class TitelFrage extends Frage {
         int richtigIndex = -1;
         //richtigIndex finden
         for (int i = 0; i < antworten.size(); i++) {
-            if(antworten.get(i).equals(titel)){
+            if (antworten.get(i).equals(titel)) {
                 richtigIndex = i;
                 break;
             }

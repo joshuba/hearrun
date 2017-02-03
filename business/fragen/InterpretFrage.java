@@ -25,6 +25,7 @@ public class InterpretFrage extends Frage {
         return path;
     }
 
+
     public static InterpretFrage generiereFrage(String path, ID3v2[] alleInterpreten) throws TagNeededException{
 
         // Fragetext generieren

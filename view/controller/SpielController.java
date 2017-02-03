@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 /**
- * Created by joshuabarth on 12.01.17
+ * Der SPiel-Controller verwaltet ein Spiel. Er
  */
 public class SpielController {
     private Spiel aktSpiel;

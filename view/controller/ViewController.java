@@ -43,27 +43,24 @@ public class ViewController {
         feldAuswahlMakierung = new SimpleBooleanProperty(false);
 
 
-        feldAuswahlMakierung.addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        feldAuswahlMakierung.addListener((observable, oldValue, newValue) -> {
 
-                if (newValue.booleanValue() == true && spielController.getAktSpiel().getSiegStatus().getValue() == false) {
-                    //spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),spielController.getAktSpiel().getAktSpieler().getAktY()).aktuellesFeldMakierung(true);
-                    spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(true);
-
-                }
-
-                if (newValue.booleanValue() == false) {
-                    spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(false);
-                    //spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),spielController.getAktSpiel().getAktSpieler().getAktY()).aktuellesFeldMakierung(false);
-
-                }
-
-
-                //feldBlinkenLassen(spielController.getAktSpiel().getAktFeld().getX(), spielController.getAktSpiel().getAktFeld().getY());
-                //System.out.println("aktfeld = " + spielController.getAktSpiel().getAktFeld().getX() + " " + spielController.getAktSpiel().getAktFeld().getY());
+            if (newValue && !spielController.getAktSpiel().getSiegStatus().getValue()) {
+                //spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),spielController.getAktSpiel().getAktSpieler().getAktY()).aktuellesFeldMakierung(true);
+                spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(true);
 
             }
+
+            if (!newValue) {
+                spielController.getAktSpiel().getAktFeld().aktuellesFeldMakierung(false);
+                //spielController.getAktSpiel().getAktMap().getFeld(spielController.getAktSpiel().getAktSpieler().getAktX(),spielController.getAktSpiel().getAktSpieler().getAktY()).aktuellesFeldMakierung(false);
+
+            }
+
+
+            //feldBlinkenLassen(spielController.getAktSpiel().getAktFeld().getX(), spielController.getAktSpiel().getAktFeld().getY());
+            //System.out.println("aktfeld = " + spielController.getAktSpiel().getAktFeld().getX() + " " + spielController.getAktSpiel().getAktFeld().getY());
+
         });
 
 

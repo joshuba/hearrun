@@ -3,33 +3,39 @@ package hearrun.business.fragen;
 
 import hearrun.business.Fragetyp;
 
+/**
+ * Die Spielinterne Repräsentation der Fragen.
+ * Die verschiedenen Fragetypen erben von dieser Klasse.
+ * <p>
+ * Fragen werden von außerhalb nicht per Konstruktor erzeugt, sondern nur über die
+ * generiereFrage-Methode
+ */
 public abstract class Frage {
 
     protected String fragetext;
-    protected String[] antworten;
-    protected int richtigIndex;
+    private String[] antworten;
+    private int richtigIndex;
     protected String path;
 
-
-    public Frage(String fragetext, String[] antworten, int richtigIndex){
+    protected Frage(String fragetext, String[] antworten, int richtigIndex) {
         this.fragetext = fragetext;
         this.antworten = antworten;
         this.richtigIndex = richtigIndex;
     }
 
-    public int getRichtigIndex(){
+    public int getRichtigIndex() {
         return richtigIndex;
     }
 
-    public String getFragetext(){
+    public String getFragetext() {
         return fragetext;
     }
 
-    public String[] getAntworten(){
+    public String[] getAntworten() {
         return antworten;
     }
 
-    public String getPath(){
+    public String getPath() {
         return this.path;
     }
 
@@ -45,7 +51,6 @@ public abstract class Frage {
         else
             return Fragetyp.Titelfrage;
     }
-
 
 
 }

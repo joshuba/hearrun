@@ -15,9 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Beschreibung
- */
+
 public class CoverWahlFrage extends Frage {
     private Image[] antworten;
     private String path;
