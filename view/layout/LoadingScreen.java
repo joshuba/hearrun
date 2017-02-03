@@ -44,6 +44,7 @@ public class LoadingScreen extends VBox{
 
 
         text = new Label("Deine Musik wird eingelesen, dies kann abhängig von der Mediathekgröße einige Sekunden in Anspruch nehmen. \nFragen werden erstellt...");
+        text.setStyle("-fx-text-alignment: center");
         this.getChildren().addAll(ueberschrift, text,bar, fragenAnzahl);
         bar.progressProperty().bind(progress);
 

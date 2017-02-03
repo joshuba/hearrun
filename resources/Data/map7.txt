@@ -1,8 +1,17 @@
-*Titelfrage-Testmap
-*6
-*2
-#T T T T T X
-#L L L L L L
+*Spirale (Groß)
+*15
+*10
+#R R R R R R R R R R R R R R R
+#L L L L L L L L L L L L L L R
+#L R R R R R R R R R R R R L R
+#L R L L L L L L L L L L R L R
+#L R L R R R R R R R X L R L R
+#L R L R L L L L L L L L R L R
+#L R L R R R R R R R R R R L R
+#L R L L L L L L L L L L L L R
+#L R R R R R R R R R R R R R R
+#L L L L L L L L L L L L L L L
+
 
 
 /

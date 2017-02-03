@@ -122,7 +122,7 @@ public class CompleteLayout extends StackPane {
     //Intro wenn man das Spiel zum ersten mal startet
     public void showIntro(){
         VBox window = new VBox();
-        Label label = new Label("Hi, da du zum ersten Mal spielst: In den Spielecken siehst du an der farbigen Makierung welcher Spieler an der Reihe ist. Klicke auf das blinkende Feld um die deine jeweilige Frage zu erhalten zu erhalten. " +
+        Label label = new Label("Hi, da Du zum ersten Mal spielst: In den Spielecken siehst du an der farbigen Makierung welcher Spieler an der Reihe ist. Klicke auf das blinkende Feld um die deine jeweilige Frage zu erhalten zu erhalten. " +
                 "Weitere Hilfestellungen findest du im Hilfe-Menü. Viel Spaß!");
         label.setWrapText(true);
         label.setAlignment(Pos.CENTER);
