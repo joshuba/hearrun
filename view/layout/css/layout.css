@@ -309,12 +309,18 @@ Button:hover:pressed{
     -fx-background-size: 100%;
 }
 
-.feld-icon-positiv{
-    -fx-background-image: url("../../../resources/icons/feldIconPositiv.png");
+.feld-icon-negativ, .feld-icon-positiv {
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100%;
+}
 
+.feld-icon-positiv {
+    -fx-background-image: url("../../../resources/icons/feldIconPositiv.png");
+}
+
+.feld-icon-negativ {
+    -fx-background-image: url("../../../resources/icons/feldIconNegativ.png");
 }
 
 .kein-leben-icon {

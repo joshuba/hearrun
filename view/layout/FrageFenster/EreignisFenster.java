@@ -12,11 +12,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Random;
+
 import static hearrun.business.ereignisse.Ereignis.LAUFEN_POSITIV;
 import static hearrun.business.ereignisse.Ereignis.LEBEN;
 
 /**
- * Created by Leo on 29.01.2017.
+ * Das Ereignis-Fenster zeigt auftretende Zufallsereignisse, ausgelöst durch die
+ * Ereignis-Felder im Spiel.
  */
 public class EreignisFenster extends Fenster {
 
@@ -51,13 +54,13 @@ public class EreignisFenster extends Fenster {
         } else if (ereignis == LAUFEN_POSITIV) {
             ereignisIcon.getStyleClass().add("feld-icon-positiv");
             ueberschrift.setText("Felder vor rücken.");
-            text.setText("Du rückst 8 Felder nach vorne!");
-            schritte = 8;
+            schritte = 5 + new Random().nextInt(4);
+            text.setText(String.format("Du rückst %s Felder nach vorne!", schritte));
         } else {
-            ereignisIcon.getStyleClass().add("feld-icon-positiv");
+            ereignisIcon.getStyleClass().add("feld-icon-negativ");
             ueberschrift.setText("Felder zurück rücken.");
-            text.setText("Du rückst 8 Felder nach hinten!");
-            schritte = -8;
+            schritte = 2 + new Random().nextInt(4);
+            text.setText(String.format("Du rückst %s Felder nach hinten!", schritte));
         }
 
         ueberschrift.setId("grossText");

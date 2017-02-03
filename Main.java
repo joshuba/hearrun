@@ -1,8 +1,6 @@
 package hearrun;
 
 import hearrun.view.controller.SpielController;
-import hearrun.view.layout.CircleSpawner;
-import hearrun.view.layout.PictureGalery;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
