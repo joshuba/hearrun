@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Reräsentiert einen Spieler.
  * Implementiert Methoden zum Laufen sowie zum aktualisieren der Achievements.
  * (gelaufene Felder, eingesetzte Leben, falsche Fragen, richtige Fragen, falsche Fragen,
- *  Fragen, bei denen die Zeit abgelaufen ist)
+ * Fragen, bei denen die Zeit abgelaufen ist).
  */
 public class Spieler {
     private String name;
@@ -32,8 +32,6 @@ public class Spieler {
         achievements.put("fragenFalsch" , 0);
         achievements.put("zeitAbgelaufen" , 0);
         achievements.put("usedHearts" , 0);
-
-
     }
 
 
