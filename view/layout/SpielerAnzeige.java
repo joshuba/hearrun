@@ -21,7 +21,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by joshuabarth on 09.01.17
+ * Die Anzeigen der Spieler im Game-Layout.
+ * Es gibt jeweils eine rechte und eine linke.
  */
 public class SpielerAnzeige extends VBox {
     private Stage stage;
@@ -73,6 +74,12 @@ public class SpielerAnzeige extends VBox {
         this.getChildren().addAll(boxOben, boxUnten);
     }
 
+    /**
+     * Initialisiert eine Spieler-Anzeige mit Farbe, Achievements und Listener, ob der Spieler der aktuelle ist.
+     * @param spielerNummer Die Nummer des Spielers im Spiel, 1, 2, 3 oder 4
+     * @param spielerListe Die Liste der Spieler
+     * @return Eine VBox, die alle Informationen über den Spieler anzeigt.
+     */
     private VBox initSpielerAnzeige(int spielerNummer, ArrayList<Spieler> spielerListe) {
         VBox anzeige = new VBox();
         anzeige.prefHeightProperty().bind(stage.heightProperty());
@@ -131,6 +138,12 @@ public class SpielerAnzeige extends VBox {
         }
     }
 
+    /**
+     * Aktualisiert die Anzeige der Achievements in der Player-Anzeige.
+     *
+     * @param achievementMap Das Dictionary, das die Achievements.
+     * @param achievements Die ListView, die die Achievements anzeigt.
+     */
     private void updateAchievements(ObservableMap<String, Integer> achievementMap, ListView<HBox> achievements) {
         class Herzen extends HBox {
             private Herzen() {
