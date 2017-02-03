@@ -5,7 +5,10 @@ import hearrun.business.Fragetyp;
 import java.util.ArrayList;
 
 /**
- * Created by Leo on 07.01.2017.
+ * Die Frageliste verwaltet intern die verschiedenen Frage-Objekte.
+ *
+ * Sie verwaltet dabei pro Fragetyp eine Array-List, damit schnell Fragen zu einem bestimmten Typ
+ * geliefert werden können.
  */
 public class Frageliste {
     private ArrayList<Frage> coverTitelFragen;
@@ -37,7 +40,11 @@ public class Frageliste {
         }
     }
 
-
+    /**
+     * Liefert eine zufällige Frage zu einem bestimmten Fragetyp, der übergeben wird.
+     * @param typ der gewünschte Fragetyp.
+     * @return eine zufällige Frage
+     */
     public Frage getRand(Fragetyp typ) {
         Frage rand = null;
         int index;
