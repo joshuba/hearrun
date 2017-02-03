@@ -223,7 +223,6 @@ public abstract class FrageFenster extends Fenster {
     }
 
     private void addHeartAnimation() {
-        System.out.println("HEARTANIMATION");
         HBox ereignisHeart = new HBox();
         ereignisHeart.setAlignment(Pos.CENTER);
         ereignisHeart.setMinSize(50,50);
@@ -235,7 +234,6 @@ public abstract class FrageFenster extends Fenster {
 
 
         ereignisHeart.setId("leben-icon-big");
-        ereignisHeart.setOpacity(100);
 
         ScaleTransition st = new ScaleTransition(Duration.millis(800), ereignisHeart);
         st.setFromY(0);
@@ -244,7 +242,15 @@ public abstract class FrageFenster extends Fenster {
         st.setToX(10);
 
 
-        FadeTransition ft = new FadeTransition(Duration.millis(600), ereignisHeart);
+        FadeTransition ft2 = new FadeTransition(Duration.millis(150), ereignisHeart);
+        ft2.setFromValue(0);
+        ft2.setToValue(100);
+        ft2.setOnFinished(e -> {
+            this.getChildren().removeAll(ereignisHeart);
+            wuerfelBox.getChildren().removeAll(ereignisHeart);
+        });
+
+        FadeTransition ft = new FadeTransition(Duration.millis(800), ereignisHeart);
         ft.setFromValue(100);
         ft.setToValue(0);
         ft.setOnFinished(e -> {
@@ -253,6 +259,7 @@ public abstract class FrageFenster extends Fenster {
         });
 
         KeyFrame k1 = new KeyFrame(Duration.millis(1000), a -> {
+            ft2.play();
             ft.play();
             st.play();
         });
