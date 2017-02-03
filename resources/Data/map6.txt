@@ -1,8 +1,9 @@
 *Ereignis-Testmap
 *6
-*2
-#E E E E E X
+*3
+#E T E T E X
 #L L L L L L
+#E T L L L L
 
 
 /

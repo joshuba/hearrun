@@ -6,8 +6,7 @@ import hearrun.business.Spieler;
 import hearrun.view.controller.SpielController;
 import hearrun.business.fragen.Frage;
 import hearrun.view.layout.Wuerfel;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -114,6 +113,10 @@ public abstract class FrageFenster extends Fenster {
 
 
 
+
+
+
+
         //Frageninfos auslesen und in GUI einsetzen
         this.fragetext.setText(frage.getFragetext());
 
@@ -136,6 +139,7 @@ public abstract class FrageFenster extends Fenster {
     }
 
     public void starteAntwortPhase(){
+
         zeit = Integer.valueOf(spielController.getProperties().getProperty("antwortZeit"));
         progressIndex = (100/zeit+1)/100F;
         progressWert = 0;
@@ -202,6 +206,9 @@ public abstract class FrageFenster extends Fenster {
         if (spielController.getAktSpiel().getAktSpieler().getLeben() > 0 && index != 1) {
             spielController.stelleAktFrage();
             spielController.getAktSpiel().getAktSpieler().removeLeben();
+            spielController.getAktSpiel().getAktSpieler().addUsedHeart();
+            this.addHeartAnimation();
+
         } else {
             Wuerfel w = new Wuerfel(index, spielController);
             w.setAlignment(Pos.CENTER);
@@ -209,6 +216,58 @@ public abstract class FrageFenster extends Fenster {
             w.requestFocus(); // Fokus darauf setzen damit Shortcut funktioniert.
             wuerfelBox.getChildren().addAll(w);
         }
+    }
+
+    private void addHeartAnimation() {
+        System.out.println("HEARTANIMATION");
+        HBox ereignisHeart = new HBox();
+        ereignisHeart.setAlignment(Pos.CENTER);
+        ereignisHeart.setMinSize(50,50);
+        ereignisHeart.setMaxSize(50,50);
+
+        this.getChildren().add(ereignisHeart);
+        wuerfelBox.getChildren().addAll(ereignisHeart);
+        wuerfelBox.setAlignment(Pos.CENTER);
+
+
+        ereignisHeart.setId("leben-icon-big");
+        ereignisHeart.setOpacity(100);
+
+        ScaleTransition st = new ScaleTransition(Duration.millis(800), ereignisHeart);
+        st.setFromY(0);
+        st.setFromX(0);
+        st.setToY(10);
+        st.setToX(10);
+
+
+        FadeTransition ft = new FadeTransition(Duration.millis(600), ereignisHeart);
+        ft.setFromValue(100);
+        ft.setToValue(0);
+        ft.setOnFinished(e -> {
+            this.getChildren().removeAll(ereignisHeart);
+            wuerfelBox.getChildren().removeAll(ereignisHeart);
+        });
+
+        KeyFrame k1 = new KeyFrame(Duration.millis(1000), a -> {
+
+            ft.play();
+            st.play();
+
+
+        });
+
+        Timeline f = new Timeline();
+        f.setAutoReverse(false);
+        f.setCycleCount(1);
+        f.getKeyFrames().addAll(k1);
+        f.play();
+
+
+
+
+
+
+
     }
 
 

@@ -302,6 +302,13 @@ Button:hover:pressed{
     -fx-background-size: 100%;
 }
 
+#leben-icon-big{
+    -fx-background-image: url("../../../resources/icons/leben-icon-big.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100%;
+}
+
 .feld-icon-positiv{
     -fx-background-image: url("../../../resources/icons/feldIconPositiv.png");
     -fx-background-size: contain;
