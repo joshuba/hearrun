@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 /**
+ * Reräsentiert einen Spieler.
+ * Implementiert Methoden zum Laufen sowie zum aktualisieren der Achievements.
  *
  */
 public class Spieler {
@@ -15,12 +17,6 @@ public class Spieler {
     private int gelaufen;
     private int nr;
 
-    /**
-     * Reräsentiert einen Spieler.
-     * Implementiert Methoden zum Laufen sowie zum aktualisieren der Achievements.
-     *
-     * @param name Der Name des Spielers.
-     */
     public Spieler(String name) {
         this.name = name;
         log = new ArrayList<>();
