@@ -3,7 +3,7 @@ package hearrun.business.ereignisse;
 import java.util.Random;
 
 /**
- * Created by Leo on 29.01.2017
+ * @author Leo Back & Joshua Barth
  */
 public enum Ereignis {
     LEBEN, LAUFEN_POSITIV, LAUFEN_NEGATIV;

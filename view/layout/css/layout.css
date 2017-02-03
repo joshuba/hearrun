@@ -314,7 +314,7 @@ Button:hover:pressed{
 #aktFeldMakierung{
     -fx-background-image: url("../../../resources/icons/aktMakierung.png");
     -fx-background-repeat: stretch;
-    -fx-background-size: 100%;
+    -fx-background-size: contain;
     -fx-background-position: center;
 
 }
@@ -344,6 +344,9 @@ Button:hover:pressed{
 .achievements:selected {
     -fx-border-width: 0;
 }
+
+
+
 
 #imageViewerLeft{
     -fx-background-image: url("../../../resources/icons/imageViewerLeft.png");
@@ -543,3 +546,23 @@ Button:hover:pressed{
     -fx-opacity: 0.7;
     -fx-background-radius: 20;
 }
+
+.slider .track{
+     -fx-pref-height:8;
+     -fx-background-color: linear-gradient(rgba(0,0,0,0.18), rgba(178,178,178,0.48));
+     -fx-control-inner-background: palegreen;
+
+
+ }
+
+.slider .thumb {
+    -fx-pref-height: 26;
+    -fx-pref-width: 26;
+    -fx-background-color: #5aa0ad;
+}
+
+#tutorial{
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+}
+

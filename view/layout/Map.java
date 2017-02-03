@@ -10,8 +10,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- * Created by joshuabarth on 10.01.17
+/**Die Map verwaltet alle Felder, und bietet Zugriff darauf
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class Map {
     private String mapName;

@@ -25,8 +25,10 @@ import javafx.util.Duration;
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Created by joshuabarth on 14.01.17
+/**Im Main Menu werden die verschiedenen Untermenues immer erst initalisiert und beim wechsel durch
+ * die Animationsmethode gejagt, in der die alten Panes entfernt und die neuen hinzugefügt werden
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class MainMenu extends StackPane {
     private Button cont;
@@ -48,7 +50,6 @@ public class MainMenu extends StackPane {
 
     public MainMenu(SpielController spielController, ViewController viewController) {
         mainMenuElements = new VBox();
-        //mainMenuElements.setSpacing(15);
         settingsElements = new VBox();
         settingsElements.setSpacing(15);
         newGameElements = new VBox();
@@ -68,6 +69,7 @@ public class MainMenu extends StackPane {
 
         this.setAlignment(Pos.CENTER);
         circleSpawner = new CircleSpawner(spielController.getStage());
+        circleSpawner.setOpacity(60);
 
         this.getChildren().addAll(circleSpawner);
         kreisSpawningAnAus(true);
@@ -75,14 +77,23 @@ public class MainMenu extends StackPane {
 
     }
 
-
+    /**
+     * Elemente fuer das "Neues Spiel" Menue
+     */
     public void initNewGameWindow() {
         //Baue neues Menü auf
         HBox menuContainer = new HBox();
         VBox links = new VBox();
         VBox rechts = new VBox();
-        Label spielfeldText = new Label("Waehle eine Karte: ");
+
+        Label ueberschrift = new Label("Neues Spiel");
+        ueberschrift.setId("grossText");
+        ueberschrift.setPadding(new Insets(0,0,40,0));
+
+        Label spielfeldText = new Label("Wähle eine Karte: ");
+        spielfeldText.setId("schriftMittel");
         Label spielerText = new Label("Wähle Spieler: ");
+        spielerText.setId("schriftMittel");
         ListView<Map> maps = new ListView<>();
         ListView<String> spieler = new ListView<>();
         ArrayList<Spieler> spielerliste = new ArrayList<>();
@@ -118,7 +129,7 @@ public class MainMenu extends StackPane {
         links.getChildren().addAll(spielfeldText, maps);
         rechts.getChildren().addAll(spielerText, new HBox(spieler, new VBox(addSpieler, removeSpieler)));
 
-        newGameElements.getChildren().addAll(menuContainer, back, start);
+        newGameElements.getChildren().addAll(ueberschrift, menuContainer, back, start);
         newGameElements.setAlignment(Pos.CENTER);
 
 
@@ -209,7 +220,10 @@ public class MainMenu extends StackPane {
         return mapsList;
 
     }
-
+    /**
+     * Zentrale Methode, von aussen aufrufbar. Ruft das Obermenü auf
+     * Wenn ein spiel laeuft wird ein "Fortsetzen" Button angezeigt
+     */
     public void showMainMenu() {
         //Falls ein spiel erstellt wurde schalte continue an
         if (spielController.getAktSpiel() != null) {
@@ -265,8 +279,13 @@ public class MainMenu extends StackPane {
         });
         exit.setOnAction((e) -> spielController.beendeProgramm());
         cont.setOnAction((e) -> {
+
+            mainMenuElements.getChildren().removeAll(mainMenuElements.getChildren());
+
             spielController.getLayout().setGameLayout();
+
             this.getChildren().removeAll(mainMenuElements);
+
 
         });
         settings.setOnAction(e -> {
@@ -289,8 +308,13 @@ public class MainMenu extends StackPane {
 
         HBox antwortBox = new HBox();
         Label aktZeit = new Label();
+        aktZeit.setId("schriftMittel");
         Label zeitTitel = new Label("Antwortzeit");
         zeitTitel.setId("schriftMittel");
+
+        Label pfadTitel = new Label("Aktueller Musikpfad");
+        pfadTitel.setId("schriftMittel");
+        HBox pfadBox = new HBox();
 
         zeitTitel.setPadding(new Insets(0,0,10,0));
         SimpleIntegerProperty time = new SimpleIntegerProperty();
@@ -311,9 +335,12 @@ public class MainMenu extends StackPane {
         aktZeit.textProperty().bind(time.asString().concat(" s"));
 
 
-        Button button = new Button("Musikpfad ändern");
+        Button button = new Button("ändern");
         Label pfad = new Label(spielController.getProperties().getProperty("musicPath"));
         button.setId("buttonRedHover");
+        pfadBox.getChildren().addAll(pfad, button);
+        pfadBox.setSpacing(10);
+        pfadBox.setAlignment(Pos.CENTER);
 
         Button back = new Button("zurück");
         settingsElements.setAlignment(Pos.CENTER);
@@ -336,7 +363,7 @@ public class MainMenu extends StackPane {
                 spielController.ladeMusik();
             } catch (NullPointerException ignored) {}
         });
-        settingsElements.getChildren().addAll(ueberschrift, zeitTitel, antwortBox, button, pfad, back);
+        settingsElements.getChildren().addAll(ueberschrift, zeitTitel, antwortBox, pfadTitel, pfadBox, back);
 
     }
 
@@ -362,10 +389,7 @@ public class MainMenu extends StackPane {
         this.newGame.setDisable(!anAus);
     }
 
-    public static void main(String[] args) {
-        System.out.println(Main.class.getResource("/hearrun/resources/Data").getPath());
 
-    }
 
     public void kreisSpawningAnAus(boolean anAus) {
         if (anAus) {
@@ -375,7 +399,9 @@ public class MainMenu extends StackPane {
         }
 
     }
-
+    /**
+     * Beim wechsel in ein anderes Menue gibt es entweder eine aufsteigende oder absteigende Animation
+     */
     private void menuUebergang(VBox von, VBox zu, boolean vorwaerts) {
         int zoomVon = 0;
         int zoomZu = 1;
@@ -427,24 +453,14 @@ public class MainMenu extends StackPane {
         });
 
 
-/*
-        this.getChildren().addAll(zu);
-        TranslateTransition t = new TranslateTransition(Duration.millis(250), von);
-        t.setToY(von.getTranslateY() - 400);
 
-        TranslateTransition t1 = new TranslateTransition(Duration.millis(500), zu);
-        t1.setToY(von.getTranslateY());
-
-        t.play();
-        t1.play();
-
-
-        t.setOnFinished(e -> {
-            this.getChildren().remove(von);
-            von.getChildren().removeAll(von.getChildren());
-        });
-        */
-
+    }
+    public void setContinue(boolean anAus){
+        if(anAus){
+            continueAn = true;
+        }else{
+            continueAn = false;
+        }
     }
 
 

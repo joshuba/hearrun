@@ -7,8 +7,9 @@ import javafx.scene.layout.GridPane;
 
 import javax.swing.text.View;
 
-/**
- * Gridpane, welches das Spielfeld darstellt
+/**Gridpane welches das Spielfeld darstellt
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class CenterLayout extends GridPane {
 

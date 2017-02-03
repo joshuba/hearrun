@@ -499,7 +499,7 @@
 #interpretfeldp2BIG, #coverfeldp2BIG, #faktfeldp2BIG, #titelfeldp2BIG, #interpretfeldp3BIG, #coverfeldp3BIG, #faktfeldp3BIG, #titelfeldp3BIG, #interpretfeldp4BIG, #coverfeldp4BIG, #faktfeldp4BIG, #titelfeldp4BIG{
 
     -fx-background-repeat: stretch;
-    -fx-background-size: 100%;
+    -fx-background-size: contain;
     -fx-background-position: center;
 
 }

@@ -16,8 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
 
-/**
- * Created by Josh on 23.01.17
+/**Der Ladescreen ermöglicht die Mitverfolgung des Einlesefortschrittes
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class LoadingScreen extends VBox{
     private Label text;

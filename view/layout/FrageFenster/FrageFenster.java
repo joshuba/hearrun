@@ -21,8 +21,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-/**
- * Oberklasse der Fragefenster
+/**Oberklasse der Fragefenster. Fasst Button und Coverfragen zusammen
+ *
+ * @author Leo Back & Joshua Barth
  */
 public abstract class FrageFenster extends Fenster {
 
@@ -267,12 +268,6 @@ public abstract class FrageFenster extends Fenster {
         f.setCycleCount(1);
         f.getKeyFrames().addAll(k1);
         f.play();
-
-
-
-
-
-
 
     }
 

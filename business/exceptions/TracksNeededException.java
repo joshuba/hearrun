@@ -1,7 +1,7 @@
 package hearrun.business.exceptions;
 
 /**
- * Created by Leo on 24.01.2017
+ * @author Leo Back & Joshua Barth
  */
 public class TracksNeededException extends Exception {
 

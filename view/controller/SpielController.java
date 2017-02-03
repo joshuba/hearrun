@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 /**
- * Der SPiel-Controller verwaltet ein Spiel. Er
+ * Der Spiel-Controller verwaltet ein Spiel. Er managed die Spielabläufe. Mithilfe von Properties werden
+ * die wichtigsten Spielinfos gespeichert und bleiben erhalten.
  */
 public class SpielController {
     private Spiel aktSpiel;
@@ -187,6 +188,7 @@ public class SpielController {
 
         } catch (FileNotFoundException e) {
             properties.setProperty("antwortZeit", "8");
+            properties.setProperty("tutorialZeigen", "true");
             writeProperties();
 
         } catch (IOException e) {
