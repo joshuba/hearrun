@@ -1,8 +1,14 @@
-*SimpleMap
-*6
-*2
-#C I T F E X
-#L L L L L L
+*Klassik (Mittel)
+*12
+*7
+#T C I T C C R R R R R R
+#L L L L L L L L L L L R
+#X L L L L L L L L L L R
+#R L L L L L L L L L L R
+#R L L L L L L L L L L R
+#R L L L L L L L L L L R
+#R R R R R R R R R R R R
+
 
 
 /

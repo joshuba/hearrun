@@ -1,15 +1,15 @@
-*Slalom
+*Slalom (Mittel)
 *15
 *9
-#C I I T T T C T E F I C T E F
-#L L L L L L L L L L L L L L I
-#I F E T C I F E T C I F E T C
-#C L L L L L L L L L L L L L L
-#T E F I C T E F T C I F E T C
-#L L L L L L L L L L L L L L T
-#T C I F E T C I F E T C I F E
-#E L L L L L L L L L L L L L L
-#F I C T E F I C T E F I C T X
+#T I R L L L L L L L L L L L L
+#L L R I R L L L L L L L L L L
+#L L L L R R R L L L L L L L L
+#L L L L L L C R R L L L L L L
+#L L L L L L L L C R R L L L L
+#L L L L L L L L L L R R R L L
+#L L L L L L L L L L L L C I L
+#L L L L L L L L L L L L L R R
+#L L L L L L L L L L L L L L X
 
 /
 

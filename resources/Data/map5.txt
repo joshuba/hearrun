@@ -1,8 +1,16 @@
-*Quickie
-*1
-*2
-#C
-#X
+*Hin und her (Groß)
+*16
+*10
+#R R R R R R R R R R R R R R R R
+#L L L L L L L L L L L L L L L R
+#L L L L L L L L L L L L L L L R
+#R R R R R R R R R R R R R R R R
+#R L L L L L L L L L L L L L L L
+#R L L L L L L L L L L L L L L L
+#R R R R R R R R R R R R R R R R
+#L L L L L L L L L L L L L L L R
+#L L L L L L L L L L L L L L L R
+#X R R R R R R R R R R R R R R R
 
 
 /

@@ -1,17 +1,11 @@
-*Little Snake
-*13
-*7
-#I L L L L C T E F I C L L
-#C L L L L I L L L L T L L
-#T L L L L F L L L L E L L
-#E L L L L E L L L L F L L
-#F L L L L T L L L L I L L
-#I L L L L C L L L L C L L
-#C T E F I T L L L L X L L
-
-
-
-
+*Quickie (Klein)
+*8
+*5
+#R T T I L L L L
+#L L L F R L L L
+#L L L L R R L L
+#L L L L L T L L
+#X I C T I R L L
 /
 
 
@@ -33,4 +27,3 @@ X   Endfeld
 L   Leeres Feld
 R   RandomFeld
 _________________________________
-
