@@ -410,6 +410,29 @@ Button:hover:pressed{
     -fx-background-color: white;
 }
 
+.maps-spieler-liste .thumb {
+    -fx-background-color: #5aa0ad;
+}
+
+.maps-spieler-liste .scroll-bar:vertical .decrement-button,
+.maps-spieler-liste .scroll-bar:vertical .increment-button,
+.maps-spieler-liste .scroll-bar:vertical .track,
+.maps-spieler-liste .scroll-bar:vertical .track-background,
+.maps-spieler-liste .scroll-bar:vertical .decrement-arrow,
+.maps-spieler-liste .scroll-bar:vertical .increment-arrow{
+    -fx-background-color:white;
+    -fx-border-color: white;
+    -fx-background-radius: 0;
+}
+
+.text-middle {
+    -fx-font-size: 120%;
+}
+
+.maps-spieler-liste {
+    -fx-pref-height: 150;
+}
+
 .maps-spieler-liste .list-cell:focused, .maps-spieler-liste .list-cell:selected {
     -fx-background-color: lightgray;
 }

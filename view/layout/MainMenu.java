@@ -73,9 +73,9 @@ public class MainMenu extends StackPane {
 
     public void initNewGameWindow() {
         //Baue neues Menü auf
-        BorderPane menuContainer = new BorderPane();
-        HBox links = new HBox();
-        HBox rechts = new HBox();
+        HBox menuContainer = new HBox();
+        VBox links = new VBox();
+        VBox rechts = new VBox();
         Label spielfeldText = new Label("Waehle eine Karte: ");
         Label spielerText = new Label("Wähle Spieler: ");
         ListView<Map> maps = new ListView<>();
@@ -100,13 +100,15 @@ public class MainMenu extends StackPane {
         maps.getStyleClass().add("maps-spieler-liste");
         spieler.getStyleClass().add("maps-spieler-liste");
 
-        menuContainer.setLeft(links);
-        menuContainer.setRight(rechts);
+        menuContainer.getChildren().addAll(links, rechts);
 
         menuContainer.setPadding(new Insets(40));
+        menuContainer.setSpacing(40);
+        menuContainer.setAlignment(Pos.BASELINE_CENTER);
+        menuContainer.getStyleClass().add("text-middle");
 
         links.getChildren().addAll(spielfeldText, maps);
-        rechts.getChildren().addAll(spielerText, spieler, new VBox(addSpieler, removeSpieler));
+        rechts.getChildren().addAll(spielerText, new HBox(spieler, new VBox(addSpieler, removeSpieler)));
 
         newGameElements.getChildren().addAll(menuContainer, back, start);
         newGameElements.setAlignment(Pos.CENTER);
