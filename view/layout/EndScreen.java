@@ -156,7 +156,7 @@ public class EndScreen extends BorderPane {
         HBox icon4 = new HBox();
         icon4.setMinSize(21,21);
         icon4.setId("zeitAbgelaufen");
-        Label abgelaufen = new Label(String.format(" Zeit abgelaufen:\t\t\t%d x", a.get("zeitAbgelaufen")));
+        Label abgelaufen = new Label(String.format(" Zeit abgelaufen:\t\t\t%dx", a.get("zeitAbgelaufen")));
         frageZeit.getChildren().addAll(icon4, abgelaufen);
 
         //Box mit Leben am Ende
@@ -180,7 +180,7 @@ public class EndScreen extends BorderPane {
             durchschnitt = a.get("fragenRichtig") / durchschnitt;
         }
         DecimalFormat f = new DecimalFormat("#0.00");
-        Label d = new Label(String.format(" Im Durchschnitt richtig:\t\t\t %s Prozent", f.format(durchschnitt)));
+        Label d = new Label(" Im Durchschnitt richtig:\t\t\t" + f.format(durchschnitt) + "%");
         durchschnittsbox.getChildren().addAll(icon6, d);
 
 
