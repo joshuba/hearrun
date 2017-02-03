@@ -98,6 +98,8 @@ public class MainMenu extends StackPane {
         spieler.setCellFactory(TextFieldListCell.forListView());
         spieler.setEditable(true);
 
+        maps.getStyleClass().add("maps-spieler-liste");
+        spieler.getStyleClass().add("maps-spieler-liste");
 
         menuContainer.setLeft(links);
         menuContainer.setRight(rechts);

@@ -9,7 +9,7 @@ import javafx.beans.value.ObservableValue;
 import java.util.ArrayList;
 
 /**
- * Created by joshuabarth on 12.01.17.
+ * Das Modell eines Spiels. Es verwaltet die Maps und Spieler.
  */
 public class Spiel {
     private Map aktMap;
@@ -45,14 +45,8 @@ public class Spiel {
         return spielerListe.size();
     }
 
-
-
     public void nextSpieler(){
         aktSpieler = (aktSpieler +1) %spielerListe.size();
-    }
-
-    public void setPlayerNames(int nr, String name){
-        spielerListe.get(nr).setName(name);
     }
 
     public Feld getAktFeld(){

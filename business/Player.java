@@ -106,6 +106,9 @@ public class Player {
 
     }
 
+    /**
+     * Ermöglicht, die Musik-Laustärke langsam zu erhöhen
+     */
     public void fadeIn() {
         int aktVol = getVolume();
         KeyFrame k1 = new KeyFrame(Duration.ZERO, a -> {
@@ -154,6 +157,9 @@ public class Player {
 
     }
 
+    /**
+     * Ermöglicht, die Musik langsam auf Lautstärke 0 abzusenken und anschließend den player zu beenden.
+     */
     public void fadeOut() {
         int aktVol = getVolume();
         KeyFrame k1 = new KeyFrame(Duration.ZERO, a -> {

@@ -6,25 +6,28 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 /**
- * Created by joshuabarth on 13.01.17
+ *
  */
 public class Spieler {
     private String name;
     private ArrayList<Point> log;
     private ObservableMap<String, Integer> achievements;
     private int gelaufen;
-    private int leben;
     private int nr;
 
+    /**
+     * Reräsentiert einen Spieler.
+     * Implementiert Methoden zum Laufen sowie zum aktualisieren der Achievements.
+     *
+     * @param name Der Name des Spielers.
+     */
     public Spieler(String name) {
-        this.nr = nr;
         this.name = name;
         log = new ArrayList<>();
         log.add(new Point(0, 0)); //Für den Start wird die letzte Position auf 0 gesetzt
         log.add(new Point(0, 0)); //aktPos
         achievements = FXCollections.observableHashMap();
         gelaufen = 0;
-        leben = 0;
 
         achievements.put("felder", 0);
         achievements.put("fragenRichtig", 0);
@@ -34,12 +37,19 @@ public class Spieler {
 
     }
 
+
     public void move(int x, int y) {
         log.add(new Point(x, y));
         gelaufen++;
         achievements.put("felder", gelaufen);
 
 
+    }
+
+    public void moveBack() {
+        log.remove(log.size() - 1);
+        gelaufen++;
+        achievements.put("felder", gelaufen);
     }
 
     public int getAktX() {
@@ -68,12 +78,6 @@ public class Spieler {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void moveBack() {
-        log.remove(log.size() - 1);
-        gelaufen++;
-        achievements.put("felder", gelaufen);
     }
 
     public int getLogSize() {
@@ -117,7 +121,6 @@ public class Spieler {
 
     public void setNr(int nr){
         this.nr = nr;
-
     }
 
     public void addFalscheFrage() {

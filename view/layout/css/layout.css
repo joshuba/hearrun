@@ -389,3 +389,10 @@ Button:hover:pressed{
     -fx-background-color: #b1b4b2;
 }
 
+.maps-spieler-liste, .maps-spieler-liste:focused, .maps-spieler-liste:selected, .maps-spieler-liste .list-cell {
+    -fx-background-color: white;
+}
+
+.maps-spieler-liste .list-cell:focused, .maps-spieler-liste .list-cell:selected {
+    -fx-background-color: lightgray;
+}
