@@ -127,11 +127,8 @@ public class ViewController {
 
             forward.setOnFinished(e -> {
                 spielerLaeuft.setValue(false);
-
                 spielController.nextSpieler();
                 feldAuswahlMakierung.setValue(true);
-
-
             });
         }else{
             if(anz != 0){ //Falls mindestens ein Feld zurueck gegangen werden kann

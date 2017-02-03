@@ -11,16 +11,16 @@ import javafx.stage.Stage;
  * Created by Josh on 09.01.17.
  */
 public class GameLayout extends BorderPane{
-
-
+    SpielerAnzeige leftLayout;
+    SpielerAnzeige rightLayout;
     public GameLayout(Stage stage, SpielController spielController, ViewController viewController){
         this.setId("gameLayout");
 
 
         //Panes initalisieren
         CenterLayout centerLayout = new CenterLayout(viewController);
-        SpielerAnzeige leftLayout = new SpielerAnzeige(spielController.getSpielerListe(), "links", viewController.getStage());
-        SpielerAnzeige rightLayout = new SpielerAnzeige(spielController.getSpielerListe(), "rechts", viewController.getStage());
+        leftLayout = new SpielerAnzeige(spielController.getSpielerListe(), "links", viewController.getStage());
+        rightLayout = new SpielerAnzeige(spielController.getSpielerListe(), "rechts", viewController.getStage());
         TopLayout topLayout = new TopLayout(viewController, spielController);
 
         //Komponenten zusammenfügen
@@ -56,6 +56,8 @@ public class GameLayout extends BorderPane{
 
     }
 
-
-
+    public void setAktSpieler(int i) {
+        leftLayout.setAktuellerSpieler(i);
+        rightLayout.setAktuellerSpieler(i);
+    }
 }

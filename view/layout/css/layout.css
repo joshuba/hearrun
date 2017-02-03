@@ -501,5 +501,13 @@ Button:hover:pressed{
 }
 
 #plus-minus-button {
-    -fx-max-width: 4;
+    -fx-max-width: 40;
+    -fx-min-width: 40;
+    -fx-min-height: 40;
+    -fx-max-height: 40;
+    -fx-background-size: auto;
+}
+
+.aktiv {
+    -fx-background-color: #ff8e7d;
 }

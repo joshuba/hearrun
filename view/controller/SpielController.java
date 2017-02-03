@@ -87,7 +87,7 @@ public class SpielController {
 
     public void nextSpieler() {
         this.getAktSpiel().nextSpieler();
-
+        getLayout().getGameLayout().setAktSpieler(getAktSpiel().getAktSpieler().getNr());
     }
 
     public Spiel getAktSpiel() {

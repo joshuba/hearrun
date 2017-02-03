@@ -2,18 +2,22 @@ package hearrun.view.layout;
 
 import hearrun.Main;
 import hearrun.business.Spieler;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -21,9 +25,16 @@ import java.util.ArrayList;
  */
 public class SpielerAnzeige extends VBox {
     private Stage stage;
+    private SimpleIntegerProperty aktuellerSpieler;
+    private String aktiv;
+
     public SpielerAnzeige(ArrayList<Spieler> spielerListe, String position, Stage stage) {
-        this.setMinWidth(200);
+        setMinWidth(150);
+        setMaxWidth(150);
+        setPadding(new Insets(0,20,0,20));
         this.stage = stage;
+        aktuellerSpieler = new SimpleIntegerProperty(0);
+        aktiv = "aktiv";
 
         VBox oben;
 
@@ -32,7 +43,6 @@ public class SpielerAnzeige extends VBox {
         if (position.equals("links")) {
             // Spielernamen anzeigen
             oben = initSpielerAnzeige(0, spielerListe);
-
 
             if (spielerListe.size() > 2) { // Mehr als 2 Spieler: zeige oben und unten einen Spieler an.
                 unten = initSpielerAnzeige(2, spielerListe);
@@ -57,7 +67,10 @@ public class SpielerAnzeige extends VBox {
             }
         }
 
-        this.getChildren().addAll(oben, unten);
+        BorderPane b = new BorderPane();
+        b.setTop(oben);
+        b.setBottom(unten);
+        this.getChildren().add(b);
     }
 
     private VBox initSpielerAnzeige(int spielerNummer, ArrayList<Spieler> spielerListe) {
@@ -65,6 +78,7 @@ public class SpielerAnzeige extends VBox {
         anzeige.prefHeightProperty().bind(stage.heightProperty());
         anzeige.setAlignment(Pos.TOP_CENTER);
         anzeige.getStyleClass().add("spieler-box");
+        anzeige.setMaxHeight(160);
 
         StackPane spielerFarbe = new StackPane();
         Circle farbKreis = new Circle(20);
@@ -77,7 +91,7 @@ public class SpielerAnzeige extends VBox {
         ListView<HBox> achievements = new ListView<>();
         ObservableMap<String, Integer> achievementsMap = spielerListe.get(spielerNummer).getAchievements();
         achievements.setMaxHeight(100);
-        achievementsMap.addListener((MapChangeListener<String, Integer> ) change ->
+        achievementsMap.addListener((MapChangeListener<String, Integer>) change ->
                 updateAchievements(achievementsMap, achievements)
         );
         achievements.getStyleClass().add("achievements");
@@ -86,6 +100,20 @@ public class SpielerAnzeige extends VBox {
         Label spielerName = new Label(spielerListe.get(spielerNummer).getName());
         anzeige.getChildren().addAll(spielerFarbe, spielerName, achievements);
         updateAchievements(achievementsMap, achievements);
+
+
+        if (spielerNummer == 0) {
+            anzeige.getStyleClass().add(aktiv);
+        }
+
+
+        aktuellerSpieler.addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() == spielerNummer) {
+                anzeige.getStyleClass().add(aktiv);
+            } else
+                anzeige.getStyleClass().remove(aktiv);
+         });
+
         return anzeige;
     }
 
@@ -107,17 +135,17 @@ public class SpielerAnzeige extends VBox {
             private Herzen() {
                 int leben = achievementMap.get("leben");
                 this.setAlignment(Pos.BASELINE_CENTER);
-                for(int i = 0; i < leben; i++) {
+                for (int i = 0; i < leben; i++) {
                     Label l = new Label();
                     l.getStyleClass().add("leben-icon");
-                    l.setMinSize(30,30);
+                    l.setMinSize(30, 30);
                     getChildren().add(l);
                 }
 
                 if (leben == 0) {
                     Label l = new Label();
                     l.getStyleClass().add("kein-leben-icon");
-                    l.setMinSize(30,30);
+                    l.setMinSize(30, 30);
                     getChildren().add(l);
                 }
             }
@@ -126,12 +154,22 @@ public class SpielerAnzeige extends VBox {
         achievements.getItems().clear();
         achievements.getItems().add(new Herzen());
 
-        Integer anz = achievementMap.get("fragenRichtig");
-        Label fragenRichtig = new Label(anz + ((anz == 1)?" Frage" : " Fragen") + " richtig beantwortet");
-        fragenRichtig.setTextAlignment(TextAlignment.CENTER);
-        HBox hb = new HBox(fragenRichtig);
-        hb.setAlignment(Pos.BASELINE_CENTER);
+        int anz = achievementMap.get("fragenRichtig");
+        Label fragenRichtig = new Label("  " + anz);
+        HBox icon = new HBox();
+        icon.setId("richtigeAntworten");
+        icon.setPrefSize(30,30);
 
+        fragenRichtig.setTextAlignment(TextAlignment.CENTER);
+        HBox hb = new HBox(icon, fragenRichtig);
+        hb.setAlignment(Pos.CENTER);
         achievements.getItems().add(hb);
     }
+
+    public void setAktuellerSpieler(int i) {
+        System.out.println("Setze Spielernummer auf " + i);
+        aktuellerSpieler.setValue(i);
+    }
+
+
 }
