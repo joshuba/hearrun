@@ -4,9 +4,13 @@ Button {
     -fx-min-width: 180px;
     -fx-min-height: 35px;
     -fx-border-radius: 20;
+    -fx-font-size: 14;
+    -fx-font-weight: bolder;
     -fx-background-size: contain;
     -fx-background-repeat: stretch;
     -fx-background-position: center;
+    -fx-text-fill: white;
+    -fx-font-family: Verdana, Geneva, sans-serif;
     -fx-background-image:  url("../../../resources/icons/menuButton.png");
 
 }
@@ -17,7 +21,7 @@ Button {
 Button:hover {
 
     -fx-background-image:  url("../../../resources/icons/menuButtonHover.png");
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 Button:hover:pressed{
@@ -26,23 +30,23 @@ Button:hover:pressed{
 }
 
 #buttonRedHover:hover:pressed{
-    -fx-background-image:  url("../../../resources/icons/menuButtonExit.png");
-    -fx-text-fill: black;
+    -fx-background-image:  url("../../../resources/icons/menuButtonExitPressed.png");
+    -fx-text-fill: white;
 }
 
 #buttonRedHover:hover{
     -fx-background-image:  url("../../../resources/icons/menButtonExitHover.png");
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 #buttonGreenHover:hover {
     -fx-background-image: url("../../../resources/icons/menButtonStartHover.png");
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 #buttonGreenHover:hover:pressed{
     -fx-background-image:  url("../../../resources/icons/menuButtonStartPressed.png");
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 #gameLayout{

@@ -65,6 +65,8 @@ public class IntroScreen extends VBox {
         path.setText(pfad);
         start = new Button("Laden & Starten");
         start.setId("buttonGreenHover");
+
+        start.setId("buttonGreenHover");
         if(pfadchosen == false){
             this.getChildren().addAll(start);
             pfadchosen = true;

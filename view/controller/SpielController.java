@@ -28,6 +28,7 @@ public class SpielController {
     private FrageController frageController;
     private Player musicPlayer;
     private Player effectPlayer;
+    private Player loopPlayer;
     private Properties properties;
     private String path;
     private SimpleBooleanProperty sieg;
@@ -40,6 +41,7 @@ public class SpielController {
         this.stage = stage;
         this.musicPlayer = new Player();
         this.effectPlayer = new Player();
+        this.loopPlayer = new Player();
         this.completeLayout = new CompleteLayout(stage, this);
 
         readProperties();
@@ -184,8 +186,7 @@ public class SpielController {
             properties.load(input);
 
         } catch (FileNotFoundException e) {
-            properties.setProperty("aktVolume", "100");
-            properties.setProperty("antwortZeit", "7");
+            properties.setProperty("antwortZeit", "8");
             writeProperties();
 
         } catch (IOException e) {
@@ -245,8 +246,9 @@ public class SpielController {
         return this.properties;
     }
 
-    public void resetMusicPathPropertie() {
+    public void resetSettingsProperty() {
         properties.remove("musicPath");
+        properties.remove("antwortZeit");
     }
 
     public void setMap(Map map) {
@@ -264,4 +266,10 @@ public class SpielController {
     public Stage getStage() {
         return stage;
     }
+
+    public Player getLoopPlayer(){
+        return this.loopPlayer;
+    }
+
+
 }
