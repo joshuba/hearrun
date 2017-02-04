@@ -111,7 +111,11 @@ public class FrageController {
         new Thread(() -> {
             tracks.clear();
             alleFragen.clear();
-            leseOrdnerEin(new File(path));
+            try {
+                leseOrdnerEin(new File(path));
+            } catch (InvalidDataException | IOException | UnsupportedTagException e) {
+                e.printStackTrace();
+            }
             musicReadingProgress.setValue(0);
             fragenAnzahl.setValue(0);
 
@@ -239,12 +243,12 @@ public class FrageController {
     }
 
 
-    private void leseOrdnerEin(File root) {
+    private void leseOrdnerEin(File root) throws InvalidDataException, IOException, UnsupportedTagException {
         File[] files = root.listFiles();
         // Dateien einlesen
         if (files != null) {
             for (File f : files)
-                if (f.getName().endsWith(".mp3") && !f.getName().startsWith("."))
+                if (f.getName().endsWith(".mp3") && !f.getName().startsWith(".") && new Mp3File(f.getAbsolutePath()).getId3v2Tag() != null)
                     tracks.add(f);
                 else if (f.isDirectory())
                     leseOrdnerEin(f);

@@ -229,6 +229,7 @@ public class MainMenu extends StackPane {
 
 
     private void initMainMenuWindow() {
+        mainMenuElements.getChildren().clear();
         newGame = new Button("Neues Spiel");
         newGame.setId("buttonGreenHover");
         cont = new Button("Fortfahren");
