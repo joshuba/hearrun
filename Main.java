@@ -45,7 +45,7 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
 
-        //primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.getStylesheets().add(("/hearrun/view/layout/css/felder.css"));
         scene.getStylesheets().add(("/hearrun/view/layout/css/layout.css"));

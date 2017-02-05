@@ -61,21 +61,23 @@ public class IntroScreen extends VBox {
 
     public void waehlePfad() {
 
-        String pfad = new DirectoryChooser().showDialog(stage).getAbsolutePath();
-        path.setText(pfad);
-        start = new Button("Laden & Starten");
-        start.setId("buttonGreenHover");
+        try {
+            String pfad = new DirectoryChooser().showDialog(stage).getAbsolutePath();
+            path.setText(pfad);
+            start = new Button("Laden & Starten");
+            start.setId("buttonGreenHover");
 
-        start.setId("buttonGreenHover");
-        if(pfadchosen == false){
-            this.getChildren().addAll(start);
-            pfadchosen = true;
-        }
+            start.setId("buttonGreenHover");
+            if (pfadchosen == false) {
+                this.getChildren().addAll(start);
+                pfadchosen = true;
+            }
 
 
-        start.setOnAction(e -> {
-            spielController.getProperties().setProperty("musicPath", pfad);
-            spielController.ladeMusik();
-        });
+            start.setOnAction(e -> {
+                spielController.getProperties().setProperty("musicPath", pfad);
+                spielController.ladeMusik();
+            });
+        } catch (NullPointerException ignored){}
     }
 }
