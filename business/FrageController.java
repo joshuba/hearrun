@@ -226,14 +226,6 @@ public class FrageController {
                 readingOnOff.setValue(true);
 
 
-                System.out.println(alleFragen.size() - alleFragen.size(Fragetyp.FaktFrage) + " Fragen generiert aus " + tracks.size() + " Songs.");
-                System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverWahlFrage) + " Cover-Wahl-Fragen");
-                System.out.println("Darunter " + alleFragen.size(Fragetyp.InterpretFrage) + " Interpret-Fragen");
-                System.out.println("Darunter " + alleFragen.size(Fragetyp.Titelfrage) + " Titel-Fragen");
-                System.out.println("Darunter " + alleFragen.size(Fragetyp.CoverTitelFrage) + " Cover-Titel-Fragen");
-                System.out.println("Darunter " + alleFragen.size(Fragetyp.FaktFrage) + " Fakt-Fragen");
-
-
             } else {
                 success.setValue(true);
                 success.setValue(false);
@@ -329,11 +321,7 @@ public class FrageController {
             e.printStackTrace();
         }
 
-        System.out.println("Anzahl Tracks: " + tracks.size() +
-                "\nAnzahl einzelner Alben: " + covers.size() +
-                "\nAnzahl einzelner Interpreten: " + interpreten.size());
-
-        return tracks.size() >= 40 && interpreten.size() >= 30 && covers.size() >= 30;
+        return tracks.size() >= 50 && interpreten.size() >= 20 && covers.size() >= 20;
     }
 
     /**
@@ -356,7 +344,6 @@ public class FrageController {
         doc.getDocumentElement().normalize();
         NodeList alleFaktfragenNL = doc.getElementsByTagName("frage");
 
-        System.out.println("XML erfolgreich eingelesen!");
 
         //erstelle Frage-Objekte zu allen Fraktfragen in der xml
         for (int i = 0; i < alleFaktfragenNL.getLength(); i++) {

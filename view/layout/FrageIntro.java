@@ -141,7 +141,6 @@ public class FrageIntro extends StackPane {
         String feldtyp = spielController.getAktSpiel().getAktMap().getFeld(x, y).getFeldtyp().toString();
         feldtyp = feldtyp.toLowerCase();
         feldtyp += "p" + (spielController.getAktSpiel().getAktSpieler().getNr()+1) + "BIG";
-        System.out.println(feldtyp);
 
 
 

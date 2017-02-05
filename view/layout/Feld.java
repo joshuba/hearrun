@@ -148,7 +148,6 @@ public class Feld extends StackPane{
 
     public void aktuellesFeldMakierung(boolean anAus){
         if(anAus){
-            System.out.println("MakierungAN");
             HBox aktBild = new HBox();
             aktBild.setId(this.getId());
             aktBild.setAlignment(Pos.CENTER);
@@ -194,7 +193,6 @@ public class Feld extends StackPane{
             this.setLayoutY(1);
             this.setScaleX(1);
             this.setScaleY(1);
-            System.out.println("MakierungAus");
             resetSizeZoom();
 
 

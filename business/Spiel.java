@@ -24,8 +24,6 @@ public class Spiel {
         sieg = new SimpleBooleanProperty();
         sieg.set(false);
 
-        for (Spieler s : spielerListe)
-            System.out.println(s);
 
     }
 

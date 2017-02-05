@@ -363,10 +363,6 @@ public class MainMenu extends StackPane {
         this.newGame.setDisable(!anAus);
     }
 
-    public static void main(String[] args) {
-        System.out.println(Main.class.getResource("/hearrun/resources/Data").getPath());
-
-    }
 
     public void kreisSpawningAnAus(boolean anAus) {
         if (anAus) {

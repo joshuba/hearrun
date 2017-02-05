@@ -30,7 +30,7 @@ public class CoverTitelFrage extends Frage {
             String titel;
 
             // Cover einlesen
-            if (srctags.getAlbumImage() == null)
+            if (srctags.getAlbumImage() == null || srctags.getAlbum() == null)
                 throw new TagNeededException();
             else
                 cover = SwingFXUtils.toFXImage(ImageIO.read(
@@ -49,6 +49,8 @@ public class CoverTitelFrage extends Frage {
             for (int i = 0; i < 3; i++) {
                 ID3v2 randAntwort = alleTitel[(int) (Math.random() * alleTitel.length)];
 
+                if (randAntwort.getTitle() == null || randAntwort.getAlbum() == null)
+                    throw new TagNeededException();
                 if (!(randAntwort.getTitle() == null && randAntwort.getAlbum() == null) &&
                         !randAntwort.getTitle().equals(titel) && !randAntwort.getAlbum().equals(srctags.getAlbum())) {//zweifach richtige antwort durch titel / album vermeiden
 

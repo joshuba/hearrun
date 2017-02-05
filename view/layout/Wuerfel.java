@@ -86,9 +86,6 @@ public class Wuerfel extends VBox {
         spielcontroller.getMusicPlayer().play("/hearrun/resources/sounds/wuerfel.mp3");
         wuerfeln.setDisable(true);
         ergebnis = wuerfeln();
-        System.out.println("Ergebnis: " + ergebnis);
-        System.out.println("index: " + index);
-
 
         KeyFrame k1 = new KeyFrame(Duration.millis(0), a -> {
             anzeige.setText(Integer.toString(1));

@@ -48,8 +48,6 @@ public class CompleteLayout extends StackPane {
         this.getChildren().addAll(mainMenu);
         mainMenu.showMainMenu();
         mainMenu.kreisSpawningAnAus(true);
-
-        System.out.println(mainMenu.getChildren().size());
     }
 
     public ViewController getViewController() {

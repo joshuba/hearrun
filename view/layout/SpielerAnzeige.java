@@ -181,7 +181,6 @@ public class SpielerAnzeige extends VBox {
     }
 
     public void setAktuellerSpieler(int i) {
-        System.out.println("Setze Spielernummer auf " + i);
         aktuellerSpieler.setValue(i);
     }
 

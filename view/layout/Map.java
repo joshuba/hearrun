@@ -37,7 +37,6 @@ public class Map {
 
                 this.spielFeld = new Feld[feldBreite][feldHoehe];
 
-                System.out.println("mapName: "+ mapName + " Breite: "+ feldBreite + " Hoehe: " + feldHoehe);
             }
            line = r.readLine();
             int row = 0;
@@ -83,7 +82,6 @@ public class Map {
                 return Feldtyp.EndFeld;
 
         }
-        System.out.println("Lesefehler");
         return null;
     }
 

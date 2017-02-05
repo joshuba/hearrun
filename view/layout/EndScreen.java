@@ -71,7 +71,6 @@ public class EndScreen extends BorderPane {
                 lv.setId("gewinnerListView");
             }
             lv.getItems().addAll(baueListe(s));
-            System.out.println(s.getNr());
             boxen[s.getNr()] = lv;
             mitte.getChildren().addAll(lv);
 
@@ -110,7 +109,6 @@ public class EndScreen extends BorderPane {
         //Box mit Farbe und Name füllen
         HBox farbeName = new HBox();
         farbeName.setId("endScreenFill"+(s.getNr()+1));
-        System.out.println(farbeName.getId());
         farbeName.setPadding(new Insets(20,0,20,0));
         farbeName.setSpacing(4);
         farbeName.setAlignment(Pos.CENTER);
