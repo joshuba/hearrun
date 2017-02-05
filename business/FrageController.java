@@ -321,7 +321,7 @@ public class FrageController {
             e.printStackTrace();
         }
 
-        return tracks.size() >= 50 && interpreten.size() >= 20 && covers.size() >= 20;
+        return tracks.size() >= 40 && interpreten.size() >= 20 && covers.size() >= 20;
     }
 
     /**

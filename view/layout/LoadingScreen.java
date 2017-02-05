@@ -85,7 +85,7 @@ public class LoadingScreen extends VBox{
             text.setText(
                     "Die eingelesene Mediathek enthält nicht genug Titel, Alben oder Albumcover.\n" +
                             "Daher kann keine ausreichende Fragenanzahl generiert werden.\n" +
-                            "Es sind mindestens 20 Interpreten, 20 Alben und 50 Tracks erforderlich." +
+                            "Es sind mindestens 20 Interpreten, 20 Alben und 40 Tracks erforderlich." +
                             "Bitte wähle einen neuen Pfad."
             );
             reset.setText("Neuen Pfad wählen");
