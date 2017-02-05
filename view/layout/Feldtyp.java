@@ -3,7 +3,8 @@ package hearrun.view.layout;
 import java.util.Random;
 
 /**
- * Created by joshuabarth on 10.01.17.
+ *
+ * @author Leo Back & Joshua Barth
  */
 public enum Feldtyp {
     CoverFeld, FaktFeld, InterpretFeld, TitelFeld, EreignisFeld, LeeresFeld, EndFeld;

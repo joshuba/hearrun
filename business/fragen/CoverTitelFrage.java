@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-
+/**
+ * @author Leo Back & Joshua Barth
+ */
 public class CoverTitelFrage extends Frage {
 
     private Image cover;

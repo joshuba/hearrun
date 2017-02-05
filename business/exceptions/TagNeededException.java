@@ -1,7 +1,7 @@
 package hearrun.business.exceptions;
 
 /**
- * Created by Leo on 10.01.2017.
+ * @author Leo Back & Joshua Barth
  */
 public class TagNeededException extends Exception {
 

@@ -8,8 +8,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-/**
- * Created by Leo on 29.01.2017.
+/**Fenster Oberklasse
+ *
+ * @author Leo Back & Joshua Barth
  */
 public abstract class Fenster extends BorderPane {
     protected SpielController spielController;

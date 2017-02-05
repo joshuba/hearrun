@@ -106,8 +106,10 @@ public class SpielerAnzeige extends VBox {
 
 
         Label spielerName = new Label(spielerListe.get(spielerNummer).getName());
+        spielerName.setId("schriftMittel");
         anzeige.getChildren().addAll(spielerFarbe, spielerName, achievements);
         updateAchievements(achievementsMap, achievements);
+        anzeige.setAlignment(Pos.CENTER);
 
 
         if (spielerNummer == 0) {

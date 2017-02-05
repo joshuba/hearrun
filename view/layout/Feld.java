@@ -12,8 +12,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-/**
- * Created by joshuabarth on 10.01.17.
+/**Ein einzelnes Feld. Hat immer einen klar zugewiesenen Feldtyp. Besitzt einige Funktionen wie das aktuelles Feld makieren
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class Feld extends StackPane{
     private Feldtyp feldtyp;

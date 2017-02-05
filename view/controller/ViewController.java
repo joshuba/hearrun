@@ -26,8 +26,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-/**
- * Created by Josh on 09.01.17
+/**Controller ueber die meisten Ablaeufe, die etwas an der GUI aendern
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class ViewController {
     private Stage stage;

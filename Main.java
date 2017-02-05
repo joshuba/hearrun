@@ -9,8 +9,10 @@ import javafx.stage.Stage;
 
 import java.io.*;
 
-/**
- * Created by Josh on 09.01.17
+/**Hear & Run ist eine Mischung aus Brettspiel und Musikquiz
+ *
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class Main extends Application {
     public static final Color spielerEinsFarbe = new Color(221f / 255, 66f / 255, 85f / 255, 1);

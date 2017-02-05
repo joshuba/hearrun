@@ -1,13 +1,14 @@
-*Little Snake (Mittel)
-*11
+*Becken (Mittel)
+*13
 *7
-#I L L L L C T E F I C
-#C L L L L I L L L L T
-#T L L L L F L L L L E
-#E L L L L E L L L L F
-#F L L L L T L L L L I
-#I L L L L C L L L L C
-#C T E F I T L L L L X
+#R L L L L L L L L L L L X
+#R L L L L L L L L L L L R
+#R L L L L L L L L L L L R
+#R L L L L L L L L L L L R
+#R L L L L L L L L L L L R
+#R L L L L L L L L L L L R
+#R R R R R R R R R R R R R
+
 
 
 

@@ -23,8 +23,10 @@ import javafx.util.Duration;
 import java.text.DecimalFormat;
 import java.util.*;
 
-/**
- * Created by Josh on 02.02.17.
+/**Finale Zusammenfassung des Spiels. Zeigt in Form von Listen einige Statistiken an und makiert mittels einer Animation
+ * den Gewinner
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class EndScreen extends BorderPane {
     private SpielController spielController;
@@ -35,6 +37,7 @@ public class EndScreen extends BorderPane {
     private Button back;
     private ListView<HBox> [] boxen;
     private int gewinner;
+
 
     public EndScreen(SpielController spielController){
         boxen = new ListView[4];
@@ -50,6 +53,7 @@ public class EndScreen extends BorderPane {
 
         back.setOnAction(e -> {
             spielController.beendeSpiel();
+            spielController.getLayout().getMainMenu().setContinue(false);
             spielController.getLayout().getViewController().setMainMenu();
         });
 
@@ -66,7 +70,7 @@ public class EndScreen extends BorderPane {
 
         for(Spieler s: spielController.getSpielerListe()){
             ListView<HBox> lv = new ListView();
-            lv.setId("achievements");
+            lv.getStyleClass().add("maps-spieler-liste");
             if(s.getNr() == gewinnerID){
                 lv.setId("gewinnerListView");
             }
@@ -90,6 +94,7 @@ public class EndScreen extends BorderPane {
         //styling
         oben.setAlignment(Pos.CENTER);
         oben.setId("grossText");
+        ueberschrift.setId("grossText");
         oben.setPadding(new Insets(40,0,0,0));
         mitte.setAlignment(Pos.CENTER);
         mitte.setHgap(40);

@@ -1,9 +1,14 @@
-*Ereignis-Testmap
-*6
-*3
-#E T E T E X
-#L L L L L L
-#E T L L L L
+*Salat (Mittel)
+*12
+*8
+#I C T E F L L L L L L L
+#L L L L I L E F I C L L
+#I F E T C L T L L T L L
+#C L L L L L C L L E L X
+#T E F I C L I L L F L F
+#L L L L T E F L C I L E
+#L L L L L L L L T L L T
+#L L L L L L L L E F I C
 
 
 /

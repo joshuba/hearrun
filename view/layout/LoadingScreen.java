@@ -16,8 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
 
-/**
- * Created by Josh on 23.01.17
+/**Der Ladescreen ermöglicht die Mitverfolgung des Einlesefortschrittes
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class LoadingScreen extends VBox{
     private Label text;
@@ -43,6 +44,7 @@ public class LoadingScreen extends VBox{
 
 
         text = new Label("Deine Musik wird eingelesen, dies kann abhängig von der Mediathekgröße einige Sekunden in Anspruch nehmen. \nFragen werden erstellt...");
+        text.setStyle("-fx-text-alignment: center");
         this.getChildren().addAll(ueberschrift, text,bar, fragenAnzahl);
         bar.progressProperty().bind(progress);
 

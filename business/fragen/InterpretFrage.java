@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by  Josh on 28.12.16.
+ * @author Leo Back & Joshua Barth
  */
 public class InterpretFrage extends Frage {
     private String path;
@@ -29,7 +29,7 @@ public class InterpretFrage extends Frage {
     public static InterpretFrage generiereFrage(String path, ID3v2[] alleInterpreten) throws TagNeededException{
 
         // Fragetext generieren
-        String[] texte = {"Der ausschnitt aus dem Song stammt von einem der folgenden Interpreten. \nWelcher ist der Richtige?",
+        String[] texte = {"Der Ausschnitt aus dem Song stammt von einem der folgenden Interpreten. \nWelcher ist der Richtige?",
             "Zu welchem der 4 Interpreten lässt sich der Songschnipsel zuordnen?",
             "Welcher Interpret hat diesen Song geschrieben?"};
         String fragetext = texte[(int) (Math.random() * texte.length)];

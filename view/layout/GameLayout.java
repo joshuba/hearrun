@@ -7,8 +7,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-/**
- * Created by Josh on 09.01.17.
+/**Das Zentrale Layout waehrend dem Spiel
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class GameLayout extends BorderPane{
     SpielerAnzeige leftLayout;
@@ -60,4 +61,6 @@ public class GameLayout extends BorderPane{
         leftLayout.setAktuellerSpieler(i);
         rightLayout.setAktuellerSpieler(i);
     }
+
+
 }

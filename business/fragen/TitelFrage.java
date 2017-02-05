@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * @author Leo Back & Joshua Barth
+ */
 public class TitelFrage extends Frage {
     private String path;
 

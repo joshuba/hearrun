@@ -11,8 +11,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
-/**
- * Created by Josh on 23.01.17.
+/**Wenn das Programm das erste Mal startet wird eine Anleitung und die Aufforderung
+ * einen Pfad zu waehlen angezeigt
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class IntroScreen extends VBox {
     private DirectoryChooser auswahl;

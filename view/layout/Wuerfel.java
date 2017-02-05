@@ -13,8 +13,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-/**
- * Created by Josh on 19.01.17.
+/**Der Würfel bietet die möglichkeit auf die Antwort einer Frage zu reagieren
+ * je nach Antwort kann positiv oder auch negativ gewürfelt werden
+ * @author Leo Back & Joshua Barth
  */
 public class Wuerfel extends VBox {
     private int index;
@@ -81,7 +82,9 @@ public class Wuerfel extends VBox {
         }
     }
 
-
+    /**
+     * Eine Würfelanimation wird angezeigt
+     */
     public void wuerfelProzess() {
         spielcontroller.getMusicPlayer().play("/hearrun/resources/sounds/wuerfel.mp3");
         wuerfeln.setDisable(true);

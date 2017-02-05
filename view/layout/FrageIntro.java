@@ -13,8 +13,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-/**
- * Created by Josh on 24.01.17.
+/**Jede Frage wird durch eine Animation eingeleitet, sodass
+ * der Spieler nicht von der Frage ueberrascht wird
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class FrageIntro extends StackPane {
     private HBox bild;
@@ -25,7 +27,6 @@ public class FrageIntro extends StackPane {
     private VBox hintergrund;
 
     public FrageIntro(SpielController spielController){
-        //this.setId("frageIntro");
         this.spielController = spielController;
         bild = new HBox();
         container = new VBox();
@@ -40,7 +41,6 @@ public class FrageIntro extends StackPane {
         hintergrund.prefHeightProperty().bind(this.heightProperty().add(400));
         hintergrund.setStyle("-fx-background-color: white");
 
-        //spielController.getLayout().getGameLayout().blury(true);
 
         label = new Label(spielController.getAktSpiel().getAktSpieler().getName() + "\n" + spielController
         .getAktSpiel().getAktFeld().getPassendenFragetyp());

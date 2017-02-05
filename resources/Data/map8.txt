@@ -1,14 +1,12 @@
-*Little Snake (Mittel)
-*11
-*7
-#I L L L L C T E F I C
-#C L L L L I L L L L T
-#T L L L L F L L L L E
-#E L L L L E L L L L F
-#F L L L L T L L L L I
-#I L L L L C L L L L C
-#C T E F I T L L L L X
-
+*Bogen (Klein)
+*9
+*6
+#R L R R R L L L L
+#R R R L R R R R L
+#L L L L L L L R L
+#L L L L L L L R L
+#X R R L R R R R L
+#L L R R R L L L L
 
 
 

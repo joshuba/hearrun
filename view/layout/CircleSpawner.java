@@ -16,8 +16,10 @@ import javafx.util.Duration;
 
 import java.awt.*;
 
-/**
- * Created by Josh on 29.01.17.
+/**Aesthetischer Random Kreisspawner fuer das Hauptmenue. Kreise werden zufaellig in zufaelligen Farben und groessen in ein
+ * Gridpane animiert.
+ *
+ * @author Leo Back & Joshua Barth
  */
 public class CircleSpawner extends GridPane {
     private Stage stage;
