@@ -11,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,6 +27,8 @@ public class CompleteLayout extends StackPane {
     private MainMenu mainMenu;
     private Stage stage;
     private Player musicPlayer;
+    private VBox window;
+
 
     public CompleteLayout(Stage stage, SpielController spielController) {
         this.viewController = new ViewController(stage, spielController);
@@ -57,7 +58,7 @@ public class CompleteLayout extends StackPane {
 
     public void setMainMenu() {
         spielController.getLoopPlayer().stop();
-        spielController.getLoopPlayer().play(Main.getFilePathFromResourcePath("/hearrun/resources/music/1.mp3", false), true);
+        spielController.getLoopPlayer().play(Main.getFilePathFromResourcePath("/hearrun/resources/music/main.mp3", false), true);
         this.getChildren().clear();
         this.getChildren().addAll(mainMenu);
         mainMenu.showMainMenu();
@@ -113,14 +114,17 @@ public class CompleteLayout extends StackPane {
     }
 
     public void setFrageIntro(FrageIntro frageIntro) {
+        if(spielController.getProperties().getProperty("tutorialZeigen").equals("true")){
+            this.getChildren().removeAll(window);
+        }
         this.getChildren().addAll(frageIntro);
         frageIntro.setAlignment(Pos.CENTER);
     }
 
     //Intro wenn man das Spiel zum ersten mal startet
     public void showIntro(){
-        VBox window = new VBox();
-        Label label = new Label("Hi, da Du zum ersten Mal spielst: In den Spielecken siehst du an der farbigen Makierung welcher Spieler an der Reihe ist. Klicke auf das blinkende Feld um die deine jeweilige Frage zu erhalten zu erhalten. " +
+        window = new VBox();
+        Label label = new Label("Hi, da du zum ersten Mal spielst: In den Spielecken siehst du an der farbigen Makierung welcher Spieler an der Reihe ist. Klicke auf das blinkende Feld um deine jeweilige Frage zu erhalten. " +
                 "Weitere Hilfestellungen findest du im Hilfe-Menü. Viel Spaß!");
         label.setWrapText(true);
         label.setAlignment(Pos.CENTER);

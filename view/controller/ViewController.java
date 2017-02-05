@@ -152,8 +152,9 @@ public class ViewController {
             }else{
                 spielController.getEffectPlayer().play("/hearrun/resources/sounds/moveFailure.mp3"); //Falls kein Feld mehr da ist
                 feldBlinkenLassen(0,0);
-                feldAuswahlMakierung.setValue(true);
                 spielController.nextSpieler();
+                feldAuswahlMakierung.setValue(true);
+
                 spielerLaeuft.setValue(false);
 
             }

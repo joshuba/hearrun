@@ -125,7 +125,7 @@ public class Feld extends StackPane{
         });
 
         Timeline t = new Timeline(k2,k1);
-        t.setOnFinished(e -> {
+        st2.setOnFinished(e -> {
             //st3.play();
             resetSizeZoom();
 
@@ -153,6 +153,7 @@ public class Feld extends StackPane{
             aktBild.setId(this.getId());
             aktBild.setAlignment(Pos.CENTER);
             aktBild.setStyle("-fx-background-size: 80%");
+
 
 
 
