@@ -1,10 +1,9 @@
-package hearrun.view.controller;
+package hearrun.controller;
 
-import hearrun.business.Fragetyp;
-import hearrun.Main;
-import hearrun.business.Spieler;
-import hearrun.business.ereignisse.Ereignis;
-import hearrun.business.fragen.Frage;
+import hearrun.model.Fragetyp;
+import hearrun.model.Spieler;
+import hearrun.model.ereignisse.Ereignis;
+import hearrun.model.fragen.Frage;
 import hearrun.view.layout.FrageFenster.EreignisFenster;
 import hearrun.view.layout.IntroScreen;
 import hearrun.view.layout.*;

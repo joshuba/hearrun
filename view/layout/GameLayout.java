@@ -1,7 +1,7 @@
 package hearrun.view.layout;
 
-import hearrun.view.controller.SpielController;
-import hearrun.view.controller.ViewController;
+import hearrun.controller.SpielController;
+import hearrun.controller.ViewController;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;

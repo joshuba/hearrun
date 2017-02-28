@@ -1,6 +1,6 @@
-package hearrun.business.fragen;
+package hearrun.model.fragen;
 
-import hearrun.business.Fragetyp;
+import hearrun.model.Fragetyp;
 
 import java.util.ArrayList;
 
@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * geliefert werden können.
  */
 public class Frageliste {
-    private ArrayList<Frage> coverTitelFragen;
-    private ArrayList<Frage> coverWahlFragen;
-    private ArrayList<Frage> faktFragen;
-    private ArrayList<Frage> interpretFragen;
-    private ArrayList<Frage> titelFragen;
+    private ArrayList<hearrun.model.fragen.Frage> coverTitelFragen;
+    private ArrayList<hearrun.model.fragen.Frage> coverWahlFragen;
+    private ArrayList<hearrun.model.fragen.Frage> faktFragen;
+    private ArrayList<hearrun.model.fragen.Frage> interpretFragen;
+    private ArrayList<hearrun.model.fragen.Frage> titelFragen;
 
     public Frageliste() {
         coverTitelFragen = new ArrayList<>();
@@ -25,17 +25,17 @@ public class Frageliste {
         titelFragen = new ArrayList<>();
     }
 
-    public void add(Frage f) {
+    public void add(hearrun.model.fragen.Frage f) {
         //Unterscheide den typ der übergebenen Frage und ordne ihn richtig ein
         if (f instanceof CoverWahlFrage) {
             coverWahlFragen.add(f);
-        } else if (f instanceof CoverTitelFrage) {
+        } else if (f instanceof hearrun.model.fragen.CoverTitelFrage) {
             coverTitelFragen.add(f);
-        } else if (f instanceof FaktFrage) {
+        } else if (f instanceof hearrun.model.fragen.FaktFrage) {
             faktFragen.add(f);
-        } else if (f instanceof InterpretFrage) {
+        } else if (f instanceof hearrun.model.fragen.InterpretFrage) {
             interpretFragen.add(f);
-        } else if (f instanceof TitelFrage) {
+        } else if (f instanceof hearrun.model.fragen.TitelFrage) {
             titelFragen.add(f);
         }
     }
@@ -45,8 +45,8 @@ public class Frageliste {
      * @param typ der gewünschte Fragetyp.
      * @return eine zufällige Frage
      */
-    public Frage getRand(Fragetyp typ) {
-        Frage rand = null;
+    public hearrun.model.fragen.Frage getRand(Fragetyp typ) {
+        hearrun.model.fragen.Frage rand = null;
         int index;
         try {
             switch (typ) {
@@ -82,8 +82,8 @@ public class Frageliste {
         return rand;
     }
 
-    public Frage getRand() {
-        ArrayList<Frage> alleFragen = new ArrayList<>();
+    public hearrun.model.fragen.Frage getRand() {
+        ArrayList<hearrun.model.fragen.Frage> alleFragen = new ArrayList<>();
         if (coverTitelFragen.size() > 0)
             alleFragen.addAll(coverTitelFragen);
         if (coverWahlFragen.size() > 0)

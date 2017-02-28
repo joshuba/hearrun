@@ -1,7 +1,6 @@
 package hearrun.view.layout;
 
-import hearrun.Main;
-import hearrun.view.controller.SpielController;
+import hearrun.controller.SpielController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;

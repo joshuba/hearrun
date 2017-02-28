@@ -1,7 +1,6 @@
 package hearrun.view.layout;
 
-import hearrun.Main;
-import hearrun.view.controller.SpielController;
+import hearrun.controller.SpielController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

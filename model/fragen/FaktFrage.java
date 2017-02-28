@@ -1,4 +1,4 @@
-package hearrun.business.fragen;
+package hearrun.model.fragen;
 
 /**
  * @author Leo Back & Joshua Barth

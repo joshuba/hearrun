@@ -1,8 +1,7 @@
 package hearrun.view.layout;
 
-import hearrun.Main;
-import hearrun.business.Spieler;
-import hearrun.view.controller.SpielController;
+import hearrun.model.Spieler;
+import hearrun.controller.SpielController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 /**Finale Zusammenfassung des Spiels. Zeigt in Form von Listen einige Statistiken an und makiert mittels einer Animation

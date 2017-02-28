@@ -1,16 +1,12 @@
 package hearrun.view.layout;
 
-import hearrun.view.controller.SpielController;
-import hearrun.view.controller.ViewController;
-import javafx.animation.PathTransition;
-import javafx.animation.TranslateTransition;
+import hearrun.controller.SpielController;
+import hearrun.controller.ViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 
 /**Enthält den Menuebutton
  *

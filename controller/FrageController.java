@@ -1,12 +1,12 @@
-package hearrun.business;
+package hearrun.controller;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import hearrun.Main;
-import hearrun.business.exceptions.TagNeededException;
-import hearrun.business.fragen.*;
+import hearrun.model.Fragetyp;
+import hearrun.model.exceptions.TagNeededException;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,14 +25,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 
 /**
- * Der Fragecontroller ist im wesentliche für das Einlesen der Musikbibliothek bei Programmstart,
+ * Der Fragecontroller ist im wesentlichen für das Einlesen der Musikbibliothek bei Programmstart,
  * sowie für die Bereitstellung der generierten Fragen zuständig.
  */
 public class FrageController {
@@ -41,7 +39,7 @@ public class FrageController {
     //Für Faktfragen
     private Document doc;
 
-    private Frageliste alleFragen;
+    private hearrun.model.fragen.Frageliste alleFragen;
 
     private SimpleFloatProperty musicReadingProgress;
     private SimpleBooleanProperty readingOnOff;
@@ -54,7 +52,7 @@ public class FrageController {
 
     public FrageController() {
 
-        alleFragen = new Frageliste();
+        alleFragen = new hearrun.model.fragen.Frageliste();
         tracks = new ArrayList<>();
         covers = new ArrayList<>();
         musicReadingProgress = new SimpleFloatProperty();
@@ -70,7 +68,7 @@ public class FrageController {
      * @param fragetyp Der gewünschte Fragetyp.
      * @return eine zufällige Frage zum übergebenen Fragetyp
      */
-    public Frage getFrage(Fragetyp fragetyp) {
+    public hearrun.model.fragen.Frage getFrage(Fragetyp fragetyp) {
         return alleFragen.getRand(fragetyp);
     }
 
@@ -79,7 +77,7 @@ public class FrageController {
      *
      * @return eine zufällige Frage  aus der Frageliste.
      */
-    public Frage getFrage() {
+    public hearrun.model.fragen.Frage getFrage() {
         return alleFragen.getRand();
     }
 
@@ -144,7 +142,7 @@ public class FrageController {
                     musicReadingProgress.setValue(musicReadingProgress.get() + 0.3 / tracks.size());
                     fragenAnzahl.set(alleFragen.size());
                     try {
-                        alleFragen.add(CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
+                        alleFragen.add(hearrun.model.fragen.CoverTitelFrage.generiereFrage(new Mp3File(tracksCP.get(akt).getAbsolutePath()).getId3v2Tag(), titel));
                     } catch (TagNeededException e) {
                         akt++;
                         i--;
@@ -166,7 +164,7 @@ public class FrageController {
                     musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
                     fragenAnzahl.set(alleFragen.size());
                     try {
-                        alleFragen.add(CoverWahlFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), covers.toArray(new Image[covers.size()])));
+                        alleFragen.add(hearrun.model.fragen.CoverWahlFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), covers.toArray(new Image[covers.size()])));
 
                     } catch (TagNeededException e) {
                         akt++;
@@ -189,7 +187,7 @@ public class FrageController {
                     musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
                     fragenAnzahl.set(alleFragen.size());
                     try {
-                        alleFragen.add(InterpretFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+                        alleFragen.add(hearrun.model.fragen.InterpretFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
                     } catch (TagNeededException e) {
                         akt++;
                         i--;
@@ -210,7 +208,7 @@ public class FrageController {
                     musicReadingProgress.setValue(musicReadingProgress.get() + 0.2 / tracks.size());
                     fragenAnzahl.set(alleFragen.size());
                     try {
-                        alleFragen.add(TitelFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
+                        alleFragen.add(hearrun.model.fragen.TitelFrage.generiereFrage(tracksCP.get(akt).getAbsolutePath(), titel));
                     } catch (TagNeededException e) {
                         akt++;
                         i--;
@@ -363,7 +361,7 @@ public class FrageController {
             }
 
             // Füge die Frage der Frageliste hinzu
-            alleFragen.add(new FaktFrage(fragetext, antwortTexte, richtigIndex));
+            alleFragen.add(new hearrun.model.fragen.FaktFrage(fragetext, antwortTexte, richtigIndex));
         }
     }
 

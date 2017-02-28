@@ -1,4 +1,4 @@
-package hearrun.business;
+package hearrun.model;
 
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;

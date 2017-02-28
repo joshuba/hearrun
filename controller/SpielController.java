@@ -1,17 +1,13 @@
-package hearrun.view.controller;
+package hearrun.controller;
 
-import hearrun.business.*;
-import hearrun.business.ereignisse.Ereignis;
-import hearrun.business.fragen.Frage;
+import hearrun.model.ereignisse.Ereignis;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
-import hearrun.view.layout.Feldtyp;
 import hearrun.view.layout.Map;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.stage.Stage;
 
-import javax.swing.event.ChangeListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -21,15 +17,15 @@ import java.util.Properties;
  * die wichtigsten Spielinfos gespeichert und bleiben erhalten.
  */
 public class SpielController {
-    private Spiel aktSpiel;
+    private hearrun.model.Spiel aktSpiel;
     private CompleteLayout completeLayout;
     private Stage stage;
     private Map map;
-    private ArrayList<Spieler> spielerListe;
+    private ArrayList<hearrun.model.Spieler> spielerListe;
     private FrageController frageController;
-    private Player musicPlayer;
-    private Player effectPlayer;
-    private Player loopPlayer;
+    private hearrun.model.Player musicPlayer;
+    private hearrun.model.Player effectPlayer;
+    private hearrun.model.Player loopPlayer;
     private Properties properties;
     private String path;
     private SimpleBooleanProperty sieg;
@@ -40,9 +36,9 @@ public class SpielController {
         properties = new Properties();
         path = erstellePropPfad();
         this.stage = stage;
-        this.musicPlayer = new Player();
-        this.effectPlayer = new Player();
-        this.loopPlayer = new Player();
+        this.musicPlayer = new hearrun.model.Player();
+        this.effectPlayer = new hearrun.model.Player();
+        this.loopPlayer = new hearrun.model.Player();
         this.completeLayout = new CompleteLayout(stage, this);
 
         readProperties();
@@ -54,8 +50,8 @@ public class SpielController {
     }
 
 
-    private void waehleMapErstelleSpiel(Map map, ArrayList<Spieler> spielerListe) {
-        this.aktSpiel = new Spiel(map, spielerListe); //Erstelle spiel
+    private void waehleMapErstelleSpiel(Map map, ArrayList<hearrun.model.Spieler> spielerListe) {
+        this.aktSpiel = new hearrun.model.Spiel(map, spielerListe); //Erstelle spiel
         sieg = getAktSpiel().getSiegStatus();
         completeLayout.getViewController().baueSpielfeldAuf();
         completeLayout.getViewController().setFeldId(0, 0, completeLayout.getViewController().erkenneFeldId(0, 0)); //Setze Alle Player aufs erste Feld
@@ -91,7 +87,7 @@ public class SpielController {
         getLayout().getGameLayout().setAktSpieler(getAktSpiel().getAktSpieler().getNr());
     }
 
-    public Spiel getAktSpiel() {
+    public hearrun.model.Spiel getAktSpiel() {
         return aktSpiel;
     }
 
@@ -135,19 +131,19 @@ public class SpielController {
 
     public void stelleAktFrage(boolean mitHeart) {
         Feld aktFeld = aktSpiel.getAktMap().getFeld(aktSpiel.getAktSpieler().getAktX(), aktSpiel.getAktSpieler().getAktY());
-        Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
-        if (fragetyp == Fragetyp.Ereignis)
+        hearrun.model.Fragetyp fragetyp = aktFeld.getPassendenFragetyp();
+        if (fragetyp == hearrun.model.Fragetyp.Ereignis)
             getLayout().getViewController().zeigeEreignis(Ereignis.zufallsEreignis());
         else {
             getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp, mitHeart);
         }
     }
 
-    public Player getMusicPlayer() {
+    public hearrun.model.Player getMusicPlayer() {
         return this.musicPlayer;
     }
 
-    public Player getEffectPlayer() {
+    public hearrun.model.Player getEffectPlayer() {
         return this.effectPlayer;
     }
 
@@ -255,11 +251,11 @@ public class SpielController {
         this.map = map;
     }
 
-    public void setSpieler(ArrayList<Spieler> spielerListe) {
+    public void setSpieler(ArrayList<hearrun.model.Spieler> spielerListe) {
         this.spielerListe = spielerListe;
     }
 
-    public ArrayList<Spieler> getSpielerListe() {
+    public ArrayList<hearrun.model.Spieler> getSpielerListe() {
         return this.spielerListe;
     }
 
@@ -267,7 +263,7 @@ public class SpielController {
         return stage;
     }
 
-    public Player getLoopPlayer(){
+    public hearrun.model.Player getLoopPlayer(){
         return this.loopPlayer;
     }
 

@@ -1,21 +1,19 @@
 package hearrun.view.layout.FrageFenster;
 
-import hearrun.business.ereignisse.Ereignis;
-import hearrun.view.controller.SpielController;
+import hearrun.model.ereignisse.Ereignis;
+import hearrun.controller.SpielController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.util.Random;
 
-import static hearrun.business.ereignisse.Ereignis.LAUFEN_POSITIV;
-import static hearrun.business.ereignisse.Ereignis.LEBEN;
+import static hearrun.model.ereignisse.Ereignis.LAUFEN_POSITIV;
+import static hearrun.model.ereignisse.Ereignis.LEBEN;
 
 /**
  * Das Ereignis-Fenster zeigt auftretende Zufallsereignisse, ausgelöst durch die

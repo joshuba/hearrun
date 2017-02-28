@@ -1,9 +1,9 @@
 package hearrun.view.layout;
 
 import hearrun.Main;
-import hearrun.business.Player;
-import hearrun.view.controller.SpielController;
-import hearrun.view.controller.ViewController;
+import hearrun.model.Player;
+import hearrun.controller.SpielController;
+import hearrun.controller.ViewController;
 import hearrun.view.layout.FrageFenster.Fenster;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;

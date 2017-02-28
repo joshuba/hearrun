@@ -1,10 +1,9 @@
-package hearrun.business.fragen;
+package hearrun.model.fragen;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import hearrun.business.exceptions.TagNeededException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class TitelFrage extends Frage {
         return path;
     }
 
-    public static TitelFrage generiereFrage(String path, ID3v2[] alleTitel) throws TagNeededException {
+    public static TitelFrage generiereFrage(String path, ID3v2[] alleTitel) throws hearrun.model.exceptions.TagNeededException {
 
         // Fragetext generieren
         String[] texte = {"Aus welchem Song stammt der abgespielte Songschnipsel?",
@@ -40,7 +39,7 @@ public class TitelFrage extends Frage {
         }
 
         if (titel == null)
-            throw new TagNeededException();
+            throw new hearrun.model.exceptions.TagNeededException();
 
         ArrayList<String> antworten = new ArrayList<>();
         for (int i = 0; i < 3; i++) {

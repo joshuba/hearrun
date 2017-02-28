@@ -1,13 +1,11 @@
 package hearrun.view.layout;
 
 import hearrun.Main;
-import hearrun.view.controller.SpielController;
-import hearrun.business.Spieler;
-import hearrun.view.controller.ViewController;
+import hearrun.controller.SpielController;
+import hearrun.model.Spieler;
+import hearrun.controller.ViewController;
 import javafx.animation.*;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;

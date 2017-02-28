@@ -1,6 +1,6 @@
 package hearrun;
 
-import hearrun.view.controller.SpielController;
+import hearrun.controller.SpielController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;

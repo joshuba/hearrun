@@ -1,12 +1,9 @@
 package hearrun.view.layout;
 
-import hearrun.Main;
-import hearrun.view.controller.SpielController;
+import hearrun.controller.SpielController;
 import javafx.animation.*;
-import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;

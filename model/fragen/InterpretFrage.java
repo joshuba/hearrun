@@ -1,10 +1,9 @@
-package hearrun.business.fragen;
+package hearrun.model.fragen;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import hearrun.business.exceptions.TagNeededException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class InterpretFrage extends Frage {
     }
 
 
-    public static InterpretFrage generiereFrage(String path, ID3v2[] alleInterpreten) throws TagNeededException{
+    public static InterpretFrage generiereFrage(String path, ID3v2[] alleInterpreten) throws hearrun.model.exceptions.TagNeededException {
 
         // Fragetext generieren
         String[] texte = {"Der Ausschnitt aus dem Song stammt von einem der folgenden Interpreten. \nWelcher ist der Richtige?",
@@ -41,13 +40,13 @@ public class InterpretFrage extends Frage {
         }
 
         if (interpret == null)
-            throw new TagNeededException();
+            throw new hearrun.model.exceptions.TagNeededException();
 
         ArrayList<String> antworten = new ArrayList<>();
         for (int i = 0; i < 3; i++){
             ID3v2 randAntwort = alleInterpreten[(int) (Math.random() * alleInterpreten.length)];
             if (randAntwort.getArtist() == null)
-                throw new TagNeededException();
+                throw new hearrun.model.exceptions.TagNeededException();
 
             if(!(randAntwort.getArtist() == null) &&
                     !randAntwort.getArtist().equals(interpret)) { //zweifach richtige antwort durch Interpret vermeiden

@@ -1,4 +1,4 @@
-package hearrun.business.exceptions;
+package hearrun.model.exceptions;
 
 /**
  * @author Leo Back & Joshua Barth

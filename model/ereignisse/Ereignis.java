@@ -1,4 +1,4 @@
-package hearrun.business.ereignisse;
+package hearrun.model.ereignisse;
 
 import java.util.Random;
 

@@ -1,9 +1,8 @@
 package hearrun.view.layout.FrageFenster;
 
-import hearrun.Main;
-import hearrun.view.controller.SpielController;
-import hearrun.business.fragen.CoverWahlFrage;
-import hearrun.business.fragen.Frage;
+import hearrun.controller.SpielController;
+import hearrun.model.fragen.CoverWahlFrage;
+import hearrun.model.fragen.Frage;
 import javafx.animation.*;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;

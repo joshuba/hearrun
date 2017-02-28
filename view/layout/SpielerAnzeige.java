@@ -1,10 +1,8 @@
 package hearrun.view.layout;
 
 import hearrun.Main;
-import hearrun.business.Spieler;
+import hearrun.model.Spieler;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.geometry.*;
@@ -17,7 +15,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**

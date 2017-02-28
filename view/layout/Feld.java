@@ -1,15 +1,11 @@
 package hearrun.view.layout;
 
-import hearrun.business.Fragetyp;
-import hearrun.view.controller.SpielController;
+import hearrun.model.Fragetyp;
 import javafx.animation.*;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
-import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 /**Ein einzelnes Feld. Hat immer einen klar zugewiesenen Feldtyp. Besitzt einige Funktionen wie das aktuelles Feld makieren

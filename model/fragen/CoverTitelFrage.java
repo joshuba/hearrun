@@ -1,7 +1,6 @@
-package hearrun.business.fragen;
+package hearrun.model.fragen;
 
 import com.mpatric.mp3agic.ID3v2;
-import hearrun.business.exceptions.TagNeededException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -25,7 +24,7 @@ public class CoverTitelFrage extends Frage {
 
     }
 
-    public static CoverTitelFrage generiereFrage(ID3v2 srctags, ID3v2[] alleTitel) throws TagNeededException {
+    public static CoverTitelFrage generiereFrage(ID3v2 srctags, ID3v2[] alleTitel) throws hearrun.model.exceptions.TagNeededException {
         try {
 
             Image cover;
@@ -33,14 +32,14 @@ public class CoverTitelFrage extends Frage {
 
             // Cover einlesen
             if (srctags.getAlbumImage() == null || srctags.getAlbum() == null)
-                throw new TagNeededException();
+                throw new hearrun.model.exceptions.TagNeededException();
             else
                 cover = SwingFXUtils.toFXImage(ImageIO.read(
                         new ByteArrayInputStream(srctags.getAlbumImage())), null);
 
             // Titel einlesen
             if (srctags.getTitle() == null)
-                throw new TagNeededException();
+                throw new hearrun.model.exceptions.TagNeededException();
             else
                 titel = srctags.getTitle();
 
@@ -52,7 +51,7 @@ public class CoverTitelFrage extends Frage {
                 ID3v2 randAntwort = alleTitel[(int) (Math.random() * alleTitel.length)];
 
                 if (randAntwort.getTitle() == null || randAntwort.getAlbum() == null)
-                    throw new TagNeededException();
+                    throw new hearrun.model.exceptions.TagNeededException();
                 if (!(randAntwort.getTitle() == null && randAntwort.getAlbum() == null) &&
                         !randAntwort.getTitle().equals(titel) && !randAntwort.getAlbum().equals(srctags.getAlbum())) {//zweifach richtige antwort durch titel / album vermeiden
 

@@ -1,7 +1,7 @@
-package hearrun.business.fragen;
+package hearrun.model.fragen;
 
 
-import hearrun.business.Fragetyp;
+import hearrun.model.Fragetyp;
 
 /**
  * Die Spielinterne Repräsentation der Fragen.
@@ -42,11 +42,11 @@ public abstract class Frage {
     public Fragetyp getFragetyp() {
         if (this instanceof CoverWahlFrage)
             return Fragetyp.CoverWahlFrage;
-        else if (this instanceof CoverTitelFrage)
+        else if (this instanceof hearrun.model.fragen.CoverTitelFrage)
             return Fragetyp.CoverTitelFrage;
         else if (this instanceof FaktFrage)
             return Fragetyp.FaktFrage;
-        else if (this instanceof InterpretFrage)
+        else if (this instanceof hearrun.model.fragen.InterpretFrage)
             return Fragetyp.InterpretFrage;
         else
             return Fragetyp.Titelfrage;

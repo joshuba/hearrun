@@ -1,10 +1,9 @@
-package hearrun.business.fragen;
+package hearrun.model.fragen;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import hearrun.business.exceptions.TagNeededException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -33,7 +32,7 @@ public class CoverWahlFrage extends Frage {
     }
 
 
-    public static CoverWahlFrage generiereFrage(String path, Image[] alleCover) throws TagNeededException {
+    public static CoverWahlFrage generiereFrage(String path, Image[] alleCover) throws hearrun.model.exceptions.TagNeededException {
 
         Image srcCover = null;
         ArrayList<Image> antworten = new ArrayList<>();
@@ -44,7 +43,7 @@ public class CoverWahlFrage extends Frage {
 
             // Titel einlesen
             if (srctags.getTitle() == null || srctags.getAlbumImage() == null)
-                throw new TagNeededException();
+                throw new hearrun.model.exceptions.TagNeededException();
             else {
                 srcCover = SwingFXUtils.toFXImage(ImageIO.read(new ByteArrayInputStream(srctags.getAlbumImage())), null);
             }

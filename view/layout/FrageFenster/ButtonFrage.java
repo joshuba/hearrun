@@ -1,19 +1,13 @@
 package hearrun.view.layout.FrageFenster;
 
-import hearrun.business.Fragetyp;
-import hearrun.Main;
-import hearrun.view.controller.SpielController;
-import hearrun.business.fragen.CoverTitelFrage;
-import hearrun.business.fragen.Frage;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import hearrun.model.Fragetyp;
+import hearrun.controller.SpielController;
+import hearrun.model.fragen.CoverTitelFrage;
+import hearrun.model.fragen.Frage;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 
 /**
  * Created by joshuabarth on 16.01.17

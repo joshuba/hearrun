@@ -1,4 +1,4 @@
-package hearrun.business;
+package hearrun.model;
 
 /**
  * Die verschiedenen Fragetypen.

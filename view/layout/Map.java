@@ -1,7 +1,5 @@
 package hearrun.view.layout;
 
-import hearrun.view.controller.SpielController;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 //import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 //import sun.rmi.rmic.Main;

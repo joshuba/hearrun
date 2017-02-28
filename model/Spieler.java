@@ -1,4 +1,4 @@
-package hearrun.business;
+package hearrun.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;

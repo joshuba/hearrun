@@ -1,11 +1,8 @@
 package hearrun.view.layout;
 
-import hearrun.view.controller.ViewController;
-import javafx.geometry.Pos;
+import hearrun.controller.ViewController;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
-
-import javax.swing.text.View;
 
 /**Gridpane welches das Spielfeld darstellt
  *

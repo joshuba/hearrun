@@ -1,10 +1,9 @@
 package hearrun.view.layout.FrageFenster;
 
-import hearrun.Main;
-import hearrun.business.Player;
-import hearrun.business.Spieler;
-import hearrun.view.controller.SpielController;
-import hearrun.business.fragen.Frage;
+import hearrun.model.Player;
+import hearrun.model.Spieler;
+import hearrun.controller.SpielController;
+import hearrun.model.fragen.Frage;
 import hearrun.view.layout.Wuerfel;
 import javafx.animation.*;
 import javafx.beans.property.SimpleFloatProperty;
@@ -15,7 +14,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;

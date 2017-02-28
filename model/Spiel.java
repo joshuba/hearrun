@@ -1,10 +1,8 @@
-package hearrun.business;
+package hearrun.model;
 
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.Map;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 import java.util.ArrayList;
 
