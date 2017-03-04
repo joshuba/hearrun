@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.Main;
 import hearrun.model.Fragetyp;
 import javafx.animation.*;
 import javafx.beans.property.ReadOnlyDoubleProperty;
@@ -66,7 +67,8 @@ public class Feld extends StackPane{
             case CoverFeld:
                 double rand = Math.random() * 1;
                 System.out.println(rand);
-                if (Math.round(rand) == 1) {
+                if (Math.round(rand) == 1 || (Main.testMode && !Main.coverTestMode)) {
+                    Main.coverTestMode = true;
                     return Fragetyp.CoverTitelFrage;
                 }
                 return Fragetyp.CoverWahlFrage;

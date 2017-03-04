@@ -1,5 +1,6 @@
 package hearrun.view.layout.FrageFenster;
 
+import hearrun.Main;
 import hearrun.model.ereignisse.Ereignis;
 import hearrun.controller.SpielController;
 import javafx.geometry.Insets;
@@ -53,12 +54,18 @@ public class EreignisFenster extends Fenster {
             ereignisIcon.getStyleClass().add("feld-icon-positiv");
             ueberschrift.setText("Felder vor rücken.");
             schritte = 5 + new Random().nextInt(4);
-            text.setText(String.format("Du rückst %s Felder nach vorne!", schritte));
+            if(Main.testMode){
+                schritte = 1;
+            }
+            text.setText(String.format("Du rückst %s " + (schritte == 1? "Feld": "Felder") + " nach vorne!", schritte));
         } else {
             ereignisIcon.getStyleClass().add("feld-icon-negativ");
             ueberschrift.setText("Felder zurück rücken.");
             schritte = 2 + new Random().nextInt(4);
-            text.setText(String.format("Du rückst %s Felder nach hinten!", schritte));
+            if(Main.testMode){
+                schritte = 1;
+            }
+            text.setText(String.format("Du rückst %s " + (schritte == 1? "Feld": "Felder") + " nach hinten!", schritte));
             schritte *= -1;
         }
 

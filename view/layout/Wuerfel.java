@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.Main;
 import hearrun.controller.SpielController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -73,6 +74,14 @@ public class Wuerfel extends VBox {
 
 
     public int wuerfeln() {
+        if(Main.testMode){
+            if(index <= 0){
+                return -1;
+            }else{
+                return 1;
+            }
+        }
+
         if (index <= 0) {
             return (int) ((Math.random() * 3 + 1)) * (-1);
 

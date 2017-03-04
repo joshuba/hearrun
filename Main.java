@@ -19,6 +19,8 @@ public class Main extends Application {
     public static final Color spielerZweiFarbe = new Color(51f / 255, 195f / 255, 98f / 255, 1);
     public static final Color spielerDreiFarbe = new Color(66f / 255, 107f / 255, 221f / 255, 1);
     public static final Color spielerVierFarbe = new Color(109f / 255, 106f / 255, 94f / 255, 1);
+    public static boolean testMode = false;
+    public static boolean coverTestMode = false;
 
 
     private Stage primaryStage;
@@ -57,6 +59,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        if(args.length > 0 && args[0].equals("test")){
+            System.out.println("Gegebene Argumente ->" + args[0] + "<-");
+
+            System.out.println("TESTMODUS\n Achtung Wuerfel kann nur noch einen Wert würfeln!");
+            testMode = true;
+        }
         launch(args);
 
     }

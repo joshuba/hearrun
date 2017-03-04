@@ -180,7 +180,7 @@ public class EndScreen extends BorderPane {
         if(durchschnitt != 0){
             durchschnitt = a.get("fragenRichtig") / durchschnitt;
         }
-        Label d = new Label(" Im Durchschnitt richtig:\t\t\t" + (int)(durchschnitt * 100) + "%");
+        Label d = new Label(" Im Durchschnitt richtig:\t\t" + (int)(durchschnitt * 100) + "%");
         durchschnittsbox.getChildren().addAll(icon6, d);
 
 

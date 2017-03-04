@@ -1,0 +1,29 @@
+*Präsi (Klein)
+*8
+*5
+#I C C T E F X L
+#L L L L L L L L
+#L L L L L L L L
+#L L L L L L L L
+#L L L L L L L L
+/
+
+
+
+____________________________________
+
+*   (1)Name
+*   (2)Breite
+*   (3)Hoehe
+#   Feldtypen
+/   Ende des Dokuments
+
+I   InterpretFeld
+C   CoverFeld
+T   Titelfeld
+E   Ereignisfeld
+F   Faktfeld
+X   Endfeld
+L   Leeres Feld
+R   RandomFeld
+_________________________________
