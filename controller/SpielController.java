@@ -1,5 +1,6 @@
 package hearrun.controller;
 
+import hearrun.model.FrageGenerator;
 import hearrun.model.ereignisse.Ereignis;
 import hearrun.view.layout.Feld;
 import hearrun.view.layout.CompleteLayout;
@@ -22,7 +23,7 @@ public class SpielController {
     private Stage stage;
     private Map map;
     private ArrayList<hearrun.model.Spieler> spielerListe;
-    private FrageController frageController;
+    private FrageGenerator frageGenerator;
     private hearrun.model.Player musicPlayer;
     private hearrun.model.Player effectPlayer;
     private hearrun.model.Player loopPlayer;
@@ -43,7 +44,7 @@ public class SpielController {
 
         readProperties();
 
-        frageController = new FrageController();
+        frageGenerator = new FrageGenerator();
         ladeMusik();
 
 
@@ -135,7 +136,7 @@ public class SpielController {
         if (fragetyp == hearrun.model.Fragetyp.Ereignis)
             getLayout().getViewController().zeigeEreignis(Ereignis.zufallsEreignis());
         else {
-            getLayout().getViewController().zeigeIntroUndFrage(frageController.getFrage(fragetyp), fragetyp, mitHeart);
+            getLayout().getViewController().zeigeIntroUndFrage(frageGenerator.getFrage(fragetyp), fragetyp, mitHeart);
         }
     }
 
@@ -160,14 +161,14 @@ public class SpielController {
         } else {
             System.out.println("Lese Musik ein: " + properties.getProperty("musicPath"));
             completeLayout.getViewController().zeigeLadeScreen(
-                    frageController.readingOnOffProperty(),
-                    frageController.musicReadingProgressProperty(),
-                    frageController.fragenAnzahlProperty()
+                    frageGenerator.readingOnOffProperty(),
+                    frageGenerator.musicReadingProgressProperty(),
+                    frageGenerator.fragenAnzahlProperty()
             );
 
-            frageController.leseMusikEin(properties.getProperty("musicPath"));
+            frageGenerator.leseMusikEin(properties.getProperty("musicPath"));
 
-            frageController.successProperty().addListener((observable, oldValue, newValue) -> {
+            frageGenerator.successProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue) {
                     getLayout().getViewController().getLoadingScreen().zeigeFehler();
                 }

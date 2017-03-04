@@ -1,4 +1,4 @@
-package hearrun.controller;
+package hearrun.model;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
@@ -33,7 +33,7 @@ import java.util.Collections;
  * Der Fragecontroller ist im wesentlichen für das Einlesen der Musikbibliothek bei Programmstart,
  * sowie für die Bereitstellung der generierten Fragen zuständig.
  */
-public class FrageController {
+public class FrageGenerator {
     private final String XMLPATH = "/hearrun/resources/Data/quiz.xml";
 
     //Für Faktfragen
@@ -50,7 +50,7 @@ public class FrageController {
     private ArrayList<Image> covers;
 
 
-    public FrageController() {
+    public FrageGenerator() {
 
         alleFragen = new hearrun.model.fragen.Frageliste();
         tracks = new ArrayList<>();
