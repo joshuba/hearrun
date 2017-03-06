@@ -1,5 +1,6 @@
 package hearrun.view.layout;
 
+import hearrun.Main;
 import hearrun.model.Spieler;
 import hearrun.controller.SpielController;
 import javafx.animation.Animation;
@@ -13,9 +14,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -55,8 +55,9 @@ public class EndScreen extends BorderPane {
             spielController.getLayout().getViewController().setMainMenu();
         });
 
-
-
+        setBackground(new Background(new BackgroundImage(
+                new Image("file:" + Main.getFilePathFromResourcePath("/hearrun/resources/img/confetti.gif", false)),
+                null, null, null, null)));
     }
 
     public void showResults(){
