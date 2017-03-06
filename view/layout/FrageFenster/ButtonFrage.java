@@ -96,7 +96,7 @@ public class ButtonFrage extends FrageFenster {
     }
 
     public void fertig() {
-        if (!(frage.getFragetyp() == Fragetyp.CoverTitelFrage && !(frage.getFragetyp() == Fragetyp.FaktFrage)))
+        if (!(frage.getFragetyp() == Fragetyp.CoverTitelFrage || frage.getFragetyp() == Fragetyp.FaktFrage))
             musicPlayer.fadeOut();
         zeigeRichtigOderFalsch();
         disableAllButtons();

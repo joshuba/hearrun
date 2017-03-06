@@ -142,9 +142,8 @@ public class Player {
 
         fadeIn = true;
 
-        if (!fadeOut) {
-            fadein.play();
-        }
+        fadein.play();
+
 
 
     }
@@ -186,8 +185,7 @@ public class Player {
 
         fadeOut = true;
 
-        if (!fadeIn)
-            fadeout.play();
+        fadeout.play();
     }
 }
 
