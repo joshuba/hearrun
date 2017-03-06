@@ -42,7 +42,7 @@ public class Main extends Application {
         Scene scene = new Scene(spielController.getLayout());
 
 
-        primaryStage.setTitle("Hear and Run - alpha 0.01");
+        primaryStage.setTitle("Hear & Run");
         primaryStage.setMinWidth(1100);
         primaryStage.setMinHeight(800);
 

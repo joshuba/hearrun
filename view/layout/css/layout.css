@@ -287,9 +287,9 @@ Button:hover:pressed{
 
 #pauseButton{
     -fx-background-image: url("../../../resources/icons/pause.png");
-    -fx-background-color: transparent;
-    -fx-min-width: 30px;
-    -fx-min-height: 30px;
+    -fx-background-size: 32;
+    -fx-background-position: left;
+    -fx-min-width: 120px;
 }
 
 #pauseButton:hover{
